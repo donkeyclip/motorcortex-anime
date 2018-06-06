@@ -25,7 +25,7 @@ const plugins = MotorCortex.loadPlugin(Anime);
 const anime = new plugins.Anime(attrs, props);
 ```
 
-### Configuring
+### API
 
 ```javascript
 const attrs = {
@@ -46,14 +46,18 @@ const props = {
 
 ### attrs
 
-##### animatedAttrs
+#### animatedAttrs
 
-This property defines any CSS (opacity, backgroundColor...), Transform (translateX, rotate...), Object, DOM or SVG properties that is going to be animated.
+`animatedAttrs` include any CSS (opacity, backgroundColor...), Transform (translateX, rotate...), Object, DOM or SVG properties to be animated.
 
-##### attrs
+#### attrs
 
-This property defines animation properties such as duration, delay, easing (default 'easeOutElastic'), elasticity etc.
+`attrs` include animation properties such as duration, delay, easing (default 'easeOutElastic'), elasticity etc.
 
 ### props
 
-This property defines the animation duration and the elements (CSS selectors, dom elements, nodelist, object or array) to animate.
+`props` include the following keys:
+
+`duration`: which defines the animation duration
+
+`selector`: which are the elements (CSS selectors, dom elements, nodelist, object or array) to animate.
