@@ -5,6 +5,7 @@
   "author": "Ioannis Potouridis",
   "license": "MIT",
   "dependencies": {
+    "@kissmybutton/motorcortex": "^1.6.7",
     "animejs": "^2.2.0"
   },
   "peerDependencies": {
