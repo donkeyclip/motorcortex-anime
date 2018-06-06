@@ -11,13 +11,13 @@ class Anime extends MotorCortex.TimedIncident {
   }
 
   getScratchValue(id, attribute) {
-    const el = this.getElementByMCID(id);
+    var el = this.getElementByMCID(id);
 
     return window.getComputedStyle(el).getPropertyValue(attribute);
   }
 
-  onProgress(progress) {
-    return this.element.seek(this.element.duration * progress);
+  onProgress(t) {
+    return this.element.seek(this.element.duration * t);
   }
 }
 
