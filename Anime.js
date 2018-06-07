@@ -4,6 +4,8 @@ var anime = require("animejs");
 class Anime extends MotorCortex.TimedIncident {
   onGetContext() {
     this.element = anime({
+      autoplay: false,
+      duration: this.props.duration,
       targets: this.elements,
       ...this.attrs.attrs,
       ...this.attrs.animatedAttrs
