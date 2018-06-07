@@ -8,16 +8,14 @@ $ npm install --save @kissmybutton/motorcortex-anime
 $ yarn add @kissmybutton/motorcortex-anime
 ```
 
-## Usage
-
-### Importing
+## Importing
 
 ```javascript
 import MotorCortex from "@kissmybutton/motorcortex";
 import Anime from "@kissmybutton/motorcortex-anime";
 ```
 
-### Loading
+## Loading
 
 ```javascript
 const plugins = MotorCortex.loadPlugin(Anime);
@@ -25,7 +23,7 @@ const plugins = MotorCortex.loadPlugin(Anime);
 const anime = new plugins.Anime(attrs, props);
 ```
 
-### API
+## API
 
 ```javascript
 const attrs = {
@@ -52,7 +50,7 @@ const props = {
 
 #### attrs
 
-`attrs` include animation properties such as duration, delay, easing (default 'easeOutElastic'), elasticity etc.
+`attrs` include animation properties such as delay, easing (default 'easeOutElastic'), elasticity etc.
 
 ### props
 
