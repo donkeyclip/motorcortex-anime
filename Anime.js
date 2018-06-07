@@ -3,7 +3,7 @@ var anime = require("animejs");
 
 class Anime extends MotorCortex.TimedIncident {
   onGetContext() {
-    this.element = anime({
+    this.target = anime({
       autoplay: false,
       duration: this.props.duration,
       targets: this.elements,
@@ -19,7 +19,7 @@ class Anime extends MotorCortex.TimedIncident {
   }
 
   onProgress(t) {
-    return this.element.seek(this.element.duration * t);
+    return this.target.seek(this.target.duration * t);
   }
 }
 
