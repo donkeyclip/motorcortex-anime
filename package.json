@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-anime",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "repository": "https://github.com/kissmybutton/motorcortex-anime",
   "author": "Ioannis Potouridis",
@@ -9,6 +9,6 @@
     "animejs": "^2.2.0"
   },
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "^1.6.7"
+    "@kissmybutton/motorcortex": "^1.6.8"
   }
 }

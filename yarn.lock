@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@kissmybutton/motorcortex@^1.6.7":
-  version "1.6.7"
-  resolved "https://registry.npmjs.org/@kissmybutton/motorcortex/-/motorcortex-1.6.7.tgz#bb2112e06f274a0cbc6e2a88200c6728046143e5"
+"@kissmybutton/motorcortex@^1.6.8":
+  version "1.6.8"
+  resolved "https://registry.npmjs.org/@kissmybutton/motorcortex/-/motorcortex-1.6.8.tgz#a508e8d58e1b1f4bbba13e15b95eefdfe21d35e0"
   dependencies:
     draggabilly "*"
 
