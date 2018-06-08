@@ -3,19 +3,31 @@ var anime = require("animejs");
 
 class Anime extends MotorCortex.TimedIncident {
   onGetContext() {
+    let x = {};
+    let z = {};
+
+    for (let key in this.attrs.animatedAttrs) {
+      x[key] = [this.getInitialValue(key), this.attrs.animatedAttrs[key]];
+      z[key] = anime.getValue(this.element, key);
+    }
+
     this.target = anime({
       autoplay: false,
       duration: this.props.duration,
-      targets: this.elements,
+      targets: this.element,
       ...this.attrs.attrs,
-      ...this.attrs.animatedAttrs
+      ...x
+    });
+
+    anime({
+      duration: 0,
+      targets: this.element,
+      ...z
     });
   }
 
-  getScratchValue(id, attribute) {
-    var el = this.getElementByMCID(id);
-
-    return window.getComputedStyle(el).getPropertyValue(attribute);
+  getScratchValue(id, attr) {
+    return anime.getValue(this.element, attr);
   }
 
   onProgress(t) {
