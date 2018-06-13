@@ -3,12 +3,27 @@ var anime = require("animejs");
 
 class Anime extends MotorCortex.TimedIncident {
   onGetContext() {
-    let x = {};
-    let z = {};
+    var x = {};
+    var z = {};
 
-    for (let key in this.attrs.animatedAttrs) {
-      x[key] = [this.getInitialValue(key), this.attrs.animatedAttrs[key]];
-      z[key] = anime.getValue(this.element, key);
+    for (var key in this.attrs.animatedAttrs) {
+      if (this.channel.compoAttributes.hasOwnProperty(key)) {
+        const compoAttribute = this.channel.compoAttributes[key];
+
+        for (var i = 0; i <= compoAttribute.length; i++) {
+          if (!attrs[key].hasOwnProperty(compoAttribute[i])) {
+            continue;
+          }
+          x[compoAttribute[i]] = [
+            this.getInitialValue(key)[compoAttribute[i]],
+            attrs[key][compoAttribute[i]]
+          ];
+          z[key] = anime.getValue(this.element, compoAttribute[i]);
+        }
+      } else {
+        x[key] = [this.getInitialValue(key), attrs[key]];
+        z[key] = anime.getValue(this.element, key);
+      }
     }
 
     this.target = anime({
@@ -27,6 +42,20 @@ class Anime extends MotorCortex.TimedIncident {
   }
 
   getScratchValue(id, attr) {
+    if (this.channel.compoAttributes.hasOwnProperty(attr)) {
+      var obj = {};
+      const compoAttribute = this.channel.compoAttributes[attr];
+
+      for (var i = 0; i <= compoAttribute.length; i++) {
+        obj[compoAttribute[i]] = anime.getValue(
+          this.element,
+          compoAttribute[i]
+        );
+      }
+
+      return obj;
+    }
+
     return anime.getValue(this.element, attr);
   }
 

@@ -1,5 +1,5 @@
-var MotorCortex = require("@kissmybutton/motorcortex");
 var Anime = require("./Anime");
+var Channel = require("./Channel");
 
 module.exports = {
   npm_name: "@kissmybutton/motorcortex-anime",
@@ -8,5 +8,5 @@ module.exports = {
       exportable: Anime
     }
   ],
-  channel: MotorCortex.AttributeChannel
+  channel: Channel
 };
