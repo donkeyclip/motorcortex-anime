@@ -9,6 +9,6 @@
     "animejs": "^2.2.0"
   },
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "^1.7.6"
+    "@kissmybutton/motorcortex": "^1.8.2"
   }
 }

@@ -6,6 +6,8 @@ class Anime extends MotorCortex.TimedIncident {
     var x = {};
     var z = {};
 
+    console.log(this.animAttributes());
+
     for (var key in this.attrs.animatedAttrs) {
       if (this.channel.compoAttributes.hasOwnProperty(key)) {
         const compoAttribute = this.channel.compoAttributes[key];
