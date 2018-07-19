@@ -33,7 +33,7 @@ class Anime extends MotorCortex.TimedIncident {
       duration: this.props.duration,
       easing: "linear",
       targets: this.element,
-      ...this.attrs.attrs,
+      ...((this.attrs || {}).attrs || {}),
       ...x
     });
 
