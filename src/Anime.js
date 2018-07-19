@@ -1,16 +1,16 @@
-var MotorCortex = require("@kissmybutton/motorcortex");
-var anime = require("animejs");
+import MotorCortex from "@kissmybutton/motorcortex";
+import anime from "animejs";
 
 class Anime extends MotorCortex.TimedIncident {
   onGetContext() {
-    var x = {};
-    var z = {};
+    const x = {};
+    const z = {};
 
-    for (var key in this.attrs.animatedAttrs) {
+    for (const key in this.attrs.animatedAttrs) {
       if (this.channel.compoAttributes.hasOwnProperty(key)) {
         const compoAttribute = this.channel.compoAttributes[key];
 
-        for (var i = 0; i <= compoAttribute.length; i++) {
+        for (let i = 0; i <= compoAttribute.length; i++) {
           if (
             !this.attrs.animatedAttrs[key].hasOwnProperty(compoAttribute[i])
           ) {
@@ -46,10 +46,10 @@ class Anime extends MotorCortex.TimedIncident {
 
   getScratchValue(id, attr) {
     if (this.channel.compoAttributes.hasOwnProperty(attr)) {
-      var obj = {};
+      const obj = {};
       const compoAttribute = this.channel.compoAttributes[attr];
 
-      for (var i = 0; i <= compoAttribute.length; i++) {
+      for (let i = 0; i <= compoAttribute.length; i++) {
         obj[compoAttribute[i]] = anime.getValue(
           this.element,
           compoAttribute[i]
@@ -67,4 +67,4 @@ class Anime extends MotorCortex.TimedIncident {
   }
 }
 
-module.exports = Anime;
+export default Anime;
