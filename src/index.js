@@ -1,7 +1,7 @@
 var Anime = require("./Anime");
 var Channel = require("./Channel");
 
-module.exports = {
+export default {
   npm_name: "@kissmybutton/motorcortex-anime",
   incidents: [
     {
