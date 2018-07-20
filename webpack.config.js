@@ -1,6 +1,7 @@
-const webpack = require("webpack");
-
 module.exports = {
+  output: {
+    filename: "motorcortex-anime.min.js"
+  },
   module: {
     rules: [
       {
@@ -11,6 +12,5 @@ module.exports = {
         }
       }
     ]
-  },
-  plugins: [new webpack.IgnorePlugin(/^\@kissmybutton\/motorcortex$/)]
+  }
 };

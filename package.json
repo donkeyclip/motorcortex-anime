@@ -1,18 +1,18 @@
 {
   "name": "@kissmybutton/motorcortex-anime",
-  "version": "0.6.2",
-  "main": "dist/main.js",
+  "version": "0.7.0",
+  "main": "dist/motorcortex-anime.min.js",
   "repository": "https://github.com/kissmybutton/motorcortex-anime",
   "author": "Ioannis Potouridis",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack --mode development"
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "animejs": "^2.2.0"
   },
   "devDependencies": {
+    "@kissmybutton/motorcortex": "^1.10.2",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
