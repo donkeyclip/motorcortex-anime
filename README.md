@@ -29,7 +29,9 @@ const anime = new plugins.Anime(attrs, props);
 const attrs = {
   animatedAttrs: {
     opacity: 0.5,
-    translateX: "320px"
+    transform: {
+      translateX: "320px"
+    }
   },
   attrs: {
     easing: "linear"
