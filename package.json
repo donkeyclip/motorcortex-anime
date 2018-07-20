@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-anime",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "main": "dist/index.js",
   "repository": "https://github.com/kissmybutton/motorcortex-anime",
   "author": "Ioannis Potouridis",

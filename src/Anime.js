@@ -67,4 +67,4 @@ class Anime extends MotorCortex.TimedIncident {
   }
 }
 
-export default Anime;
+module.exports =  Anime;

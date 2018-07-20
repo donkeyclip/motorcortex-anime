@@ -25,4 +25,4 @@ class Channel extends MotorCortex.AttributeChannel {
   }
 }
 
-export default Channel;
+module.exports =  Channel;
