@@ -1,5 +1,5 @@
-var Anime = require("./Anime");
-var Channel = require("./Channel");
+const Anime = require("./Anime");
+const Channel = require("./Channel");
 
 export default {
   npm_name: "@kissmybutton/motorcortex-anime",

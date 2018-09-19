@@ -1,5 +1,5 @@
-import MotorCortex from "@kissmybutton/motorcortex";
-import anime from "animejs";
+const MotorCortex = require("@kissmybutton/motorcortex/");
+const anime = require("animejs");
 
 class Anime extends MotorCortex.TimedIncident {
   onGetContext() {
@@ -67,4 +67,4 @@ class Anime extends MotorCortex.TimedIncident {
   }
 }
 
-export default Anime;
+module.exports = Anime;

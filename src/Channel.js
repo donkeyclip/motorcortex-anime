@@ -1,4 +1,4 @@
-import MotorCortex from "@kissmybutton/motorcortex";
+const MotorCortex = require("@kissmybutton/motorcortex");
 
 class Channel extends MotorCortex.AttributeChannel {
   constructor(props) {
@@ -25,4 +25,4 @@ class Channel extends MotorCortex.AttributeChannel {
   }
 }
 
-export default Channel;
+module.exports = Channel;
