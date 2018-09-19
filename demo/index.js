@@ -1,6 +1,6 @@
 const MotorCortex = require("@kissmybutton/motorcortex/");
 const Player = require("@kissmybutton/motorcortex-player/");
-const AnimeDefinition = require("../src/main");
+const AnimeDefinition = require("../dist/main");
 
 // console.log(AnimeDefinition);
 
