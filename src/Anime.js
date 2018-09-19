@@ -1,7 +1,7 @@
-const MotorCortex = require("@kissmybutton/motorcortex/");
+const MC = require("@kissmybutton/motorcortex/");
 const anime = require("animejs");
 
-class Anime extends MotorCortex.TimedIncident {
+class Anime extends MC.TimedIncident {
   onGetContext() {
     const x = {};
     const z = {};

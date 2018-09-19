@@ -1,10 +1,12 @@
-const Anime = require("../src/main");
 const MotorCortex = require("@kissmybutton/motorcortex/");
 const Player = require("@kissmybutton/motorcortex-player/");
+const AnimeDefinition = require("../src/main");
 
-// console.log(Anime);
-// Load plugins
-const plugins = MotorCortex.loadPlugin(Anime);
+// console.log(AnimeDefinition);
+
+const Anime = MotorCortex.loadPlugin(AnimeDefinition);
+
+// Load Anime
 
 // Create a Clip
 const css = `
@@ -73,8 +75,8 @@ const props = {
   selector: ".wcPxNCqx"
 };
 
-const anime = new plugins.Anime(attrs, props);
-const anime1 = new plugins.Anime(attrs1, props);
+const anime = new Anime.Anime(attrs, props);
+const anime1 = new Anime.Anime(attrs1, props);
 
 // Add anime to Group
 group.addIncident(anime, 0);

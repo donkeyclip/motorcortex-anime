@@ -12,10 +12,10 @@ const _extends =
     return target;
   };
 
-import MotorCortex from "@kissmybutton/motorcortex";
-import anime from "animejs";
+const MC = require("@kissmybutton/motorcortex/");
+const anime = require("animejs");
 
-class Anime extends MotorCortex.TimedIncident {
+class Anime extends MC.TimedIncident {
   onGetContext() {
     const x = {};
     const z = {};
@@ -89,4 +89,4 @@ class Anime extends MotorCortex.TimedIncident {
   }
 }
 
-export default Anime;
+module.exports = Anime;
