@@ -47,7 +47,7 @@ class Anime extends MC.TimedIncident {
         {
           autoplay: false,
           duration: this.props.duration,
-          easing: "linear",
+          easing: this.attrs.attrs.easing || "linear",
           targets: this.element
         },
         (this.attrs || {}).attrs || {},
