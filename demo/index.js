@@ -1,16 +1,13 @@
 const MotorCortex = require("@kissmybutton/motorcortex/");
 const Player = require("@kissmybutton/motorcortex-player/");
 const AnimeDefinition = require("../dist/main");
-
-// console.log(AnimeDefinition);
-
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
 
-// Load Anime
-
-// Create a Clip
 const css = `
-  .wcPxNCqx {
+  body {
+    background-color:white;
+  }
+  .cirlce {
     background: palevioletred;
     border-radius: 64px;
     height: 64px;
@@ -19,14 +16,9 @@ const css = `
     top: 0;
     width: 64px;
   }
-  .keNWI6yF {
-    height: 384px;
-    position: relative;
-    width: 384px;
-  }
 `;
 
-const html = `<div class="keNWI6yF"><div class="wcPxNCqx" /></div>`;
+const html = `<div class="cirlce" />`;
 
 const host = document.getElementById("clip");
 
@@ -42,47 +34,74 @@ const clip = new MotorCortex.Clip(null, {
   containerParams
 });
 
-// Create a Group
 const group = new MotorCortex.Group();
+const top = 0;
+const right = 320;
+const bottom = 320;
+const left = 0;
+let c = 0;
+for (let i = 0; i < 50; i += 2) {
+  c++;
+  let translateX, translateY;
+  if (c % 2) {
+    translateX = right;
+    translateY = Math.random() * 320;
+  } else {
+    translateX = Math.random() * 320;
+    translateY = bottom;
+  }
 
-// Add Group to Clip
+  const anime = new Anime.Anime(
+    {
+      animatedAttrs: {
+        opacity: Math.random(),
+        transform: {
+          translateX: translateX + "px",
+          translateY: translateY + "px"
+        }
+      },
+      attrs: {
+        easing: "linear"
+      }
+    },
+    {
+      duration: 500,
+      selector: ".cirlce"
+    }
+  );
+
+  if (c % 2) {
+    translateX = left;
+    translateY = Math.random() * 320;
+  } else {
+    translateX = Math.random() * 320;
+    translateY = top;
+  }
+
+  const anime1 = new Anime.Anime(
+    {
+      animatedAttrs: {
+        opacity: Math.random(),
+        transform: {
+          translateX: translateX + "px",
+          translateY: translateY + "px"
+        }
+      },
+      attrs: {
+        easing: "linear"
+      }
+    },
+    {
+      duration: 500,
+      selector: ".cirlce"
+    }
+  );
+
+  group.addIncident(anime, 500 * i);
+  group.addIncident(anime1, 500 * (i + 1));
+}
 clip.addIncident(group, 0);
 
-// Create an Anime effect
-const attrs = {
-  animatedAttrs: {
-    opacity: 0.5,
-    translateX: "320px"
-  },
-  attrs: {
-    easing: "linear"
-  }
-};
-
-const attrs1 = {
-  animatedAttrs: {
-    opacity: 1,
-    translateX: "0px",
-    backgroundColor: "tomato"
-  },
-  attrs: {
-    easing: "linear"
-  }
-};
-
-const props = {
-  duration: 3000,
-  selector: ".wcPxNCqx"
-};
-
-const anime = new Anime.Anime(attrs, props);
-const anime1 = new Anime.Anime(attrs1, props);
-
-// Add anime to Group
-group.addIncident(anime, 0);
-group.addIncident(anime1, 3000);
-
-// console.log(clip);
 new Player({
   clip: clip,
   theme: "transparent on-top",

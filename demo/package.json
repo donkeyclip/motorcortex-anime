@@ -13,11 +13,12 @@
     "threejs"
   ],
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "1.10.8-rc.53",
+    "@kissmybutton/motorcortex": "1.10.8-rc.57",
     "babel-core": "^6.26.3"
   },
   "devDependencies": {
-    "@kissmybutton/motorcortex": "1.10.8-rc.53",
+    "@kissmybutton/motorcortex": "1.10.8-rc.57",
+    "@kissmybutton/motorcortex-anime": "^0.7.4",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -36,7 +37,7 @@
   "author": "KissMyButton.gr",
   "license": "MIT",
   "dependencies": {
-    "@kissmybutton/motorcortex-player": "1.2.14",
+    "@kissmybutton/motorcortex-player": "1.2.17",
     "babel-core": "^6.26.3",
     "exports-loader": "^0.7.0",
     "imports-loader": "^0.8.0",
