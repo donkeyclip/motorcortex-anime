@@ -4,7 +4,13 @@ const AnimeDefinition = require("../src/main");
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
 const calcDist = (x1, x2, y1, y2) =>
   Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-
+const getTotalTime = g => {
+  let sum = 0;
+  for (const i of g.incidents) {
+    sum += i.incident.props.duration;
+  }
+  return sum;
+};
 const css = `
 
   html,body {
@@ -18,23 +24,36 @@ const css = `
     height:100%;
     position:absolute;
   }
+
+  .board {
+    background-color: whitesmoke;
+    width:50%;
+    height:50%;
+    margin:auto;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+  }
   .cirlce {
-    position: relative;
+    position: absolute;
     background: navy;
     border-radius: 30px;
     height: 30px;
     width: 30px;
-    left: 0;
-    top: 0;
+    left: 0px;
+    top: 0px;
   }
+
   .cirlceIn {
-    position: relative;
+    position: absolute;
     background: red;
     border-radius: 20px;
     height:20px;
     width: 20px;
-    left: 5;
-    top: 5;
+    left: 5px;
+    top: 5px;;
   }
 
   .dotted {
@@ -46,33 +65,58 @@ const css = `
     -moz-background-size: 3px 3px;
     background-size: 3px 3px;
   }
-  .board {
-    background-color: whitesmoke;
-    width:50%;
-    height:50%;
-    margin:auto;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
 `;
 
 const html = `
   <div class="container">
     <div id="board" class="board dotted">
-      <div id="hit"/>
-      <div class="cirlce">
-        <div class="cirlceIn"/>
+      <div class="cirlce0 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce1 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce2 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce3 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+       <div class="cirlce4 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce5 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce6 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce7 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce8 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce9 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce10 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce11 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+       <div class="cirlce12 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce13 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce14 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce15 cirlce">
+        <div class="cirlceIn"></div>
       </div>
     </div>
   </div>`;
@@ -105,7 +149,6 @@ clip.props.host
   ).style.height = clip.props.host
   .getElementsByTagName("iframe")[0]
   .contentWindow.document.getElementById("board").offsetHeight;
-// const group = new MotorCortex.Group();
 const top = 0;
 const right =
   clip.props.host
@@ -116,92 +159,103 @@ const bottom =
     .getElementsByTagName("iframe")[0]
     .contentWindow.document.getElementById("board").offsetHeight - 30;
 const left = 0;
-let c = 0;
-let translateX1, translateY1;
-let translateX2 = 0,
-  translateY2 = 0;
 
-for (let i = 0; i < 50; i += 2) {
-  c++;
-  if (c % 2) {
-    translateX1 = right;
-    translateY1 = Math.random() * bottom;
-  } else {
-    translateX1 = Math.random() * right;
-    translateY1 = bottom;
-  }
+for (let q = 0; q <= 15; q++) {
+  const group = new MotorCortex.Group();
 
-  const anime = new Anime.Anime(
-    {
-      animatedAttrs: {
-        transform: {
-          translateX: translateX1 + "px",
-          translateY: translateY1 + "px"
-        },
-        backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
-          256},${Math.random() * 256})`
-      },
-      attrs: {
-        easing: "linear"
-      }
-    },
-    {
-      duration: parseInt(
-        calcDist(translateX1, translateX2, translateY1, translateY2)
-      ),
-      selector: ".cirlce"
+  let c = 0;
+  let translateX1 = 0,
+    translateY1 = 0,
+    translateX2 = 0,
+    translateY2 = 0;
+  for (let i = 0; i < 50; i += 2) {
+    c++;
+    if (c % 2) {
+      translateX1 = right;
+      translateY1 = Math.random() * bottom;
+    } else {
+      translateX1 = Math.random() * right;
+      translateY1 = bottom;
     }
-  );
 
-  if (c % 2) {
-    translateX2 = left;
-    translateY2 = Math.random() * bottom;
-  } else {
-    translateX2 = Math.random() * right;
-    translateY2 = top;
-  }
-
-  const anime1 = new Anime.Anime(
-    {
-      animatedAttrs: {
-        transform: {
-          translateX: translateX2 + "px",
-          translateY: translateY2 + "px"
+    const anime = new Anime.Anime(
+      {
+        animatedAttrs: {
+          transform: {
+            translateX: translateX1 + "px",
+            translateY: translateY1 + "px"
+          },
+          backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
+            256},${Math.random() * 256})`
         },
-        backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
-          256},${Math.random() * 256})`
+        attrs: {
+          easing: "linear"
+        }
       },
-      attrs: {
-        easing: "linear"
+      {
+        duration: parseInt(
+          calcDist(translateX1, translateX2, translateY1, translateY2)
+        ),
+        selector: ".cirlce" + q
       }
-    },
-    {
-      duration: parseInt(
-        calcDist(translateX1, translateX2, translateY1, translateY2)
-      ),
-      selector: ".cirlce"
-    }
-  );
+    );
 
-  if (clip.incidents.length == 0) {
-    clip.addIncident(anime, 0);
-    clip.addIncident(anime1, 0);
-  } else {
-    clip.addIncident(
-      anime,
-      parseInt(
-        clip.incidents[clip.incidents.length - 1].millisecond +
-          clip.incidents[clip.incidents.length - 1].incident.props.duration
-      )
+    if (c % 2) {
+      translateX2 = left;
+      translateY2 = Math.random() * bottom;
+    } else {
+      translateX2 = Math.random() * right;
+      translateY2 = top;
+    }
+
+    const anime1 = new Anime.Anime(
+      {
+        animatedAttrs: {
+          transform: {
+            translateX: translateX2 + "px",
+            translateY: translateY2 + "px"
+          },
+          backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
+            256},${Math.random() * 256})`
+        },
+        attrs: {
+          easing: "linear"
+        }
+      },
+      {
+        duration: parseInt(
+          calcDist(translateX1, translateX2, translateY1, translateY2)
+        ),
+        selector: ".cirlce" + q
+      }
     );
-    clip.addIncident(
-      anime1,
-      parseInt(
-        clip.incidents[clip.incidents.length - 1].millisecond +
-          clip.incidents[clip.incidents.length - 1].incident.props.duration
-      )
-    );
+
+    if (group.incidents.length == 0) {
+      group.addIncident(anime, 0);
+      // console.log(group.incidents)
+      // console.log("millisecond added",0);
+      // console.log("current duration",parseInt(calcDist(translateX1, 0, translateY1, 0)));
+
+      group.addIncident(anime1, getTotalTime(group));
+
+      // console.log(group.incidents)
+      // console.log("millisecond previous",parseInt(calcDist(translateX1, 0, translateY1, 0)))
+      // console.log("current durations",parseInt(calcDist(translateX1, 0, translateY1, 0)) + parseInt(calcDist(translateX1, translateX2, translateY1, translateY2)))
+    } else {
+      group.addIncident(anime, getTotalTime(group));
+
+      // console.log(group.incidents)
+      // console.log("millisecond previous", group.incidents[group.incidents.length - 1].millisecond)
+      // console.log("millisecond added", parseInt(group.incidents[group.incidents.length - 1].millisecond + group.incidents[group.incidents.length - 1].incident.props.duration))
+      // console.log("current duration", parseInt(group.incidents[group.incidents.length - 1].millisecond + group.incidents[group.incidents.length - 1].incident.props.duration) + parseInt(calcDist(translateX1, translateX2, translateY1, translateY2)));
+
+      group.addIncident(anime1, getTotalTime(group));
+      // console.log("millisecond previous", group.incidents[group.incidents.length - 1].millisecond)
+      // console.log("millisecond added", parseInt(group.incidents[group.incidents.length - 1].millisecond + group.incidents[group.incidents.length - 1].incident.props.duration))
+      // console.log("current duration", parseInt(group.incidents[group.incidents.length - 1].millisecond + group.incidents[group.incidents.length - 1].incident.props.duration) + parseInt(calcDist(translateX1, translateX2, translateY1, translateY2)));
+    }
   }
+  clip.addIncident(group, 0);
 }
 
 new Player({
