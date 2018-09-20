@@ -1,30 +1,56 @@
-const MotorCortex = require("@kissmybutton/motorcortex/");
-const Player = require("@kissmybutton/motorcortex-player/");
+const MotorCortex = require("../node_modules/@kissmybutton/motorcortex/");
+const Player = require("./node_modules/@kissmybutton/motorcortex-player/");
 const AnimeDefinition = require("../src/main");
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
 
 const css = `
-  body {
+
+  html,body {
     background-color:white;
+    height:100%;
+    width:100%;
+    margin:0px;
+  }
+  .container {
+    width:100%;
+    height:100%;
+    position:absolute;
   }
   .cirlce {
-    background: palevioletred;
+    background: navy;
     border-radius: 64px;
     height: 64px;
     left: 0;
-    position: absolute;
+    position: relative;
     top: 0;
     width: 64px;
   }
+
+  .dotted {
+    background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    -webkit-background-size: 3px 3px;
+    -moz-background-size: 3px 3px;
+    background-size: 3px 3px;
+  }
+  .board {
+    background-color: whitesmoke;
+    width:384px;
+    height:384px;
+    margin:auto;
+    transform:translateY(50%)
+  }
 `;
 
-const html = `<div class="cirlce" />`;
+const html = `<div class="container"><div class="board dotted"><div class="cirlce" /></div></div>`;
 
 const host = document.getElementById("clip");
 
 const containerParams = {
-  width: "384px",
-  height: "384px"
+  width: "90%",
+  height: "90%"
 };
 
 const clip = new MotorCortex.Clip(null, {
