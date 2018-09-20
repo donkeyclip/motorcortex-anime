@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-anime",
-  "version": "0.7.4",
+  "version": "1.0.1",
   "description": "Annime plugin for MotorCortex",
   "main": "./dist/main.js",
   "author": "KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>",
