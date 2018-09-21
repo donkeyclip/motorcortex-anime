@@ -80,7 +80,6 @@ class Anime extends MC.TimedIncident {
 
       return obj;
     }
-
     return anime.getValue(this.element, attr);
   }
 

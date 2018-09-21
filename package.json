@@ -19,7 +19,8 @@
     "lint": "npm run concurrently \"npm run lint:js\" \"npm run lint:styles\" ",
     "lint:fix": "npm run concurrently  \"npm run lint:js -- --fix\" \"npm run lint:styles -- --fix\"",
     "build": "npx babel ./src --out-dir ./dist",
-    "start": "webpack-dev-server --inline --hot --disableHostCheck",
+    "start": "webpack-dev-server --inline --hot --disableHostCheck --config ./demo/webpack.config.js",
+    "build:demo": "webpack --config ./demo/webpack.config.js",
     "test": "HERE GOES YOUR TEST TASK",
     "test:prod": "npm run lint",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
@@ -68,16 +69,18 @@
     }
   },
   "dependencies": {
-    "animejs": "^2.2.0",
-    "exports-loader": "^0.7.0",
-    "imports-loader": "^0.8.0",
-    "whatwg-fetch": "^2.0.4"
+    "animejs": "^2.2.0"
   },
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "1.10.8-rc.57",
-    "babel-core": "^6.26.3"
+    "@kissmybutton/motorcortex": "1.10.8-rc.57"
   },
   "devDependencies": {
+    "@kissmybutton/motorcortex-player": "1.2.18",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-core": "^6.26.3",
+    "exports-loader": "^0.7.0",
+    "imports-loader": "^0.8.0",
+    "whatwg-fetch": "^2.0.4",
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
     "@kissmybutton/motorcortex": "1.10.8-rc.57",
@@ -92,7 +95,6 @@
     "babel-preset-es2015": "*",
     "babel-preset-es2015-node5": "^1.2.0",
     "babel-preset-stage-2": "^6.24.1",
-    "babel-preset-stage-3": "^6.24.1",
     "commitizen": "^2.10.1",
     "concurrently": "^3.6.0",
     "coveralls": "^3.0.0",
