@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-anime",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Annime plugin for MotorCortex",
   "main": "./dist/main.js",
   "author": "KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>",
@@ -72,10 +72,10 @@
     "animejs": "^2.2.0"
   },
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "1.10.8-rc.57"
+    "@kissmybutton/motorcortex": "^1.10.8-rc.57"
   },
   "devDependencies": {
-    "@kissmybutton/motorcortex-player": "1.2.18",
+    "@kissmybutton/motorcortex-player": "^1.2.18",
     "babel-preset-stage-3": "^6.24.1",
     "babel-core": "^6.26.3",
     "exports-loader": "^0.7.0",
