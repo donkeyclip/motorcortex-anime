@@ -71,7 +71,7 @@ class Anime extends MC.TimedIncident {
       const obj = {};
       const compoAttribute = this.channel.compoAttributes[attr];
 
-      for (let i = 0; i <= compoAttribute.length; i++) {
+      for (let i = 0; i < compoAttribute.length; i++) {
         obj[compoAttribute[i]] = anime.getValue(
           this.element,
           compoAttribute[i]
