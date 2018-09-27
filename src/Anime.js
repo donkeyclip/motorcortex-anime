@@ -10,7 +10,7 @@ class Anime extends MC.TimedIncident {
       if (this.channel.compoAttributes.hasOwnProperty(key)) {
         const compoAttribute = this.channel.compoAttributes[key];
 
-        for (let i = 0; i <= compoAttribute.length; i++) {
+        for (let i = 0; i < compoAttribute.length; i++) {
           if (
             !this.attrs.animatedAttrs[key].hasOwnProperty(compoAttribute[i])
           ) {
