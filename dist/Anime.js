@@ -18,7 +18,7 @@ const anime = require("animejs");
 class Anime extends MC.TimedIncident {
   onGetContext() {
     const options = {};
-
+    const initialize = {};
     for (const key in this.attrs.animatedAttrs) {
       if (this.channel.compoAttributes.hasOwnProperty(key)) {
         const compoAttribute = this.channel.compoAttributes[key];
@@ -33,10 +33,18 @@ class Anime extends MC.TimedIncident {
             this.getInitialValue(key)[compoAttribute[i]],
             this.attrs.animatedAttrs[key][compoAttribute[i]]
           ];
+          initialize[compoAttribute[i]] = [
+            this.getScratchValue(key)[compoAttribute[i]],
+            this.attrs.animatedAttrs[key][compoAttribute[i]]
+          ];
         }
       } else {
         options[key] = [
           this.getInitialValue(key),
+          this.attrs.animatedAttrs[key]
+        ];
+        initialize[key] = [
+          this.getScratchValue(key),
           this.attrs.animatedAttrs[key]
         ];
       }
@@ -52,6 +60,20 @@ class Anime extends MC.TimedIncident {
         },
         (this.attrs || {}).attrs || {},
         options
+      )
+    );
+
+    // handle first render initial values
+    anime(
+      _extends(
+        {
+          autoplay: false,
+          duration: this.props.duration,
+          easing: (this.attrs.attrs || {}).easing || "linear",
+          targets: this.element
+        },
+        (this.attrs || {}).attrs || {},
+        initialize
       )
     );
   }
