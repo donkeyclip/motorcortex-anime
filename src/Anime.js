@@ -56,7 +56,7 @@ class Anime extends MC.TimedIncident {
     });
   }
 
-  getScratchValue(id, attr) {
+  getScratchValue(attr) {
     if (this.channel.compoAttributes.hasOwnProperty(attr)) {
       const obj = {};
       const compoAttribute = this.channel.compoAttributes[attr];
