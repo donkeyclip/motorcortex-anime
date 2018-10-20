@@ -1,5 +1,6 @@
 const MC = require("@kissmybutton/motorcortex/");
 const anime = require("animejs");
+const helper = new MC.Helper();
 
 class Anime extends MC.TimedIncident {
   onGetContext() {
@@ -20,7 +21,7 @@ class Anime extends MC.TimedIncident {
             this.attrs.animatedAttrs[key][compoAttribute[i]]
           ];
           initialize[compoAttribute[i]] = [
-            this.getScratchValue(key)[compoAttribute[i]],
+            this.getScratchValue(helper.getMCIDOfElement(this.element), key)[compoAttribute[i]],
             this.attrs.animatedAttrs[key][compoAttribute[i]]
           ];
         }
@@ -30,7 +31,7 @@ class Anime extends MC.TimedIncident {
           this.attrs.animatedAttrs[key]
         ];
         initialize[key] = [
-          this.getScratchValue(key),
+          this.getScratchValue(helper.getMCIDOfElement(this.element), key),
           this.attrs.animatedAttrs[key]
         ];
       }
