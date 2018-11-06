@@ -75,7 +75,7 @@
     "@kissmybutton/motorcortex": "^1.11.0-rc10"
   },
   "devDependencies": {
-    "@kissmybutton/motorcortex-player": "^1.3.2",
+    "@kissmybutton/motorcortex-player": "^1.3.3",
     "babel-preset-stage-3": "^6.24.1",
     "babel-core": "^6.26.3",
     "exports-loader": "^0.7.0",
