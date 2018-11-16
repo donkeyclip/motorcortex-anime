@@ -99,20 +99,20 @@ const clip = new MotorCortex.Clip(null, {
   containerParams
 });
 
-clip.props.host
-  .getElementsByTagName("iframe")[0]
-  .contentWindow.document.getElementById(
-    "board"
-  ).style.width = clip.props.host
+const width = clip.props.host
   .getElementsByTagName("iframe")[0]
   .contentWindow.document.getElementById("board").offsetWidth;
-clip.props.host
-  .getElementsByTagName("iframe")[0]
-  .contentWindow.document.getElementById(
-    "board"
-  ).style.height = clip.props.host
+const height = clip.props.host
   .getElementsByTagName("iframe")[0]
   .contentWindow.document.getElementById("board").offsetHeight;
+
+clip.props.host
+  .getElementsByTagName("iframe")[0]
+  .contentWindow.document.getElementById("board").style.width = width;
+clip.props.host
+  .getElementsByTagName("iframe")[0]
+  .contentWindow.document.getElementById("board").style.height = height;
+
 const top = 0;
 const right =
   clip.props.host
@@ -135,20 +135,18 @@ for (let q = 0; q <= 3; q++) {
   for (let i = 0; i < 10; i += 2) {
     c++;
     if (c % 2) {
-      translateX1 = right;
-      translateY1 = Math.random() * bottom;
+      translateX1 = (right / width) * 100;
+      translateY1 = ((Math.random() * bottom) / height) * 100;
     } else {
-      translateX1 = Math.random() * right;
-      translateY1 = bottom;
+      translateX1 = ((Math.random() * right) / width) * 100;
+      translateY1 = (bottom / height) * 100;
     }
 
     const anime = new Anime.Anime(
       {
         animatedAttrs: {
-          transform: {
-            translateX: translateX1 + "px",
-            translateY: translateY1 + "px"
-          },
+          left: translateX1 + "%",
+          top: translateY1 + "%",
           backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
             256},${Math.random() * 256})`
         },
@@ -165,20 +163,18 @@ for (let q = 0; q <= 3; q++) {
     );
 
     if (c % 2) {
-      translateX2 = left;
-      translateY2 = Math.random() * bottom;
+      translateX2 = (left / width) * 100;
+      translateY2 = ((Math.random() * bottom) / height) * 100;
     } else {
-      translateX2 = Math.random() * right;
-      translateY2 = top;
+      translateX2 = ((Math.random() * right) / width) * 100;
+      translateY2 = (top / height) * 100;
     }
 
     const anime1 = new Anime.Anime(
       {
         animatedAttrs: {
-          transform: {
-            translateX: translateX2 + "px",
-            translateY: translateY2 + "px"
-          },
+          left: translateX2 + "%",
+          top: translateY2 + "%",
           backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
             256},${Math.random() * 256})`
         },
