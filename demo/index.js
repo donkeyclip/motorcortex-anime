@@ -23,6 +23,8 @@ const css = `
     width:100%;
     height:100%;
     position:absolute;
+    top:0px;
+    left:0px;
   }
 
   .board {
@@ -99,29 +101,26 @@ const clip = new MotorCortex.Clip(null, {
   containerParams
 });
 
-const width = clip.props.host
-  .getElementsByTagName("iframe")[0]
-  .contentWindow.document.getElementById("board").offsetWidth;
-const height = clip.props.host
-  .getElementsByTagName("iframe")[0]
-  .contentWindow.document.getElementById("board").offsetHeight;
+const type =
+  clip.props.host.getElementsByTagName("iframe").length > 0
+    ? "iframe"
+    : "webcomponent";
+let myclip;
 
-clip.props.host
-  .getElementsByTagName("iframe")[0]
-  .contentWindow.document.getElementById("board").style.width = width;
-clip.props.host
-  .getElementsByTagName("iframe")[0]
-  .contentWindow.document.getElementById("board").style.height = height;
+if (type === "iframe") {
+  myclip = clip.rootElement.contentWindow.document;
+} else {
+  myclip = clip.rootElement;
+}
+const width = myclip.getElementsByClassName("board")[0].offsetWidth;
+const height = myclip.getElementsByClassName("board")[0].offsetHeight;
+
+myclip.getElementsByClassName("board")[0].style.width = width;
+myclip.getElementsByClassName("board")[0].style.height = height;
 
 const top = 0;
-const right =
-  clip.props.host
-    .getElementsByTagName("iframe")[0]
-    .contentWindow.document.getElementById("board").offsetWidth - 30;
-const bottom =
-  clip.props.host
-    .getElementsByTagName("iframe")[0]
-    .contentWindow.document.getElementById("board").offsetHeight - 30;
+const right = myclip.getElementsByClassName("board")[0].offsetWidth - 30;
+const bottom = myclip.getElementsByClassName("board")[0].offsetHeight - 30;
 const left = 0;
 
 for (let q = 0; q <= 3; q++) {
