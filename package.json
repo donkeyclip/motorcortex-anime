@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-anime",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Annime plugin for MotorCortex",
   "main": "./dist/main.js",
   "author": "KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>",
@@ -17,8 +17,8 @@
     "update:packages": "npm update --save/--save-dev",
     "concurrently": "concurrently -c \"cyan.bold,magenta.bold\" --names \"JS,Styles\"",
     "lint:styles": "stylelint  \"src/**.css\" \"src/**/*.scss\" --config .stylelintrc.json",
-    "lint:js": "eslint -c .eslintrc src/**/*.{js,jsx} ",
-    "lint": "npm run concurrently \"npm run lint:js\" \"npm run lint:styles\" ",
+    "lint:js": "./node_modules/eslint/bin/eslint.js -c .eslintrc src/**/*.js",
+    "lint": "npm run concurrently \"npm run lint:js\" \"npm run lint:styles\"",
     "lint:fix": "npm run concurrently  \"npm run lint:js -- --fix\" \"npm run lint:styles -- --fix\"",
     "build": "npx babel ./src --out-dir ./dist",
     "start": "webpack-dev-server --inline --hot --disableHostCheck --config ./demo/webpack.config.js",
@@ -27,10 +27,7 @@
     "test:prod": "npm run lint",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "commit": "git-cz",
-    "prebuild": "rimraf dist",
-    "precommit": "lint-staged",
-    "prepush": "npm run test:prod",
-    "commitmsg": "commitlint -E GIT_PARAMS"
+    "prebuild": "rimraf dist"
   },
   "keywords": [
     "motorcortex",
