@@ -1,13 +1,14 @@
-const Anime = require("./Anime");
-const Channel = require("./Channel");
+"use strict";
+
+var Anime = require("./Anime");
+
+var Channel = require("./Channel");
 
 module.exports = {
   npm_name: "@kissmybutton/motorcortex-anime",
-  incidents: [
-    {
-      exportable: Anime,
-      name: "Anime"
-    }
-  ],
+  incidents: [{
+    exportable: Anime,
+    name: "Anime"
+  }],
   channel: Channel
 };
