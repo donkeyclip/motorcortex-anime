@@ -20,7 +20,7 @@ class Anime extends MC.TimedIncident {
             this.attrs.animatedAttrs[key][compoAttribute[i]]
           ];
           initialize[compoAttribute[i]] = [
-            this.getScratchValue(key)[compoAttribute[i]],
+            this.getScratchValue(null, key)[compoAttribute[i]],
             this.attrs.animatedAttrs[key][compoAttribute[i]]
           ];
         }
@@ -30,7 +30,7 @@ class Anime extends MC.TimedIncident {
           this.attrs.animatedAttrs[key]
         ];
         initialize[key] = [
-          this.getScratchValue(key),
+          this.getScratchValue(null, key),
           this.attrs.animatedAttrs[key]
         ];
       }

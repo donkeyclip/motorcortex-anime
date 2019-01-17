@@ -53,11 +53,11 @@ function (_MC$TimedIncident) {
             }
 
             options[compoAttribute[i]] = [this.getInitialValue(key)[compoAttribute[i]], this.attrs.animatedAttrs[key][compoAttribute[i]]];
-            initialize[compoAttribute[i]] = [this.getScratchValue(key)[compoAttribute[i]], this.attrs.animatedAttrs[key][compoAttribute[i]]];
+            initialize[compoAttribute[i]] = [this.getScratchValue(null, key)[compoAttribute[i]], this.attrs.animatedAttrs[key][compoAttribute[i]]];
           }
         } else {
           options[key] = [this.getInitialValue(key), this.attrs.animatedAttrs[key]];
-          initialize[key] = [this.getScratchValue(key), this.attrs.animatedAttrs[key]];
+          initialize[key] = [this.getScratchValue(null, key), this.attrs.animatedAttrs[key]];
         }
       }
 
