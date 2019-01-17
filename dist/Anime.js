@@ -42,6 +42,7 @@ function (_MC$TimedIncident) {
     value: function onGetContext() {
       var options = {};
       var initialize = {};
+      var mcid = this.element.dataset.motorcortex2Id;
 
       for (var key in this.attrs.animatedAttrs) {
         if (this.channel.compoAttributes.hasOwnProperty(key)) {
@@ -53,11 +54,19 @@ function (_MC$TimedIncident) {
             }
 
             options[compoAttribute[i]] = [this.getInitialValue(key)[compoAttribute[i]], this.attrs.animatedAttrs[key][compoAttribute[i]]];
-            initialize[compoAttribute[i]] = [this.getScratchValue(null, key)[compoAttribute[i]], this.attrs.animatedAttrs[key][compoAttribute[i]]];
+            initialize[compoAttribute[i]] = [this.getScratchValue(mcid, compoAttribute[i]), this.attrs.animatedAttrs[key][compoAttribute[i]]];
           }
         } else {
           options[key] = [this.getInitialValue(key), this.attrs.animatedAttrs[key]];
-          initialize[key] = [this.getScratchValue(null, key), this.attrs.animatedAttrs[key]];
+          initialize[key] = [this.getScratchValue(mcid, key), this.attrs.animatedAttrs[key]];
+        }
+      }
+
+      var initialStyle = {};
+
+      for (var _key in this.attrs.animatedAttrs) {
+        if (this.element.style[_key] != "" && this.element.style[_key] != null) {
+          initialStyle[_key] = this.element.style[_key];
         }
       }
 
@@ -68,27 +77,17 @@ function (_MC$TimedIncident) {
         targets: this.element
       }, (this.attrs || {}).attrs || {}, options)); // handle first render initial values
 
-      anime(_objectSpread({
-        autoplay: false,
-        duration: this.props.duration,
-        easing: (this.attrs.attrs || {}).easing || "linear",
-        targets: this.element
-      }, (this.attrs || {}).attrs || {}, initialize));
+      for (var _key2 in this.attrs.animatedAttrs) {
+        if (initialStyle.hasOwnProperty(_key2)) {
+          this.element.style[_key2] = initialStyle[_key2];
+        } else {
+          this.element.style[_key2] = null;
+        }
+      }
     }
   }, {
     key: "getScratchValue",
     value: function getScratchValue(id, attr) {
-      if (this.channel.compoAttributes.hasOwnProperty(attr)) {
-        var obj = {};
-        var compoAttribute = this.channel.compoAttributes[attr];
-
-        for (var i = 0; i < compoAttribute.length; i++) {
-          obj[compoAttribute[i]] = anime.getValue(this.element, compoAttribute[i]);
-        }
-
-        return obj;
-      }
-
       return anime.getValue(this.element, attr);
     }
   }, {
