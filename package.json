@@ -68,7 +68,9 @@
     }
   },
   "dependencies": {
-    "animejs": "^2.2.0"
+    "animejs": "^2.2.0",
+    "browserslist": "^4.7.0",
+    "caniuse-lite": "^1.0.30000997"
   },
   "peerDependencies": {
     "@kissmybutton/motorcortex": "^3.0.0-rc09"
