@@ -1,6 +1,5 @@
 const Anime = require("./Anime");
-const Channel = require("./Channel");
-
+const compositeAttributes = require("./compoAttributes");
 module.exports = {
   npm_name: "@kissmybutton/motorcortex-anime",
   incidents: [
@@ -9,5 +8,5 @@ module.exports = {
       name: "Anime"
     }
   ],
-  channel: Channel
+  compositeAttributes
 };

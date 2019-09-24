@@ -22,14 +22,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var MC = require("@kissmybutton/motorcortex/");
+var MC = require("@kissmybutton/motorcortex");
 
 var anime = require("animejs");
 
+var compoAttribute = require("./compoAttributes");
+
 var Anime =
 /*#__PURE__*/
-function (_MC$TimedIncident) {
-  _inherits(Anime, _MC$TimedIncident);
+function (_MC$API$Incident) {
+  _inherits(Anime, _MC$API$Incident);
 
   function Anime() {
     _classCallCheck(this, Anime);
@@ -45,16 +47,16 @@ function (_MC$TimedIncident) {
       var mcid = this.element.dataset.motorcortex2Id;
 
       for (var key in this.attrs.animatedAttrs) {
-        if (this.channel.compoAttributes.hasOwnProperty(key)) {
-          var compoAttribute = this.channel.compoAttributes[key];
+        if (compoAttribute.hasOwnProperty(key)) {
+          var _compoAttribute = _compoAttribute[key];
 
-          for (var i = 0; i < compoAttribute.length; i++) {
-            if (!this.attrs.animatedAttrs[key].hasOwnProperty(compoAttribute[i])) {
+          for (var i = 0; i < _compoAttribute.length; i++) {
+            if (!this.attrs.animatedAttrs[key].hasOwnProperty(_compoAttribute[i])) {
               continue;
             }
 
-            options[compoAttribute[i]] = [this.getInitialValue(key)[compoAttribute[i]], this.attrs.animatedAttrs[key][compoAttribute[i]]];
-            initialize[compoAttribute[i]] = [this.getScratchValue(mcid, compoAttribute[i]), this.attrs.animatedAttrs[key][compoAttribute[i]]];
+            options[_compoAttribute[i]] = [this.getInitialValue(key)[_compoAttribute[i]], this.attrs.animatedAttrs[key][_compoAttribute[i]]];
+            initialize[_compoAttribute[i]] = [this.getScratchValue(mcid, _compoAttribute[i]), this.attrs.animatedAttrs[key][_compoAttribute[i]]];
           }
         } else {
           options[key] = [this.getInitialValue(key), this.attrs.animatedAttrs[key]];
@@ -87,17 +89,18 @@ function (_MC$TimedIncident) {
     }
   }, {
     key: "getScratchValue",
-    value: function getScratchValue(id, attr) {
+    value: function getScratchValue() {
+      var attr = this.attributeKey;
       return anime.getValue(this.element, attr);
     }
   }, {
     key: "onProgress",
-    value: function onProgress(t) {
-      return this.target.seek(this.target.duration * t);
+    value: function onProgress(f) {
+      return this.target.seek(this.target.duration * f);
     }
   }]);
 
   return Anime;
-}(MC.TimedIncident);
+}(MC.API.Incident);
 
 module.exports = Anime;

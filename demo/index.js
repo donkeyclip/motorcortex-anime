@@ -2,15 +2,10 @@ const MotorCortex = require("@kissmybutton/motorcortex/");
 const Player = require("@kissmybutton/motorcortex-player/");
 const AnimeDefinition = require("../src/main");
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
+
 const calcDist = (x1, x2, y1, y2) =>
   Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-const getTotalTime = g => {
-  let sum = 0;
-  for (const i of g.incidents) {
-    sum += i.incident.props.duration;
-  }
-  return sum;
-};
+
 const css = `
 
   html,body {
@@ -84,6 +79,57 @@ const html = `
       <div class="cirlce3 cirlce">
         <div class="cirlceIn"></div>
       </div>
+      <div class="cirlce4 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce5 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce6 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce7 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce8 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce9 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce10 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce11 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce12 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce13 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce14 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce15 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce16 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce17 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce18 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce19 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
+      <div class="cirlce20 cirlce">
+        <div class="cirlceIn"></div>
+      </div>
     </div>
   </div>`;
 
@@ -94,37 +140,23 @@ const containerParams = {
   height: "90%"
 };
 
-const clip = new MotorCortex.Clip(null, {
+const clip = new MotorCortex.Clip({
   css,
   html,
   host,
   containerParams
 });
 
-const type =
-  clip.props.host.getElementsByTagName("iframe").length > 0
-    ? "iframe"
-    : "webcomponent";
-let myclip;
-
-if (type === "iframe") {
-  myclip = clip.rootElement.contentWindow.document;
-} else {
-  myclip = clip.rootElement;
-}
-const width = myclip.getElementsByClassName("board")[0].offsetWidth;
-const height = myclip.getElementsByClassName("board")[0].offsetHeight;
-
-myclip.getElementsByClassName("board")[0].style.width = width;
-myclip.getElementsByClassName("board")[0].style.height = height;
+const width = host.offsetWidth * 0.9;
+const height = host.offsetHeight * 0.9;
 
 const top = 0;
-const right = myclip.getElementsByClassName("board")[0].offsetWidth - 30;
-const bottom = myclip.getElementsByClassName("board")[0].offsetHeight - 30;
+const right = width - 30;
+const bottom = height - 30;
 const left = 0;
 
-for (let q = 0; q <= 3; q++) {
-  const group = new MotorCortex.Group();
+for (let q = 0; q <= 30; q++) {
+  const group = new MotorCortex.Group({}, {});
 
   let c = 0;
   let translateX1 = 0,
@@ -155,7 +187,7 @@ for (let q = 0; q <= 3; q++) {
       },
       {
         duration: parseInt(
-          calcDist(translateX1, translateX2, translateY1, translateY2) * 3
+          calcDist(translateX1, translateX2, translateY1, translateY2) * 10
         ),
         selector: ".cirlce" + q
       }
@@ -183,23 +215,16 @@ for (let q = 0; q <= 3; q++) {
       },
       {
         duration: parseInt(
-          calcDist(translateX1, translateX2, translateY1, translateY2) * 3
+          calcDist(translateX1, translateX2, translateY1, translateY2) * 10
         ),
         selector: ".cirlce" + q
       }
     );
-
-    if (group.incidents.length == 0) {
-      group.addIncident(anime, 0);
-      group.addIncident(anime1, getTotalTime(group));
-    } else {
-      group.addIncident(anime, getTotalTime(group));
-      group.addIncident(anime1, getTotalTime(group));
-    }
+    group.addIncident(anime, group.duration);
+    group.addIncident(anime1, group.duration);
   }
   clip.addIncident(group, 0);
 }
-
 new Player({
   clip: clip,
   theme: "transparent on-top",

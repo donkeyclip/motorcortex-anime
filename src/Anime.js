@@ -1,14 +1,15 @@
-const MC = require("@kissmybutton/motorcortex/");
+const MC = require("@kissmybutton/motorcortex");
 const anime = require("animejs");
+const compoAttribute = require("./compoAttributes");
 
-class Anime extends MC.TimedIncident {
+class Anime extends MC.API.Incident {
   onGetContext() {
     const options = {};
     const initialize = {};
     const mcid = this.element.dataset.motorcortex2Id;
     for (const key in this.attrs.animatedAttrs) {
-      if (this.channel.compoAttributes.hasOwnProperty(key)) {
-        const compoAttribute = this.channel.compoAttributes[key];
+      if (compoAttribute.hasOwnProperty(key)) {
+        const compoAttribute = compoAttribute[key];
 
         for (let i = 0; i < compoAttribute.length; i++) {
           if (
@@ -62,12 +63,13 @@ class Anime extends MC.TimedIncident {
     }
   }
 
-  getScratchValue(id, attr) {
+  getScratchValue() {
+    const attr = this.attributeKey;
     return anime.getValue(this.element, attr);
   }
 
-  onProgress(t) {
-    return this.target.seek(this.target.duration * t);
+  onProgress(f) {
+    return this.target.seek(this.target.duration * f);
   }
 }
 

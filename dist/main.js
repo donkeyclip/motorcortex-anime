@@ -2,7 +2,7 @@
 
 var Anime = require("./Anime");
 
-var Channel = require("./Channel");
+var compositeAttributes = require("./compoAttributes");
 
 module.exports = {
   npm_name: "@kissmybutton/motorcortex-anime",
@@ -10,5 +10,5 @@ module.exports = {
     exportable: Anime,
     name: "Anime"
   }],
-  channel: Channel
+  compositeAttributes: compositeAttributes
 };
