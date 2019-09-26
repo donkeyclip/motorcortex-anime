@@ -1,5 +1,6 @@
 const MotorCortex = require("@kissmybutton/motorcortex/");
-const Player = require("@kissmybutton/motorcortex-player/");
+const Player = require("../../teo-motorcortex-player/");
+// const Player = require("@kissmybutton/motorcortex-player/");
 const AnimeDefinition = require("../src/main");
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
 
@@ -144,7 +145,8 @@ const clip = new MotorCortex.Clip({
   css,
   html,
   host,
-  containerParams
+  containerParams,
+  audio: "off"
 });
 
 const width = host.offsetWidth * 0.9;

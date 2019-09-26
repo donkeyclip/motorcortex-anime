@@ -2,7 +2,7 @@ const MC = require("@kissmybutton/motorcortex");
 const anime = require("animejs");
 const compoAttribute = require("./compoAttributes");
 
-class Anime extends MC.API.Incident {
+class Anime extends MC.API.MonoIncident {
   onGetContext() {
     const options = {};
     const initialize = {};

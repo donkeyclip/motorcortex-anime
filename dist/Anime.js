@@ -30,8 +30,8 @@ var compoAttribute = require("./compoAttributes");
 
 var Anime =
 /*#__PURE__*/
-function (_MC$API$Incident) {
-  _inherits(Anime, _MC$API$Incident);
+function (_MC$API$MonoIncident) {
+  _inherits(Anime, _MC$API$MonoIncident);
 
   function Anime() {
     _classCallCheck(this, Anime);
@@ -101,6 +101,6 @@ function (_MC$API$Incident) {
   }]);
 
   return Anime;
-}(MC.API.Incident);
+}(MC.API.MonoIncident);
 
 module.exports = Anime;
