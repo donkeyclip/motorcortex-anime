@@ -1,48 +1,38 @@
 const MC = require("@kissmybutton/motorcortex");
 const anime = require("animejs");
-const compoAttribute = require("./compoAttributes");
+const compoAttributes = require("./compoAttributes");
 
 class Anime extends MC.API.MonoIncident {
   onGetContext() {
     const options = {};
     const initialize = {};
-    const mcid = this.element.dataset.motorcortex2Id;
-    for (const key in this.attrs.animatedAttrs) {
-      if (compoAttribute.hasOwnProperty(key)) {
-        const compoAttribute = compoAttribute[key];
+    if (compoAttributes.hasOwnProperty(this.attributeKey)) {
+      const compoAttribute = compoAttributes[this.attributeKey];
 
-        for (let i = 0; i < compoAttribute.length; i++) {
-          if (
-            !this.attrs.animatedAttrs[key].hasOwnProperty(compoAttribute[i])
-          ) {
-            continue;
-          }
-          options[compoAttribute[i]] = [
-            this.getInitialValue(key)[compoAttribute[i]],
-            this.attrs.animatedAttrs[key][compoAttribute[i]]
-          ];
-          initialize[compoAttribute[i]] = [
-            this.getScratchValue(mcid, compoAttribute[i]),
-            this.attrs.animatedAttrs[key][compoAttribute[i]]
-          ];
+      for (let i = 0; i < compoAttribute.length; i++) {
+        if (!this.targetValue.hasOwnProperty(compoAttribute[i])) {
+          continue;
         }
-      } else {
-        options[key] = [
-          this.getInitialValue(key),
-          this.attrs.animatedAttrs[key]
+        options[compoAttribute[i]] = [
+          this.getInitialValue()[compoAttribute[i]],
+          this.targetValue[compoAttribute[i]]
         ];
-        initialize[key] = [
-          this.getScratchValue(mcid, key),
-          this.attrs.animatedAttrs[key]
+        initialize[compoAttribute[i]] = [
+          this.getScratchValue(),
+          this.targetValue[compoAttribute[i]]
         ];
       }
+    } else {
+      options[this.attributeKey] = [this.getInitialValue(), this.targetValue];
+      initialize[this.targetValue] = [this.getScratchValue(), this.targetValue];
     }
 
     const initialStyle = {};
-    for (const key in this.attrs.animatedAttrs) {
-      if (this.element.style[key] != "" && this.element.style[key] != null) {
-        initialStyle[key] = this.element.style[key];
-      }
+    if (
+      this.element.style[this.attributeKey] != "" &&
+      this.element.style[this.attributeKey] != null
+    ) {
+      initialStyle[this.attributeKey] = this.element.style[this.attributeKey];
     }
 
     this.target = anime({

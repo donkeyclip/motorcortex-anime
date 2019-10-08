@@ -26,7 +26,7 @@ var MC = require("@kissmybutton/motorcortex");
 
 var anime = require("animejs");
 
-var compoAttribute = require("./compoAttributes");
+var compoAttributes = require("./compoAttributes");
 
 var Anime =
 /*#__PURE__*/
@@ -44,32 +44,27 @@ function (_MC$API$MonoIncident) {
     value: function onGetContext() {
       var options = {};
       var initialize = {};
-      var mcid = this.element.dataset.motorcortex2Id;
 
-      for (var key in this.attrs.animatedAttrs) {
-        if (compoAttribute.hasOwnProperty(key)) {
-          var _compoAttribute = _compoAttribute[key];
+      if (compoAttributes.hasOwnProperty(this.attributeKey)) {
+        var compoAttribute = compoAttributes[this.attributeKey];
 
-          for (var i = 0; i < _compoAttribute.length; i++) {
-            if (!this.attrs.animatedAttrs[key].hasOwnProperty(_compoAttribute[i])) {
-              continue;
-            }
-
-            options[_compoAttribute[i]] = [this.getInitialValue(key)[_compoAttribute[i]], this.attrs.animatedAttrs[key][_compoAttribute[i]]];
-            initialize[_compoAttribute[i]] = [this.getScratchValue(mcid, _compoAttribute[i]), this.attrs.animatedAttrs[key][_compoAttribute[i]]];
+        for (var i = 0; i < compoAttribute.length; i++) {
+          if (!this.targetValue.hasOwnProperty(compoAttribute[i])) {
+            continue;
           }
-        } else {
-          options[key] = [this.getInitialValue(key), this.attrs.animatedAttrs[key]];
-          initialize[key] = [this.getScratchValue(mcid, key), this.attrs.animatedAttrs[key]];
+
+          options[compoAttribute[i]] = [this.getInitialValue()[compoAttribute[i]], this.targetValue[compoAttribute[i]]];
+          initialize[compoAttribute[i]] = [this.getScratchValue(), this.targetValue[compoAttribute[i]]];
         }
+      } else {
+        options[this.attributeKey] = [this.getInitialValue(), this.targetValue];
+        initialize[this.targetValue] = [this.getScratchValue(), this.targetValue];
       }
 
       var initialStyle = {};
 
-      for (var _key in this.attrs.animatedAttrs) {
-        if (this.element.style[_key] != "" && this.element.style[_key] != null) {
-          initialStyle[_key] = this.element.style[_key];
-        }
+      if (this.element.style[this.attributeKey] != "" && this.element.style[this.attributeKey] != null) {
+        initialStyle[this.attributeKey] = this.element.style[this.attributeKey];
       }
 
       this.target = anime(_objectSpread({
@@ -79,11 +74,11 @@ function (_MC$API$MonoIncident) {
         targets: this.element
       }, (this.attrs || {}).attrs || {}, options)); // handle first render initial values
 
-      for (var _key2 in this.attrs.animatedAttrs) {
-        if (initialStyle.hasOwnProperty(_key2)) {
-          this.element.style[_key2] = initialStyle[_key2];
+      for (var key in this.attrs.animatedAttrs) {
+        if (initialStyle.hasOwnProperty(key)) {
+          this.element.style[key] = initialStyle[key];
         } else {
-          this.element.style[_key2] = null;
+          this.element.style[key] = null;
         }
       }
     }
