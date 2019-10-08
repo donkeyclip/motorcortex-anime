@@ -1,5 +1,5 @@
 const MotorCortex = require("@kissmybutton/motorcortex/");
-const Player = require("../../teo-motorcortex-player/");
+const Player = require("@kissmybutton/motorcortex-player");
 // const Player = require("@kissmybutton/motorcortex-player/");
 const AnimeDefinition = require("../src/main");
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
