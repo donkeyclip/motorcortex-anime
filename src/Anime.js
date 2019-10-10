@@ -54,8 +54,20 @@ class Anime extends MC.API.MonoIncident {
   }
 
   getScratchValue() {
-    const attr = this.attributeKey;
-    return anime.getValue(this.element, attr);
+    if (compoAttributes.hasOwnProperty(this.attributeKey)) {
+      const obj = {};
+      const compoAttribute = compoAttributes[this.attributeKey];
+
+      for (let i = 0; i < compoAttribute.length; i++) {
+        obj[compoAttribute[i]] = anime.getValue(
+          this.element,
+          compoAttribute[i]
+        );
+      }
+
+      return obj;
+    }
+    return anime.getValue(this.element, this.attributeKey);
   }
 
   onProgress(f) {
