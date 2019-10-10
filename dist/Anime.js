@@ -1,5 +1,14 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _animeEs = _interopRequireDefault(require("animejs/lib/anime.es.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -23,8 +32,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 var MC = require("@kissmybutton/motorcortex");
-
-var anime = require("animejs");
 
 var compoAttributes = require("./compoAttributes");
 
@@ -67,7 +74,7 @@ function (_MC$API$MonoIncident) {
         initialStyle[this.attributeKey] = this.element.style[this.attributeKey];
       }
 
-      this.target = anime(_objectSpread({
+      this.target = (0, _animeEs.default)(_objectSpread({
         autoplay: false,
         duration: this.props.duration,
         easing: (this.attrs.attrs || {}).easing || "linear",
@@ -85,8 +92,18 @@ function (_MC$API$MonoIncident) {
   }, {
     key: "getScratchValue",
     value: function getScratchValue() {
-      var attr = this.attributeKey;
-      return anime.getValue(this.element, attr);
+      if (compoAttributes.hasOwnProperty(this.attributeKey)) {
+        var obj = {};
+        var compoAttribute = compoAttributes[this.attributeKey];
+
+        for (var i = 0; i < compoAttribute.length; i++) {
+          obj[compoAttribute[i]] = _animeEs.default.getValue(this.element, compoAttribute[i]);
+        }
+
+        return obj;
+      }
+
+      return _animeEs.default.get(this.element, this.attributeKey);
     }
   }, {
     key: "onProgress",
@@ -98,4 +115,4 @@ function (_MC$API$MonoIncident) {
   return Anime;
 }(MC.API.MonoIncident);
 
-module.exports = Anime;
+exports.default = Anime;

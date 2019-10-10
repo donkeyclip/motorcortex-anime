@@ -1,8 +1,8 @@
 const MC = require("@kissmybutton/motorcortex");
-const anime = require("animejs");
+import anime from "animejs/lib/anime.es.js";
 const compoAttributes = require("./compoAttributes");
 
-class Anime extends MC.API.MonoIncident {
+export default class Anime extends MC.API.MonoIncident {
   onGetContext() {
     const options = {};
     const initialize = {};
@@ -67,12 +67,10 @@ class Anime extends MC.API.MonoIncident {
 
       return obj;
     }
-    return anime.getValue(this.element, this.attributeKey);
+    return anime.get(this.element, this.attributeKey);
   }
 
   onProgress(f) {
     return this.target.seek(this.target.duration * f);
   }
 }
-
-module.exports = Anime;
