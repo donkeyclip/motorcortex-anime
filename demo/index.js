@@ -42,6 +42,7 @@ const css = `
     width: 30px;
     left: 0px;
     top: 0px;
+    transform: scaleX(0.5);
   }
 
   .cirlceIn {
@@ -141,12 +142,19 @@ const containerParams = {
   height: "90%"
 };
 
+const rootClip = new MotorCortex.Clip({
+  html: '<div id="edo"></div>',
+  css: "#edo{width:100%; height: 100%}",
+  host: host,
+  containerParams,
+  audio: "off"
+});
+
 const clip = new MotorCortex.Clip({
   css,
   html,
-  host,
-  containerParams,
-  audio: "off"
+  selector: "#edo",
+  containerParams
 });
 
 const width = host.offsetWidth * 0.9;
@@ -178,6 +186,10 @@ for (let q = 0; q <= 30; q++) {
     const anime = new Anime.Anime(
       {
         animatedAttrs: {
+          transform: {
+            scaleX: 1,
+            scaleY: 0.5
+          },
           left: translateX1 + "%",
           top: translateY1 + "%",
           backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
@@ -227,9 +239,13 @@ for (let q = 0; q <= 30; q++) {
   }
   clip.addIncident(group, 0);
 }
+rootClip.addIncident(clip, 0);
+
 new Player({
-  clip: clip,
+  clip: rootClip,
   theme: "transparent on-top",
   preview: false,
   pointerEvents: false
 });
+
+window.myclip = clip;

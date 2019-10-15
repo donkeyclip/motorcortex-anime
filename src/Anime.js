@@ -1,6 +1,7 @@
 const MC = require("@kissmybutton/motorcortex");
 import anime from "animejs/lib/anime.es.js";
 const compoAttributes = require("./compoAttributes");
+const getMatrix2D = require("./matrix2d");
 
 export default class Anime extends MC.API.MonoIncident {
   onGetContext() {
@@ -54,15 +55,17 @@ export default class Anime extends MC.API.MonoIncident {
   }
 
   getScratchValue() {
-    if (compoAttributes.hasOwnProperty(this.attributeKey)) {
+    if (this.attributeKey === "transform") {
       const obj = {};
-      const compoAttribute = compoAttributes[this.attributeKey];
+      const transform = compoAttributes[this.attributeKey];
+      const currentTransform = getMatrix2D(this.context.window, this.element);
 
-      for (let i = 0; i < compoAttribute.length; i++) {
-        obj[compoAttribute[i]] = anime.getValue(
-          this.element,
-          compoAttribute[i]
-        );
+      for (let i = 0; i < transform.length; i++) {
+        if (currentTransform.hasOwnProperty(transform[i])) {
+          obj[transform[i]] = currentTransform[transform[i]];
+        } else {
+          obj[transform[i]] = anime.get(this.element, transform[i]);
+        }
       }
 
       return obj;

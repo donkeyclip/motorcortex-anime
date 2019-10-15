@@ -35,6 +35,8 @@ var MC = require("@kissmybutton/motorcortex");
 
 var compoAttributes = require("./compoAttributes");
 
+var getMatrix2D = require("./matrix2d");
+
 var Anime =
 /*#__PURE__*/
 function (_MC$API$MonoIncident) {
@@ -92,12 +94,17 @@ function (_MC$API$MonoIncident) {
   }, {
     key: "getScratchValue",
     value: function getScratchValue() {
-      if (compoAttributes.hasOwnProperty(this.attributeKey)) {
+      if (this.attributeKey === "transform") {
         var obj = {};
-        var compoAttribute = compoAttributes[this.attributeKey];
+        var transform = compoAttributes[this.attributeKey];
+        var currentTransform = getMatrix2D(this.context.window, this.element);
 
-        for (var i = 0; i < compoAttribute.length; i++) {
-          obj[compoAttribute[i]] = _animeEs.default.getValue(this.element, compoAttribute[i]);
+        for (var i = 0; i < transform.length; i++) {
+          if (currentTransform.hasOwnProperty(transform[i])) {
+            obj[transform[i]] = currentTransform[transform[i]];
+          } else {
+            obj[transform[i]] = _animeEs.default.get(this.element, transform[i]);
+          }
         }
 
         return obj;
