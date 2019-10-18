@@ -42,7 +42,7 @@ const css = `
     width: 30px;
     left: 0px;
     top: 0px;
-    transform: scaleX(0.5);
+    
   }
 
   .cirlceIn {
@@ -187,8 +187,8 @@ for (let q = 0; q <= 30; q++) {
       {
         animatedAttrs: {
           transform: {
-            scaleX: 1,
-            scaleY: 0.5
+            scaleX: 0.2,
+            scaleY: 0.2
           },
           left: translateX1 + "%",
           top: translateY1 + "%",
@@ -218,6 +218,10 @@ for (let q = 0; q <= 30; q++) {
     const anime1 = new Anime.Anime(
       {
         animatedAttrs: {
+          transform: {
+            scaleX: 1,
+            scaleY: 1
+          },
           left: translateX2 + "%",
           top: translateY2 + "%",
           backgroundColor: `rgb(${Math.random() * 256},${Math.random() *

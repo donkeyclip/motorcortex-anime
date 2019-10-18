@@ -73,7 +73,7 @@
     "caniuse-lite": "^1.0.30000997"
   },
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "3.0.0-rc24"
+    "@kissmybutton/motorcortex": "3.0.0-rc30"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -81,8 +81,8 @@
     "@babel/preset-env": "^7.1.0",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.0.1",
-    "@kissmybutton/motorcortex": "3.0.0-rc24",
-    "@kissmybutton/motorcortex-player": "^1.4.2",
+    "@kissmybutton/motorcortex": "3.0.0-rc30",
+    "@kissmybutton/motorcortex-player": "^1.4.5",
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/git": "^7.0.7",
     "@semantic-release/github": "^5.2.8",
