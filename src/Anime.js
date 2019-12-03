@@ -39,7 +39,7 @@ export default class Anime extends MC.API.MonoIncident {
     this.target = anime({
       autoplay: false,
       duration: this.props.duration,
-      easing: (this.attrs.attrs || {}).easing || "linear",
+      easing: "linear",
       targets: this.element,
       ...((this.attrs || {}).attrs || {}),
       ...options

@@ -79,7 +79,7 @@ function (_MC$API$MonoIncident) {
       this.target = (0, _animeEs.default)(_objectSpread({
         autoplay: false,
         duration: this.props.duration,
-        easing: (this.attrs.attrs || {}).easing || "linear",
+        easing: "linear",
         targets: this.element
       }, (this.attrs || {}).attrs || {}, options)); // handle first render initial values
 
