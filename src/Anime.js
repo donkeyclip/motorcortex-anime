@@ -1,5 +1,5 @@
 const MC = require("@kissmybutton/motorcortex");
-import anime from "animejs/lib/anime.es.js";
+import anime from "mc-animejs-core/lib/anime.es.js";
 const compoAttributes = require("./compoAttributes");
 const getMatrix2D = require("./matrix2d");
 
@@ -28,14 +28,6 @@ export default class Anime extends MC.API.MonoIncident {
       initialize[this.targetValue] = [this.getScratchValue(), this.targetValue];
     }
 
-    const initialStyle = {};
-    if (
-      this.element.style[this.attributeKey] != "" &&
-      this.element.style[this.attributeKey] != null
-    ) {
-      initialStyle[this.attributeKey] = this.element.style[this.attributeKey];
-    }
-
     this.target = anime({
       autoplay: false,
       duration: this.props.duration,
@@ -44,14 +36,6 @@ export default class Anime extends MC.API.MonoIncident {
       ...((this.attrs || {}).attrs || {}),
       ...options
     }); // handle first render initial values
-
-    for (const key in this.attrs.animatedAttrs) {
-      if (initialStyle.hasOwnProperty(key)) {
-        this.element.style[key] = initialStyle[key];
-      } else {
-        this.element.style[key] = null;
-      }
-    }
   }
 
   getScratchValue() {
