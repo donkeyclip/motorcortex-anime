@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _animeEs = _interopRequireDefault(require("animejs/lib/anime.es.js"));
+var _animeEs = _interopRequireDefault(require("mc-animejs-core/lib/anime.es.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70,26 +70,12 @@ function (_MC$API$MonoIncident) {
         initialize[this.targetValue] = [this.getScratchValue(), this.targetValue];
       }
 
-      var initialStyle = {};
-
-      if (this.element.style[this.attributeKey] != "" && this.element.style[this.attributeKey] != null) {
-        initialStyle[this.attributeKey] = this.element.style[this.attributeKey];
-      }
-
       this.target = (0, _animeEs.default)(_objectSpread({
         autoplay: false,
         duration: this.props.duration,
         easing: "linear",
         targets: this.element
       }, (this.attrs || {}).attrs || {}, options)); // handle first render initial values
-
-      for (var key in this.attrs.animatedAttrs) {
-        if (initialStyle.hasOwnProperty(key)) {
-          this.element.style[key] = initialStyle[key];
-        } else {
-          this.element.style[key] = null;
-        }
-      }
     }
   }, {
     key: "getScratchValue",
