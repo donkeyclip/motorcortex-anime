@@ -1,6 +1,6 @@
 const MotorCortex = require("@kissmybutton/motorcortex/");
 const Player = require("@kissmybutton/motorcortex-player");
-// const Player = require("@kissmybutton/motorcortex-player/");
+// const Player = require("../../teo-motorcortex-player/src/Player");
 const AnimeDefinition = require("../src/main");
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
 
@@ -247,9 +247,10 @@ rootClip.addIncident(clip, 0);
 
 new Player({
   clip: rootClip,
-  theme: "transparent on-top",
+  theme: "mc-blue",
   preview: false,
   pointerEvents: false
+  // speedValues: [1, 2, 3]
 });
 
 window.myclip = clip;
