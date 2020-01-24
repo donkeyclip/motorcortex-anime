@@ -13,8 +13,6 @@ $ yarn add @kissmybutton/motorcortex-anime
 import Anime from "@kissmybutton/motorcortex-anime";
 ```
 
-Or manually [download](https://google.com) and link `sample-project.min.js` in your HTML:
-
 
 ## Key Concepts / Features
 MotorCortex Anime takes the capabilities of Anime.js library and exposes them via an easy to use MotorCortex Incident. 
@@ -99,6 +97,7 @@ MyClip.play();
 - "skewX",
 - "skewY",
 - "perspective"
+
 All of the attributes on this list can only be animated via the transform composite attribute:
 ```javascript
 const MyAnime = new AnimePlugin.Anime({
