@@ -1,6 +1,6 @@
 # MotorCortex Anime
 
-(Anime.js)[https://animejs.com/] library as a MotorCortex Incident
+[Anime.js](https://animejs.com/) library as a MotorCortex Incident
 
 ## Installation
 ```bash
