@@ -16,8 +16,8 @@ const css = `
     align-items: center;
   }
   .container {
-    margin-top: 5%;
-    width: 50%;
+    
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -126,8 +126,8 @@ const html = `
 const host = document.getElementById("clip");
 
 const containerParams = {
-  width: "100%",
-  height: "100%"
+  width: "612px",
+  height: "671px"
 };
 
 const clip = new MotorCortex.Clip({
@@ -266,6 +266,23 @@ const svg = new Anime.Anime(
   }
 );
 
+const boxWidthBack = new Anime.Anime(
+  {
+    animatedAttrs: {
+      width: "30px"
+    },
+    initialValues: {
+      width: "250px"
+    },
+    attrs: {}
+  },
+  {
+    duration: 1700,
+    selector: `.boxWidth`,
+    easing: "easeOutQuad"
+  }
+);
+
 clip.addIncident(boxWidth, 0);
 clip.addIncident(boxColor, 1700);
 clip.addIncident(boxRotate, 3400);
@@ -273,6 +290,7 @@ clip.addIncident(boxMove, 5100);
 clip.addIncident(boxBorder, 6800);
 clip.addIncident(opacity, 8500);
 clip.addIncident(svg, 9500);
+clip.addIncident(boxWidthBack, 12500);
 new Player({
   clip: clip,
   theme: "mc-blue",
