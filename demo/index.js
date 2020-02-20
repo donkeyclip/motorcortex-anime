@@ -4,253 +4,298 @@ const Player = require("@kissmybutton/motorcortex-player");
 const AnimeDefinition = require("../src/main");
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
 
-const calcDist = (x1, x2, y1, y2) =>
-  Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-
 const css = `
 
-  html,body {
-    background-color:white;
+.wrapper {
+    background-color: #f7f7f7;
     height:100%;
     width:100%;
     margin:0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .container {
-    width:100%;
-    height:100%;
-    position:absolute;
-    top:0px;
-    left:0px;
-  }
-
-  .board {
-    background-color: whitesmoke;
-    width:50%;
-    height:50%;
-    margin:auto;
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-  }
-  .cirlce {
-    position: absolute;
-    background: navy;
-    border-radius: 30px;
-    height: 30px;
-    width: 30px;
-    left: 0px;
-    top: 0px;
     
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    overflow: hidden;
+    color: #252056;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .title {
+    font-size: 50px;
+    font-weight: bold;
+  }
+  .subTitle {
+    font-size: 30px;
+  }
+  .text{
+    font-size: 24px;
+    font-weight: 100;
+  }
+  .boxWidth,.boxColor,.boxRotate,.boxMove,.boxBorder {
+    background: #252056;
+    width: 250px;
+    height: 30px;
+    position: relative;
+    margin-left: 30px
+  }
+  .boxBorder{
+    width: 30px;
+    border-radius: 0%;
+  }
+  .boxMove{
+    left:0;
+    width: 30px;
   }
 
-  .cirlceIn {
-    position: absolute;
-    background: red;
-    border-radius: 20px;
-    height:20px;
-    width: 20px;
-    left: 5px;
-    top: 5px;;
+  .boxWidth{
+    width: 30px;
   }
 
-  .dotted {
-    background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-    background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-    background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-    background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-    -webkit-background-size: 3px 3px;
-    -moz-background-size: 3px 3px;
-    background-size: 3px 3px;
+  .boxColor{
+    background: rgb(37, 32, 86);
+  }
+
+  .boxRotate{
+    width:30px;
+    transform: rotate(0deg);
+  }
+
+  .demo{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    position: relative;
+  }
+  .demoWidth,.demoColor,.demoRotate,.demoMove,.demoBorder{
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: start;
+  }
+  .cls-1{
+    stroke-dasharray: 6000;
+    stroke-dashoffset: 6000;
   }
 `;
 
 const html = `
-  <div class="container">
-    <div id="board" class="board dotted">
-      <div class="cirlce0 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce1 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce2 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce3 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce4 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce5 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce6 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce7 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce8 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce9 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce10 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce11 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce12 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce13 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce14 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce15 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce16 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce17 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce18 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce19 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
-      <div class="cirlce20 cirlce">
-        <div class="cirlceIn"></div>
-      </div>
+<div class="wrapper">
+<div class="container">
+  <div class="title">MotorCortex</div>
+  <div class="subTitle">Anime plugin</div>
+  <div class="text">Demo:</div>
+  <div class="demo">
+    <div class="demoWidth">
+      <div class="text">width :</div>
+      <div class="boxWidth"></div>
     </div>
-  </div>`;
+    <div class="demoColor">
+      <div class="text">background color :</div>
+      <div class="boxColor"></div>
+    </div>
+    <div class="demoRotate">
+      <div class="text">Rotate :</div>
+      <div class="boxRotate"></div>
+    </div>
+    <div class="demoMove">
+      <div class="text">Move with easings:</div>
+      <div class="boxMove"> </div>
+    </div>
+    <div class="demoBorder">
+      <div class="text">Border :</div>
+      <div class="boxBorder"> </div>
+    </div>
+  </div>
+ 
+  <div class="subTitle svgText">svg </div>
+  <div class="svgBorder"> <svg xmlns="http://www.w3.org/2000/svg" width="300px" viewBox="0 0 495 464.3"><defs><style>.cls-1{fill:none;stroke:#252056;stroke-miterlimit:10;stroke-width:3px;}.cls-2{fill:none;}</style></defs><title>mc2</title><g id="Layer_1" data-name="Layer 1"><path class="cls-1" d="M86,368.6V128.8L195.3,253.4,86,368.6ZM496,18.1H419.8L246.4,197.3,86.3,18.1H4V479.3H80.5L299,250.1l119.6-125V370.5l-71.5-74.4a3.9,3.9,0,0,0-5.4-.1l-.2.2L293.2,348,418.6,479.3H496Z" transform="translate(-2.5 -16.6)"/></g><g id="Layer_2" data-name="Layer 2"><path class="cls-2" d="M86,368.6V128.8L195.3,253.4,86,368.6ZM496,18.1H419.8L246.4,197.3,86.3,18.1H4V479.3H80.5L299,250.1l119.6-125V370.5l-71.5-74.4a3.9,3.9,0,0,0-5.4-.1l-.2.2L293.2,348,418.6,479.3H496Z" transform="translate(-2.5 -16.6)"/></g></svg> </div>
+
+</div>
+</div>`;
 
 const host = document.getElementById("clip");
 
 const containerParams = {
-  width: "90%",
-  height: "90%"
+  width: "612px",
+  height: "671px"
 };
-
-const rootClip = new MotorCortex.Clip({
-  html: '<div id="edo"></div>',
-  css: "#edo{width:100%; height: 100%}",
-  host: host,
-  containerParams,
-  audio: "off"
-});
 
 const clip = new MotorCortex.Clip({
   css,
   html,
-  selector: "#edo",
+  host,
+  fonts: [
+    {
+      type: `google-font`,
+      src: `https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700,900&display=swap`
+    }
+  ],
   containerParams
 });
 
-const width = host.offsetWidth * 0.9;
-const height = host.offsetHeight * 0.9;
-
-const top = 0;
-const right = width - 30;
-const bottom = height - 30;
-const left = 0;
-
-for (let q = 0; q <= 30; q++) {
-  const group = new MotorCortex.Group({}, {});
-
-  let c = 0;
-  let translateX1 = 0,
-    translateY1 = 0,
-    translateX2 = 0,
-    translateY2 = 0;
-  for (let i = 0; i < 10; i += 2) {
-    c++;
-    if (c % 2) {
-      translateX1 = (right / width) * 100;
-      translateY1 = ((Math.random() * bottom) / height) * 100;
-    } else {
-      translateX1 = ((Math.random() * right) / width) * 100;
-      translateY1 = (bottom / height) * 100;
-    }
-
-    const anime = new Anime.Anime(
-      {
-        animatedAttrs: {
-          transform: {
-            scaleX: 0.2,
-            scaleY: 0.2
-          },
-          left: translateX1 + "%",
-          top: translateY1 + "%",
-          backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
-            256},${Math.random() * 256})`
-        },
-        attrs: {
-          easing: "linear"
-        }
-      },
-      {
-        duration: parseInt(
-          calcDist(translateX1, translateX2, translateY1, translateY2) * 10
-        ),
-        selector: ".cirlce" + q
-      }
-    );
-
-    if (c % 2) {
-      translateX2 = (left / width) * 100;
-      translateY2 = ((Math.random() * bottom) / height) * 100;
-    } else {
-      translateX2 = ((Math.random() * right) / width) * 100;
-      translateY2 = (top / height) * 100;
-    }
-
-    const anime1 = new Anime.Anime(
-      {
-        animatedAttrs: {
-          transform: {
-            scaleX: 1,
-            scaleY: 1
-          },
-          left: translateX2 + "%",
-          top: translateY2 + "%",
-          backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
-            256},${Math.random() * 256})`
-        },
-        attrs: {
-          easing: "linear"
-        }
-      },
-      {
-        duration: parseInt(
-          calcDist(translateX1, translateX2, translateY1, translateY2) * 10
-        ),
-        selector: ".cirlce" + q
-      }
-    );
-    group.addIncident(anime, group.duration);
-    group.addIncident(anime1, group.duration);
+const boxWidth = new Anime.Anime(
+  {
+    animatedAttrs: {
+      width: "250px"
+    },
+    attrs: {}
+  },
+  {
+    duration: 1700,
+    selector: `.boxWidth`,
+    easing: "easeOutQuad"
   }
-  clip.addIncident(group, 0);
-}
-rootClip.addIncident(clip, 0);
+);
 
+const boxColor = new Anime.Anime(
+  {
+    animatedAttrs: {
+      background: "rgb(255, 0, 85)"
+    },
+    initialValues: {
+      background: "rgb(37, 32, 86)"
+    },
+
+    attrs: {}
+  },
+  {
+    duration: 1700,
+    selector: `.boxColor`,
+    easing: "easeOutQuad"
+  }
+);
+
+const boxRotate = new Anime.Anime(
+  {
+    animatedAttrs: {
+      transform: {
+        rotate: "360deg"
+      }
+    },
+    initialValues: {
+      transform: {
+        rotate: "0deg"
+      }
+    },
+
+    attrs: {}
+  },
+  {
+    duration: 1700,
+    selector: `.boxRotate`,
+    easing: "easeOutQuad"
+  }
+);
+
+const boxMove = new Anime.Anime(
+  {
+    animatedAttrs: {
+      left: 220
+    },
+    initialValues: {
+      left: 0
+    },
+
+    attrs: {}
+  },
+  {
+    duration: 1700,
+    selector: `.boxMove`,
+    easing: "easeOutBounce"
+  }
+);
+
+const boxBorder = new Anime.Anime(
+  {
+    animatedAttrs: {
+      borderRadius: "50%"
+    },
+    initialValues: {
+      borderRadius: "0%"
+    },
+
+    attrs: {}
+  },
+  {
+    duration: 1700,
+    selector: `.boxBorder`
+  }
+);
+
+const opacity = new Anime.Anime(
+  {
+    animatedAttrs: {
+      opacity: 1
+    },
+    initialValues: {
+      opacity: 0
+    },
+
+    attrs: {}
+  },
+  {
+    duration: 1000,
+    selector: `.svgText`
+  }
+);
+
+const svg = new Anime.Anime(
+  {
+    animatedAttrs: {
+      strokeDashoffset: 0
+    },
+    initialValues: {
+      strokeDashoffset: 6000
+    },
+
+    attrs: {}
+  },
+  {
+    duration: 3000,
+    selector: `.cls-1`
+  }
+);
+
+const boxWidthBack = new Anime.Anime(
+  {
+    animatedAttrs: {
+      width: "30px"
+    },
+    initialValues: {
+      width: "250px"
+    },
+    attrs: {}
+  },
+  {
+    duration: 1700,
+    selector: `.boxWidth`,
+    easing: "easeOutQuad"
+  }
+);
+
+clip.addIncident(boxWidth, 0);
+clip.addIncident(boxColor, 1700);
+clip.addIncident(boxRotate, 3400);
+clip.addIncident(boxMove, 5100);
+clip.addIncident(boxBorder, 6800);
+clip.addIncident(opacity, 8500);
+clip.addIncident(svg, 9500);
+clip.addIncident(boxWidthBack, 12500);
 new Player({
-  clip: rootClip,
+  clip: clip,
   theme: "mc-blue",
   preview: false,
   pointerEvents: false
-  // speedValues: [1, 2, 3]
 });
 
 window.myclip = clip;
