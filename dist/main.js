@@ -4,7 +4,7 @@ var Anime = require("./Anime");
 
 var compositeAttributes = require("./compoAttributes");
 
-var validations = require('./validation');
+var validations = require("./validation");
 
 module.exports = {
   npm_name: "@kissmybutton/motorcortex-anime",

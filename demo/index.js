@@ -147,12 +147,11 @@ const boxWidth = new Anime.Anime(
   {
     animatedAttrs: {
       width: "250px"
-    },
-    attrs: {}
+    }
   },
   {
     duration: 1700,
-    selector: `.boxWidth`,
+    selector: ".boxWidth",
     easing: "easeOutQuad"
   }
 );
@@ -164,13 +163,11 @@ const boxColor = new Anime.Anime(
     },
     initialValues: {
       background: "rgb(37, 32, 86)"
-    },
-
-    attrs: {}
+    }
   },
   {
     duration: 1700,
-    selector: `.boxColor`,
+    selector: ".boxColor",
     easing: "easeOutQuad"
   }
 );
@@ -186,13 +183,11 @@ const boxRotate = new Anime.Anime(
       transform: {
         rotate: "0deg"
       }
-    },
-
-    attrs: {}
+    }
   },
   {
     duration: 1700,
-    selector: `.boxRotate`,
+    selector: ".boxRotate",
     easing: "easeOutQuad"
   }
 );
@@ -200,17 +195,15 @@ const boxRotate = new Anime.Anime(
 const boxMove = new Anime.Anime(
   {
     animatedAttrs: {
-      left: 220
+      left: "220px"
     },
     initialValues: {
-      left: 0
-    },
-
-    attrs: {}
+      left: "0px"
+    }
   },
   {
     duration: 1700,
-    selector: `.boxMove`,
+    selector: ".boxMove",
     easing: "easeOutBounce"
   }
 );
@@ -222,13 +215,11 @@ const boxBorder = new Anime.Anime(
     },
     initialValues: {
       borderRadius: "0%"
-    },
-
-    attrs: {}
+    }
   },
   {
     duration: 1700,
-    selector: `.boxBorder`
+    selector: ".boxBorder"
   }
 );
 
@@ -239,13 +230,11 @@ const opacity = new Anime.Anime(
     },
     initialValues: {
       opacity: 0
-    },
-
-    attrs: {}
+    }
   },
   {
     duration: 1000,
-    selector: `.svgText`
+    selector: ".svgText"
   }
 );
 
@@ -256,32 +245,35 @@ const svg = new Anime.Anime(
     },
     initialValues: {
       strokeDashoffset: 6000
-    },
-
-    attrs: {}
+    }
   },
   {
     duration: 3000,
-    selector: `.cls-1`
+    selector: ".cls-1"
   }
 );
 
-const boxWidthBack = new Anime.Anime(
-  {
-    animatedAttrs: {
-      width: "30px"
-    },
-    initialValues: {
-      width: "250px"
-    },
-    attrs: {}
-  },
-  {
-    duration: 1700,
-    selector: `.boxWidth`,
-    easing: "easeOutQuad"
-  }
-);
+// const boxWidthBack = new Anime.Anime(
+//   {
+//     animatedAttrs: {
+//       // width: "30px",
+//       opacity: 0,
+//       // height: 30
+//     },
+//     initialValues: {
+//       // width: "250px"
+//     },
+
+//   },
+//   {
+//     duration: 1000,
+//     delay:3000,
+//     hiatus:4000,
+//     repeats:3,
+//     selector: ".boxWidth",
+//     easing: "easeOutQuad"
+//   }
+// );
 
 clip.addIncident(boxWidth, 0);
 clip.addIncident(boxColor, 1700);
@@ -290,7 +282,7 @@ clip.addIncident(boxMove, 5100);
 clip.addIncident(boxBorder, 6800);
 clip.addIncident(opacity, 8500);
 clip.addIncident(svg, 9500);
-clip.addIncident(boxWidthBack, 12500);
+// clip.addIncident(boxWidthBack, 0); //12500
 new Player({
   clip: clip,
   theme: "mc-blue",

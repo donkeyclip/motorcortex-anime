@@ -3,15 +3,17 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _animeEs = _interopRequireDefault(require("mc-animejs-core/lib/anime.es.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -37,9 +39,7 @@ var compoAttributes = require("./compoAttributes");
 
 var getMatrix2D = require("./matrix2d");
 
-var Anime =
-/*#__PURE__*/
-function (_MC$API$MonoIncident) {
+var Anime = /*#__PURE__*/function (_MC$API$MonoIncident) {
   _inherits(Anime, _MC$API$MonoIncident);
 
   function Anime() {
@@ -70,12 +70,12 @@ function (_MC$API$MonoIncident) {
         initialize[this.targetValue] = [this.getScratchValue(), this.targetValue];
       }
 
-      this.target = (0, _animeEs.default)(_objectSpread({
+      this.target = (0, _animeEs["default"])(_objectSpread({
         autoplay: false,
         duration: this.props.duration,
         easing: "linear",
         targets: this.element
-      }, (this.attrs || {}).attrs || {}, options)); // handle first render initial values
+      }, (this.attrs || {}).attrs || {}, {}, options)); // handle first render initial values
     }
   }, {
     key: "getScratchValue",
@@ -89,14 +89,14 @@ function (_MC$API$MonoIncident) {
           if (currentTransform.hasOwnProperty(transform[i])) {
             obj[transform[i]] = currentTransform[transform[i]];
           } else {
-            obj[transform[i]] = _animeEs.default.get(this.element, transform[i]);
+            obj[transform[i]] = _animeEs["default"].get(this.element, transform[i]);
           }
         }
 
         return obj;
       }
 
-      return _animeEs.default.get(this.element, this.attributeKey);
+      return _animeEs["default"].get(this.element, this.attributeKey);
     }
   }, {
     key: "onProgress",
@@ -108,4 +108,4 @@ function (_MC$API$MonoIncident) {
   return Anime;
 }(MC.API.MonoIncident);
 
-exports.default = Anime;
+exports["default"] = Anime;
