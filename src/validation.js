@@ -22,6 +22,7 @@ const _COLOR = "color";
 module.exports = {
   animatedAttrs: {
     type: "object",
+    // strict : true,
     props: {
       background: {
         optional: true,
