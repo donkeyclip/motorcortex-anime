@@ -251,7 +251,7 @@ const svg = new Anime.Anime(
   },
   {
     duration: 3000,
-    selector: ""
+    selector: ".cls-1"
   }
 );
 
