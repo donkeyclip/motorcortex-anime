@@ -175,11 +175,13 @@ const boxColor = new Anime.Anime(
 const boxRotate = new Anime.Anime(
   {
     animatedAttrs: {
+      width: "30px",
       transform: {
         rotate: "360deg"
       }
     },
     initialValues: {
+      width: "0px",
       transform: {
         rotate: "0deg"
       }
@@ -249,9 +251,11 @@ const svg = new Anime.Anime(
   },
   {
     duration: 3000,
-    selector: ".cls-1"
+    selector: ""
   }
 );
+
+//.cls-1
 
 // const boxWidthBack = new Anime.Anime(
 //   {
@@ -274,9 +278,10 @@ const svg = new Anime.Anime(
 //     easing: "easeOutQuad"
 //   }
 // );
-
+const myGroup = new MotorCortex.Group();
+myGroup.addIncident(boxColor, 0);
 clip.addIncident(boxWidth, 0);
-clip.addIncident(boxColor, 1700);
+clip.addIncident(myGroup, 4000);
 clip.addIncident(boxRotate, 3400);
 clip.addIncident(boxMove, 5100);
 clip.addIncident(boxBorder, 6800);
