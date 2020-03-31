@@ -7,11 +7,18 @@ export default class Anime extends MC.API.MonoIncident {
   onGetContext() {
     const options = {};
     const initialize = {};
-    if (compoAttributes.hasOwnProperty(this.attributeKey)) {
+    if (
+      Object.prototype.hasOwnProperty.call(compoAttributes, this.attributeKey)
+    ) {
       const compoAttribute = compoAttributes[this.attributeKey];
 
       for (let i = 0; i < compoAttribute.length; i++) {
-        if (!this.targetValue.hasOwnProperty(compoAttribute[i])) {
+        if (
+          !Object.prototype.hasOwnProperty.call(
+            this.targetValue,
+            compoAttribute[i]
+          )
+        ) {
           continue;
         }
         options[compoAttribute[i]] = [
@@ -45,7 +52,9 @@ export default class Anime extends MC.API.MonoIncident {
       const currentTransform = getMatrix2D(this.context.window, this.element);
 
       for (let i = 0; i < transform.length; i++) {
-        if (currentTransform.hasOwnProperty(transform[i])) {
+        if (
+          Object.prototype.hasOwnProperty.call(currentTransform, transform[i])
+        ) {
           obj[transform[i]] = currentTransform[transform[i]];
         } else {
           obj[transform[i]] = anime.get(this.element, transform[i]);

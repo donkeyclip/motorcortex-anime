@@ -38,17 +38,16 @@
     "animation"
   ],
   "lint-staged": {
-    "linters": {
-      "*.json": [
-        "prettier --write"
-      ],
-      "*.{css,scss}": [
-        "stylelint  \"src/**.css\" \"src/**/*.scss\" --config .stylelintrc.json --fix"
-      ],
-      "*.{js,jsx}": [
-        "eslint --fix"
-      ]
-    }
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.{css,scss}": [
+      "stylelint  \"src/**.css\" \"src/**/*.scss\" --config .stylelintrc.json --fix"
+    ],
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "release": {
     "verifyConditions": [

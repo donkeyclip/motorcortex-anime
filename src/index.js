@@ -1,6 +1,6 @@
 import Anime from "./Anime";
 import compositeAttributes from "./compoAttributes";
-import validations from "./validation";
+import { animatedAttrs } from "./validation";
 
 export default {
   npm_name: "@kissmybutton/motorcortex-anime",
@@ -8,8 +8,8 @@ export default {
     {
       exportable: Anime,
       name: "Anime",
-      attributesValidationRules: validations
-    }
+      attributesValidationRules: animatedAttrs,
+    },
   ],
-  compositeAttributes
+  compositeAttributes,
 };

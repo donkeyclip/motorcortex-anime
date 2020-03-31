@@ -12,6 +12,6 @@ const transform = [
   "scaleZ",
   "skewX",
   "skewY",
-  "perspective"
+  "perspective",
 ];
 export default transform;
