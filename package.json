@@ -18,7 +18,7 @@
     "update-force:packages": "./node_modules/npm-check-updates/bin/ncu -u && npm i",
     "update:packages": "npm update --save/--save-dev",
     "concurrently": "concurrently -c \"cyan.bold,magenta.bold\" --names \"JS,Styles\"",
-    "lint:styles": "stylelint  \"src/**.css\" \"src/**/*.scss\" --config .stylelintrc.json",
+    "lint:styles": "stylelint  --allow-empty-input \"src/**.css\" \"src/**/*.scss\" --config .stylelintrc.json",
     "lint:js": "eslint -c .eslintrc src/**/*.js",
     "lint": "npm run concurrently \"npm:lint:js\" \"npm:lint:styles\"",
     "lint:fix": "npm run concurrently  \"npm:lint:js -- --fix\" \"npm:lint:styles -- --fix\"",
