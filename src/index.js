@@ -1,8 +1,8 @@
-const Anime = require("./Anime");
-const compositeAttributes = require("./compoAttributes");
-const validations = require("./validation");
+import Anime from "./Anime";
+import compositeAttributes from "./compoAttributes";
+import validations from "./validation";
 
-module.exports = {
+export default {
   npm_name: "@kissmybutton/motorcortex-anime",
   incidents: [
     {

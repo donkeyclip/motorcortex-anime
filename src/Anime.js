@@ -1,7 +1,7 @@
-const MC = require("@kissmybutton/motorcortex");
+import MC from "@kissmybutton/motorcortex";
 import anime from "mc-animejs-core/lib/anime.es.js";
-const compoAttributes = require("./compoAttributes");
-const getMatrix2D = require("./matrix2d");
+import compoAttributes from "./compoAttributes";
+import getMatrix2D from "./matrix2d";
 
 export default class Anime extends MC.API.MonoIncident {
   onGetContext() {
@@ -16,11 +16,11 @@ export default class Anime extends MC.API.MonoIncident {
         }
         options[compoAttribute[i]] = [
           this.getInitialValue()[compoAttribute[i]],
-          this.targetValue[compoAttribute[i]]
+          this.targetValue[compoAttribute[i]],
         ];
         initialize[compoAttribute[i]] = [
           this.getScratchValue(),
-          this.targetValue[compoAttribute[i]]
+          this.targetValue[compoAttribute[i]],
         ];
       }
     } else {
@@ -34,7 +34,7 @@ export default class Anime extends MC.API.MonoIncident {
       easing: "linear",
       targets: this.element,
       ...((this.attrs || {}).attrs || {}),
-      ...options
+      ...options,
     }); // handle first render initial values
   }
 
@@ -57,6 +57,9 @@ export default class Anime extends MC.API.MonoIncident {
     return anime.get(this.element, this.attributeKey);
   }
 
+  /**
+   * @param {number} f
+   */
   onProgress(f) {
     return this.target.seek(this.target.duration * f);
   }

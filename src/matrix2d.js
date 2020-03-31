@@ -40,4 +40,4 @@ function getMatrix2D(win, element) {
   return qrDecompone(values);
 }
 
-module.exports = getMatrix2D;
+export default getMatrix2D;
