@@ -1,5 +1,5 @@
 import Player from "@kissmybutton/motorcortex-player";
-import { Clip, loadPlugin } from "@kissmybutton/motorcortex/";
+import { Clip, Group, loadPlugin } from "@kissmybutton/motorcortex/";
 import AnimeDefinition from "../dist/motorcortex-anime.umd";
 const Anime = loadPlugin(AnimeDefinition);
 
@@ -162,13 +162,13 @@ const boxColor = new Anime.Anime(
       background: "rgb(255, 0, 85)",
     },
     initialValues: {
-      background: "rgb(37, 32, 86)"
-    }
+      background: "rgb(37, 32, 86)",
+    },
   },
   {
     duration: 1700,
     selector: ".boxColor",
-    easing: "easeOutQuad"
+    easing: "easeOutQuad",
   }
 );
 
@@ -183,30 +183,30 @@ const boxRotate = new Anime.Anime(
     initialValues: {
       width: "0px",
       transform: {
-        rotate: "0deg"
-      }
-    }
+        rotate: "0deg",
+      },
+    },
   },
   {
     duration: 1700,
     selector: ".boxRotate",
-    easing: "easeOutQuad"
+    easing: "easeOutQuad",
   }
 );
 
 const boxMove = new Anime.Anime(
   {
     animatedAttrs: {
-      left: "220px"
+      left: "220px",
     },
     initialValues: {
-      left: "0px"
-    }
+      left: "0px",
+    },
   },
   {
     duration: 1700,
     selector: ".boxMove",
-    easing: "easeOutBounce"
+    easing: "easeOutBounce",
   }
 );
 
@@ -216,12 +216,12 @@ const boxBorder = new Anime.Anime(
       borderRadius: "50%",
     },
     initialValues: {
-      borderRadius: "0%"
-    }
+      borderRadius: "0%",
+    },
   },
   {
     duration: 1700,
-    selector: ".boxBorder"
+    selector: ".boxBorder",
   }
 );
 
@@ -231,12 +231,12 @@ const opacity = new Anime.Anime(
       opacity: 1,
     },
     initialValues: {
-      opacity: 0
-    }
+      opacity: 0,
+    },
   },
   {
     duration: 1000,
-    selector: ".svgText"
+    selector: ".svgText",
   }
 );
 
@@ -246,12 +246,12 @@ const svg = new Anime.Anime(
       strokeDashoffset: 0,
     },
     initialValues: {
-      strokeDashoffset: 6000
-    }
+      strokeDashoffset: 6000,
+    },
   },
   {
     duration: 3000,
-    selector: ".cls-1"
+    selector: ".cls-1",
   }
 );
 
@@ -278,7 +278,7 @@ const svg = new Anime.Anime(
 //     easing: "easeOutQuad"
 //   }
 // );
-const myGroup = new MotorCortex.Group();
+const myGroup = new Group();
 myGroup.addIncident(boxColor, 0);
 clip.addIncident(boxWidth, 0);
 clip.addIncident(myGroup, 4000);
