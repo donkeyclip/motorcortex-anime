@@ -14,4 +14,4 @@ const transform = [
   "skewY",
   "perspective",
 ];
-export default transform;
+export default { transform };

@@ -8,7 +8,7 @@ export default {
     {
       exportable: Anime,
       name: "Anime",
-      attributesValidationRules: animatedAttrs,
+      attributesValidationRules: { animatedAttrs },
     },
   ],
   compositeAttributes,
