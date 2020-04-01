@@ -1,26 +1,33 @@
-const MC = require("@kissmybutton/motorcortex");
+import MC from "@kissmybutton/motorcortex";
 import anime from "mc-animejs-core/lib/anime.es.js";
-const compoAttributes = require("./compoAttributes");
-const getMatrix2D = require("./matrix2d");
+import compoAttributes from "./compoAttributes";
+import getMatrix2D from "./matrix2d";
 
 export default class Anime extends MC.API.MonoIncident {
   onGetContext() {
     const options = {};
     const initialize = {};
-    if (compoAttributes.hasOwnProperty(this.attributeKey)) {
+    if (
+      Object.prototype.hasOwnProperty.call(compoAttributes, this.attributeKey)
+    ) {
       const compoAttribute = compoAttributes[this.attributeKey];
 
       for (let i = 0; i < compoAttribute.length; i++) {
-        if (!this.targetValue.hasOwnProperty(compoAttribute[i])) {
+        if (
+          !Object.prototype.hasOwnProperty.call(
+            this.targetValue,
+            compoAttribute[i]
+          )
+        ) {
           continue;
         }
         options[compoAttribute[i]] = [
           this.getInitialValue()[compoAttribute[i]],
-          this.targetValue[compoAttribute[i]]
+          this.targetValue[compoAttribute[i]],
         ];
         initialize[compoAttribute[i]] = [
           this.getScratchValue(),
-          this.targetValue[compoAttribute[i]]
+          this.targetValue[compoAttribute[i]],
         ];
       }
     } else {
@@ -34,7 +41,7 @@ export default class Anime extends MC.API.MonoIncident {
       easing: "linear",
       targets: this.element,
       ...((this.attrs || {}).attrs || {}),
-      ...options
+      ...options,
     }); // handle first render initial values
   }
 
@@ -45,7 +52,9 @@ export default class Anime extends MC.API.MonoIncident {
       const currentTransform = getMatrix2D(this.context.window, this.element);
 
       for (let i = 0; i < transform.length; i++) {
-        if (currentTransform.hasOwnProperty(transform[i])) {
+        if (
+          Object.prototype.hasOwnProperty.call(currentTransform, transform[i])
+        ) {
           obj[transform[i]] = currentTransform[transform[i]];
         } else {
           obj[transform[i]] = anime.get(this.element, transform[i]);
@@ -57,6 +66,9 @@ export default class Anime extends MC.API.MonoIncident {
     return anime.get(this.element, this.attributeKey);
   }
 
+  /**
+   * @param {number} f
+   */
   onProgress(f) {
     return this.target.seek(this.target.duration * f);
   }

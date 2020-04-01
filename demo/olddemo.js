@@ -1,8 +1,8 @@
-const MotorCortex = require("@kissmybutton/motorcortex/");
-const Player = require("@kissmybutton/motorcortex-player");
-// const Player = require("../../teo-motorcortex-player/src/Player");
-const AnimeDefinition = require("../src/main");
-const Anime = MotorCortex.loadPlugin(AnimeDefinition);
+import Player from "@kissmybutton/motorcortex-player";
+import { Clip, Group, loadPlugin } from "@kissmybutton/motorcortex/";
+import AnimeDefinition from "../src/index";
+
+const Anime = loadPlugin(AnimeDefinition);
 const calcDist = (x1, x2, y1, y2) =>
   Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 const css = `
@@ -129,20 +129,20 @@ const html = `
 const host = document.getElementById("clip");
 const containerParams = {
   width: "90%",
-  height: "90%"
+  height: "90%",
 };
-const rootClip = new MotorCortex.Clip({
+const rootClip = new Clip({
   html: '<div id="edo"></div>',
   css: "#edo{width:100%; height: 100%}",
   host: host,
   containerParams,
-  audio: "off"
+  audio: "off",
 });
-const clip = new MotorCortex.Clip({
+const clip = new Clip({
   css,
   html,
   selector: "#edo",
-  containerParams
+  containerParams,
 });
 const width = host.offsetWidth * 0.9;
 const height = host.offsetHeight * 0.9;
@@ -151,7 +151,7 @@ const right = width - 30;
 const bottom = height - 30;
 const left = 0;
 for (let q = 0; q <= 30; q++) {
-  const group = new MotorCortex.Group({}, {});
+  const group = new Group({}, {});
   let c = 0;
   let translateX1 = 0,
     translateY1 = 0,
@@ -171,22 +171,23 @@ for (let q = 0; q <= 30; q++) {
         animatedAttrs: {
           transform: {
             scaleX: 0.2,
-            scaleY: 0.2
+            scaleY: 0.2,
           },
           left: translateX1 + "%",
           top: translateY1 + "%",
-          backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
-            256},${Math.random() * 256})`
+          backgroundColor: `rgb(${Math.random() * 256},${Math.random() * 256},${
+            Math.random() * 256
+          })`,
         },
         attrs: {
-          easing: "linear"
-        }
+          easing: "linear",
+        },
       },
       {
         duration: parseInt(
           calcDist(translateX1, translateX2, translateY1, translateY2) * 10
         ),
-        selector: ".cirlce" + q
+        selector: ".cirlce" + q,
       }
     );
     if (c % 2) {
@@ -201,22 +202,23 @@ for (let q = 0; q <= 30; q++) {
         animatedAttrs: {
           transform: {
             scaleX: 1,
-            scaleY: 1
+            scaleY: 1,
           },
           left: translateX2 + "%",
           top: translateY2 + "%",
-          backgroundColor: `rgb(${Math.random() * 256},${Math.random() *
-            256},${Math.random() * 256})`
+          backgroundColor: `rgb(${Math.random() * 256},${Math.random() * 256},${
+            Math.random() * 256
+          })`,
         },
         attrs: {
-          easing: "linear"
-        }
+          easing: "linear",
+        },
       },
       {
         duration: parseInt(
           calcDist(translateX1, translateX2, translateY1, translateY2) * 10
         ),
-        selector: ".cirlce" + q
+        selector: ".cirlce" + q,
       }
     );
     group.addIncident(anime, group.duration);
@@ -229,7 +231,7 @@ new Player({
   clip: rootClip,
   theme: "mc-blue",
   preview: false,
-  pointerEvents: false
+  pointerEvents: false,
   // speedValues: [1, 2, 3]
 });
 window.myclip = clip;

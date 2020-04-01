@@ -1,8 +1,7 @@
-const MotorCortex = require("@kissmybutton/motorcortex/");
-const Player = require("@kissmybutton/motorcortex-player");
-// const Player = require("../../teo-motorcortex-player/src/Player");
-const AnimeDefinition = require("../src/main");
-const Anime = MotorCortex.loadPlugin(AnimeDefinition);
+import Player from "@kissmybutton/motorcortex-player";
+import { Clip, Group, loadPlugin } from "@kissmybutton/motorcortex/";
+import AnimeDefinition from "../dist/motorcortex-anime.umd";
+const Anime = loadPlugin(AnimeDefinition);
 
 const css = `
 
@@ -16,13 +15,13 @@ const css = `
     align-items: center;
   }
   .container {
-    
+
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
     overflow: hidden;
     color: #252056;
     font-family: 'Montserrat', sans-serif;
@@ -116,7 +115,7 @@ const html = `
       <div class="boxBorder"> </div>
     </div>
   </div>
- 
+
   <div class="subTitle svgText">svg </div>
   <div class="svgBorder"> <svg xmlns="http://www.w3.org/2000/svg" width="300px" viewBox="0 0 495 464.3"><defs><style>.cls-1{fill:none;stroke:#252056;stroke-miterlimit:10;stroke-width:3px;}.cls-2{fill:none;}</style></defs><title>mc2</title><g id="Layer_1" data-name="Layer 1"><path class="cls-1" d="M86,368.6V128.8L195.3,253.4,86,368.6ZM496,18.1H419.8L246.4,197.3,86.3,18.1H4V479.3H80.5L299,250.1l119.6-125V370.5l-71.5-74.4a3.9,3.9,0,0,0-5.4-.1l-.2.2L293.2,348,418.6,479.3H496Z" transform="translate(-2.5 -16.6)"/></g><g id="Layer_2" data-name="Layer 2"><path class="cls-2" d="M86,368.6V128.8L195.3,253.4,86,368.6ZM496,18.1H419.8L246.4,197.3,86.3,18.1H4V479.3H80.5L299,250.1l119.6-125V370.5l-71.5-74.4a3.9,3.9,0,0,0-5.4-.1l-.2.2L293.2,348,418.6,479.3H496Z" transform="translate(-2.5 -16.6)"/></g></svg> </div>
 
@@ -127,48 +126,49 @@ const host = document.getElementById("clip");
 
 const containerParams = {
   width: "612px",
-  height: "671px"
+  height: "671px",
 };
 
-const clip = new MotorCortex.Clip({
+const clip = new Clip({
   css,
   html,
   host,
   fonts: [
     {
       type: `google-font`,
-      src: `https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700,900&display=swap`
-    }
+      src: `https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700,900&display=swap`,
+    },
   ],
-  containerParams
+  containerParams,
 });
 
 const boxWidth = new Anime.Anime(
   {
     animatedAttrs: {
-      width: "250px"
-    }
+      width: "250px",
+    },
+    attrs: {},
   },
   {
     duration: 1700,
-    selector: ".boxWidth",
-    easing: "easeOutQuad"
+    selector: `.boxWidth`,
+    easing: "easeOutQuad",
   }
 );
 
 const boxColor = new Anime.Anime(
   {
     animatedAttrs: {
-      background: "rgb(255, 0, 85)"
+      background: "rgb(255, 0, 85)",
     },
     initialValues: {
-      background: "rgb(37, 32, 86)"
-    }
+      background: "rgb(37, 32, 86)",
+    },
   },
   {
     duration: 1700,
     selector: ".boxColor",
-    easing: "easeOutQuad"
+    easing: "easeOutQuad",
   }
 );
 
@@ -177,81 +177,81 @@ const boxRotate = new Anime.Anime(
     animatedAttrs: {
       width: "30px",
       transform: {
-        rotate: "360deg"
-      }
+        rotate: "360deg",
+      },
     },
     initialValues: {
       width: "0px",
       transform: {
-        rotate: "0deg"
-      }
-    }
+        rotate: "0deg",
+      },
+    },
   },
   {
     duration: 1700,
     selector: ".boxRotate",
-    easing: "easeOutQuad"
+    easing: "easeOutQuad",
   }
 );
 
 const boxMove = new Anime.Anime(
   {
     animatedAttrs: {
-      left: "220px"
+      left: "220px",
     },
     initialValues: {
-      left: "0px"
-    }
+      left: "0px",
+    },
   },
   {
     duration: 1700,
     selector: ".boxMove",
-    easing: "easeOutBounce"
+    easing: "easeOutBounce",
   }
 );
 
 const boxBorder = new Anime.Anime(
   {
     animatedAttrs: {
-      borderRadius: "50%"
+      borderRadius: "50%",
     },
     initialValues: {
-      borderRadius: "0%"
-    }
+      borderRadius: "0%",
+    },
   },
   {
     duration: 1700,
-    selector: ".boxBorder"
+    selector: ".boxBorder",
   }
 );
 
 const opacity = new Anime.Anime(
   {
     animatedAttrs: {
-      opacity: 1
+      opacity: 1,
     },
     initialValues: {
-      opacity: 0
-    }
+      opacity: 0,
+    },
   },
   {
     duration: 1000,
-    selector: ".svgText"
+    selector: ".svgText",
   }
 );
 
 const svg = new Anime.Anime(
   {
     animatedAttrs: {
-      strokeDashoffset: 0
+      strokeDashoffset: 0,
     },
     initialValues: {
-      strokeDashoffset: 6000
-    }
+      strokeDashoffset: 6000,
+    },
   },
   {
     duration: 3000,
-    selector: ".cls-1"
+    selector: ".cls-1",
   }
 );
 
@@ -278,7 +278,7 @@ const svg = new Anime.Anime(
 //     easing: "easeOutQuad"
 //   }
 // );
-const myGroup = new MotorCortex.Group();
+const myGroup = new Group();
 myGroup.addIncident(boxColor, 0);
 clip.addIncident(boxWidth, 0);
 clip.addIncident(myGroup, 4000);
@@ -292,7 +292,7 @@ new Player({
   clip: clip,
   theme: "mc-blue",
   preview: false,
-  pointerEvents: false
+  pointerEvents: false,
 });
 
 window.myclip = clip;

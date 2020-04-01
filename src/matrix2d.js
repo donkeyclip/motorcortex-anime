@@ -7,10 +7,7 @@ function getMatrix2D(win, element) {
     return {};
   }
 
-  const values = transform
-    .split("(")[1]
-    .split(")")[0]
-    .split(",");
+  const values = transform.split("(")[1].split(")")[0].split(",");
 
   const qrDecompone = function qrDecompone(a) {
     const angle = Math.atan2(a[1], a[0]),
@@ -33,11 +30,11 @@ function getMatrix2D(win, element) {
       // skewY angle degrees
       translateX: a[4] + "px",
       // translation point  x
-      translateY: a[5] + "px" // translation point  y
+      translateY: a[5] + "px", // translation point  y
     };
   };
 
   return qrDecompone(values);
 }
 
-module.exports = getMatrix2D;
+export default getMatrix2D;
