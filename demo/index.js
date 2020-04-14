@@ -167,7 +167,7 @@ const boxColor = new Anime.Anime(
   },
   {
     duration: 1700,
-    selector: ".boxColor",
+    selector: ".boxColor, .boxWidth",
     easing: "easeOutQuad"
   }
 );
@@ -181,7 +181,7 @@ const boxRotate = new Anime.Anime(
       }
     },
     initialValues: {
-      width: "0px",
+      width: "30cm",
       transform: {
         rotate: "0deg"
       }
