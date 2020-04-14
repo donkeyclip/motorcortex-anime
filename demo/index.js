@@ -147,7 +147,6 @@ const boxWidth = new Anime.Anime(
     animatedAttrs: {
       width: "250px",
     },
-    attrs: {},
   },
   {
     duration: 1700,
