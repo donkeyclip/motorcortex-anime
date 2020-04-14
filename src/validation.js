@@ -13,7 +13,7 @@ const nu = [
   "vh",
   "vmin",
   "vmax",
-  "%"
+  "%",
 ];
 const ru = ["deg", "rad", "grad", "turn"];
 const _MEASUREMENT = "measurement";
@@ -25,721 +25,721 @@ export const animatedAttrs = {
   props: {
     background: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     backgroundColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     backgroundPosition: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     backgroundSize: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     border: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     borderBottom: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     borderBottomColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     borderBottomLeftRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderBottomRightRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderBottomWidth: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     borderEndEndRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderEndStartRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderImageOutset: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     borderImageSlice: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     borderImageWidth: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     borderLeft: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     borderLeftColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     borderLeftWidth: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderRight: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     borderRightColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     borderRightWidth: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderStartEndRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderStartStartRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderTop: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     borderTopColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     borderTopLeftRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderTopRightRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderTopWidth: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     borderWidth: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     bottom: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     boxShadow: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     caretColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     color: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     columnCount: {
       optional: true,
       type: "number",
       min: 0,
-      integer: true
+      integer: true,
     },
     columnGap: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     columnRule: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     columnRuleColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     columnRuleWidth: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     columns: {
       optional: true,
       type: "number",
       min: 0,
-      integer: true
+      integer: true,
     },
     columnWidth: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     flex: {
       optional: true,
       type: "number",
       min: 0,
-      integer: true
+      integer: true,
     },
     flexBasis: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     flexGrow: {
       optional: true,
       type: "number",
       min: 0,
-      integer: true
+      integer: true,
     },
     flexShrink: {
       optional: true,
       type: "number",
       min: 0,
-      integer: true
+      integer: true,
     },
     font: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     fontSize: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     fontSizeAdjust: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     fontStretch: {
       optional: true,
       type: _MEASUREMENT,
-      units: ["%"]
+      units: ["%"],
     },
     fontWeight: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     gap: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     gridColumnGap: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     gridGap: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     gridRowGap: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     gridTemplateColumns: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     gridTemplateRows: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     height: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     inset: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     insetBlock: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     insetBlockEnd: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     insetBlockStart: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     insetInline: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     insetInlineEnd: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     insetInlineStart: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     left: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     letterSpacing: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     lineClamp: {
       optional: true,
       type: "number",
       min: 0,
-      integer: true
+      integer: true,
     },
     lineHeight: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     margin: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     marginBottom: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     marginLeft: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     marginRight: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     marginTop: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     maskBorder: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     maskPosition: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     maskSize: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     maxHeight: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     maxWidth: {
       optional: true,
       type: _MEASUREMENT,
       units: nu,
-      min: 0
+      min: 0,
     },
     objectPosition: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     offset: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     offsetAnchor: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     offsetDistance: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     offsetPath: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     offsetPosition: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     offsetRotate: {
       optional: true,
       type: _MEASUREMENT,
-      units: ru
+      units: ru,
     },
     opacity: {
       optional: true,
       type: "number",
       min: 0,
-      max: 1
+      max: 1,
     },
     order: {
       optional: true,
       type: "number",
-      integer: true
+      integer: true,
     },
     outline: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     outlineColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     outlineOffset: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     outlineRadius: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     outlineRadiusBottomleft: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     outlineRadiusBottomright: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     outlineRadiusTopleft: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     outlineRadiusTopright: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     outlineWidth: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     padding: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     paddingBottom: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     paddingLeft: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     paddingRight: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     paddingTop: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     perspective: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     perspectiveOrigin: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     right: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     rotate: {
       optional: true,
       type: _MEASUREMENT,
-      units: ru
+      units: ru,
     },
     rowGap: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scale: {
       optional: true,
       type: "number",
-      min: 0
+      min: 0,
     },
     scrollbarColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     scrollMargin: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginBlock: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginBlockEnd: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginBlockStart: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginBottom: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginInline: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginInlineEnd: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginInlineStart: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginLeft: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginRight: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollMarginTop: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPadding: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingBlock: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingBlockEnd: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingBlockStart: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingBottom: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingInline: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingInlineEnd: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingInlineStart: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingLeft: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingRight: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollPaddingTop: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     scrollSnapCoordinate: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     scrollSnapDestination: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     shapeImageThreshold: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     shapeMargin: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     shapeOutside: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     tabSize: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     textDecoration: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     textDecorationColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     textDecorationThickness: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     textEmphasis: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     textEmphasisColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     textFillColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     textIndent: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     textShadow: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     textStroke: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     textStrokeColor: {
       optional: true,
-      type: _COLOR
+      type: _COLOR,
     },
     textUnderlineOffset: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     top: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     transform: {
       optional: true,
@@ -758,67 +758,67 @@ export const animatedAttrs = {
         scaleZ: { type: "number", min: 0, optional: true },
         skewX: { type: _MEASUREMENT, units: ru, optional: true },
         skewY: { type: _MEASUREMENT, units: ru, optional: true },
-        perspective: { type: _MEASUREMENT, units: nu, optional: true }
-      }
+        perspective: { type: _MEASUREMENT, units: nu, optional: true },
+      },
     },
     transformOrigin: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     verticalAlign: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     visibility: {
       optional: true,
-      type: "string"
+      type: "string",
     },
     width: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     wordSpacing: {
       optional: true,
       type: _MEASUREMENT,
-      units: nu
+      units: nu,
     },
     zIndex: {
       optional: true,
       type: "number",
-      integer: true
+      integer: true,
     },
     zoom: {
       optional: true,
       type: _MEASUREMENT,
       units: ["%"],
-      min: 0
-    }
+      min: 0,
+    },
   },
   transformOrigin: {
-    type: "string"
+    type: "string",
   },
   verticalAlign: {
-    type: "string"
+    type: "string",
   },
   visibility: {
-    type: "string"
+    type: "string",
   },
   width: {
     type: _MEASUREMENT,
-    units: nu
+    units: nu,
   },
   wordSpacing: {
     type: _MEASUREMENT,
-    units: nu
+    units: nu,
   },
   zIndex: {
     type: "number",
-    integer: true
+    integer: true,
   },
   zoom: {
     type: _MEASUREMENT,
     units: ["%"],
-    min: 0
-  }
+    min: 0,
+  },
 };
