@@ -126,7 +126,7 @@ const host = document.getElementById("clip");
 
 const containerParams = {
   width: "612px",
-  height: "671px",
+  height: "100%",
 };
 
 const clip = new Clip({
