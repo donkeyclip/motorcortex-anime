@@ -11,7 +11,7 @@
   };
   var n,
     i = !0,
-    r = "826d353f9ae361692721",
+    r = "29ff12efde51a2c0c970",
     o = {},
     s = [],
     a = [];
@@ -492,33 +492,8 @@
     (E.h = function () {
       return r;
     }),
-    l(6)((E.s = 6));
+    l(4)((E.s = 4));
 })([
-  function (t, e, n) {
-    "use strict";
-    t.exports = {
-      el: function (t) {
-        return document.querySelectorAll(t);
-      },
-      elid: function (t) {
-        return document.getElementById(t);
-      },
-      eltag: function (t) {
-        return document.getElementsByTagName(t);
-      },
-      elcreate: function (t) {
-        return document.createElement(t);
-      },
-      addListener: function () {
-        var t;
-        return (t = document).addEventListener.apply(t, arguments);
-      },
-      removeListener: function () {
-        var t;
-        return (t = document).removeEventListener.apply(t, arguments);
-      },
-    };
-  },
   function (t, e, n) {
     (function (t) {
       !(function (e) {
@@ -1938,229 +1913,380 @@
             const e = ut.format(t, dt);
             return pt.highlight(e, ht);
           },
-          mt = class {
-            constructor(t) {
-              (this.opts = { messages: j({}, M) }),
-                t && j(this.opts, t),
-                (this.messages = this.opts.messages),
-                (this.rules = {
-                  any: S,
-                  array: B,
-                  boolean: A,
-                  custom: T,
-                  date: L,
-                  email: z,
-                  enum: N,
-                  equal: R,
-                  forbidden: $,
-                  function: H,
-                  multi: F,
-                  number: G,
-                  object: J,
-                  string: Z,
-                  url: et,
-                  uuid: it,
-                  mac: ot,
-                  luhn: st,
-                }),
-                (this.aliases = {}),
-                (this.cache = new Map());
-            }
-            validate(t, e) {
-              return this.compile(e)(t);
-            }
-            wrapRequiredCheckSourceCode(t, e, n) {
-              const i = [],
-                r =
-                  null != t.schema.default
-                    ? JSON.stringify(t.schema.default)
-                    : null;
-              return (
-                i.push(
-                  "\n\t\t\tif (value === undefined || value === null) {\n\t\t"
-                ),
-                !0 === t.schema.optional || "forbidden" == t.schema.type
-                  ? null != r && n
-                    ? i.push(`${n} = ${r};`)
-                    : i.push("// Do nothing, it's an optional field")
-                  : null != r && n
-                  ? i.push(`${n} = ${r};`)
-                  : i.push(
-                      this.makeError({
-                        type: "required",
-                        actual: "value",
-                        messages: t.messages,
-                      })
-                    ),
-                i.push("} else {"),
-                e && i.push(e),
-                i.push("\t\t}"),
-                i.join("\n")
-              );
-            }
-            compile(t) {
-              if (null === t || "object" != typeof t)
-                throw new Error("Invalid schema.");
-              const e = this,
-                n = { index: 0, rules: [], fn: [], customs: {} };
-              if ((this.cache.clear(), !0 !== t.$$root))
-                if (Array.isArray(t)) t = this.getRuleFromSchema(t).schema;
-                else {
-                  const e = Object.assign({}, t);
-                  (t = { type: "object", strict: e.$$strict, properties: e }),
-                    delete e.$$strict;
-                }
-              const i = ["var errors = [];", "var field;"],
-                r = this.getRuleFromSchema(t);
-              i.push(
-                this.compileRule(
-                  r,
-                  n,
-                  null,
-                  "context.fn[%%INDEX%%](value, field, null, errors, context);",
-                  "value"
-                )
-              ),
-                i.push("if (errors.length) {"),
-                i.push(
-                  '\n\t\t\treturn errors.map(err => {\n\t\t\t\tif (err.message)\n\t\t\t\t\terr.message = err.message\n\t\t\t\t\t\t.replace(/\\{field\\}/g, err.field || "")\n\t\t\t\t\t\t.replace(/\\{expected\\}/g, err.expected != null ? err.expected : "")\n\t\t\t\t\t\t.replace(/\\{actual\\}/g, err.actual != null ? err.actual : "");\n\n\t\t\t\treturn err;\n\t\t\t});\n\t\t'
-                ),
-                i.push("}"),
-                i.push("return true;");
-              const o = i.join("\n"),
-                s = new Function("value", "context", o);
-              if (this.opts.debug) {
-                let t = function (t) {
-                  return t;
-                };
-                "undefined" == typeof window && (t = ft),
-                  n.fn.forEach((e, n) =>
-                    console.log(t(`// Context.fn[${n}]\n` + e.toString()))
-                  ),
-                  console.log(t("// Main check function\n" + s.toString()));
+          mt = new RegExp(
+            /^#([\da-f]{3}){1,2}$|^#([\da-f]{4}){1,2}$|(rgb|hsl)a?\((\s*-?\d+%?\s*,){2}(\s*-?\d+%?\s*,?\s*\)?)(,\s*(0?\.\d+)?|1)?\)/,
+            "gi"
+          ),
+          vt = new RegExp(/^[-+]?\d+$/),
+          gt = function () {
+            var t = new (class {
+              constructor(t) {
+                (this.opts = { messages: j({}, M) }),
+                  t && j(this.opts, t),
+                  (this.messages = this.opts.messages),
+                  (this.rules = {
+                    any: S,
+                    array: B,
+                    boolean: A,
+                    custom: T,
+                    date: L,
+                    email: z,
+                    enum: N,
+                    equal: R,
+                    forbidden: $,
+                    function: H,
+                    multi: F,
+                    number: G,
+                    object: J,
+                    string: Z,
+                    url: et,
+                    uuid: it,
+                    mac: ot,
+                    luhn: st,
+                  }),
+                  (this.aliases = {}),
+                  (this.cache = new Map());
               }
-              return (
-                this.cache.clear(),
-                function (t) {
-                  return (n.data = t), s.call(e, t, n);
+              validate(t, e) {
+                return this.compile(e)(t);
+              }
+              wrapRequiredCheckSourceCode(t, e, n) {
+                const i = [],
+                  r =
+                    null != t.schema.default
+                      ? JSON.stringify(t.schema.default)
+                      : null;
+                return (
+                  i.push(
+                    "\n\t\t\tif (value === undefined || value === null) {\n\t\t"
+                  ),
+                  !0 === t.schema.optional || "forbidden" == t.schema.type
+                    ? null != r && n
+                      ? i.push(`${n} = ${r};`)
+                      : i.push("// Do nothing, it's an optional field")
+                    : null != r && n
+                    ? i.push(`${n} = ${r};`)
+                    : i.push(
+                        this.makeError({
+                          type: "required",
+                          actual: "value",
+                          messages: t.messages,
+                        })
+                      ),
+                  i.push("} else {"),
+                  e && i.push(e),
+                  i.push("\t\t}"),
+                  i.join("\n")
+                );
+              }
+              compile(t) {
+                if (null === t || "object" != typeof t)
+                  throw new Error("Invalid schema.");
+                const e = this,
+                  n = { index: 0, rules: [], fn: [], customs: {} };
+                if ((this.cache.clear(), !0 !== t.$$root))
+                  if (Array.isArray(t)) t = this.getRuleFromSchema(t).schema;
+                  else {
+                    const e = Object.assign({}, t);
+                    (t = { type: "object", strict: e.$$strict, properties: e }),
+                      delete e.$$strict;
+                  }
+                const i = ["var errors = [];", "var field;"],
+                  r = this.getRuleFromSchema(t);
+                i.push(
+                  this.compileRule(
+                    r,
+                    n,
+                    null,
+                    "context.fn[%%INDEX%%](value, field, null, errors, context);",
+                    "value"
+                  )
+                ),
+                  i.push("if (errors.length) {"),
+                  i.push(
+                    '\n\t\t\treturn errors.map(err => {\n\t\t\t\tif (err.message)\n\t\t\t\t\terr.message = err.message\n\t\t\t\t\t\t.replace(/\\{field\\}/g, err.field || "")\n\t\t\t\t\t\t.replace(/\\{expected\\}/g, err.expected != null ? err.expected : "")\n\t\t\t\t\t\t.replace(/\\{actual\\}/g, err.actual != null ? err.actual : "");\n\n\t\t\t\treturn err;\n\t\t\t});\n\t\t'
+                  ),
+                  i.push("}"),
+                  i.push("return true;");
+                const o = i.join("\n"),
+                  s = new Function("value", "context", o);
+                if (this.opts.debug) {
+                  let t = function (t) {
+                    return t;
+                  };
+                  "undefined" == typeof window && (t = ft),
+                    n.fn.forEach((e, n) =>
+                      console.log(t(`// Context.fn[${n}]\n` + e.toString()))
+                    ),
+                    console.log(t("// Main check function\n" + s.toString()));
                 }
-              );
-            }
-            compileRule(t, e, n, i, r) {
-              const o = [],
-                s = this.cache.get(t.schema);
-              if (s)
-                ((t = s).cycle = !0),
-                  (t.cycleStack = []),
-                  o.push(
-                    this.wrapRequiredCheckSourceCode(
-                      t,
-                      `\n\t\t\t\tvar rule = context.rules[${
-                        t.index
-                      }];\n\t\t\t\tif (rule.cycleStack.indexOf(value) === -1) {\n\t\t\t\t\trule.cycleStack.push(value);\n\t\t\t\t\t${i.replace(
-                        "%%INDEX%%",
-                        t.index
-                      )}\n\t\t\t\t\trule.cycleStack.pop(value);\n\t\t\t\t}\n\t\t\t`,
-                      r
-                    )
-                  );
-              else {
-                this.cache.set(t.schema, t),
-                  (t.index = e.index),
-                  (e.rules[e.index] = t),
-                  "function" == typeof t.schema.custom &&
-                    ((e.customs[n] = {
-                      schema: t.schema,
-                      messages: t.messages,
-                    }),
-                    (t.customValidation = (t) =>
-                      `\n\t\t\t\t\tconst rule = context.customs["${n}"];\n\t\t\t\t\tconst res = rule.schema.custom.call(this, ${t}, rule.schema, "${n}", parent, context);\n\t\t\t\t\tif (Array.isArray(res)) {\n\t\t\t\t\t\tres.forEach(err => errors.push(Object.assign({ message: rule.messages[err.type], field }, err)));\n\t\t\t\t\t}\n\t\t\t\t`)),
-                  e.index++;
-                const s = t.ruleFunction.call(this, t, n, e);
-                if (s.source) {
-                  const n = new Function(
-                    "value",
-                    "field",
-                    "parent",
-                    "errors",
-                    "context",
-                    s.source
-                  );
-                  (e.fn[t.index] = n),
+                return (
+                  this.cache.clear(),
+                  function (t) {
+                    return (n.data = t), s.call(e, t, n);
+                  }
+                );
+              }
+              compileRule(t, e, n, i, r) {
+                const o = [],
+                  s = this.cache.get(t.schema);
+                if (s)
+                  ((t = s).cycle = !0),
+                    (t.cycleStack = []),
                     o.push(
                       this.wrapRequiredCheckSourceCode(
                         t,
-                        i.replace("%%INDEX%%", t.index),
+                        `\n\t\t\t\tvar rule = context.rules[${
+                          t.index
+                        }];\n\t\t\t\tif (rule.cycleStack.indexOf(value) === -1) {\n\t\t\t\t\trule.cycleStack.push(value);\n\t\t\t\t\t${i.replace(
+                          "%%INDEX%%",
+                          t.index
+                        )}\n\t\t\t\t\trule.cycleStack.pop(value);\n\t\t\t\t}\n\t\t\t`,
                         r
                       )
                     );
-                } else o.push(this.wrapRequiredCheckSourceCode(t));
+                else {
+                  this.cache.set(t.schema, t),
+                    (t.index = e.index),
+                    (e.rules[e.index] = t),
+                    "function" == typeof t.schema.custom &&
+                      ((e.customs[n] = {
+                        schema: t.schema,
+                        messages: t.messages,
+                      }),
+                      (t.customValidation = (t) =>
+                        `\n\t\t\t\t\tconst rule = context.customs["${n}"];\n\t\t\t\t\tconst res = rule.schema.custom.call(this, ${t}, rule.schema, "${n}", parent, context);\n\t\t\t\t\tif (Array.isArray(res)) {\n\t\t\t\t\t\tres.forEach(err => errors.push(Object.assign({ message: rule.messages[err.type], field }, err)));\n\t\t\t\t\t}\n\t\t\t\t`)),
+                    e.index++;
+                  const s = t.ruleFunction.call(this, t, n, e);
+                  if (s.source) {
+                    const n = new Function(
+                      "value",
+                      "field",
+                      "parent",
+                      "errors",
+                      "context",
+                      s.source
+                    );
+                    (e.fn[t.index] = n),
+                      o.push(
+                        this.wrapRequiredCheckSourceCode(
+                          t,
+                          i.replace("%%INDEX%%", t.index),
+                          r
+                        )
+                      );
+                  } else o.push(this.wrapRequiredCheckSourceCode(t));
+                }
+                return o.join("\n");
               }
-              return o.join("\n");
-            }
-            getRuleFromSchema(t) {
-              if ("string" == typeof t) {
-                const e = t.split("|").map((t) => t.trim());
-                (t = { type: e[0] }),
-                  e.slice(1).map((e) => {
-                    const n = e.indexOf(":");
-                    if (-1 !== n) {
-                      const i = e.substr(0, n).trim();
-                      let r = e.substr(n + 1).trim();
-                      "true" === r || "false" === r
-                        ? (r = "true" === r)
-                        : Number.isNaN(Number(r)) || (r = Number(r)),
-                        (t[i] = r);
-                    } else
-                      e.startsWith("no-") ? (t[e.slice(3)] = !1) : (t[e] = !0);
-                  });
-              } else if (Array.isArray(t)) {
-                if (0 == t.length) throw new Error("Invalid schema.");
-                (t = { type: "multi", rules: t }).rules
-                  .map((t) => this.getRuleFromSchema(t))
-                  .every((t) => 1 == t.schema.optional) && (t.optional = !0);
+              getRuleFromSchema(t) {
+                if ("string" == typeof t) {
+                  const e = t.split("|").map((t) => t.trim());
+                  (t = { type: e[0] }),
+                    e.slice(1).map((e) => {
+                      const n = e.indexOf(":");
+                      if (-1 !== n) {
+                        const i = e.substr(0, n).trim();
+                        let r = e.substr(n + 1).trim();
+                        "true" === r || "false" === r
+                          ? (r = "true" === r)
+                          : Number.isNaN(Number(r)) || (r = Number(r)),
+                          (t[i] = r);
+                      } else
+                        e.startsWith("no-")
+                          ? (t[e.slice(3)] = !1)
+                          : (t[e] = !0);
+                    });
+                } else if (Array.isArray(t)) {
+                  if (0 == t.length) throw new Error("Invalid schema.");
+                  (t = { type: "multi", rules: t }).rules
+                    .map((t) => this.getRuleFromSchema(t))
+                    .every((t) => 1 == t.schema.optional) && (t.optional = !0);
+                }
+                const e = this.aliases[t.type];
+                e && (delete t.type, (t = Object.assign({}, e, t)));
+                const n = this.rules[t.type];
+                if (!n)
+                  throw new Error(
+                    "Invalid '" + t.type + "' type in validator schema."
+                  );
+                return {
+                  messages: Object.assign({}, this.messages, t.messages),
+                  schema: t,
+                  ruleFunction: n,
+                  customValidation: () => "",
+                };
               }
-              const e = this.aliases[t.type];
-              e && (delete t.type, (t = Object.assign({}, e, t)));
-              const n = this.rules[t.type];
-              if (!n)
-                throw new Error(
-                  "Invalid '" + t.type + "' type in validator schema."
+              makeError({
+                type: t,
+                field: e,
+                expected: n,
+                actual: i,
+                messages: r,
+              }) {
+                const o = { type: `"${t}"`, message: `"${r[t]}"` };
+                return (
+                  (o.field = e ? `"${e}"` : "field"),
+                  n && (o.expected = n),
+                  i && (o.actual = i),
+                  `errors.push({ ${Object.keys(o)
+                    .map((t) => `${t}: ${o[t]}`)
+                    .join(", ")} });`
                 );
-              return {
-                messages: Object.assign({}, this.messages, t.messages),
-                schema: t,
-                ruleFunction: n,
-                customValidation: () => "",
-              };
-            }
-            makeError({
-              type: t,
-              field: e,
-              expected: n,
-              actual: i,
-              messages: r,
-            }) {
-              const o = { type: `"${t}"`, message: `"${r[t]}"` };
-              return (
-                (o.field = e ? `"${e}"` : "field"),
-                n && (o.expected = n),
-                i && (o.actual = i),
-                `errors.push({ ${Object.keys(o)
-                  .map((t) => `${t}: ${o[t]}`)
-                  .join(", ")} });`
-              );
-            }
-            add(t, e) {
-              this.rules[t] = e;
-            }
-            alias(t, e) {
-              if (this.rules[t])
-                throw new Error("Alias name must not be a rule name");
-              this.aliases[t] = e;
-            }
+              }
+              add(t, e) {
+                this.rules[t] = e;
+              }
+              alias(t, e) {
+                if (this.rules[t])
+                  throw new Error("Alias name must not be a rule name");
+                this.aliases[t] = e;
+              }
+            })({
+              messages: {
+                color:
+                  "The '{field}' field must be an a valid color! Actual: {actual}",
+                measurement:
+                  "The '{field}' must be a measurement with specs that are not met. Please check schema definition. Actual: {actual}",
+              },
+            });
+            return (
+              t.add("measurement", function (t, e, n) {
+                var i = t.schema,
+                  r = t.messages,
+                  o = new RegExp(
+                    "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)(" +
+                      i.units.join("|") +
+                      ")$",
+                    "gi"
+                  ),
+                  s = new RegExp("^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)", "gi"),
+                  a = i.units.join(", ");
+                return {
+                  source: "\n        if(typeof value !== 'string' && !(value instanceof String)){\n          "
+                    .concat(
+                      this.makeError({
+                        type: "measurement",
+                        actual: "value",
+                        units: a,
+                        messages: r,
+                      }),
+                      "\n          return ;\n        }\n        if(!value.match("
+                    )
+                    .concat(o, ")){\n          ")
+                    .concat(
+                      this.makeError({
+                        type: "measurement",
+                        actual: "value",
+                        units: a,
+                        messages: r,
+                      }),
+                      "\n        } else {\n          var numberPart = value.match("
+                    )
+                    .concat(s, ")[0];\n          if(")
+                    .concat(
+                      Object.prototype.hasOwnProperty.call(i, "min"),
+                      "){\n            if("
+                    )
+                    .concat(i.min, " > numberPart){\n              ")
+                    .concat(
+                      this.makeError({
+                        type: "measurement",
+                        actual: "value",
+                        units: a,
+                        messages: r,
+                      }),
+                      "\n            }\n          }\n          if("
+                    )
+                    .concat(
+                      Object.prototype.hasOwnProperty.call(i, "max"),
+                      "){\n            if("
+                    )
+                    .concat(i.max, " < numberPart){\n              ")
+                    .concat(
+                      this.makeError({
+                        type: "measurement",
+                        actual: "value",
+                        units: a,
+                        messages: r,
+                      }),
+                      "\n            }\n          }\n           if("
+                    )
+                    .concat(
+                      Object.prototype.hasOwnProperty.call(i, "integer"),
+                      "){\n            if(!numberPart.match("
+                    )
+                    .concat(vt, ")){\n              ")
+                    .concat(
+                      this.makeError({
+                        type: "measurement",
+                        actual: "value",
+                        units: a,
+                        messages: r,
+                      }),
+                      "\n            }\n          }\n        }\n        return value;\n      "
+                    ),
+                };
+              }),
+              t.add("html", function (t, e, n) {
+                t.schema;
+                var i = t.messages;
+                return {
+                  source: "\n        if(value === null){\n          ".concat(
+                    this.makeError({
+                      type: "html",
+                      actual: "value",
+                      messages: i,
+                    }),
+                    "\n        } else {\n          return value;\n        }\n      "
+                  ),
+                };
+              }),
+              t.add("css", function (t, e, n) {
+                t.schema;
+                var i = t.messages;
+                return {
+                  source: "\n        if(value === null){\n          ".concat(
+                    this.makeError({
+                      type: "css",
+                      actual: "value",
+                      messages: i,
+                    }),
+                    "\n        } else {\n          return value;\n        }\n      "
+                  ),
+                };
+              }),
+              t.add("color", function (t, e, n) {
+                t.schema;
+                var i = t.messages;
+                return {
+                  source: "\n        if(typeof value !== 'string' && !(value instanceof String)){\n          "
+                    .concat(
+                      this.makeError({
+                        type: "measurement",
+                        actual: "value",
+                        messages: i,
+                      }),
+                      "\n          return ;\n        }\n        if(!value.match("
+                    )
+                    .concat(
+                      mt,
+                      ') && [\n            "aliceblue",\n            "antiquewhite",\n            "aqua",\n            "aquamarine",\n            "azure",\n            "beige",\n            "bisque",\n            "black",\n            "blanchedalmond",\n            "blue",\n            "blueviolet",\n            "brown",\n            "burlywood",\n            "cadetblue",\n            "chartreuse",\n            "chocolate",\n            "coral",\n            "cornflowerblue",\n            "cornsilk",\n            "crimson",\n            "cyan",\n            "darkblue",\n            "darkcyan",\n            "darkgoldenrod",\n            "darkgray",\n            "darkgrey",\n            "darkgreen",\n            "darkkhaki",\n            "darkmagenta",\n            "darkolivegreen",\n            "darkorange",\n            "darkorchid",\n            "darkred",\n            "darksalmon",\n            "darkseagreen",\n            "darkslateblue",\n            "darkslategray",\n            "darkslategrey",\n            "darkturquoise",\n            "darkviolet",\n            "deeppink",\n            "deepskyblue",\n            "dimgray",\n            "dimgrey",\n            "dodgerblue",\n            "firebrick",\n            "floralwhite",\n            "forestgreen",\n            "fuchsia",\n            "gainsboro",\n            "ghostwhite",\n            "gold",\n            "goldenrod",\n            "gray",\n            "grey",\n            "green",\n            "greenyellow",\n            "honeydew",\n            "hotpink",\n            "indianred",\n            "indigo",\n            "ivory",\n            "khaki",\n            "lavender",\n            "lavenderblush",\n            "lawngreen",\n            "lemonchiffon",\n            "lightblue",\n            "lightcoral",\n            "lightcyan",\n            "lightgoldenrodyellow",\n            "lightgray",\n            "lightgrey",\n            "lightgreen",\n            "lightpink",\n            "lightsalmon",\n            "lightseagreen",\n            "lightskyblue",\n            "lightslategray",\n            "lightslategrey",\n            "lightsteelblue",\n            "lightyellow",\n            "lime",\n            "limegreen",\n            "linen",\n            "magenta",\n            "maroon",\n            "mediumaquamarine",\n            "mediumblue",\n            "mediumorchid",\n            "mediumpurple",\n            "mediumseagreen",\n            "mediumslateblue",\n            "mediumspringgreen",\n            "mediumturquoise",\n            "mediumvioletred",\n            "midnightblue",\n            "mintcream",\n            "mistyrose",\n            "moccasin",\n            "navajowhite",\n            "navy",\n            "oldlace",\n            "olive",\n            "olivedrab",\n            "orange",\n            "orangered",\n            "orchid",\n            "palegoldenrod",\n            "palegreen",\n            "paleturquoise",\n            "palevioletred",\n            "papayawhip",\n            "peachpuff",\n            "peru",\n            "pink",\n            "plum",\n            "powderblue",\n            "purple",\n            "rebeccapurple",\n            "red",\n            "rosybrown",\n            "royalblue",\n            "saddlebrown",\n            "salmon",\n            "sandybrown",\n            "seagreen",\n            "seashell",\n            "sienna",\n            "silver",\n            "skyblue",\n            "slateblue",\n            "slategray",\n            "slategrey",\n            "snow",\n            "springgreen",\n            "steelblue",\n            "tan",\n            "teal",\n            "thistle",\n            "tomato",\n            "turquoise",\n            "violet",\n            "wheat",\n            "white",\n            "whitesmoke",\n            "yellow",\n            "yellowgreen",\n          ].indexOf(value.toLowerCase()) < 0){\n          '
+                    )
+                    .concat(
+                      this.makeError({
+                        type: "color",
+                        actual: "value",
+                        messages: i,
+                      }),
+                      "\n        }\n        return value;\n      "
+                    ),
+                };
+              }),
+              t
+            );
           },
-          vt = [
+          yt = [
             { key: "info", style: "color: #666;", level: 5 },
             {
               key: "notice",
@@ -2176,46 +2302,46 @@
             { key: "error", style: "color: black; background: red;", level: 1 },
           ];
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        var gt = new window.AudioContext();
-        function yt(t) {
+        var bt = new window.AudioContext();
+        function xt(t) {
           return "object" === n(t);
         }
-        function bt(t) {
+        function wt(t) {
           return t.charAt(0).toUpperCase() + t.slice(1);
         }
-        function xt(t, e) {
+        function kt(t, e) {
           return Math.round(t / e) * e;
         }
-        function wt(t) {
+        function _t(t) {
           var e = t.split("___");
           return { mcid: e[0], attribute: e[1] };
         }
-        function kt() {
+        function Ct() {
           return Math.floor(65536 * (1 + Math.random()))
             .toString(16)
             .substring(1);
         }
-        function _t() {
+        function It() {
           var t =
               arguments.length > 0 && void 0 !== arguments[0] && arguments[0],
             e = t ? "_" : "-";
-          return kt() + kt() + e + kt() + e + kt();
+          return Ct() + Ct() + e + Ct() + e + Ct();
         }
-        function Ct(t, e) {
+        function Ot(t, e) {
           return new Function("return `".concat(t, "`;")).call(e);
         }
-        function It(t, e) {
+        function Et(t, e) {
           return "".concat(t).concat("___").concat(e);
         }
-        var Ot = (function () {
+        var Pt = (function () {
             function t(e) {
               i(this, t);
               var n = 1;
               e &&
                 Object.prototype.hasOwnProperty.call(e, "logLevel") &&
                 (n = e.logLevel);
-              for (var r = 0; r < vt.length; r++) {
-                var o = vt[r];
+              for (var r = 0; r < yt.length; r++) {
+                var o = yt[r];
                 n >= o.level
                   ? (this[o.key] = window.console.log.bind(
                       window.console,
@@ -2233,7 +2359,7 @@
                 {
                   key: "validateProps",
                   value: function (t, e, n) {
-                    var i = new mt().validate(t, e);
+                    var i = gt().validate(t, e);
                     if (i.length > 0) {
                       for (
                         var r = "Error on plugin's \""
@@ -2301,13 +2427,13 @@
               t
             );
           })(),
-          Et = new Ot();
-        function Pt(t) {
+          jt = new Pt();
+        function Mt(t) {
           return t.result
             ? { result: !0, execute: t.execute }
             : { result: !1, errors: t.errors };
         }
-        var jt = (function () {
+        var St = (function () {
           function t(e) {
             i(this, t),
               (this.runTimeInfo = e.runTimeInfo),
@@ -2323,19 +2449,19 @@
                 {
                   key: "_resize",
                   value: function () {
-                    Et.log("Please overwite the _resize method of the Channel");
+                    jt.log("Please overwite the _resize method of the Channel");
                   },
                 },
                 {
                   key: "addIncidents",
                   value: function (t) {
-                    return Pt(this.checkAddition(t));
+                    return Mt(this.checkAddition(t));
                   },
                 },
                 {
                   key: "editIncidents",
                   value: function (t, e) {
-                    return Pt(this.checkEdit(t, e));
+                    return Mt(this.checkEdit(t, e));
                   },
                 },
                 {
@@ -2345,7 +2471,7 @@
                       arguments.length > 1 && void 0 !== arguments[1]
                         ? arguments[1]
                         : {};
-                    return Pt(this.checkDelete(t, e));
+                    return Mt(this.checkDelete(t, e));
                   },
                 },
                 { key: "recalcScratchValues", value: function (t) {} },
@@ -2387,15 +2513,15 @@
             t
           );
         })();
-        function Mt(t) {
+        function Bt(t) {
           t.descriptor.value = function (t) {
             this.duration = this.duration * t;
           };
         }
-        var St = "up",
-          Bt = "down",
-          At = "native.tree.bypass",
-          Tt = _(null, function (t) {
+        var At = "up",
+          Tt = "down",
+          Lt = "native.tree.bypass",
+          Dt = _(null, function (t) {
             return {
               F: function e() {
                 var n =
@@ -2408,7 +2534,7 @@
                   (this.isNode = !1),
                   Object.prototype.hasOwnProperty.call(n, "id")
                     ? (this.id = n.id)
-                    : (this.id = _t()),
+                    : (this.id = It()),
                   (this.props = n);
               },
               d: [
@@ -2496,13 +2622,13 @@
                     (this.duration = t),
                       this.putMessageOnPipe("recalcDuration", {}, "Groups", {
                         selfExecute: !1,
-                        direction: St,
+                        direction: At,
                       });
                   },
                 },
                 {
                   kind: "method",
-                  decorators: [Mt],
+                  decorators: [Bt],
                   key: "systoleDiastole",
                   value: function () {},
                 },
@@ -2537,8 +2663,8 @@
                         : {};
                     if (
                       (Object.prototype.hasOwnProperty.call(i, "direction") ||
-                        (i.direction = Bt),
-                      i.direction !== Bt ||
+                        (i.direction = Tt),
+                      i.direction !== Tt ||
                         Object.prototype.hasOwnProperty.call(
                           i,
                           "positionDelta"
@@ -2546,23 +2672,23 @@
                         (i.positionDelta = 0),
                       i.selfExecute)
                     ) {
-                      var r = "handle".concat(bt(t)),
+                      var r = "handle".concat(wt(t)),
                         o = "function" == typeof this[r];
                       if (o) {
                         var s = this[r](n, e);
-                        if (s !== At) {
+                        if (s !== Lt) {
                           var a = { response: s, responder: this };
-                          return i.direction === St
+                          return i.direction === At
                             ? a
                             : [l({}, a, { positionDelta: i.positionDelta })];
                         }
                       }
                     }
-                    return i.direction === St
+                    return i.direction === At
                       ? this.hasParent
                         ? this.parentNode.putMessageOnPipe(t, e, n, {
                             selfExecute: !0,
-                            direction: St,
+                            direction: At,
                           })
                         : { response: !1, responder: null }
                       : [];
@@ -2572,7 +2698,7 @@
                   kind: "method",
                   key: "bypass",
                   value: function () {
-                    return At;
+                    return Lt;
                   },
                 },
                 {
@@ -2595,7 +2721,7 @@
                         "getPositionOnPyramidion",
                         { delta: t, id: this.id },
                         "Parent",
-                        { selfExecute: !1, direction: St }
+                        { selfExecute: !1, direction: At }
                       );
                       return e.response;
                     }
@@ -2605,8 +2731,8 @@
               ],
             };
           }),
-          Lt = "The Leaf with the requested id couldn't be found on the Tree",
-          Dt = _(
+          Vt = "The Leaf with the requested id couldn't be found on the Tree",
+          zt = _(
             null,
             function (t, e) {
               var n = (function (e) {
@@ -2666,7 +2792,7 @@
                       (this.duration = t),
                         this.putMessageOnPipe("recalcDuration", {}, "Groups", {
                           selfExecute: !1,
-                          direction: St,
+                          direction: At,
                         });
                     },
                   },
@@ -2695,7 +2821,7 @@
                   },
                   {
                     kind: "method",
-                    decorators: [Mt],
+                    decorators: [Bt],
                     key: "systoleDiastole",
                     value: function () {},
                   },
@@ -2707,7 +2833,7 @@
                         !this._calculateDuration() ||
                         this.putMessageOnPipe("recalcDuration", {}, "Groups", {
                           selfExecute: !1,
-                          direction: St,
+                          direction: At,
                         })
                       );
                     },
@@ -2747,7 +2873,7 @@
                         "getLeafPosition",
                         { id: t },
                         "Groups",
-                        { selfExecute: !1, direction: Bt }
+                        { selfExecute: !1, direction: Tt }
                       );
                       return e.length > 0
                         ? e[0].positionDelta + e[0].response
@@ -2800,7 +2926,7 @@
                             "recalcDuration",
                             {},
                             "Groups",
-                            { selfExecute: !0, direction: St }
+                            { selfExecute: !0, direction: At }
                           ),
                           { result: !0 });
                     },
@@ -2814,7 +2940,7 @@
                         t
                       )
                         ? { result: !0 }
-                        : { result: !1, reason: Lt };
+                        : { result: !1, reason: Vt };
                     },
                   },
                   {
@@ -2826,7 +2952,7 @@
                         delete this.children[t],
                         this.putMessageOnPipe("recalcDuration", {}, "Groups", {
                           selfExecute: !0,
-                          direction: St,
+                          direction: At,
                         }),
                         { result: !0 }
                       );
@@ -2844,7 +2970,7 @@
                           }
                         : Object.prototype.hasOwnProperty.call(this.children, t)
                         ? { result: !0 }
-                        : { result: !1, reason: Lt };
+                        : { result: !1, reason: Vt };
                     },
                   },
                   {
@@ -2865,7 +2991,7 @@
                               "recalcDuration",
                               {},
                               "Groups",
-                              { selfExecute: !0, direction: St }
+                              { selfExecute: !0, direction: At }
                             ),
                           { result: !0 }
                         );
@@ -2881,14 +3007,14 @@
                           : {};
                       if (
                         (Object.prototype.hasOwnProperty.call(r, "direction") ||
-                          (r.direction = Bt),
-                        r.direction !== Bt ||
+                          (r.direction = Tt),
+                        r.direction !== Tt ||
                           Object.prototype.hasOwnProperty.call(
                             r,
                             "positionDelta"
                           ) ||
                           (r.positionDelta = 0),
-                        r.direction === St)
+                        r.direction === At)
                       )
                         return v(u(n.prototype), "putMessageOnPipe", this).call(
                           this,
@@ -2928,11 +3054,11 @@
                 ],
               };
             },
-            Tt
+            Dt
           );
-        function Vt(t) {
+        function Nt(t) {
           t.descriptor.value = function (t) {
-            void 0 === this.blockID && (this.blockID = _t()),
+            void 0 === this.blockID && (this.blockID = It()),
               this.DescriptiveIncident.putMessageOnPipe(
                 "setBlock",
                 {
@@ -2942,26 +3068,26 @@
                   realIncidentId: this.id,
                 },
                 "rootClip",
-                { selfExecute: !0, direction: St }
+                { selfExecute: !0, direction: At }
               );
           };
         }
-        function zt(t) {
+        function Rt(t) {
           t.descriptor.value = function (t) {
             return this.id === t ? this : this.bypass();
           };
         }
-        function Nt(t) {
+        function $t(t) {
           t.descriptor.value = function () {
             this.DescriptiveIncident.putMessageOnPipe(
               "unBlock",
               { id: this.blockID },
               "rootClip",
-              { selfExecute: !0, direction: St }
+              { selfExecute: !0, direction: At }
             );
           };
         }
-        var Rt = _(
+        var Ht = _(
             null,
             function (t, e) {
               var n = (function (e) {
@@ -2974,7 +3100,7 @@
                     (s = n.call(this, o)),
                     t(p(s)),
                     (s.mc_plugin_npm_name = "motor-cortex-js"),
-                    (s.plugin_channel_class = jt),
+                    (s.plugin_channel_class = St),
                     (s.hasIncidents = !0),
                     s.onGroupInitialise(),
                     (s.calculatedDuration = 0),
@@ -3030,7 +3156,7 @@
                   },
                   {
                     kind: "method",
-                    decorators: [zt],
+                    decorators: [Rt],
                     key: "handleResize",
                     value: function () {},
                   },
@@ -3084,22 +3210,22 @@
                   },
                   {
                     kind: "method",
-                    decorators: [Vt],
+                    decorators: [Nt],
                     key: "setBlock",
                     value: function () {},
                   },
                   {
                     kind: "method",
-                    decorators: [Nt],
+                    decorators: [$t],
                     key: "unblock",
                     value: function () {},
                   },
                 ],
               };
             },
-            Dt
+            zt
           ),
-          $t = ct(function (t, e) {
+          Ft = ct(function (t, e) {
             var n = "[object Arguments]",
               i = "[object Map]",
               r = "[object Object]",
@@ -4012,7 +4138,7 @@
               );
             };
           }),
-          Ht = ct(function (t, e) {
+          Gt = ct(function (t, e) {
             var n = "[object Arguments]",
               i = "[object Map]",
               r = "[object Object]",
@@ -5089,7 +5215,7 @@
             }
             t.exports = Xt;
           }),
-          Ft = (function (t) {
+          Wt = (function (t) {
             c(n, t);
             var e = f(n);
             function n() {
@@ -5127,7 +5253,7 @@
                           this.incidentsById,
                           t[r].id
                         ) &&
-                          (Et.error(
+                          (jt.error(
                             "Incident with the id ".concat(
                               t[r].id,
                               " already exists. Addition is rejected."
@@ -5144,7 +5270,7 @@
                       execute: function () {
                         (o.incidentsById = Object.assign(o.incidentsById, n)),
                           (o.incidents = o.incidents.concat(i)),
-                          (o.incidents = Ht(o.incidents, [
+                          (o.incidents = Gt(o.incidents, [
                             function (t) {
                               return t.millisecond;
                             },
@@ -5168,7 +5294,7 @@
                               n.incidents[r].millisecond += e;
                               break;
                             }
-                        n.incidents = Ht(n.incidents, [
+                        n.incidents = Gt(n.incidents, [
                           function (t) {
                             return t.millisecond;
                           },
@@ -5185,7 +5311,7 @@
                     return {
                       result: !0,
                       execute: function () {
-                        var t = $t(e.incidents, function (t) {
+                        var t = Ft(e.incidents, function (t) {
                           return -1 === n.indexOf(t.id);
                         });
                         e.incidents = t;
@@ -5208,7 +5334,7 @@
                               e.incidents[i].millisecond += t[n].startDelta;
                               break;
                             }
-                        e.incidents = Ht(e.incidents, [
+                        e.incidents = Gt(e.incidents, [
                           function (t) {
                             return t.millisecond;
                           },
@@ -5242,7 +5368,7 @@
                     else {
                       var a,
                         l = this;
-                      a = $t(
+                      a = Ft(
                         this.incidents,
                         e > t
                           ? function (n) {
@@ -5288,47 +5414,47 @@
               ]),
               n
             );
-          })(jt),
-          Gt = "function" == typeof Float32Array;
-        function Wt(t, e) {
+          })(St),
+          Ut = "function" == typeof Float32Array;
+        function qt(t, e) {
           return 1 - 3 * e + 3 * t;
         }
-        function Ut(t, e) {
+        function Jt(t, e) {
           return 3 * e - 6 * t;
         }
-        function qt(t) {
+        function Kt(t) {
           return 3 * t;
         }
-        function Jt(t, e, n) {
-          return ((Wt(e, n) * t + Ut(e, n)) * t + qt(e)) * t;
+        function Xt(t, e, n) {
+          return ((qt(e, n) * t + Jt(e, n)) * t + Kt(e)) * t;
         }
-        function Kt(t, e, n) {
-          return 3 * Wt(e, n) * t * t + 2 * Ut(e, n) * t + qt(e);
+        function Qt(t, e, n) {
+          return 3 * qt(e, n) * t * t + 2 * Jt(e, n) * t + Kt(e);
         }
-        function Xt(t) {
+        function Yt(t) {
           return t;
         }
-        var Qt = function (t, e, n, i) {
+        var Zt = function (t, e, n, i) {
           if (!(0 <= t && t <= 1 && 0 <= n && n <= 1))
             throw new Error("bezier x values must be in [0, 1] range");
-          if (t === e && n === i) return Xt;
+          if (t === e && n === i) return Yt;
           for (
-            var r = Gt ? new Float32Array(11) : new Array(11), o = 0;
+            var r = Ut ? new Float32Array(11) : new Array(11), o = 0;
             o < 11;
             ++o
           )
-            r[o] = Jt(0.1 * o, t, n);
+            r[o] = Xt(0.1 * o, t, n);
           function s(e) {
             for (var i = 0, o = 1; 10 !== o && r[o] <= e; ++o) i += 0.1;
             --o;
             var s = i + ((e - r[o]) / (r[o + 1] - r[o])) * 0.1,
-              a = Kt(s, t, n);
+              a = Qt(s, t, n);
             return a >= 0.001
               ? (function (t, e, n, i) {
                   for (var r = 0; r < 4; ++r) {
-                    var o = Kt(e, n, i);
+                    var o = Qt(e, n, i);
                     if (0 === o) return e;
-                    e -= (Jt(e, n, i) - t) / o;
+                    e -= (Xt(e, n, i) - t) / o;
                   }
                   return e;
                 })(e, s, t, n)
@@ -5339,7 +5465,7 @@
                     s,
                     a = 0;
                   do {
-                    (o = Jt((s = e + (n - e) / 2), i, r) - t) > 0
+                    (o = Xt((s = e + (n - e) / 2), i, r) - t) > 0
                       ? (n = s)
                       : (e = s);
                   } while (Math.abs(o) > 1e-7 && ++a < 10);
@@ -5347,10 +5473,10 @@
                 })(e, i, i + 0.1, t, n);
           }
           return function (t) {
-            return 0 === t ? 0 : 1 === t ? 1 : Jt(s(t), e, i);
+            return 0 === t ? 0 : 1 === t ? 1 : Xt(s(t), e, i);
           };
         };
-        function Yt(t) {
+        function te(t) {
           t.descriptor.value = function () {
             var t =
                 arguments.length > 0 && void 0 !== arguments[0]
@@ -5374,7 +5500,7 @@
             );
           };
         }
-        var Zt = _(null, function (t) {
+        var ee = _(null, function (t) {
             return {
               F: function e() {
                 var n =
@@ -5393,10 +5519,10 @@
                   (this.dna = o),
                   (this.context = o.context),
                   (this.mcid = o.mcid),
-                  (this.id = r.id || _t()),
+                  (this.id = r.id || It()),
                   (this.modelId = r.modelId),
                   (this.gotContext = !1),
-                  (this.plugin_channel_class = jt),
+                  (this.plugin_channel_class = St),
                   (this.mc_plugin_npm_name = "motor-cortex-js"),
                   Object.prototype.hasOwnProperty.call(
                     r,
@@ -5476,7 +5602,7 @@
                 },
                 {
                   kind: "method",
-                  decorators: [Yt],
+                  decorators: [te],
                   key: "getIncidentsByChannel",
                   value: function () {},
                 },
@@ -5550,7 +5676,7 @@
                   kind: "method",
                   key: "onGetContext",
                   value: function () {
-                    Et.info(
+                    jt.info(
                       'Overwritte the "onGetContext" method with the code you want to get executed',
                       "info"
                     );
@@ -5561,7 +5687,7 @@
                   kind: "method",
                   key: "onInitialise",
                   value: function () {
-                    Et.info(
+                    jt.info(
                       'Overwritte the "onInialise" method with the code you want to get executed',
                       "info"
                     );
@@ -5574,20 +5700,20 @@
                 },
                 {
                   kind: "method",
-                  decorators: [Vt],
+                  decorators: [Nt],
                   key: "setBlock",
                   value: function () {},
                 },
                 {
                   kind: "method",
-                  decorators: [Nt],
+                  decorators: [$t],
                   key: "unblock",
                   value: function () {},
                 },
               ],
             };
           }),
-          te = (function (t) {
+          ne = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t, r, o) {
@@ -5612,7 +5738,7 @@
                   key: "onGetContext",
                   value: function () {
                     var t = this.DescriptiveIncident.realClip.exportConstructionArguments(),
-                      e = Et.getElementByMCID(this.context, this.mcid),
+                      e = jt.getElementByMCID(this.context, this.mcid),
                       n = l({}, t.props, { selector: void 0, host: e });
                     (this.ownClip = new this.DescriptiveIncident.constructor.Incident(
                       t.attrs,
@@ -5673,13 +5799,13 @@
               ]),
               n
             );
-          })(Zt);
-        function ee(t) {
+          })(ee);
+        function ie(t) {
           Object.prototype.hasOwnProperty.call(t, "dnaExtras") ||
             (t.dnaExtras = {});
           var e = new t.Incident(
             t.attrs,
-            l({}, t.props, { id: t.id || _t() }),
+            l({}, t.props, { id: t.id || It() }),
             l({}, t.dnaExtras, { context: t.context, mcid: t.mcid })
           );
           return (
@@ -5689,7 +5815,7 @@
             e
           );
         }
-        var ne = {
+        var re = {
             linear: function (t) {
               return t;
             },
@@ -5839,7 +5965,7 @@
                 : 0.5 * ((t -= 2) * t * ((1 + (e *= 1.525)) * t + e) + 2);
             },
             easeInBounce: function (t) {
-              return 1 - ne.easeOutBounce(1 - t);
+              return 1 - re.easeOutBounce(1 - t);
             },
             easeOutBounce: function (t) {
               return (t /= 1) < 1 / 2.75
@@ -5852,11 +5978,11 @@
             },
             easeInOutBounce: function (t) {
               return t < 0.5
-                ? 0.5 * ne.easeInBounce(2 * t)
-                : 0.5 * ne.easeOutBounce(2 * t - 1) + 0.5;
+                ? 0.5 * re.easeInBounce(2 * t)
+                : 0.5 * re.easeOutBounce(2 * t - 1) + 0.5;
             },
           },
-          ie = _(
+          oe = _(
             null,
             function (t, e) {
               return {
@@ -5883,19 +6009,19 @@
                         (l._duration = t),
                           l.putMessageOnPipe("recalcDuration", {}, "Groups", {
                             selfExecute: !0,
-                            direction: St,
+                            direction: At,
                           });
                       }),
-                      (l.easing = ne.linear),
+                      (l.easing = re.linear),
                       Object.prototype.hasOwnProperty.call(l.props, "easing") &&
                         (Array.isArray(l.props.easing)
-                          ? (l.easing = Qt(
+                          ? (l.easing = Zt(
                               l.props.easing[0],
                               l.props.easing[1],
                               l.props.easing[2],
                               l.props.easing[3]
                             ))
-                          : (l.easing = ne[l.props.easing])),
+                          : (l.easing = re[l.props.easing])),
                       l
                     );
                   }
@@ -5942,10 +6068,10 @@
                       var n = l({}, this.constructionIngredients, {
                         context: t.context,
                         mcid: this.mcid,
-                        Incident: te,
+                        Incident: ne,
                         DescriptiveIncident: this.DescriptiveIncident,
                       });
-                      (this.contexts[t.clipId] = ee(n)),
+                      (this.contexts[t.clipId] = ie(n)),
                         e && this.contexts[t.clipId]._onGetContextOnce();
                     },
                   },
@@ -5958,7 +6084,7 @@
                   },
                   {
                     kind: "method",
-                    decorators: [Yt],
+                    decorators: [te],
                     key: "getIncidentsByChannel",
                     value: function () {},
                   },
@@ -5996,9 +6122,9 @@
                 ],
               };
             },
-            Tt
+            Dt
           ),
-          re = _(
+          se = _(
             null,
             function (t, e) {
               var r = (function (e) {
@@ -6046,16 +6172,16 @@
                             u.constructionIngredients.attrs.animatedAttrs[
                               u.attribute
                             ])),
-                    (u.easing = ne.linear),
+                    (u.easing = re.linear),
                     Object.prototype.hasOwnProperty.call(u.props, "easing") &&
                       (Array.isArray(u.props.easing)
-                        ? (u.easing = Qt(
+                        ? (u.easing = Zt(
                             u.props.easing[0],
                             u.props.easing[1],
                             u.props.easing[2],
                             u.props.easing[3]
                           ))
-                        : (u.easing = ne[u.props.easing])),
+                        : (u.easing = re[u.props.easing])),
                     u
                   );
                 }
@@ -6107,7 +6233,7 @@
                           context: t.context,
                           mcid: this.mcid,
                         }),
-                        r = ee(i);
+                        r = ie(i);
                       (this.contexts[t.clipId] = r),
                         n ||
                           null === this.attribute ||
@@ -6126,7 +6252,7 @@
                   },
                   {
                     kind: "method",
-                    decorators: [Yt],
+                    decorators: [te],
                     key: "getIncidentsByChannel",
                     value: function () {},
                   },
@@ -6276,7 +6402,7 @@
                                 .nonFragmentedContext,
                               mcid: this.mcid,
                             }),
-                            i = ee(n);
+                            i = ie(n);
                           return i.getScratchValue();
                         }
                         return 1 === e.length
@@ -6315,9 +6441,9 @@
                 ],
               };
             },
-            Tt
+            Dt
           ),
-          oe = (function (t) {
+          ae = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t, r, o, s) {
@@ -6353,7 +6479,7 @@
                           Channel: t.constructor.Channel,
                           DescriptiveIncident: t,
                         },
-                        a = new re(s, e, this.mcid, n);
+                        a = new se(s, e, this.mcid, n);
                       this.addChild(a, 0);
                     }
                   },
@@ -6361,8 +6487,8 @@
               ]),
               n
             );
-          })(Rt),
-          se = (function (t) {
+          })(Ht),
+          le = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t, r) {
@@ -6410,7 +6536,7 @@
                   value: function (t) {
                     var e = this.originalContext.getMCID(t);
                     return (
-                      e || ((e = _t(!0)), this.originalContext.setMCID(t, e)), e
+                      e || ((e = It(!0)), this.originalContext.setMCID(t, e)), e
                     );
                   },
                 },
@@ -6429,7 +6555,7 @@
                         "animatedAttrs"
                       )
                     ) {
-                      var s = new oe(
+                      var s = new ae(
                         e,
                         n,
                         o,
@@ -6451,7 +6577,7 @@
                           Channel: e.constructor.Channel,
                           DescriptiveIncident: e,
                         },
-                        d = new re(u, n, o, null);
+                        d = new se(u, n, o, null);
                       this.addChild(d, 0);
                     }
                   },
@@ -6465,8 +6591,8 @@
               ]),
               n
             );
-          })(Rt),
-          ae = (function (t) {
+          })(Ht),
+          ce = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t, r) {
@@ -6490,10 +6616,10 @@
                         }),
                         Incident: e.constructor.Incident,
                         plugin_npm_name: e.constructor.plugin_npm_name,
-                        Channel: Ft,
+                        Channel: Wt,
                         DescriptiveIncident: e,
                       },
-                      c = new ie(a, n, o, e);
+                      c = new oe(a, n, o, e);
                     this.addChild(c, 0);
                   },
                 },
@@ -6510,8 +6636,8 @@
               ]),
               n
             );
-          })(se);
-        function le(t, e) {
+          })(le);
+        function ue(t, e) {
           var n,
             i = arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
           if ((i && "off" === t.audio) || (!i && "only" === t.audio))
@@ -6527,9 +6653,9 @@
           if (t.constructor.isClip) {
             if (!Object.prototype.hasOwnProperty.call(t.props, "selector") || i)
               return i ? t.audioClip : t.realClip;
-            (n = new ae(t, e)).plugin_channel_class = jt;
+            (n = new ce(t, e)).plugin_channel_class = St;
           } else if (t.constructor.isGroup)
-            for (var r in ((n = ee({
+            for (var r in ((n = ie({
               id: t.id,
               attrs: t.attrs,
               props: t.props,
@@ -6539,13 +6665,13 @@
               DescriptiveIncident: t,
             })),
             t.children)) {
-              var o = le(t.children[r].leaf, e);
+              var o = ue(t.children[r].leaf, e);
               null !== o && n.addChild(o, t.children[r].position);
             }
-          else n = new se(t, e);
+          else n = new le(t, e);
           return n;
         }
-        var ce = (function (t) {
+        var de = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t, r) {
@@ -6610,7 +6736,7 @@
                       "addContext",
                       t,
                       {},
-                      { selfExecute: !1, direction: Bt }
+                      { selfExecute: !1, direction: Tt }
                     );
                     if (
                       1 === Object.keys(this.instantiatedCopiesContexts).length
@@ -6651,7 +6777,7 @@
                             incident: t.incident,
                             millisecond: t.millisecond,
                             parentGroupId: t.parentGroupId,
-                            incidentFromDescription: le,
+                            incidentFromDescription: ue,
                             contextData: {
                               clipId: this.id,
                               context: this.context,
@@ -6661,7 +6787,7 @@
                             audio: this.audioClip,
                           },
                           t.parentGroupId,
-                          { selfExecute: !0, direction: Bt }
+                          { selfExecute: !0, direction: Tt }
                         ),
                         i = {},
                         r = 0;
@@ -6693,7 +6819,7 @@
                                 "recalcDuration",
                                 {},
                                 "Groups",
-                                { selfExecute: !0, direction: St }
+                                { selfExecute: !0, direction: At }
                               ),
                               e.instantiatedCopiesContexts))
                                 n[i].responder.putMessageOnPipe(
@@ -6703,7 +6829,7 @@
                                     context: e.instantiatedCopiesContexts[r],
                                   },
                                   "ContextAwareIncidents",
-                                  { selfExecute: !1, direction: Bt }
+                                  { selfExecute: !1, direction: Tt }
                                 );
                           },
                         }
@@ -6763,7 +6889,7 @@
                             audio: this.audioClip,
                           },
                           t.parentGroupId,
-                          { selfExecute: !0, direction: Bt }
+                          { selfExecute: !0, direction: Tt }
                         ),
                         n = {},
                         i = 0;
@@ -6797,7 +6923,7 @@
                                   "recalcDuration",
                                   {},
                                   "Groups",
-                                  { selfExecute: !0, direction: St }
+                                  { selfExecute: !0, direction: At }
                                 );
                           },
                         }
@@ -6843,7 +6969,7 @@
                             audio: this.audioClip,
                           },
                           t.parentGroupId,
-                          { selfExecute: !0, direction: Bt }
+                          { selfExecute: !0, direction: Tt }
                         ),
                         n = {},
                         i = 0;
@@ -6872,7 +6998,7 @@
                                   "recalcDuration",
                                   {},
                                   "Groups",
-                                  { selfExecute: !0, direction: St }
+                                  { selfExecute: !0, direction: At }
                                 );
                           },
                         }
@@ -6918,7 +7044,7 @@
                             audio: this.audioClip,
                           },
                           t.id,
-                          { selfExecute: !1, direction: Bt }
+                          { selfExecute: !1, direction: Tt }
                         ),
                         n = {},
                         i = 0;
@@ -6961,7 +7087,7 @@
                       r = [],
                       o = [];
                     for (var s in e) {
-                      var a = Et.systoleDiastoleProjections(e[s], t, n),
+                      var a = jt.systoleDiastoleProjections(e[s], t, n),
                         l = this.instantiatedChannels[s].checkResizedIncidents(
                           a
                         );
@@ -7057,15 +7183,15 @@
               ]),
               n
             );
-          })(Rt),
-          ue = (function () {
+          })(Ht),
+          pe = (function () {
             function t() {
               i(this, t),
-                (this.output = gt.createGain()),
-                (this.gainNode = gt.createGain()),
-                gt.createStereoPanner &&
-                  (this.pannerNode = gt.createStereoPanner()),
-                gt.createStereoPanner
+                (this.output = bt.createGain()),
+                (this.gainNode = bt.createGain()),
+                bt.createStereoPanner &&
+                  (this.pannerNode = bt.createStereoPanner()),
+                bt.createStereoPanner
                   ? (this.pannerNode.connect(this.gainNode),
                     this.gainNode.connect(this.output),
                     (this.input = this.pannerNode))
@@ -7090,7 +7216,7 @@
               t
             );
           })();
-        function de(t) {
+        function he(t) {
           for (
             var e = window.atob(t), n = e.length, i = new Uint8Array(n), r = 0;
             r < n;
@@ -7099,8 +7225,8 @@
             i[r] = e.charCodeAt(r);
           return i.buffer;
         }
-        var pe = /\[data(-mcid="+\w+")+\]/g,
-          he = (function () {
+        var fe = /\[data(-mcid="+\w+")+\]/g,
+          me = (function () {
             function t() {
               i(this, t), (this.subscribers = []);
             }
@@ -7123,7 +7249,7 @@
               t
             );
           })(),
-          fe = (function () {
+          ve = (function () {
             function t() {
               var e = this,
                 n =
@@ -7139,12 +7265,12 @@
                 var o = function (t) {
                     var i = n[t],
                       o = {
-                        mcid: i.mcid || _t(),
+                        mcid: i.mcid || It(),
                         id: i.id,
                         src: i.src,
                         classes: i.classes || [],
                         base64: i.base64 || !1,
-                        pubSub: new he(),
+                        pubSub: new me(),
                         soundLoaded: !1,
                         startValues: i.startValues || {},
                       };
@@ -7153,7 +7279,7 @@
                       (e.elementsByMCID[o.mcid] = o),
                       i.base64)
                     )
-                      gt.decodeAudioData(de(i.src), function (t) {
+                      bt.decodeAudioData(he(i.src), function (t) {
                         e._setBuffer(o, t, r);
                       });
                     else {
@@ -7162,7 +7288,7 @@
                         (s.responseType = "arraybuffer"),
                         (e.soundLoaded = !1),
                         (s.onload = function () {
-                          gt.decodeAudioData(
+                          bt.decodeAudioData(
                             s.response,
                             function (t) {
                               e._setBuffer(o, t, r);
@@ -7184,7 +7310,7 @@
                 rootElement: document.body,
                 unmount: function () {},
                 masterNode: r,
-                audioContext: gt,
+                audioContext: bt,
                 getElements: this.getElements.bind(this),
                 getMCID: this.getMCID.bind(this),
                 setMCID: this.setMCID.bind(this),
@@ -7201,7 +7327,7 @@
                   value: function (t, e, n) {
                     (t.soundLoaded = !0),
                       (t.buffer = e),
-                      (t.effectsAudioNode = new ue()),
+                      (t.effectsAudioNode = new pe()),
                       t.effectsAudioNode.connect(n.input),
                       t.pubSub.pub();
                   },
@@ -7221,7 +7347,7 @@
                   key: "getElements",
                   value: function (t) {
                     if ("~" !== t.charAt(0)) {
-                      if (pe.exec(t)) {
+                      if (fe.exec(t)) {
                         var e = t.split('"')[1];
                         return this.elementsByMCID[e];
                       }
@@ -7265,15 +7391,15 @@
               t
             );
           })(),
-          me = (function (t) {
+          ge = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t, r) {
               var o;
               i(this, n),
-                ((o = e.call(this, t, r)).audioNode = new ue()),
-                o.audioNode.connect(gt.destination);
-              var s = new fe(o.props.audioSources, o.audioNode);
+                ((o = e.call(this, t, r)).audioNode = new pe()),
+                o.audioNode.connect(bt.destination);
+              var s = new ve(o.props.audioSources, o.audioNode);
               return (
                 (o.ownContext = l({}, s.context, { isHostedClip: !0 })),
                 (o.audioClip = !0),
@@ -7310,7 +7436,7 @@
                   key: "lastWish",
                   value: function () {
                     this.audioNode.output.disconnect(),
-                      this.audioNode.output.connect(gt.destination);
+                      this.audioNode.output.connect(bt.destination);
                   },
                 },
                 {
@@ -7322,8 +7448,8 @@
               ]),
               n
             );
-          })(ce),
-          ve = (function (t) {
+          })(de),
+          ye = (function (t) {
             c(n, t);
             var e = f(n);
             function n() {
@@ -7379,8 +7505,8 @@
               ]),
               n
             );
-          })(Zt),
-          ge = (function (t) {
+          })(ee),
+          be = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t) {
@@ -7389,7 +7515,7 @@
                 i(this, n),
                 ((r = e.call(this, t)).playingIncidentsIds = []),
                 (r.transitioned = !1),
-                t.subscribe(_t(), r._stateChange.bind(p(r)), 0, 1, !0),
+                t.subscribe(It(), r._stateChange.bind(p(r)), 0, 1, !0),
                 r
               );
             }
@@ -7439,14 +7565,14 @@
                       this.transitioned && ((t = 0), (this.transitioned = !1));
                       for (
                         var a = this,
-                          l = $t(this.incidents, function (n) {
+                          l = Ft(this.incidents, function (n) {
                             return (
                               n.millisecond >= t &&
                               n.millisecond < e &&
                               n.millisecond + a._incidentById(n.id).duration > e
                             );
                           }),
-                          c = $t(this.incidents, function (n) {
+                          c = Ft(this.incidents, function (n) {
                             return (
                               a._incidentById(n.id).duration + n.millisecond >
                                 t &&
@@ -7485,8 +7611,8 @@
               ]),
               n
             );
-          })(Ft),
-          ye = _(null, function (t) {
+          })(Wt),
+          xe = _(null, function (t) {
             return {
               F: function e() {
                 var n =
@@ -7505,10 +7631,10 @@
                   (this.dna = o),
                   (this.context = o.context),
                   (this.mcid = o.mcid),
-                  (this.id = r.id || _t()),
+                  (this.id = r.id || It()),
                   (this.modelId = r.modelId),
                   (this.gotContext = !1),
-                  (this.plugin_channel_class = ge),
+                  (this.plugin_channel_class = be),
                   (this.mc_plugin_npm_name = "motor-cortex-js-media-playback"),
                   Object.prototype.hasOwnProperty.call(
                     r,
@@ -7539,7 +7665,7 @@
                 },
                 {
                   kind: "method",
-                  decorators: [Yt],
+                  decorators: [te],
                   key: "getIncidentsByChannel",
                   value: function () {},
                 },
@@ -7560,7 +7686,7 @@
                   kind: "method",
                   key: "onGetContext",
                   value: function () {
-                    Et.info(
+                    jt.info(
                       'Overwritte the "onGetContext" method with the code you want to get executed',
                       "info"
                     );
@@ -7571,7 +7697,7 @@
                   kind: "method",
                   key: "onInitialise",
                   value: function () {
-                    Et.info(
+                    jt.info(
                       'Overwritte the "onInialise" method with the code you want to get executed',
                       "info"
                     );
@@ -7592,20 +7718,20 @@
                 { kind: "method", key: "stop", value: function () {} },
                 {
                   kind: "method",
-                  decorators: [Vt],
+                  decorators: [Nt],
                   key: "setBlock",
                   value: function () {},
                 },
                 {
                   kind: "method",
-                  decorators: [Nt],
+                  decorators: [$t],
                   key: "unblock",
                   value: function () {},
                 },
               ],
             };
           }),
-          be = {
+          we = {
             npm_name: "@kissmybutton/motorcortex-soundsystem",
             incidents: [
               {
@@ -7635,7 +7761,7 @@
                               this.props,
                               "startFrom"
                             ) && (n = this.props.startFrom),
-                            (this.audioNode = gt.createBufferSource()),
+                            (this.audioNode = bt.createBufferSource()),
                             (this.audioNode.buffer = this.element.buffer),
                             this.audioNode.connect(
                               this.element.effectsAudioNode.input
@@ -7654,15 +7780,15 @@
                     ]),
                     n
                   );
-                })(ye),
+                })(xe),
                 name: "AudioPlayback",
               },
-              { exportable: ve, name: "AudioEffect" },
+              { exportable: ye, name: "AudioEffect" },
             ],
-            Clip: me,
+            Clip: ge,
             audio: "only",
           },
-          xe = ct(function (t, e) {
+          ke = ct(function (t, e) {
             var n = "[object Arguments]",
               i = "[object Map]",
               r = "[object Object]",
@@ -8598,7 +8724,7 @@
               );
             };
           }),
-          we = (function () {
+          _e = (function () {
             function t() {
               var e =
                 arguments.length > 0 && void 0 !== arguments[0]
@@ -8653,20 +8779,20 @@
               t
             );
           })();
-        function ke(t, e, n, i) {
+        function Ce(t, e, n, i) {
           var r = !1;
           for (var o in e)
             Object.prototype.hasOwnProperty.call(n, o) ||
               ((r = !0), (i[o] = e[o]));
           return (t.animatedAttributeValue = i), r;
         }
-        function _e(t, e, n, i) {
+        function Ie(t, e, n, i) {
           var r =
               arguments.length > 4 && void 0 !== arguments[4] && arguments[4],
             o = t[i],
             s = e._get(o.id);
           s.setInitialValue(n, r);
-          var a = ke(
+          var a = Ce(
             s,
             s.initialValue,
             s.originalAnimatedAttributeValue,
@@ -8675,9 +8801,9 @@
           a && (s.lastWish(), s.onGetContext()),
             a &&
               i < t.length - 1 &&
-              _e(t, e, s.animatedAttributeValue, i + 1, !1);
+              Ie(t, e, s.animatedAttributeValue, i + 1, !1);
         }
-        var Ce = (function () {
+        var Oe = (function () {
             function t(e) {
               i(this, t),
                 (this.originalArray = e),
@@ -8768,7 +8894,7 @@
               t
             );
           })(),
-          Ie = (function (t) {
+          Ee = (function (t) {
             c(n, t);
             var e = f(n);
             function n() {
@@ -8795,8 +8921,8 @@
               ]),
               n
             );
-          })(Ce),
-          Oe = (function (t) {
+          })(Oe),
+          Pe = (function (t) {
             c(n, t);
             var e = f(n);
             function n() {
@@ -8830,25 +8956,25 @@
               ]),
               n
             );
-          })(Ce),
-          Ee = (function () {
+          })(Oe),
+          je = (function () {
             function t() {
               var e =
                 arguments.length > 0 && void 0 !== arguments[0]
                   ? arguments[0]
                   : {};
               i(this, t),
-                (this.lanes = new we({})),
+                (this.lanes = new _e({})),
                 e.lanes && (this.lanes = e.lanes),
                 (this.comboAttributes = {}),
                 null != e.comboAttributes &&
                   (this.comboAttributes = e.comboAttributes),
                 (this.runTimeInfo = e.runTimeInfo),
-                (this.belongingLaneKeysByAnimationId = new we({})),
+                (this.belongingLaneKeysByAnimationId = new _e({})),
                 e.belongingLaneKeysByAnimationId &&
                   (this.belongingLaneKeysByAnimationId =
                     e.belongingLaneKeysByAnimationId),
-                (this.incidentsById = new we({})),
+                (this.incidentsById = new _e({})),
                 e.incidentsById && (this.incidentsById = e.incidentsById);
             }
             return (
@@ -8869,11 +8995,11 @@
                   key: "createTestLanesSanbox",
                   value: function () {
                     var e = {
-                      lanes: new Oe(this.lanes._export()),
-                      belongingLaneKeysByAnimationId: new Ce(
+                      lanes: new Pe(this.lanes._export()),
+                      belongingLaneKeysByAnimationId: new Oe(
                         this.belongingLaneKeysByAnimationId._export()
                       ),
-                      incidentsById: new Ie(this.incidentsById._export()),
+                      incidentsById: new Ee(this.incidentsById._export()),
                     };
                     return (
                       this.comboAttributes &&
@@ -8902,17 +9028,17 @@
                 {
                   key: "applySandboxChanges",
                   value: function (t) {
-                    (this.lanes = new we(t.lanes._export())),
-                      (this.belongingLaneKeysByAnimationId = new we(
+                    (this.lanes = new _e(t.lanes._export())),
+                      (this.belongingLaneKeysByAnimationId = new _e(
                         t.belongingLaneKeysByAnimationId._export()
                       )),
-                      (this.incidentsById = new we(t.incidentsById._export()));
+                      (this.incidentsById = new _e(t.incidentsById._export()));
                   },
                 },
                 {
                   key: "getLane",
                   value: function (t, e) {
-                    return this.lanes._get(It(t, e));
+                    return this.lanes._get(Et(t, e));
                   },
                 },
                 {
@@ -8922,7 +9048,7 @@
                         arguments.length > 2 &&
                         void 0 !== arguments[2] &&
                         arguments[2],
-                      i = It(t, e);
+                      i = Et(t, e);
                     return (
                       !!this.lanes._hasOwnProperty(i) ||
                       (n && this.lanes._set(i, []), !1)
@@ -8941,7 +9067,7 @@
                           ? arguments[4]
                           : null,
                       o = this,
-                      s = $t(this.lanes._get(It(e, n)), function (e) {
+                      s = Ft(this.lanes._get(Et(e, n)), function (e) {
                         var n = t.incident.duration;
                         return (
                           null != r && (n = r),
@@ -8967,19 +9093,19 @@
                 {
                   key: "addElementToLane",
                   value: function (t, e, n, i) {
-                    var r = It(t, e);
+                    var r = Et(t, e);
                     this.incidentsById._set(i.id, i);
                     var o = { millisecond: n, id: i.id };
                     this.laneExists(t, e, !0);
                     var s = this.lanes._get(r);
                     s.push(o),
-                      (s = Ht(s, ["millisecond"])),
+                      (s = Gt(s, ["millisecond"])),
                       this.lanes._set(r, s),
                       this.belongingLaneKeysByAnimationId._hasOwnProperty(
                         i.id
                       ) || this.belongingLaneKeysByAnimationId._set(i.id, []),
                       this.belongingLaneKeysByAnimationId._get(i.id).push(r);
-                    var a = xe(s, function (t) {
+                    var a = ke(s, function (t) {
                       return t.id === i.id;
                     });
                     if (
@@ -8999,7 +9125,7 @@
                       ))
                     ) {
                       var l = i.initialValue;
-                      _e(s, this.incidentsById, l, a);
+                      Ie(s, this.incidentsById, l, a);
                     }
                     a + 1 < s.length &&
                       (this.incidentsById
@@ -9025,7 +9151,7 @@
                           (i[a] = {
                             animations: [],
                             lane: this.lanes._get(a),
-                            laneData: wt(o[s]),
+                            laneData: _t(o[s]),
                           }),
                           i[a].animations.push(t[r]);
                       }
@@ -9034,7 +9160,7 @@
                         var c = i[l],
                           u = c.lane,
                           d = c.laneData,
-                          p = Ht(this.getLanesCopy(u), ["millisecond"]),
+                          p = Gt(this.getLanesCopy(u), ["millisecond"]),
                           h = Object.prototype.hasOwnProperty.call(
                             this.comboAttributes,
                             d.attribute
@@ -9045,15 +9171,15 @@
                       )
                         c.animations.indexOf(u[f].id) >= 0 &&
                           (u[f].millisecond += e);
-                      var m = Ht(u, ["millisecond"]);
+                      var m = Gt(u, ["millisecond"]);
                       this.lanes._set(l, m), (u = m);
                       for (
                         var v = function (t) {
                             var e = c.animations[t],
-                              i = xe(p, function (t) {
+                              i = ke(p, function (t) {
                                 return t.id === e;
                               }),
-                              r = xe(u, function (t) {
+                              r = ke(u, function (t) {
                                 return t.id === e;
                               }),
                               o = n.incidentsById._get(u[r].id);
@@ -9061,7 +9187,7 @@
                               if (i + 1 < u.length)
                                 if (0 === i)
                                   h
-                                    ? _e(
+                                    ? Ie(
                                         u,
                                         n.incidentsById,
                                         o.pureInitialValues,
@@ -9076,7 +9202,7 @@
                                         .onGetContext());
                                 else if (h) {
                                   var s = r > i ? i : r;
-                                  _e(
+                                  Ie(
                                     u,
                                     n.incidentsById,
                                     n.incidentsById._get(p[i - 1].id)
@@ -9096,7 +9222,7 @@
                                       .onGetContext();
                               0 === r
                                 ? h
-                                  ? _e(
+                                  ? Ie(
                                       u,
                                       n.incidentsById,
                                       n.incidentsById._get(p[0].id)
@@ -9110,7 +9236,7 @@
                                     ),
                                     o.onGetContext())
                                 : h
-                                ? _e(
+                                ? Ie(
                                     u,
                                     n.incidentsById,
                                     n.incidentsById._get(u[r - 1].id)
@@ -9125,7 +9251,7 @@
                                   o.onGetContext()),
                                 r + 1 < u.length &&
                                   (h
-                                    ? _e(
+                                    ? Ie(
                                         u,
                                         n.incidentsById,
                                         o.animatedAttributeValue,
@@ -9173,7 +9299,7 @@
                         for (
                           var u = l({}, s[a]),
                             d = this.incidentsById._get(u.id),
-                            p = wt(r[o]),
+                            p = _t(r[o]),
                             h = [],
                             f = 0;
                           f < s.length;
@@ -9186,7 +9312,7 @@
                               this.lanes._delete(r[o]),
                               Object.prototype.hasOwnProperty.call(e, r[o]) &&
                                 delete e[r[o]])
-                            : ((e[r[o]] = wt(r[o])),
+                            : ((e[r[o]] = _t(r[o])),
                               a < s.length &&
                                 !1 !==
                                   this.incidentsById._get(u.id)
@@ -9195,7 +9321,7 @@
                                   this.comboAttributes,
                                   p.attribute
                                 )
-                                  ? _e(
+                                  ? Ie(
                                       s,
                                       this.incidentsById,
                                       this.incidentsById._get(u.id)
@@ -9227,12 +9353,12 @@
                       if (r.length > 0) {
                         var o = this.incidentsById._get(r[0].id),
                           s = o.getScratchValue(t),
-                          a = wt(i);
+                          a = _t(i);
                         Object.prototype.hasOwnProperty.call(
                           this.comboAttributes,
                           a.attribute
                         )
-                          ? _e(r, this.incidentsById, s, 0, !0)
+                          ? Ie(r, this.incidentsById, s, 0, !0)
                           : o.setInitialValue(s),
                           o.lastWish(),
                           o.onGetContext();
@@ -9244,7 +9370,7 @@
               t
             );
           })(),
-          Pe = (function (t) {
+          Me = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t) {
@@ -9255,7 +9381,7 @@
                 (r.fixedAttributeName = "_"),
                 null != t.comboAttributes &&
                   (r.comboAttributes = t.comboAttributes),
-                (r.LanesHandler = new Ee({
+                (r.LanesHandler = new je({
                   comboAttributes: r.comboAttributes,
                   runTimeInfo: r.runTimeInfo,
                 })),
@@ -9270,7 +9396,7 @@
                     key: "setComboAttributes",
                     value: function (t) {
                       (this.comboAttributes = t),
-                        (this.LanesHandler = new Ee({
+                        (this.LanesHandler = new je({
                           comboAttributes: this.comboAttributes,
                         }));
                     },
@@ -9485,7 +9611,7 @@
                           void 0 !== arguments[5] &&
                           arguments[5],
                         s = this,
-                        a = $t(t, function (t) {
+                        a = Ft(t, function (t) {
                           return (
                             (t.millisecond +
                               s.incidentsById._get(t.id).duration >=
@@ -9507,7 +9633,7 @@
                         return !0;
                       }
                       var c =
-                          (a = Ht(a, [
+                          (a = Gt(a, [
                             function (t) {
                               return t.millisecond;
                             },
@@ -9525,7 +9651,7 @@
                     key: "slipToLaneBackwards",
                     value: function (t, e, n, i, r) {
                       var o = this,
-                        s = $t(t, function (t) {
+                        s = Ft(t, function (t) {
                           var e =
                             o.incidentsById._get(t.id).duration + t.millisecond;
                           return (
@@ -9535,7 +9661,7 @@
                           );
                         });
                       if (0 === s.length) return !0;
-                      s = Ht(s, [
+                      s = Gt(s, [
                         function (t) {
                           return t.millisecond;
                         },
@@ -9564,7 +9690,7 @@
                       ) {
                         var s = r[o],
                           a = this.lanes._get(s),
-                          l = wt(s);
+                          l = _t(s);
                         t <= e
                           ? this.slipIntoLaneForwards(a, l, t, e, n, i)
                           : t > e && this.slipToLaneBackwards(a, l, t, e, n, i);
@@ -9595,8 +9721,8 @@
               ),
               n
             );
-          })(jt),
-          je = (function () {
+          })(St),
+          Se = (function () {
             function t() {
               i(this, t), (this.customEntities = {});
             }
@@ -9628,6 +9754,7 @@
                 {
                   key: "getElements",
                   value: function (t) {
+                    if (null == t || "" === t) return [];
                     if ("!" === t.charAt(0)) {
                       if ("#" === (t = t.substr(1)).charAt(0))
                         return [this.customEntities[t.substr(1)]];
@@ -9683,7 +9810,7 @@
                       this.customEntities,
                       t
                     )
-                      ? (Et.error(
+                      ? (jt.error(
                           "Clip "
                             .concat(
                               this.id,
@@ -9705,7 +9832,7 @@
               t
             );
           })(),
-          Me = (function (t) {
+          Be = (function (t) {
             c(r, t);
             var e = f(r);
             function r() {
@@ -9714,9 +9841,9 @@
                   arguments.length > 0 && void 0 !== arguments[0]
                     ? arguments[0]
                     : {};
-              if ((i(this, r), (t = e.call(this)), !yt(o)))
+              if ((i(this, r), (t = e.call(this)), !xt(o)))
                 return (
-                  Et.error(
+                  jt.error(
                     "ContextHandler expects an object on its constructor. ".concat(
                       n(o),
                       " passed"
@@ -9726,25 +9853,25 @@
                 );
               if (!Object.prototype.hasOwnProperty.call(o, "html"))
                 return (
-                  Et.error(
+                  jt.error(
                     "ContextHandler expects the html key on its constructor properties which is missing"
                   ),
                   h(t, !1)
                 );
               if (!Object.prototype.hasOwnProperty.call(o, "css"))
                 return (
-                  Et.error(
+                  jt.error(
                     "ContextHandler expects the css key on its constructor properties which is missing"
                   ),
                   h(t, !1)
                 );
               if (
                 (Object.prototype.hasOwnProperty.call(o, "initParams") ||
-                  Et.info("ContextHandler got null initParams"),
+                  jt.info("ContextHandler got null initParams"),
                 !Object.prototype.hasOwnProperty.call(o, "host"))
               )
                 return (
-                  Et.error(
+                  jt.error(
                     "ContextHandler expects the host key on its constructor properties which is missing"
                   ),
                   h(t, !1)
@@ -9782,14 +9909,14 @@
                 (u.src = "");
               var d = u.contentWindow || u.contentDocument;
               d.document && (d = d.document),
-                d.write(Ct(o.html, { params: o.initParams }));
+                d.write(Ot(o.html, { params: o.initParams }));
               var f =
                   "\n        body{\n            padding:0;\n            margin:0;\n        }\n        ",
                 m = d.createElement("style");
               (m.type = "text/css"),
                 m.styleSheet
                   ? (m.styleSheet.cssText =
-                      Ct(o.css, { params: o.initParams }) + f)
+                      Ot(o.css, { params: o.initParams }) + f)
                   : m.appendChild(s.createTextNode(o.css + f));
               var v = d.head || d.getElementsByTagName("head")[0];
               if (
@@ -9830,8 +9957,8 @@
               );
             }
             return r;
-          })(je),
-          Se = (function (t) {
+          })(Se),
+          Ae = (function (t) {
             c(r, t);
             var e = f(r);
             function r() {
@@ -9840,9 +9967,9 @@
                   arguments.length > 0 && void 0 !== arguments[0]
                     ? arguments[0]
                     : {};
-              if ((i(this, r), (t = e.call(this)), !yt(o)))
+              if ((i(this, r), (t = e.call(this)), !xt(o)))
                 return (
-                  Et.error(
+                  jt.error(
                     "ContextHandler expects an object on its constructor. ".concat(
                       n(o),
                       " passed"
@@ -9852,21 +9979,21 @@
                 );
               if (!Object.prototype.hasOwnProperty.call(o, "html"))
                 return (
-                  Et.error(
+                  jt.error(
                     "ContextHandler expects the html key on its constructor properties which is missing"
                   ),
                   h(t, !1)
                 );
               if (!Object.prototype.hasOwnProperty.call(o, "css"))
                 return (
-                  Et.error(
+                  jt.error(
                     "ContextHandler expects the css key on its constructor properties which is missing"
                   ),
                   h(t, !1)
                 );
               if (!Object.prototype.hasOwnProperty.call(o, "host"))
                 return (
-                  Et.error(
+                  jt.error(
                     "ContextHandler expects the host key on its constructor properties which is missing"
                   ),
                   h(t, !1)
@@ -9883,7 +10010,7 @@
                   o.containerParams,
                   "height"
                 ) && (a.style.height = o.containerParams.height)),
-                (a.innerHTML = Ct("".concat(o.html, "<slot></slot>"), {
+                (a.innerHTML = Ot("".concat(o.html, "<slot></slot>"), {
                   params: o.initParams,
                 })),
                 s.appendChild(a);
@@ -9891,7 +10018,7 @@
               if (
                 ((l.type = "text/css"),
                 l.styleSheet
-                  ? (l.styleSheet.cssText = Ct(o.css, { params: o.initParams }))
+                  ? (l.styleSheet.cssText = Ot(o.css, { params: o.initParams }))
                   : l.appendChild(document.createTextNode(o.css)),
                 s.appendChild(l),
                 (t.fontTags = []),
@@ -9923,7 +10050,7 @@
                           .getElementsByTagName("head")[0]
                           .removeChild(this.fontTags[t]);
                     } catch (t) {
-                      Et.warning(
+                      jt.warning(
                         "The element of the Clip to be removed seems not to exist any more"
                       );
                     }
@@ -9942,8 +10069,8 @@
               );
             }
             return r;
-          })(je),
-          Be = (function (t) {
+          })(Se),
+          Te = (function (t) {
             c(n, t);
             var e = f(n);
             function n() {
@@ -9969,8 +10096,8 @@
               t.clipType = c;
               var u = new (document.head.createShadowRoot ||
               document.head.attachShadow
-                ? Se
-                : Me)(o);
+                ? Ae
+                : Be)(o);
               return (
                 (t.ownContext = l({}, u.context, {
                   isHostedClip: t.isHostedClip,
@@ -10033,8 +10160,8 @@
               ]),
               n
             );
-          })(ce),
-          Ae = (function (t) {
+          })(de),
+          Le = (function (t) {
             c(r, t);
             var e = f(r);
             function r() {
@@ -10045,9 +10172,9 @@
                     : {};
               i(this, r), (t = e.call(this));
               var s = l({}, o);
-              if (!yt(s))
+              if (!xt(s))
                 return (
-                  Et.error(
+                  jt.error(
                     "HTMLFragmentContextHandler expects an object on its constructor. ".concat(
                       n(s),
                       " passed"
@@ -10065,7 +10192,7 @@
                     (c.style.width = s.containerParams.width),
                   Object.prototype.hasOwnProperty.call(s, "height") &&
                     (c.style.height = s.containerParams.height)),
-                (c.innerHTML = Ct(s.html, { params: s.initParams })),
+                (c.innerHTML = Ot(s.html, { params: s.initParams })),
                 a.appendChild(c),
                 (c.style.overflow = "hidden"),
                 (t.rootElement = c),
@@ -10092,8 +10219,8 @@
               );
             }
             return r;
-          })(je),
-          Te = (function (t) {
+          })(Se),
+          De = (function (t) {
             c(n, t);
             var e = f(n);
             function n() {
@@ -10111,7 +10238,7 @@
               i(this, n),
                 null === a ? ((r = {}), (o = s)) : ((r = s), (o = a)),
                 (t = e.call(this, r, o));
-              var c = new Ae(
+              var c = new Le(
                 l({}, o, {
                   html: Object.prototype.hasOwnProperty.call(o, "html")
                     ? o.html
@@ -10155,8 +10282,8 @@
               ]),
               n
             );
-          })(ce),
-          Le = (function () {
+          })(de),
+          Ve = (function () {
             function t() {
               i(this, t);
             }
@@ -10205,7 +10332,24 @@
               t
             );
           })(),
-          De = [
+          ze = [
+            "cm",
+            "mm",
+            "in",
+            "px",
+            "pt",
+            "pc",
+            "em",
+            "ex",
+            "ch",
+            "rem",
+            "vw",
+            "vh",
+            "vmin",
+            "vmax",
+            "%",
+          ],
+          Ne = [
             {
               type: "string",
               optional: !0,
@@ -10251,15 +10395,16 @@
               items: { type: "number" },
             },
           ],
-          Ve = { type: "string", empty: !1, trim: !0, optional: !0 },
-          ze = { type: "string", empty: !1, optional: !1 },
-          Ne = { type: "string", optional: !0 },
-          Re = {
+          Re = { type: "string", empty: !1, trim: !0, optional: !0 },
+          $e = { type: "string", empty: !1, optional: !1 },
+          He = { type: "html", optional: !0 },
+          Fe = { type: "css", optional: !0 },
+          Ge = {
             type: "array",
             optional: !0,
-            itams: { type: "object", props: { type: "string", url: "string" } },
+            items: { type: "object", props: { type: "string", src: "string" } },
           },
-          $e = {
+          We = {
             type: "array",
             items: {
               type: "object",
@@ -10274,13 +10419,13 @@
             },
             optional: !0,
           },
-          He = {
+          Ue = {
             props: {
               type: "object",
               props: {
-                id: Ve,
-                selector: l({}, ze, { optional: !0 }),
-                easing: De,
+                id: Re,
+                selector: l({}, $e, { optional: !0 }),
+                easing: Ne,
                 duration: {
                   type: "number",
                   optional: !1,
@@ -10299,44 +10444,44 @@
               },
             },
           },
-          Fe = {
+          qe = {
             type: "object",
             optional: !0,
             props: {
-              width: { type: "string", optional: !0 },
-              height: { type: "string", optional: !0 },
+              width: { type: "measurement", units: ze, optional: !0 },
+              height: { type: "measurement", units: ze, optional: !0 },
             },
           },
-          Ge = { type: "string", enum: ["on", "off"], optional: !0 },
-          We = {
+          Je = { type: "string", enum: ["on", "off"], optional: !0 },
+          Ke = {
             props: [
               {
                 type: "object",
                 strict: !0,
                 props: {
-                  id: Ve,
-                  selector: l({}, ze, { optional: !0 }),
-                  easing: De,
-                  html: Ne,
-                  css: Ne,
-                  audioSources: $e,
-                  audio: Ge,
-                  containerParams: Fe,
-                  fonts: Re,
+                  id: Re,
+                  selector: l({}, $e, { optional: !0 }),
+                  easing: Ne,
+                  html: He,
+                  css: Fe,
+                  audioSources: We,
+                  audio: Je,
+                  containerParams: qe,
+                  fonts: Ge,
                 },
               },
               {
                 type: "object",
                 strict: !0,
                 props: {
-                  id: Ve,
+                  id: Re,
                   host: { type: "any", optional: !1 },
-                  html: Ne,
-                  css: Ne,
-                  audioSources: $e,
-                  audio: Ge,
-                  containerParams: Fe,
-                  fonts: Re,
+                  html: He,
+                  css: Fe,
+                  audioSources: We,
+                  audio: Je,
+                  containerParams: qe,
+                  fonts: Ge,
                 },
               },
               {
@@ -10344,139 +10489,17 @@
                 strict: !0,
                 props: {
                   root: { type: "boolean", optional: !0 },
-                  id: Ve,
-                  audioSources: $e,
-                  audio: l({}, Ge, { enum: ["on"] }),
+                  id: Re,
+                  audioSources: We,
+                  audio: l({}, Je, { enum: ["on"] }),
                 },
               },
             ],
           },
-          Ue = { selector: l({}, ze, { optional: !0, strict: !0 }) },
-          qe = "mc.descriptive.decisionAuthority",
-          Je = new RegExp(
-            /^#([\da-f]{3}){1,2}$|^#([\da-f]{4}){1,2}$|(rgb|hsl)a?\((\s*-?\d+%?\s*,){2}(\s*-?\d+%?\s*,?\s*\)?)(,\s*(0?\.\d+)?|1)?\)/,
-            "gi"
-          ),
-          Ke = new RegExp(/^[-+]?\d+$/),
-          Xe = function () {
-            var t = new mt({
-              messages: {
-                color:
-                  "The '{field}' field must be an a valid color! Actual: {actual}",
-                measurement:
-                  "The '{field}' must be a measurement with specs that are not met. Please check schema definition. Actual: {actual}",
-              },
-            });
-            return (
-              t.add("measurement", function (t, e, n) {
-                var i = t.schema,
-                  r = t.messages,
-                  o = new RegExp(
-                    "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)(" +
-                      i.units.join("|") +
-                      ")$",
-                    "gi"
-                  ),
-                  s = new RegExp("^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)", "gi"),
-                  a = i.units.join(", ");
-                return {
-                  source: "\n        if(typeof value !== 'string' && !(value instanceof String)){\n          "
-                    .concat(
-                      this.makeError({
-                        type: "measurement",
-                        actual: "value",
-                        units: a,
-                        messages: r,
-                      }),
-                      "\n          return ;\n        }\n        if(!value.match("
-                    )
-                    .concat(o, ")){\n          ")
-                    .concat(
-                      this.makeError({
-                        type: "measurement",
-                        actual: "value",
-                        units: a,
-                        messages: r,
-                      }),
-                      "\n        } else {\n          var numberPart = value.match("
-                    )
-                    .concat(s, ")[0];\n          if(")
-                    .concat(
-                      Object.prototype.hasOwnProperty.call(i, "min"),
-                      "){\n            if("
-                    )
-                    .concat(i.min, " > numberPart){\n              ")
-                    .concat(
-                      this.makeError({
-                        type: "measurement",
-                        actual: "value",
-                        units: a,
-                        messages: r,
-                      }),
-                      "\n            }\n          }\n          if("
-                    )
-                    .concat(
-                      Object.prototype.hasOwnProperty.call(i, "max"),
-                      "){\n            if("
-                    )
-                    .concat(i.max, " < numberPart){\n              ")
-                    .concat(
-                      this.makeError({
-                        type: "measurement",
-                        actual: "value",
-                        units: a,
-                        messages: r,
-                      }),
-                      "\n            }\n          }\n           if("
-                    )
-                    .concat(
-                      Object.prototype.hasOwnProperty.call(i, "integer"),
-                      "){\n            if(!numberPart.match("
-                    )
-                    .concat(Ke, ")){\n              ")
-                    .concat(
-                      this.makeError({
-                        type: "measurement",
-                        actual: "value",
-                        units: a,
-                        messages: r,
-                      }),
-                      "\n            }\n          }\n        }\n        return value;\n      "
-                    ),
-                };
-              }),
-              t.add("color", function (t, e, n) {
-                t.schema;
-                var i = t.messages;
-                return {
-                  source: "\n        if(typeof value !== 'string' && !(value instanceof String)){\n          "
-                    .concat(
-                      this.makeError({
-                        type: "measurement",
-                        actual: "value",
-                        messages: i,
-                      }),
-                      "\n          return ;\n        }\n        if(!value.match("
-                    )
-                    .concat(
-                      Je,
-                      ') && [\n            "aliceblue",\n            "antiquewhite",\n            "aqua",\n            "aquamarine",\n            "azure",\n            "beige",\n            "bisque",\n            "black",\n            "blanchedalmond",\n            "blue",\n            "blueviolet",\n            "brown",\n            "burlywood",\n            "cadetblue",\n            "chartreuse",\n            "chocolate",\n            "coral",\n            "cornflowerblue",\n            "cornsilk",\n            "crimson",\n            "cyan",\n            "darkblue",\n            "darkcyan",\n            "darkgoldenrod",\n            "darkgray",\n            "darkgrey",\n            "darkgreen",\n            "darkkhaki",\n            "darkmagenta",\n            "darkolivegreen",\n            "darkorange",\n            "darkorchid",\n            "darkred",\n            "darksalmon",\n            "darkseagreen",\n            "darkslateblue",\n            "darkslategray",\n            "darkslategrey",\n            "darkturquoise",\n            "darkviolet",\n            "deeppink",\n            "deepskyblue",\n            "dimgray",\n            "dimgrey",\n            "dodgerblue",\n            "firebrick",\n            "floralwhite",\n            "forestgreen",\n            "fuchsia",\n            "gainsboro",\n            "ghostwhite",\n            "gold",\n            "goldenrod",\n            "gray",\n            "grey",\n            "green",\n            "greenyellow",\n            "honeydew",\n            "hotpink",\n            "indianred",\n            "indigo",\n            "ivory",\n            "khaki",\n            "lavender",\n            "lavenderblush",\n            "lawngreen",\n            "lemonchiffon",\n            "lightblue",\n            "lightcoral",\n            "lightcyan",\n            "lightgoldenrodyellow",\n            "lightgray",\n            "lightgrey",\n            "lightgreen",\n            "lightpink",\n            "lightsalmon",\n            "lightseagreen",\n            "lightskyblue",\n            "lightslategray",\n            "lightslategrey",\n            "lightsteelblue",\n            "lightyellow",\n            "lime",\n            "limegreen",\n            "linen",\n            "magenta",\n            "maroon",\n            "mediumaquamarine",\n            "mediumblue",\n            "mediumorchid",\n            "mediumpurple",\n            "mediumseagreen",\n            "mediumslateblue",\n            "mediumspringgreen",\n            "mediumturquoise",\n            "mediumvioletred",\n            "midnightblue",\n            "mintcream",\n            "mistyrose",\n            "moccasin",\n            "navajowhite",\n            "navy",\n            "oldlace",\n            "olive",\n            "olivedrab",\n            "orange",\n            "orangered",\n            "orchid",\n            "palegoldenrod",\n            "palegreen",\n            "paleturquoise",\n            "palevioletred",\n            "papayawhip",\n            "peachpuff",\n            "peru",\n            "pink",\n            "plum",\n            "powderblue",\n            "purple",\n            "rebeccapurple",\n            "red",\n            "rosybrown",\n            "royalblue",\n            "saddlebrown",\n            "salmon",\n            "sandybrown",\n            "seagreen",\n            "seashell",\n            "sienna",\n            "silver",\n            "skyblue",\n            "slateblue",\n            "slategray",\n            "slategrey",\n            "snow",\n            "springgreen",\n            "steelblue",\n            "tan",\n            "teal",\n            "thistle",\n            "tomato",\n            "turquoise",\n            "violet",\n            "wheat",\n            "white",\n            "whitesmoke",\n            "yellow",\n            "yellowgreen",\n          ].indexOf(value.toLowerCase()) < 0){\n          '
-                    )
-                    .concat(
-                      this.makeError({
-                        type: "color",
-                        actual: "value",
-                        messages: i,
-                      }),
-                      "\n        }\n        return value;\n      "
-                    ),
-                };
-              }),
-              t
-            );
-          },
-          Qe = Xe();
-        function Ye(t) {
+          Xe = { selector: l({}, $e, { optional: !0, strict: !0 }) },
+          Qe = "mc.descriptive.decisionAuthority",
+          Ye = gt();
+        function Ze(t) {
           t.descriptor.value = function (t) {
             if (this.attrsValidationRules) {
               var e = JSON.parse(JSON.stringify(this.attrsValidationRules));
@@ -10484,58 +10507,58 @@
                 this.attrsValidationRules,
                 "animatedAttrs"
               ) &&
-                (e.initialValues = Et.buildInitialValuesValidationRules(
+                (e.initialValues = jt.buildInitialValuesValidationRules(
                   e.animatedAttrs
                 ));
-              var n = Qe.validate(t, e);
+              var n = Ye.validate(t, e);
               if (n.length > 0) return { result: !1, errors: n };
             }
             return !0 ===
-              this.putMessageOnPipe("checkForClip", {}, qe, {
+              this.putMessageOnPipe("checkForClip", {}, Qe, {
                 selfExecute: !0,
-                direction: St,
+                direction: At,
               }).response
               ? this.manageEditAttrProps(t, "attrs")
               : ((this.attrs = t), { result: !0 });
           };
         }
-        function Ze(t) {
+        function tn(t) {
           t.descriptor.value = function (t) {
-            var e = Et.validateProps(
+            var e = jt.validateProps(
               { props: t },
               this.propsValidationRules,
               this.constructor
             );
             return e.result
               ? !0 ===
-                this.putMessageOnPipe("checkForClip", {}, qe, {
+                this.putMessageOnPipe("checkForClip", {}, Qe, {
                   selfExecute: !0,
-                  direction: St,
+                  direction: At,
                 }).response
                 ? this.manageEditAttrProps(t, "props")
                 : ((this.props = t), { result: !0 })
               : e;
           };
         }
-        function tn(t) {
+        function en(t) {
           t.descriptor.value = function () {
             return null !== this.props.host && void 0 !== this.props.host
               ? [this.props.host]
               : this.hasParent &&
-                this.putMessageOnPipe("checkForClip", {}, qe, {
+                this.putMessageOnPipe("checkForClip", {}, Qe, {
                   selfExecute: !0,
-                  direction: St,
+                  direction: At,
                 }).response
               ? this.putMessageOnPipe(
                   "getElements",
                   { selector: this.selector() },
-                  qe,
-                  { selfExecute: !1, direction: St }
+                  Qe,
+                  { selfExecute: !1, direction: At }
                 ).response
               : [];
           };
         }
-        function en(t) {
+        function nn(t) {
           t.descriptor.value = function (t) {
             var e =
               arguments.length > 1 && void 0 !== arguments[1]
@@ -10549,15 +10572,15 @@
               var n = this.putMessageOnPipe(
                 "checkResize",
                 { id: this.id, newSize: t, fraction: t / this.duration },
-                qe,
-                { selfExecute: !1, direction: St }
+                Qe,
+                { selfExecute: !1, direction: At }
               );
               if (!n.response.result) return n.response;
             }
             return this.setNewDuration(t), { result: !0 };
           };
         }
-        function nn(t) {
+        function rn(t) {
           t.descriptor.value = function () {
             return null === this.inheritedSelector
               ? Object.prototype.hasOwnProperty.call(this.props, "selector")
@@ -10572,7 +10595,7 @@
               : this.inheritedSelector;
           };
         }
-        var rn = _(
+        var on = _(
             null,
             function (t, e) {
               var r = (function (e) {
@@ -10598,10 +10621,10 @@
                         t(p(e)),
                         (e.attrs = o),
                         (e.props = s));
-                  var a = Et.validateProps(e.props, Ue, e.constructor);
+                  var a = jt.validateProps(e.props, Xe, e.constructor);
                   return a.result
                     ? ((e.attrsValidationRules = {}),
-                      (e.propsValidationRules = Ue),
+                      (e.propsValidationRules = Xe),
                       (e._inheritedSelector = null),
                       (e.passiveAddition = !0),
                       e._buildTree(),
@@ -10619,7 +10642,7 @@
                     static: !0,
                     key: "Incident",
                     value: function () {
-                      return Rt;
+                      return Ht;
                     },
                   },
                   {
@@ -10635,7 +10658,7 @@
                     static: !0,
                     key: "Channel",
                     value: function () {
-                      return jt;
+                      return St;
                     },
                   },
                   {
@@ -10656,31 +10679,31 @@
                   },
                   {
                     kind: "method",
-                    decorators: [Ye],
+                    decorators: [Ze],
                     key: "editAttributes",
                     value: function () {},
                   },
                   {
                     kind: "method",
-                    decorators: [Ze],
+                    decorators: [tn],
                     key: "editProperties",
                     value: function () {},
                   },
                   {
                     kind: "method",
-                    decorators: [en],
+                    decorators: [nn],
                     key: "resize",
                     value: function () {},
                   },
                   {
                     kind: "method",
-                    decorators: [nn],
+                    decorators: [rn],
                     key: "selector",
                     value: function () {},
                   },
                   {
                     kind: "method",
-                    decorators: [tn],
+                    decorators: [en],
                     key: "getElements",
                     value: function () {},
                   },
@@ -10764,6 +10787,9 @@
                     value: function () {
                       var t = {
                         ClassName: this.constructor.ClassName,
+                        plugin:
+                          this.constructor.plugin ||
+                          this.constructor.plugin_npm_name,
                         plugin_npm_name: this.constructor.plugin_npm_name,
                         attrs: this.attrs,
                         props: this.props,
@@ -10822,16 +10848,16 @@
                           e
                         );
                         if (!i.result) return (t.inheritedSelector = null), i;
-                        var o = this.putMessageOnPipe("checkForClip", {}, qe, {
+                        var o = this.putMessageOnPipe("checkForClip", {}, Qe, {
                           selfExecute: !0,
-                          direction: St,
+                          direction: At,
                         });
                         if (!0 === o.response) {
                           var s = t.putMessageOnPipe(
                             "checkForInvalidSelectors",
                             {},
                             null,
-                            { selfExecute: !0, direction: Bt }
+                            { selfExecute: !0, direction: Tt }
                           );
                           if (s.length > 0) {
                             for (var a = [], l = 0; l < s.length; l++)
@@ -10846,8 +10872,8 @@
                             millisecond: e,
                             parentGroupId: this.id,
                           },
-                          qe,
-                          { selfExecute: !0, direction: St }
+                          Qe,
+                          { selfExecute: !0, direction: At }
                         );
                         if (!c.response.result)
                           return (t.inheritedSelector = null), c.response;
@@ -10879,8 +10905,8 @@
                           positionDelta: s,
                           parentGroupId: this.id,
                         },
-                        qe,
-                        { selfExecute: !0, direction: St }
+                        Qe,
+                        { selfExecute: !0, direction: At }
                       );
                       return a.response.result
                         ? this.editPosition(i, e)
@@ -10901,8 +10927,8 @@
                       var o = this.putMessageOnPipe(
                         "checkDeletion",
                         { id: e, parentGroupId: this.id },
-                        qe,
-                        { selfExecute: !0, direction: St }
+                        Qe,
+                        { selfExecute: !0, direction: At }
                       );
                       return o.response.result
                         ? this.removeChild(e)
@@ -10947,9 +10973,9 @@
                 ],
               };
             },
-            Dt
+            zt
           ),
-          on = (function (t) {
+          sn = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t, r) {
@@ -10975,7 +11001,7 @@
                       for (var e in ((this.runTimeInfo.state = t),
                       this.putMessageOnPipe("setState", t, "Clips", {
                         selfExecute: !1,
-                        direction: Bt,
+                        direction: Tt,
                       }),
                       this.listeners))
                         this.listeners[e].funct(
@@ -11068,7 +11094,7 @@
                               this.runTimeInfo.currentMillisecond
                           ) > i.threshold
                             ? (i.funct(
-                                xt(e, i.roundTo),
+                                kt(e, i.roundTo),
                                 this.runTimeInfo.state
                               ),
                               (i.cavaDelta = 0))
@@ -11165,15 +11191,15 @@
               ]),
               n
             );
-          })(rn),
-          sn = (function () {
+          })(on),
+          an = (function () {
             function t(e) {
               i(this, t),
                 (this.runTimeInfo = {
                   currentMillisecond: 0,
                   state: "transitional",
                 }),
-                (this.id = _t()),
+                (this.id = It()),
                 (this.realClip = e.descriptiveIncident.realClip);
               var n = e.descriptiveIncident.realClip.exportConstructionArguments(),
                 r = l({}, n.props, {
@@ -11214,7 +11240,7 @@
               t
             );
           })(),
-          an = (function (t) {
+          ln = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t) {
@@ -11229,7 +11255,7 @@
               var c = (r = e.call(this, o, s))._validateProps();
               if (!c.result) return h(r, c);
               (r.attrsValidationRules = {}),
-                (r.propsValidationRules = We),
+                (r.propsValidationRules = Ke),
                 (r.isTheRootClip = !1);
               var u = {
                 id: r.id,
@@ -11261,14 +11287,14 @@
                   void 0 !== s.selector &&
                   !0 !== r.constructor.customClip)
               )
-                u.Incident = Te;
+                u.Incident = De;
               else if (
                 Object.prototype.hasOwnProperty.call(s, "selector") &&
                 void 0 !== s.selector &&
                 !0 === r.constructor.customClip
               ) {
                 delete u.props.selector;
-                var d = new Te({ html: '<div id="clip-container"></div>' });
+                var d = new De({ html: '<div id="clip-container"></div>' });
                 (u.props.host = d.rootElement),
                   (u.Incident = r.constructor.Incident);
               } else
@@ -11279,8 +11305,8 @@
                     (u.Incident = r.constructor.Incident));
               if (
                 ("on" === r.audio || "off" === r.audio
-                  ? (r.realClip = ee(u))
-                  : (r.realClip = new Le()),
+                  ? (r.realClip = ie(u))
+                  : (r.realClip = new Ve()),
                 "on" === r.audio || "only" === r.audio)
               ) {
                 var f = {
@@ -11298,11 +11324,11 @@
                   },
                   plugin_npm_name: r.constructor.plugin_npm_name,
                   Channel: r.constructor.Channel,
-                  Incident: me,
+                  Incident: ge,
                   DescriptiveIncident: p(r),
                 };
-                r.audioClip = ee(f);
-              } else (r.audio = "off"), (r.audioClip = new Le());
+                r.audioClip = ie(f);
+              } else (r.audio = "off"), (r.audioClip = new Ve());
               return (
                 (r.passiveAddition = !0),
                 r._buildTree(),
@@ -11315,9 +11341,9 @@
                 {
                   key: "_validateProps",
                   value: function () {
-                    return Et.validateProps(
+                    return jt.validateProps(
                       { props: this.props },
-                      We,
+                      Ke,
                       this.constructor
                     );
                   },
@@ -11337,11 +11363,11 @@
                       (this.duration = t),
                       this.putMessageOnPipe("recalcDuration", {}, "Groups", {
                         selfExecute: !1,
-                        direction: St,
+                        direction: At,
                       }),
                       this.putMessageOnPipe("flash", {}, "RootClip", {
                         selfExecute: !0,
-                        direction: St,
+                        direction: At,
                       }),
                       { result: !0 }
                     );
@@ -11369,7 +11395,7 @@
                         i.execute(),
                         this.putMessageOnPipe("flash", {}, "RootClip", {
                           selfExecute: !0,
-                          direction: St,
+                          direction: At,
                         }),
                         { result: !0 })
                       : n;
@@ -11385,7 +11411,7 @@
                         i.execute(),
                         this.putMessageOnPipe("flash", {}, "RootClip", {
                           selfExecute: !0,
-                          direction: St,
+                          direction: At,
                         }),
                         { result: !0 })
                       : n;
@@ -11401,7 +11427,7 @@
                         i.execute(),
                         this.putMessageOnPipe("flash", {}, "RootClip", {
                           selfExecute: !0,
-                          direction: St,
+                          direction: At,
                         }),
                         { result: !0 })
                       : n;
@@ -11417,7 +11443,7 @@
                         i.execute(),
                         this.putMessageOnPipe("flash", {}, "RootClip", {
                           selfExecute: !0,
-                          direction: St,
+                          direction: At,
                         }),
                         { result: !0 })
                       : n;
@@ -11474,7 +11500,7 @@
                   key: "paste",
                   value: function (t) {
                     return this.isTheRootClip
-                      ? new sn({ host: t, descriptiveIncident: this })
+                      ? new an({ host: t, descriptiveIncident: this })
                       : null;
                   },
                 },
@@ -11546,13 +11572,13 @@
               ]),
               n
             );
-          })(on);
-        s(an, "isClip", !0),
-          s(an, "Incident", Be),
-          s(an, "plugin_npm_name", "@kissmybutton/self-contained-incidents"),
-          s(an, "Channel", Ft),
-          s(an, "ClassName", "Clip");
-        var ln = (function (t) {
+          })(sn);
+        s(ln, "isClip", !0),
+          s(ln, "Incident", Te),
+          s(ln, "plugin_npm_name", "@kissmybutton/self-contained-incidents"),
+          s(ln, "Channel", Wt),
+          s(ln, "ClassName", "Clip");
+        var cn = (function (t) {
             c(n, t);
             var e = f(n);
             function n(t) {
@@ -11565,8 +11591,8 @@
               return null !== r && (o.id = r), e.call(this, o);
             }
             return n;
-          })(an),
-          cn = _(
+          })(ln),
+          un = _(
             null,
             function (t, e) {
               var n = (function (e) {
@@ -11578,7 +11604,7 @@
                     void 0 === o && ((o = e), (e = {})),
                     (s = n.call(this, o)),
                     t(p(s));
-                  var a = Et.validateProps({ props: o }, He, s.constructor);
+                  var a = jt.validateProps({ props: o }, Ue, s.constructor);
                   return a.result
                     ? ((s.inheritedSelector = null),
                       (s.attrs = e),
@@ -11586,7 +11612,7 @@
                         (o.duration = 0),
                       (s.props = o),
                       (s.attrsValidationRules = {}),
-                      (s.propsValidationRules = He),
+                      (s.propsValidationRules = Ue),
                       (s.passive = !1),
                       s)
                     : h(s, a);
@@ -11601,7 +11627,7 @@
                     static: !0,
                     key: "Incident",
                     value: function () {
-                      return Zt;
+                      return ee;
                     },
                   },
                   {
@@ -11617,7 +11643,7 @@
                     static: !0,
                     key: "Channel",
                     value: function () {
-                      return Pe;
+                      return Me;
                     },
                   },
                   {
@@ -11630,31 +11656,31 @@
                   },
                   {
                     kind: "method",
-                    decorators: [Ye],
+                    decorators: [Ze],
                     key: "editAttributes",
                     value: function () {},
                   },
                   {
                     kind: "method",
-                    decorators: [Ze],
+                    decorators: [tn],
                     key: "editProperties",
                     value: function () {},
                   },
                   {
                     kind: "method",
-                    decorators: [en],
+                    decorators: [nn],
                     key: "resize",
                     value: function () {},
                   },
                   {
                     kind: "method",
-                    decorators: [nn],
+                    decorators: [rn],
                     key: "selector",
                     value: function () {},
                   },
                   {
                     kind: "method",
-                    decorators: [tn],
+                    decorators: [en],
                     key: "getElements",
                     value: function () {},
                   },
@@ -11715,6 +11741,9 @@
                     value: function () {
                       return {
                         ClassName: this.constructor.ClassName,
+                        plugin:
+                          this.constructor.plugin ||
+                          this.constructor.plugin_npm_name,
                         plugin_npm_name: this.constructor.plugin_npm_name,
                         attrs: this.attrs,
                         props: this.props,
@@ -11735,16 +11764,16 @@
                 ],
               };
             },
-            Tt
+            Dt
           ),
-          un = (function () {
+          dn = (function () {
             function t(e) {
               if (
                 (i(this, t),
                 !Object.prototype.hasOwnProperty.call(e, "incident"))
               )
                 return (
-                  Et.error(
+                  jt.error(
                     'Journey constructor expects an Incident on its properties on the key "incident"'
                   ),
                   !1
@@ -11809,7 +11838,7 @@
               t
             );
           })(),
-          dn = (function () {
+          pn = (function () {
             function t() {
               i(this, t), (this.memory = []);
             }
@@ -11819,8 +11848,8 @@
                   key: "startJourney",
                   value: function (t) {
                     return t
-                      ? new un({ incident: t, calpuleMemory: this.memory })
-                      : (Et.error(
+                      ? new dn({ incident: t, calpuleMemory: this.memory })
+                      : (jt.error(
                           "startJourney expects an Incident as an argument"
                         ),
                         !1);
@@ -11830,9 +11859,9 @@
               t
             );
           })(),
-          pn = Xe(),
-          hn = new Ot({ logLevel: 0 });
-        function fn(t) {
+          hn = gt(),
+          fn = new Pt({ logLevel: 0 });
+        function mn(t) {
           if (
             (Object.prototype.hasOwnProperty.call(t, "default") &&
               (t = t.default),
@@ -11845,7 +11874,7 @@
                 i = !0;
               if (
                 (Object.prototype.hasOwnProperty.call(t, "name") ||
-                  hn.error(
+                  fn.error(
                     "Warning on plugin ".concat(
                       e,
                       '. A plugin is always good to have its name on\n        its main.js file, under the key "name". It\'s missing from this plugin'
@@ -11853,7 +11882,7 @@
                   ),
                 Object.prototype.hasOwnProperty.call(t, "incidents") ||
                   Object.prototype.hasOwnProperty.call(t, "Clip") ||
-                  (hn.error(
+                  (fn.error(
                     "Error on plugin ".concat(
                       e,
                       '. A plugin must expose at least one Incident or a Clip.\n        Exposed plugin Incidents should be defined on the "incidents" key of the main.js file while Clips on the "Clip".'
@@ -11863,7 +11892,7 @@
                 Object.prototype.hasOwnProperty.call(t, "incidents") &&
                   !Array.isArray(t.incidents))
               )
-                hn.error(
+                fn.error(
                   "Error on plugin ".concat(
                     e,
                     '. thePlugin exposed Incidents are defined on the "incidents" key of the main.js file in array format.\n        Please refer to the documentation'
@@ -11879,11 +11908,11 @@
                       "default"
                     ) &&
                     (o.exportable = o.exportable.default),
-                    o.exportable.prototype instanceof rn ||
-                      o.exportable.prototype instanceof an ||
-                      o.exportable.prototype instanceof Zt ||
-                      o.exportable.prototype instanceof ye ||
-                      (hn.error(
+                    o.exportable.prototype instanceof on ||
+                      o.exportable.prototype instanceof ln ||
+                      o.exportable.prototype instanceof ee ||
+                      o.exportable.prototype instanceof xe ||
+                      (fn.error(
                         "Error on plugin "
                           .concat(
                             e,
@@ -11896,7 +11925,7 @@
                       ),
                       (i = !1)),
                     Object.prototype.hasOwnProperty.call(o, "name") ||
-                      (hn.error(
+                      (fn.error(
                         "Error on plugin ".concat(
                           e,
                           '. Exportable Incidents by any plugin must have the "name" key which defines the name of the exported Incident.\n                Please refer to documentation'
@@ -11904,7 +11933,7 @@
                       ),
                       (i = !1)),
                     Object.prototype.hasOwnProperty.call(o, "propTypes") ||
-                      hn.log(
+                      fn.log(
                         "Warning on plugin "
                           .concat(
                             e,
@@ -11933,14 +11962,14 @@
                     return i(this, n), e.apply(this, arguments);
                   }
                   return n;
-                })(an)),
+                })(ln)),
                 s(r, "Incident", t.Clip),
                 s(r, "audio", t.audio ? t.audio : "off"),
                 s(r, "customClip", !0),
                 o);
             e.Clip = a;
           }
-          var l = Pe;
+          var l = Me;
           if (
             (Object.prototype.hasOwnProperty.call(t, "compositeAttributes") &&
               (l = (function (e) {
@@ -11954,7 +11983,7 @@
                   );
                 }
                 return r;
-              })(Pe)),
+              })(Me)),
             Object.prototype.hasOwnProperty.call(t, "incidents"))
           )
             for (
@@ -11963,7 +11992,7 @@
                     o,
                     a = t.incidents[n].exportable,
                     u = void 0;
-                  if (a.prototype instanceof Zt)
+                  if (a.prototype instanceof ee)
                     (o = r = (function (t) {
                       c(n, t);
                       var e = f(n);
@@ -11971,15 +12000,15 @@
                         return i(this, n), e.apply(this, arguments);
                       }
                       return n;
-                    })(cn)),
+                    })(un)),
                       s(r, "Incident", a),
                       s(r, "plugin_npm_name", t.npm_name),
-                      s(r, "plugin", t.name),
+                      s(r, "plugin", t.npm_name),
                       s(r, "ClassName", t.incidents[n].name),
                       s(r, "Channel", l),
                       s(r, "audio", t.audio ? t.audio : "off"),
                       (u = o);
-                  else if (a.prototype instanceof ye) {
+                  else if (a.prototype instanceof xe) {
                     var d, p;
                     (p = d = (function (t) {
                       c(n, t);
@@ -11988,15 +12017,15 @@
                         return i(this, n), e.apply(this, arguments);
                       }
                       return n;
-                    })(cn)),
+                    })(un)),
                       s(d, "Incident", a),
                       s(d, "plugin_npm_name", "@kissmybutton/media-playback"),
-                      s(d, "plugin", t.name),
+                      s(d, "plugin", t.npm_name),
                       s(d, "ClassName", t.incidents[n].name),
-                      s(d, "Channel", ge),
+                      s(d, "Channel", be),
                       s(d, "audio", t.audio ? t.audio : "off"),
                       (u = p);
-                  } else if (a.prototype instanceof an) {
+                  } else if (a.prototype instanceof ln) {
                     var h, m;
                     (m = h = (function (t) {
                       c(n, t);
@@ -12006,11 +12035,11 @@
                       }
                       return n;
                     })(a)),
-                      s(h, "plugin", t.name),
+                      s(h, "plugin", t.npm_name),
                       s(h, "ClassName", t.incidents[n].name),
                       s(h, "audio", t.audio ? t.audio : "on"),
                       (u = m);
-                  } else if (a.prototype instanceof rn) {
+                  } else if (a.prototype instanceof on) {
                     var v, g;
                     (g = v = (function (t) {
                       c(n, t);
@@ -12020,7 +12049,7 @@
                       }
                       return n;
                     })(a)),
-                      s(v, "plugin", t.name),
+                      s(v, "plugin", t.npm_name),
                       s(v, "ClassName", t.incidents[n].name),
                       (u = g);
                   }
@@ -12044,10 +12073,10 @@
                             t.incidents[n].attributesValidationRules,
                             "animatedAttrs"
                           ) &&
-                            (a.initialValues = hn.buildInitialValuesValidationRules(
+                            (a.initialValues = fn.buildInitialValuesValidationRules(
                               a.animatedAttrs
                             ));
-                          var l = pn.validate(r, a);
+                          var l = hn.validate(r, a);
                           if (l.length > 0) {
                             for (
                               var c = "Error on plugin's \""
@@ -12068,7 +12097,7 @@
                           s.attrsValidationRules =
                             t.incidents[n].attributesValidationRules;
                         } else
-                          hn.warning(
+                          fn.warning(
                             "It's always good to provide attributesValidationRules to the exported incidents. "
                               .concat(t.npm_name, ".")
                               .concat(s.constructor.name, " doesn't provide it")
@@ -12085,20 +12114,20 @@
               u(d);
           return e;
         }
-        var mn = fn(be),
-          vn = an,
-          gn = rn,
-          yn = mn.Clip,
-          bn = mn.AudioPlayback,
-          xn = {
-            MonoIncident: Zt,
-            Group: gn,
-            Clip: vn,
-            AudioClip: ln,
-            MediaPlayback: ye,
-            ExtendableClip: ce,
-            DOMClip: Be,
-            easings: ne,
+        var vn = mn(we),
+          gn = ln,
+          yn = on,
+          bn = vn.Clip,
+          xn = vn.AudioPlayback,
+          wn = {
+            MonoIncident: ee,
+            Group: yn,
+            Clip: gn,
+            AudioClip: cn,
+            MediaPlayback: xe,
+            ExtendableClip: de,
+            DOMClip: Te,
+            easings: re,
             clipFromDefinition: function t(e) {
               var n = new e.Class(e.attrs, e.props);
               if (Object.prototype.hasOwnProperty.call(e, "incidents"))
@@ -12110,55 +12139,27 @@
               return n;
             },
           },
-          wn = {
-            API: xn,
-            Group: gn,
-            Clip: vn,
-            loadPlugin: fn,
-            AudioClip: yn,
-            AudioPlayback: bn,
-            AudioEffect: mn.AudioEffect,
-            TimeCapsule: dn,
+          kn = {
+            API: wn,
+            Group: yn,
+            Clip: gn,
+            loadPlugin: mn,
+            AudioClip: bn,
+            AudioPlayback: xn,
+            AudioEffect: vn.AudioEffect,
+            TimeCapsule: pn,
           };
-        (e.API = xn),
-          (e.AudioClip = yn),
-          (e.AudioPlayback = bn),
-          (e.Clip = vn),
-          (e.Group = gn),
-          (e.TimeCapsule = dn),
-          (e.default = wn),
-          (e.loadPlugin = fn),
+        (e.API = wn),
+          (e.AudioClip = bn),
+          (e.AudioPlayback = xn),
+          (e.Clip = gn),
+          (e.Group = yn),
+          (e.TimeCapsule = pn),
+          (e.default = kn),
+          (e.loadPlugin = mn),
           Object.defineProperty(e, "__esModule", { value: !0 });
       })(e);
-    }.call(this, n(3)));
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = (t.exports = {});
-    (i.playSVG =
-      '\n  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20">\n    <path fill="#999" fill-rule="nonzero" d="M16.224 8.515L2.582.245A1.7 1.7 0 0 0 0 1.702V18.24a1.7 1.7 0 0 0 2.582 1.455l13.642-8.27a1.7 1.7 0 0 0 0-2.91z"/>\n</svg>\n\n'),
-      (i.dcSVG =
-        '\n  <svg class="svg" style="transform:scale(0.55)" version="1.0" xmlns="http://www.w3.org/2000/svg"\n width="1705.000000pt" height="1903.000000pt" viewBox="0 0 1705.000000 1903.000000"\n preserveAspectRatio="xMidYMid meet">\n<metadata>\nCreated by potrace 1.15, written by Peter Selinger 2001-2017\n</metadata>\n<g transform="translate(0.000000,1903.000000) scale(0.100000,-0.100000)"\nfill="#000000" stroke="none">\n<path d="M0 9515 l0 -9515 1583 0 1582 0 4430 4655 c2437 2561 4457 4687 4490\n4726 33 38 1164 1227 2513 2642 l2452 2572 0 2192 c0 1206 -2 2193 -4 2193 -3\n0 -1597 -1652 -3542 -3671 l-3538 -3671 -31 35 c-16 20 -1497 1683 -3290 3696\nl-3260 3661 -1692 0 -1693 0 0 -9515z m5504 2412 c1253 -1413 2279 -2574 2282\n-2580 3 -9 -3274 -3438 -4597 -4811 -5 -6 -9 1968 -9 4999 l0 5010 24 -25 c13\n-14 1048 -1181 2300 -2593z"/>\n<path d="M13924 7584 c-34 -17 -2029 -2158 -2029 -2178 0 -15 5121 -5400 5141\n-5404 12 -3 14 295 14 2241 l0 2245 -1478 1543 c-813 849 -1490 1550 -1505\n1557 -38 16 -105 15 -143 -4z"/>\n</g>\n</svg>\n'),
-      (i.pauseSVG =
-        '\n  <svg class="svg" style="transform:scale(1.5)" width="100%" height="100%" viewBox="0 0 36 36" >\n    <path id="pause-icon" data-state="playing" d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26" />\n  </svg>\n'),
-      (i.replaySVG =
-        '\n  <svg class="svg" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">\n    <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>\n    <g><g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)">\n      <path d="M5356.3,4203.8c-1247.8-153.1-2324.2-811.3-3000.7-1839.7c-379.4-578.2-596.5-1209-660.5-1933.4l-27.4-294.8H883.9c-431.9,0-783.9-6.9-783.9-18.3c0-9.2,477.6-493.7,1062.7-1078.7l1062.7-1062.7L3288.1-961.1C3873.1-376,4350.8,108.5,4350.8,117.6c0,11.4-356.5,18.3-790.7,18.3h-793l18.3,189.7C2831,876.3,2991,1338,3288.1,1779.1C4122.3,3026.9,5706,3472.5,7065.8,2841.8C7639.4,2578.9,8197,2035,8487.3,1461.4C8581,1274,8709,896.9,8754.7,666.1c48-246.8,54.8-811.3,9.1-1055.8C8567.3-1491.3,7788-2394,6720.7-2750.5c-315.4-107.4-541.6-139.4-941.6-139.4c-287.9,0-415.9,11.4-598.8,50.3c-523.3,112-973.6,335.9-1371.2,681c-75.4,68.6-148.5,123.4-160,123.4c-9.1,0-187.4-169.1-393.1-374.8c-434.2-434.2-420.5-363.4-105.1-628.5c852.4-710.7,1972.3-1055.8,3046.4-937c1627.2,176,2977.8,1257,3489.8,2790.4c457.1,1368.9,169.1,2843-777,3969.7C8322.7,3484,7417.8,4000.4,6503.6,4160.4C6197.4,4213,5619.2,4235.8,5356.3,4203.8z"/>\n      <path d="M4990.7,124.5c0-1503.8,4.6-1794,32-1778c16,9.1,505.1,413.6,1085.6,895.8C7113.8,78.8,7161.8,122.2,7122.9,161c-80,75.4-2109.4,1757.5-2120.8,1757.5C4995.3,1918.5,4990.7,1111.8,4990.7,124.5z"/>\n    </g></g>\n  </svg>\n'),
-      (i.volumeSVG =
-        '\n  <svg class="svg" width="100%" height="100%" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n   viewBox="0 0 286.374 286.374" enable-background="new 0 0 286.374 286.374" xml:space="preserve">\n    <g id="Volume_2">\n      <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M233.636,26.767l-33.372,28.5c25.659,21.07,42.006,52.616,42.006,87.92\n        c0,35.305-16.347,66.851-42.006,87.921l33.372,28.499c32.324-28.869,52.738-70.268,52.738-116.421\n        C286.374,97.034,265.96,55.635,233.636,26.767z M177.737,74.513l-34.69,29.64c15.14,6.818,27.19,21.681,27.19,39.034\n        s-12.05,32.216-27.19,39.034l34.69,29.64c21.294-15.717,36.051-40.586,36.051-68.674C213.788,115.099,199.03,90.23,177.737,74.513z\n         M108.672,48.317L44.746,98.441H17.898C4.671,98.441,0,103.268,0,116.34v53.695c0,13.072,4.951,17.898,17.898,17.898h26.848\n        l63.926,50.068c7.668,4.948,16.558,6.505,16.558-7.365V55.683C125.23,41.813,116.34,43.37,108.672,48.317z"/>\n    </g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>\n  </svg>\n'),
-      (i.volumeMuteSVG =
-        '\n  <svg class="svg" width="100%" height="100%" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n   viewBox="0 0 286.277 286.277" enable-background="new 0 0 286.277 286.277" xml:space="preserve">\n    <g id="Volume_none">\n      <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M245.102,143.151l36.98-37.071c5.593-5.605,5.593-14.681,0-20.284\n        l-10.124-10.142c-5.593-5.604-14.655-5.604-20.247,0l-36.98,37.071l-36.977-37.043c-5.594-5.603-14.654-5.603-20.247,0\n        l-10.124,10.143c-5.594,5.603-5.594,14.679,0,20.282l36.987,37.053l-36.961,37.051c-5.591,5.604-5.591,14.681,0,20.284\n        l10.126,10.141c5.593,5.604,14.654,5.604,20.247,0l36.96-37.05l36.97,37.035c5.592,5.605,14.654,5.605,20.247,0l10.124-10.141\n        c5.593-5.603,5.593-14.68,0-20.282L245.102,143.151z M108.674,48.296L44.747,98.42H17.9c-13.228,0-17.899,4.826-17.899,17.898\n        L0,142.719l0.001,27.295c0,13.072,4.951,17.898,17.899,17.898h26.847l63.927,50.068c7.667,4.948,16.557,6.505,16.557-7.365V55.662\n        C125.23,41.792,116.341,43.349,108.674,48.296z"/>\n    </g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>\n  </svg>\n'),
-      (i.settingsSVG =
-        '\n  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">\n    <path fill="#999" fill-rule="nonzero" d="M17.812 7.52h-1.474a7.09 7.09 0 0 0-.604-1.456l1.043-1.042a1.187 1.187 0 0 0 0-1.68l-1.12-1.118a1.188 1.188 0 0 0-1.68 0l-1.043 1.042a7.05 7.05 0 0 0-1.455-.604V1.188C11.48.531 10.948 0 10.292 0H8.708c-.656 0-1.187.532-1.187 1.188v1.474a7.1 7.1 0 0 0-1.456.604L5.022 2.224a1.187 1.187 0 0 0-1.68 0l-1.12 1.12a1.188 1.188 0 0 0 0 1.68l1.044 1.042c-.256.46-.458.949-.604 1.455H1.188C.531 7.52 0 8.052 0 8.708v1.584c0 .656.532 1.187 1.188 1.187h1.474c.146.507.348.995.604 1.456L2.22 13.979a1.188 1.188 0 0 0 0 1.68l1.12 1.119a1.223 1.223 0 0 0 1.68 0l1.043-1.043c.462.255.95.458 1.457.605v1.472c0 .656.531 1.188 1.187 1.188h1.584c.656 0 1.187-.532 1.187-1.188V16.34c.506-.147.995-.35 1.456-.604l1.043 1.043a1.188 1.188 0 0 0 1.68 0l1.119-1.12a1.187 1.187 0 0 0 0-1.679l-1.043-1.043c.256-.461.458-.95.604-1.456h1.474A1.188 1.188 0 0 0 19 10.29V8.709c0-.656-.532-1.187-1.188-1.187zM9.5 13.459a3.958 3.958 0 1 1 0-7.916 3.958 3.958 0 0 1 0 7.916z"/>\n</svg>\n\n'),
-      (i.arrowRightSVG =
-        '\n  <svg class="svg arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 50 80" xml:space="preserve">\n    <polyline fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" points="0.375,0.375 45.63,38.087 0.375,75.8 "/>\n  </svg>\n'),
-      (i.arrowLeftSVG =
-        '\n  <svg class="svg arrow" class="svg" width="100%" height="100%" viewBox="0 0 50 80" xml:space="preserve">\n    <polyline fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" points="45.63,75.8 0.375,38.087 45.63,0.375 "/>\n  </svg> \n'),
-      (i.fullScreenSVG =
-        '\n <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">\n    <g fill="#999" fill-rule="nonzero">\n        <path d="M18.802 1.942A1.746 1.746 0 0 0 17.06.2h-4.537a.99.99 0 1 0 0 1.98h4.102c.11 0 .198.088.198.197v2.588a.99.99 0 1 0 1.98 0V1.942zM.198 4.965a.99.99 0 0 0 1.98 0v-2.59a.198.198 0 0 1 .197-.199h4.102a.99.99 0 0 0 0-1.979H1.944C.983.2.204.978.202 1.94L.198 4.965zM18.802 17.056v-3.023a.99.99 0 1 0-1.98 0v2.592c0 .11-.088.198-.197.198h-4.102a.99.99 0 1 0 0 1.98h4.533c.964-.001 1.746-.783 1.746-1.747zM.198 17.056a1.746 1.746 0 0 0 1.746 1.742h4.533a.99.99 0 1 0 0-1.979H2.375a.198.198 0 0 1-.198-.194v-2.592a.99.99 0 1 0-1.98 0v3.023z"/>\n        <rect width="10.651" height="6.117" x="4.174" y="6.441" rx="1.954"/>\n    </g>\n</svg>\n\n'),
-      (i.loopSVG =
-        '\n<svg xmlns="http://www.w3.org/2000/svg" width="24" height="22" viewBox="0 0 24 22">\n    <g fill="#999" fill-rule="nonzero">\n        <path d="M16.773 15.476H16.3a1.25 1.25 0 0 0 0 2.5h.478a6.944 6.944 0 0 0 .98-13.823.251.251 0 0 1-.208-.246V1.93A1.25 1.25 0 0 0 15.584.906l-4.778 3.341a1.25 1.25 0 0 0 .717 2.274h4.764c2.829 0 4.963 1.925 4.963 4.478a4.482 4.482 0 0 1-4.477 4.477zM6.247 17.845c.12.02.208.124.208.246v1.976a1.249 1.249 0 0 0 1.966 1.024l4.773-3.34a1.251 1.251 0 0 0-.717-2.275H7.713c-2.829 0-4.963-1.925-4.963-4.476a4.482 4.482 0 0 1 4.477-4.479h.478a1.25 1.25 0 1 0 0-2.5h-.478a6.945 6.945 0 0 0-.98 13.824z"/>\n    </g>\n</svg>\n'),
-      (i.loadingSVG =
-        '<svg class="lds-spinner" width="200px"  height="200px"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;"><g transform="rotate(0 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(30 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(60 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(90 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(120 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(150 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(180 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(210 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(240 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(270 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(300 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(330 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animate>\n  </rect>\n</g></svg>');
+    }.call(this, n(1)));
   },
   function (t, e) {
     var n;
@@ -12173,41 +12174,330 @@
     t.exports = n;
   },
   function (t, e, n) {
-    "use strict";
-    function i(t, e) {
-      for (var n = 0; n < e.length; n++) {
-        var i = e[n];
-        (i.enumerable = i.enumerable || !1),
-          (i.configurable = !0),
-          "value" in i && (i.writable = !0),
-          Object.defineProperty(t, i.key, i);
+    t.exports = (function (t) {
+      "use strict";
+      function e(t, e) {
+        for (var n = 0; n < e.length; n++) {
+          var i = e[n];
+          (i.enumerable = i.enumerable || !1),
+            (i.configurable = !0),
+            "value" in i && (i.writable = !0),
+            Object.defineProperty(t, i.key, i);
+        }
       }
-    }
-    var r = new (n(1).TimeCapsule)(),
-      o = n(0),
-      s = o.elid,
-      a = o.eltag,
-      l = o.elcreate,
-      c = n(2),
-      u = n(7),
-      d = n(8),
-      p = n(9),
-      h = n(10),
-      f = n(12),
-      m = n(13),
-      v = n(14),
-      g = n(15),
-      y = n(16),
-      b = n(17),
-      x = n(18),
-      w = n(19),
-      k = n(20),
-      _ = n(21),
-      C = n(22),
-      I = n(23),
-      O = n(24),
-      E = n(25),
-      P = (function () {
+      t =
+        t && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
+      var n = function (t) {
+          return document.getElementById(t);
+        },
+        i = function (t) {
+          return document.createElement(t);
+        },
+        r = function () {
+          var t;
+          return (t = document).addEventListener.apply(t, arguments);
+        },
+        o = function () {
+          var t;
+          return (t = document).removeEventListener.apply(t, arguments);
+        },
+        s = (function (t, e) {
+          return (
+            (function (t) {
+              var e = (t.exports = {});
+              (e.playSVG =
+                '\n  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20">\n    <path fill="#999" fill-rule="nonzero" d="M16.224 8.515L2.582.245A1.7 1.7 0 0 0 0 1.702V18.24a1.7 1.7 0 0 0 2.582 1.455l13.642-8.27a1.7 1.7 0 0 0 0-2.91z"/>\n</svg>\n\n'),
+                (e.dcSVG =
+                  '\n  <svg class="svg" style="transform:scale(0.55)" version="1.0" xmlns="http://www.w3.org/2000/svg"\n width="1705.000000pt" height="1903.000000pt" viewBox="0 0 1705.000000 1903.000000"\n preserveAspectRatio="xMidYMid meet">\n<metadata>\nCreated by potrace 1.15, written by Peter Selinger 2001-2017\n</metadata>\n<g transform="translate(0.000000,1903.000000) scale(0.100000,-0.100000)"\nfill="#000000" stroke="none">\n<path d="M0 9515 l0 -9515 1583 0 1582 0 4430 4655 c2437 2561 4457 4687 4490\n4726 33 38 1164 1227 2513 2642 l2452 2572 0 2192 c0 1206 -2 2193 -4 2193 -3\n0 -1597 -1652 -3542 -3671 l-3538 -3671 -31 35 c-16 20 -1497 1683 -3290 3696\nl-3260 3661 -1692 0 -1693 0 0 -9515z m5504 2412 c1253 -1413 2279 -2574 2282\n-2580 3 -9 -3274 -3438 -4597 -4811 -5 -6 -9 1968 -9 4999 l0 5010 24 -25 c13\n-14 1048 -1181 2300 -2593z"/>\n<path d="M13924 7584 c-34 -17 -2029 -2158 -2029 -2178 0 -15 5121 -5400 5141\n-5404 12 -3 14 295 14 2241 l0 2245 -1478 1543 c-813 849 -1490 1550 -1505\n1557 -38 16 -105 15 -143 -4z"/>\n</g>\n</svg>\n'),
+                (e.pauseSVG =
+                  '\n  <svg class="svg" style="transform:scale(1.5)" width="100%" height="100%" viewBox="0 0 36 36" >\n    <path id="pause-icon" data-state="playing" d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26" />\n  </svg>\n'),
+                (e.replaySVG =
+                  '\n  <svg class="svg" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">\n    <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>\n    <g><g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)">\n      <path d="M5356.3,4203.8c-1247.8-153.1-2324.2-811.3-3000.7-1839.7c-379.4-578.2-596.5-1209-660.5-1933.4l-27.4-294.8H883.9c-431.9,0-783.9-6.9-783.9-18.3c0-9.2,477.6-493.7,1062.7-1078.7l1062.7-1062.7L3288.1-961.1C3873.1-376,4350.8,108.5,4350.8,117.6c0,11.4-356.5,18.3-790.7,18.3h-793l18.3,189.7C2831,876.3,2991,1338,3288.1,1779.1C4122.3,3026.9,5706,3472.5,7065.8,2841.8C7639.4,2578.9,8197,2035,8487.3,1461.4C8581,1274,8709,896.9,8754.7,666.1c48-246.8,54.8-811.3,9.1-1055.8C8567.3-1491.3,7788-2394,6720.7-2750.5c-315.4-107.4-541.6-139.4-941.6-139.4c-287.9,0-415.9,11.4-598.8,50.3c-523.3,112-973.6,335.9-1371.2,681c-75.4,68.6-148.5,123.4-160,123.4c-9.1,0-187.4-169.1-393.1-374.8c-434.2-434.2-420.5-363.4-105.1-628.5c852.4-710.7,1972.3-1055.8,3046.4-937c1627.2,176,2977.8,1257,3489.8,2790.4c457.1,1368.9,169.1,2843-777,3969.7C8322.7,3484,7417.8,4000.4,6503.6,4160.4C6197.4,4213,5619.2,4235.8,5356.3,4203.8z"/>\n      <path d="M4990.7,124.5c0-1503.8,4.6-1794,32-1778c16,9.1,505.1,413.6,1085.6,895.8C7113.8,78.8,7161.8,122.2,7122.9,161c-80,75.4-2109.4,1757.5-2120.8,1757.5C4995.3,1918.5,4990.7,1111.8,4990.7,124.5z"/>\n    </g></g>\n  </svg>\n'),
+                (e.volumeSVG =
+                  '\n  <svg class="svg" width="100%" height="100%" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n   viewBox="0 0 286.374 286.374" enable-background="new 0 0 286.374 286.374" xml:space="preserve">\n    <g id="Volume_2">\n      <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M233.636,26.767l-33.372,28.5c25.659,21.07,42.006,52.616,42.006,87.92\n        c0,35.305-16.347,66.851-42.006,87.921l33.372,28.499c32.324-28.869,52.738-70.268,52.738-116.421\n        C286.374,97.034,265.96,55.635,233.636,26.767z M177.737,74.513l-34.69,29.64c15.14,6.818,27.19,21.681,27.19,39.034\n        s-12.05,32.216-27.19,39.034l34.69,29.64c21.294-15.717,36.051-40.586,36.051-68.674C213.788,115.099,199.03,90.23,177.737,74.513z\n         M108.672,48.317L44.746,98.441H17.898C4.671,98.441,0,103.268,0,116.34v53.695c0,13.072,4.951,17.898,17.898,17.898h26.848\n        l63.926,50.068c7.668,4.948,16.558,6.505,16.558-7.365V55.683C125.23,41.813,116.34,43.37,108.672,48.317z"/>\n    </g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>\n  </svg>\n'),
+                (e.volumeMuteSVG =
+                  '\n  <svg class="svg" width="100%" height="100%" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n   viewBox="0 0 286.277 286.277" enable-background="new 0 0 286.277 286.277" xml:space="preserve">\n    <g id="Volume_none">\n      <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M245.102,143.151l36.98-37.071c5.593-5.605,5.593-14.681,0-20.284\n        l-10.124-10.142c-5.593-5.604-14.655-5.604-20.247,0l-36.98,37.071l-36.977-37.043c-5.594-5.603-14.654-5.603-20.247,0\n        l-10.124,10.143c-5.594,5.603-5.594,14.679,0,20.282l36.987,37.053l-36.961,37.051c-5.591,5.604-5.591,14.681,0,20.284\n        l10.126,10.141c5.593,5.604,14.654,5.604,20.247,0l36.96-37.05l36.97,37.035c5.592,5.605,14.654,5.605,20.247,0l10.124-10.141\n        c5.593-5.603,5.593-14.68,0-20.282L245.102,143.151z M108.674,48.296L44.747,98.42H17.9c-13.228,0-17.899,4.826-17.899,17.898\n        L0,142.719l0.001,27.295c0,13.072,4.951,17.898,17.899,17.898h26.847l63.927,50.068c7.667,4.948,16.557,6.505,16.557-7.365V55.662\n        C125.23,41.792,116.341,43.349,108.674,48.296z"/>\n    </g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>\n  </svg>\n'),
+                (e.settingsSVG =
+                  '\n  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">\n    <path fill="#999" fill-rule="nonzero" d="M17.812 7.52h-1.474a7.09 7.09 0 0 0-.604-1.456l1.043-1.042a1.187 1.187 0 0 0 0-1.68l-1.12-1.118a1.188 1.188 0 0 0-1.68 0l-1.043 1.042a7.05 7.05 0 0 0-1.455-.604V1.188C11.48.531 10.948 0 10.292 0H8.708c-.656 0-1.187.532-1.187 1.188v1.474a7.1 7.1 0 0 0-1.456.604L5.022 2.224a1.187 1.187 0 0 0-1.68 0l-1.12 1.12a1.188 1.188 0 0 0 0 1.68l1.044 1.042c-.256.46-.458.949-.604 1.455H1.188C.531 7.52 0 8.052 0 8.708v1.584c0 .656.532 1.187 1.188 1.187h1.474c.146.507.348.995.604 1.456L2.22 13.979a1.188 1.188 0 0 0 0 1.68l1.12 1.119a1.223 1.223 0 0 0 1.68 0l1.043-1.043c.462.255.95.458 1.457.605v1.472c0 .656.531 1.188 1.187 1.188h1.584c.656 0 1.187-.532 1.187-1.188V16.34c.506-.147.995-.35 1.456-.604l1.043 1.043a1.188 1.188 0 0 0 1.68 0l1.119-1.12a1.187 1.187 0 0 0 0-1.679l-1.043-1.043c.256-.461.458-.95.604-1.456h1.474A1.188 1.188 0 0 0 19 10.29V8.709c0-.656-.532-1.187-1.188-1.187zM9.5 13.459a3.958 3.958 0 1 1 0-7.916 3.958 3.958 0 0 1 0 7.916z"/>\n</svg>\n\n'),
+                (e.arrowRightSVG =
+                  '\n  <svg class="svg arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 50 80" xml:space="preserve">\n    <polyline fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" points="0.375,0.375 45.63,38.087 0.375,75.8 "/>\n  </svg>\n'),
+                (e.arrowLeftSVG =
+                  '\n  <svg class="svg arrow" class="svg" width="100%" height="100%" viewBox="0 0 50 80" xml:space="preserve">\n    <polyline fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" points="45.63,75.8 0.375,38.087 45.63,0.375 "/>\n  </svg> \n'),
+                (e.fullScreenSVG =
+                  '\n <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">\n    <g fill="#999" fill-rule="nonzero">\n        <path d="M18.802 1.942A1.746 1.746 0 0 0 17.06.2h-4.537a.99.99 0 1 0 0 1.98h4.102c.11 0 .198.088.198.197v2.588a.99.99 0 1 0 1.98 0V1.942zM.198 4.965a.99.99 0 0 0 1.98 0v-2.59a.198.198 0 0 1 .197-.199h4.102a.99.99 0 0 0 0-1.979H1.944C.983.2.204.978.202 1.94L.198 4.965zM18.802 17.056v-3.023a.99.99 0 1 0-1.98 0v2.592c0 .11-.088.198-.197.198h-4.102a.99.99 0 1 0 0 1.98h4.533c.964-.001 1.746-.783 1.746-1.747zM.198 17.056a1.746 1.746 0 0 0 1.746 1.742h4.533a.99.99 0 1 0 0-1.979H2.375a.198.198 0 0 1-.198-.194v-2.592a.99.99 0 1 0-1.98 0v3.023z"/>\n        <rect width="10.651" height="6.117" x="4.174" y="6.441" rx="1.954"/>\n    </g>\n</svg>\n\n'),
+                (e.loopSVG =
+                  '\n<svg xmlns="http://www.w3.org/2000/svg" width="24" height="22" viewBox="0 0 24 22">\n    <g fill="#999" fill-rule="nonzero">\n        <path d="M16.773 15.476H16.3a1.25 1.25 0 0 0 0 2.5h.478a6.944 6.944 0 0 0 .98-13.823.251.251 0 0 1-.208-.246V1.93A1.25 1.25 0 0 0 15.584.906l-4.778 3.341a1.25 1.25 0 0 0 .717 2.274h4.764c2.829 0 4.963 1.925 4.963 4.478a4.482 4.482 0 0 1-4.477 4.477zM6.247 17.845c.12.02.208.124.208.246v1.976a1.249 1.249 0 0 0 1.966 1.024l4.773-3.34a1.251 1.251 0 0 0-.717-2.275H7.713c-2.829 0-4.963-1.925-4.963-4.476a4.482 4.482 0 0 1 4.477-4.479h.478a1.25 1.25 0 1 0 0-2.5h-.478a6.945 6.945 0 0 0-.98 13.824z"/>\n    </g>\n</svg>\n'),
+                (e.loadingSVG =
+                  '<svg class="lds-spinner" width="200px"  height="200px"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;"><g transform="rotate(0 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(30 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(60 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(90 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(120 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(150 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(180 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(210 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(240 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(270 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(300 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"></animate>\n  </rect>\n</g><g transform="rotate(330 50 50)">\n  <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#999">\n    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animate>\n  </rect>\n</g></svg>');
+            })((e = { exports: {} })),
+            e.exports
+          );
+        })(),
+        a = {
+          name: "mc-player",
+          set playerName(t) {
+            this.name += "-" + t;
+          },
+        },
+        l = function (t, e) {
+          return {
+            default: {
+              "settings-background-color": "whitesmoke",
+              "hms-background-color": "whitesmoke",
+              "background-color": "whitesmoke",
+              "grad-height": "0px",
+              color: "black",
+              "svg-color": "black",
+              "loopbar-color": "#808086",
+              "speedbar-color": "#999",
+              "runningbar-color": "red",
+              "cursor-color": "red",
+              "speedbar-cursor-color": "red",
+              "button-opacity": "1",
+              "hover-color": "rgba(200, 200, 200, 0.5)",
+              "slider-off-color": "#ccc",
+              "slider-on-color": "red",
+              "preview-border": "1px solid rgba(0,0,0,1)",
+              border: "1px solid rgba(255,255,255,0.2)",
+              "controls-border": "none",
+              "svg-selected-color": "red",
+              "loopbar-boundaries-style::before": "",
+              "loopbar-boundaries-style::after": "",
+              "theme-style": "",
+              "loopbar-boundaries-color": "#808086",
+            },
+            dark: {
+              "settings-background-color": "black",
+              "hms-background-color": "black",
+              "background-color": "black",
+              "grad-height": "0px",
+              color: "white",
+              "svg-color": "white",
+              "loopbar-color": "#808086",
+              "speedbar-color": "#999",
+              "runningbar-color": "red",
+              "cursor-color": "red",
+              "speedbar-cursor-color": "red",
+              "button-opacity": "1",
+              "hover-color": "rgba(90, 90, 90, 0.5)",
+              "slider-off-color": "#ccc",
+              "slider-on-color": "red",
+              "preview-border": "1px solid rgba(0,0,0,1)",
+              border: "1px solid rgba(255,255,255,0.2)",
+              "controls-border": "none",
+              "svg-selected-color": "red",
+              "loopbar-boundaries-style::before": "",
+              "loopbar-boundaries-style::after": "",
+              "theme-style": "",
+              "loopbar-boundaries-color": "#808086",
+            },
+            whiteGold: {
+              "settings-background-color": "white",
+              "hms-background-color": "white",
+              "background-color": "white",
+              "grad-height": "0px",
+              color: "#a17f1a",
+              "svg-color": "#a17f1a",
+              "loopbar-color": "#808086",
+              "speedbar-color": "#999",
+              "runningbar-color": "#a17f1a",
+              "cursor-color": "#a17f1a",
+              "speedbar-cursor-color": "#a17f1a",
+              "button-opacity": "1",
+              "hover-color": "rgba(200, 200, 200, 0.5)",
+              "slider-off-color": "#ccc",
+              "slider-on-color": "#a17f1a",
+              "preview-border": "1px solid rgba(0,0,0,1)",
+              border: "1px solid rgba(255,255,255,0.2)",
+              "controls-border": "none",
+              "svg-selected-color": "red",
+              "loopbar-boundaries-style::before": "",
+              "loopbar-boundaries-style::after": "",
+              "theme-style": "",
+              "loopbar-boundaries-color": "#808086",
+            },
+            darkGold: {
+              "settings-background-color": "black",
+              "hms-background-color": "black",
+              "background-color": "black",
+              "grad-height": "0px",
+              color: "#a17f1a",
+              "svg-color": "#a17f1a",
+              "loopbar-color": "#808086",
+              "speedbar-color": "#999",
+              "runningbar-color": "#a17f1a",
+              "cursor-color": "#a17f1a",
+              "speedbar-cursor-color": "#a17f1a",
+              "button-opacity": "1",
+              "hover-color": "rgba(90, 90, 90, 0.5)",
+              "slider-off-color": "#ccc",
+              "slider-on-color": "#a17f1a",
+              "preview-border": "1px solid rgba(0,0,0,1)",
+              border: "1px solid rgba(255,255,255,0.2)",
+              "controls-border": "none",
+              "svg-selected-color": "red",
+              "loopbar-boundaries-style::before": "",
+              "loopbar-boundaries-style::after": "",
+              "theme-style": "",
+              "loopbar-boundaries-color": "#808086",
+            },
+            transparent: {
+              "background-color": "transparent",
+              "settings-background-color": "rgba(0,0,0,0.5)",
+              "hms-background-color": "rgba(0,0,0,0.5)",
+              "preview-border": "1px solid rgba(0,0,0,1)",
+              color: "#999",
+              "grad-height": "60px",
+              "svg-color": "#999",
+              "loopbar-color": "#808086",
+              "speedbar-color": "#999",
+              "runningbar-color": "red",
+              "cursor-color": "#9e2d11",
+              "cursor-style::before":
+                '\n        box-shadow: 0px 0px 6px 6px red;\n        width: 6px;\n        height: 6px;\n        border-radius: 100%;\n        display: block;\n        content: "";\n        background-color: red;\n        position: relative;\n        left: -2px;\n        top: -2px;\n    ',
+              "cursor-style::after":
+                '\n        width: 6px;\n        height: 6px;\n        border-radius: 100%;\n        box-shadow: 0px 0px 6px 6px red;\n        content: "";\n        display: block;\n        position: absolute;\n        background-color: red;\n        right: -2px;\n        bottom: -2px;\n    ',
+              "speedbar-cursor-color": "red",
+              "button-opacity": "1",
+              "hover-color": "rgba(200, 200, 200, 0.5)",
+              "slider-off-color": "#ccc",
+              "slider-on-color": "red",
+              border: "1px solid rgba(255,255,255,0.1)",
+              "controls-border": "1px solid rgba(255,255,255,0.1)",
+              "svg-selected-color": "red",
+              "loopbar-boundaries-style":
+                "\n        transform: translate(-50%,-37%);\n        position: absolute;\n        width: 18px;\n        background-color: #ff0000;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        position: absolute;\n        width: 18px;\n        background-color: #ff0000;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        width: 18px;\n        height: 9px;\n        border-radius: 100%;\n        top: 1.5px;\n    ",
+              "loopbar-boundaries-style::before":
+                '\n            width: 16px;\n        height: 5px;\n        background: #ff0000;\n        border-radius: 100%;\n        display: block;\n        content: "";\n        position: relative;\n        left: -2px;\n        top: 2px;\n    ',
+              "loopbar-boundaries-style::after":
+                '\n        width: 14px;\n        height: 11px;\n        border-radius: 100%;\n        background: #ff0000;\n        content: "";\n        display: block;\n        position: relative;\n        top: -6px;\n        left: 5px;\n    ',
+              "theme-style": "\n        #".concat(
+                e,
+                "-loopbar-start {\n            left: -9px !important;\n            transform: rotate(180deg);\n            top: -2px;\n        }\n    "
+              ),
+            },
+            "mc-green": {
+              "background-color": "#141416",
+              "settings-background-color": "rgba(0,0,0,0.5)",
+              "hms-background-color": "rgba(0,0,0,0.5)",
+              "preview-border": "1px solid rgba(0,0,0,1)",
+              color: "#999",
+              "grad-height": "0px",
+              "svg-color": "#999",
+              "loopbar-color": "rgba(0,184,139,0.2)",
+              "loopbar-boundaries-color": "#00b88b",
+              "totalbar-color": "rgba(255, 255, 255, 0.11)",
+              "speedbar-color": "#999",
+              "runningbar-color": "#00b88b",
+              "cursor-color": "#00b88b",
+              "speedbar-cursor-color": "#00b88b",
+              "button-opacity": "1",
+              "hover-color": "rgba(0,184,139,0.2)",
+              "slider-off-color": "#ccc",
+              "slider-on-color": "#00b88b",
+              border: "1px solid rgba(255,255,255,0.1)",
+              "controls-border": "1px solid #151515",
+              "svg-selected-color": "#00b88b",
+              "loopbar-boundaries-style":
+                "\n        transform: translate(-50%,-37%);\n        position: absolute;\n        width: 18px;\n        background-color: #00b88b;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        position: absolute;\n        width: 18px;\n        background-color: #00b88b;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        width: 18px;\n        height: 9px;\n        border-radius: 100%;\n        top: 1.5px;\n    ",
+              "loopbar-boundaries-style::before":
+                '\n            width: 16px;\n        height: 5px;\n        background: #00b88b;\n        border-radius: 100%;\n        display: block;\n        content: "";\n        position: relative;\n        left: -2px;\n        top: 2px;\n    ',
+              "loopbar-boundaries-style::after":
+                '\n        width: 14px;\n        height: 11px;\n        border-radius: 100%;\n        background: #00b88b;\n        content: "";\n        display: block;\n        position: relative;\n        top: -6px;\n        left: 5px;\n    ',
+              "theme-style": "\n        #".concat(
+                e,
+                "-loopbar-start {\n            left: -9px !important;\n            transform: rotate(180deg);\n            top: -2px;\n        }\n    "
+              ),
+            },
+            "mc-blue": {
+              "background-color": "#141416",
+              "settings-background-color": "rgba(0,0,0,0.5)",
+              "hms-background-color": "rgba(0,0,0,0.5)",
+              "preview-border": "1px solid rgba(0,0,0,1)",
+              color: "#999",
+              "grad-height": "0px",
+              "svg-color": "#999",
+              "loopbar-color": "rgba(0,153,225,0.2)",
+              "loopbar-boundaries-color": "#0099e1",
+              "totalbar-color": "rgba(255, 255, 255, 0.11)",
+              "speedbar-color": "#999",
+              "runningbar-color": "#0099e1",
+              "cursor-color": "#0099e1",
+              "speedbar-cursor-color": "#0099e1",
+              "button-opacity": "1",
+              "hover-color": "rgba(0,153,225,0.2)",
+              "slider-off-color": "#ccc",
+              "slider-on-color": "#0099e1",
+              border: "1px solid rgba(255,255,255,0.1)",
+              "controls-border": "1px solid #151515",
+              "svg-selected-color": "#0099e1",
+              "loopbar-boundaries-style":
+                "\n        transform: translate(-50%,-37%);\n        position: absolute;\n        width: 18px;\n        background-color: #0099e1;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        position: absolute;\n        width: 18px;\n        background-color: #0099e1;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        width: 18px;\n        height: 9px;\n        border-radius: 100%;\n        top: 1.5px;\n    ",
+              "loopbar-boundaries-style::before":
+                '\n            width: 16px;\n        height: 5px;\n        background: #0099e1;\n        border-radius: 100%;\n        display: block;\n        content: "";\n        position: relative;\n        left: -2px;\n        top: 2px;\n    ',
+              "loopbar-boundaries-style::after":
+                '\n        width: 14px;\n        height: 11px;\n        border-radius: 100%;\n        background: #0099e1;\n        content: "";\n        display: block;\n        position: relative;\n        top: -6px;\n        left: 5px;\n    ',
+              "theme-style": "\n        #".concat(
+                e,
+                "-loopbar-start {\n            left: -9px !important;\n            transform: rotate(180deg);\n            top: -2px;\n        }\n    "
+              ),
+            },
+            "on-top": {
+              "background-height": "100%",
+              "pointer-event-panel-height": "calc(100% - 44px)",
+              "controls-bottom": "0px",
+              "settings-panel-bottom": "48px",
+              "controls-position": "0px",
+            },
+            "position-bottom": {
+              "background-height": "calc(100% - 44px)",
+              "pointer-event-panel-height": "calc(100% - 44px)",
+              "controls-bottom": "-0px",
+              "settings-panel-bottom": "48px",
+              "controls-position": "40px",
+            },
+          }[t];
+        },
+        c = n,
+        u = i,
+        d = r,
+        p = o,
+        h = n,
+        f = r,
+        m = o,
+        v = r,
+        g = o,
+        y = r,
+        b = o,
+        x = n,
+        w = r,
+        k = o,
+        _ = n,
+        C = r,
+        I = o,
+        O = n,
+        E = n;
+      function P(t, e) {
+        for (var n = e.parentNode; null != n; ) {
+          if (n == t) return !0;
+          n = n.parentNode;
+        }
+        return !1;
+      }
+      var j = n,
+        M = r,
+        S = o,
+        B = function (t) {
+          return document.querySelectorAll(t);
+        },
+        A = n,
+        T = new t.TimeCapsule(),
+        L = n,
+        D = function (t) {
+          return document.getElementsByTagName(t);
+        },
+        V = i;
+      return (function () {
         function t(e) {
           var n = this;
           for (var i in ((function (t, e) {
@@ -12242,11 +12532,11 @@
           e.speedValues.sort(function (t, e) {
             return t - e;
           }),
-            (this.className = u.name),
-            (u.playerName = e.id),
+            (this.className = a.name),
+            (a.playerName = e.id),
             (this.options = e),
             (this.id = this.options.id),
-            (this.name = u.name),
+            (this.name = a.name),
             (this.previewClip = null),
             (this.clip = e.clip),
             (this.clipClass = e.clipClass),
@@ -12274,7 +12564,414 @@
               millisecondChange: this.millisecondChange,
               createJourney: this.createJourney,
             }),
-            h(this),
+            (function (t) {
+              t.elements = {};
+              var e = t.clip.props.host;
+              if (
+                ((e.style.display = "flex"),
+                (e.style.justifyContent = "center"),
+                (e.style.alignItems = "center"),
+                (t.clip.props.host.style.position = "relative"),
+                (t.clip.props.host.style.zIndex = "0"),
+                (t.elements.mcPlayer = u("div")),
+                (t.elements.mcPlayer.id = "".concat(t.name)),
+                (t.elements.mcPlayer.className = "".concat(t.className)),
+                (t.elements.mcPlayer.innerHTML = (function (t) {
+                  return '\n  <div\n    class="pointer-event-panel"\n    id="'
+                    .concat(
+                      t.name,
+                      '-pointer-event-panel"\n  ></div>\n  <div\n    class="pointer-event-panel"\n    id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-listener-helper"\n  ></div>\n  <div class="grad"></div>\n  <div class="background"></div>\n  <div id="'
+                    )
+                    .concat(t.name, '-controls">\n    <div id="')
+                    .concat(t.name, '-totalbar">\n      <div id="')
+                    .concat(t.name, '-hover-display">\n        <div id="')
+                    .concat(
+                      t.name,
+                      '-hover-millisecond"></div>\n      </div>\n      <div id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-loopbar">\n        <div\n          class="'
+                    )
+                    .concat(t.name, '-loop-boundaries"\n          id="')
+                    .concat(
+                      t.name,
+                      '-loopbar-start"\n        ></div>\n        <div\n          class="'
+                    )
+                    .concat(t.name, '-loop-boundaries"\n          id="')
+                    .concat(
+                      t.name,
+                      '-loopbar-end"\n        ></div>\n        <div id="'
+                    )
+                    .concat(t.name, '-helperbar"></div>\n        <div id="')
+                    .concat(t.name, '-runningbar">\n          <div id="')
+                    .concat(
+                      t.name,
+                      '-cursor"></div>\n        </div>\n      </div>\n    </div>\n    <div id="'
+                    )
+                    .concat(t.name, '-left-controls">\n      <div id="')
+                    .concat(t.name, '-status-btn">\n        ')
+                    .concat(t.svg.playSVG, '\n        <span id="')
+                    .concat(
+                      t.name,
+                      '-indicator"></span>\n      </div>\n      <div id="'
+                    )
+                    .concat(t.name, '-volume">\n        <div id="')
+                    .concat(t.name, '-volume-btn">\n          ')
+                    .concat(
+                      t.svg.volumeSVG,
+                      '\n        </div>\n        <div id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-volumebar-helper"></div>\n        <div id="'
+                    )
+                    .concat(t.name, '-volumebar">\n            <div id="')
+                    .concat(
+                      t.name,
+                      '-volumebar-active">\n              <div id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-volume-cursor"></div>\n            </div>\n        </div>\n      </div>\n      <div id="'
+                    )
+                    .concat(t.name, '-time-display">\n        <span id="')
+                    .concat(
+                      t.name,
+                      '-time-current"></span>\n        <span id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-time-separator"></span>\n        <span id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-time-total"></span>\n      </div>\n    </div>\n    <div id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-right-controls">\n      <div\n        id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-loop-btn-container"\n      >\n        <div\n          id="'
+                    )
+                    .concat(t.name, '-loop-btn"\n        >')
+                    .concat(
+                      t.svg.loopSVG,
+                      '</div>\n        <div\n          id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-loop-time"\n        >\n          <span\n            id="'
+                    )
+                    .concat(t.name, '-loopbar-start-time"\n            class="')
+                    .concat(
+                      t.name,
+                      '-loopbar-time"\n          ></span>\n          <span>:</span>\n          <span\n            id="'
+                    )
+                    .concat(t.name, '-loopbar-end-time"\n            class="')
+                    .concat(
+                      t.name,
+                      '-loopbar-time"\n          ></span>\n        </div>\n      </div>\n      <div\n        id="'
+                    )
+                    .concat(t.name, '-settings-btn"\n      >')
+                    .concat(
+                      t.svg.settingsSVG,
+                      '</div>\n      <div\n        id="'
+                    )
+                    .concat(t.name, '-dc-btn"\n      >\n        ')
+                    .concat(
+                      t.svg.dcSVG,
+                      '\n      </div>\n      \n      <div\n        id="'
+                    )
+                    .concat(t.name, '-full-screen-btn"\n      >')
+                    .concat(
+                      t.svg.fullScreenSVG,
+                      '</div>\n    </div>\n    \n\n  </div>\n  <div id="'
+                    )
+                    .concat(t.name, '-settings-panel">\n    <ul id="')
+                    .concat(t.name, '-main-settings">\n      <li id="')
+                    .concat(
+                      t.name,
+                      '-settings-pointer-events">\n        <label>Pointer Events</label>\n        <label class="switch settings-switch">\n          <input id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-pointer-events-checkbox" type="checkbox">\n          <span class="slider round"></span>\n        </label>\n      </li>\n      <li id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-settings-preview">\n        <label>Show Preview</label>\n        <label class="switch settings-switch">\n          <input id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-show-preview-checkbox" type="checkbox">\n          <span class="slider round"></span>\n        </label>\n      </li>\n      <li id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-settings-indicator">\n        <label>Show Indicator</label>\n        <label class="switch settings-switch">\n          <input id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-show-indicator-checkbox" type="checkbox">\n          <span class="slider round"></span>\n        </label>\n      </li>\n      <li id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-settings-volume">\n        <label>Show Volume</label>\n        <label class="switch settings-switch">\n          <input id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-show-volume-checkbox" type="checkbox">\n          <span class="slider round"></span>\n        </label>\n      </li>\n      <li id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-settings-speed-show">\n        <label>Speed</label>\n        <div class="'
+                    )
+                    .concat(t.name, '-speed-btn">')
+                    .concat(t.svg.arrowRightSVG, '</div>\n        <span id="')
+                    .concat(
+                      t.name,
+                      '-speed-current"></span>\n      </li>\n    </ul>\n    <ul id="'
+                    )
+                    .concat(t.name, '-speed-settings">\n      <li id="')
+                    .concat(
+                      t.name,
+                      '-settings-speed-hide">\n        <div class="'
+                    )
+                    .concat(t.name, '-speed-btn">')
+                    .concat(t.svg.arrowLeftSVG, "</div>\n        <label id=")
+                    .concat(
+                      t.name,
+                      '-speed-runtime>Speed</label>\n      </li>\n      <li>\n        <div id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-speed-value-helperbar"></div>\n        <div id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-speed-value-bar">\n          <div\n            class="'
+                    )
+                    .concat(t.name, '-speed-value-step"\n            id="')
+                    .concat(
+                      t.name,
+                      '-speed-cursor"\n          >\n            <div></div>\n          </div>\n        </div>\n        <div id="'
+                    )
+                    .concat(
+                      t.name,
+                      '-speed-value">\n        </div>\n      </li>\n    </ul>\n  </div>\n'
+                    );
+                })({ svg: s, name: t.name })),
+                "string" == typeof t.options.host)
+              ) {
+                var n = document.querySelectorAll(t.options.host);
+                for (var i in n)
+                  isNaN(i) || n[i].appendChild(t.elements.mcPlayer);
+              } else t.options.host.appendChild(t.elements.mcPlayer);
+              for (var r in ((t.elements.pointerEventPanel = c(
+                "".concat(t.name, "-pointer-event-panel")
+              )),
+              (t.elements.listenerHelper = c(
+                "".concat(t.name, "-listener-helper")
+              )),
+              (t.elements.loopBar = c("".concat(t.name, "-loopbar"))),
+              (t.elements.totalBar = c("".concat(t.name, "-totalbar"))),
+              (t.elements.indicator = c("".concat(t.name, "-indicator"))),
+              (t.elements.loopButton = c("".concat(t.name, "-loop-btn"))),
+              (t.elements.volumeBar = c("".concat(t.name, "-volumebar"))),
+              (t.elements.totalTime = c("".concat(t.name, "-time-total"))),
+              (t.elements.volumeControl = c("".concat(t.name, "-volume"))),
+              (t.elements.volumeBtn = c("".concat(t.name, "-volume-btn"))),
+              (t.elements.runningBar = c("".concat(t.name, "-runningbar"))),
+              (t.elements.loopBarEnd = c("".concat(t.name, "-loopbar-end"))),
+              (t.elements.statusButton = c("".concat(t.name, "-status-btn"))),
+              (t.elements.speedBar = c("".concat(t.name, "-speed-value-bar"))),
+              (t.elements.currentTime = c("".concat(t.name, "-time-current"))),
+              (t.elements.timeDisplay = c("".concat(t.name, "-time-display"))),
+              (t.elements.speedCurrent = c(
+                "".concat(t.name, "-speed-current")
+              )),
+              (t.elements.loopBarStart = c(
+                "".concat(t.name, "-loopbar-start")
+              )),
+              (t.elements.volumeCursor = c(
+                "".concat(t.name, "-volume-cursor")
+              )),
+              (t.elements.settingsButton = c(
+                "".concat(t.name, "-settings-btn")
+              )),
+              (t.elements.donkeyclipButton = c("".concat(t.name, "-dc-btn"))),
+              (t.elements.timeSeparator = c(
+                "".concat(t.name, "-time-separator")
+              )),
+              (t.elements.settingsPanel = c(
+                "".concat(t.name, "-settings-panel")
+              )),
+              (t.elements.settingsMainPanel = c(
+                "".concat(t.name, "-main-settings")
+              )),
+              (t.elements.fullScreenButton = c(
+                "".concat(t.name, "-full-screen-btn")
+              )),
+              (t.elements.volumeBarHelper = c(
+                "".concat(t.name, "-volumebar-helper")
+              )),
+              (t.elements.volumeBarActive = c(
+                "".concat(t.name, "-volumebar-active")
+              )),
+              (t.elements.settingsSpeedPanel = c(
+                "".concat(t.name, "-speed-settings")
+              )),
+              (t.elements.settingsShowVolume = c(
+                "".concat(t.name, "-settings-volume")
+              )),
+              (t.elements.settingsShowPreview = c(
+                "".concat(t.name, "-settings-preview")
+              )),
+              (t.elements.settingsPointerEvents = c(
+                "".concat(t.name, "-settings-pointer-events")
+              )),
+              (t.elements.speedBarHelper = c(
+                "".concat(t.name, "-speed-value-helperbar")
+              )),
+              (t.elements.settingsShowIndicator = c(
+                "".concat(t.name, "-settings-indicator")
+              )),
+              (t.elements.settingsSpeedButtonShow = c(
+                "".concat(t.name, "-settings-speed-show")
+              )),
+              (t.elements.settingsSpeedButtonHide = c(
+                "".concat(t.name, "-settings-speed-hide")
+              )),
+              (t.elements.volumeBarActive.style.width =
+                100 * t.settings.volume + "%"),
+              (t.elements.currentTime.innerHTML = t.timeFormat(0)),
+              (t.elements.totalTime.innerHTML = t.timeFormat(t.clip.duration)),
+              (t.elements.timeSeparator.innerHTML = "/"),
+              t.elements.settingsPanel.classList.add(
+                "m-fadeOut",
+                "".concat(t.name, "-hide")
+              ),
+              t.options.showIndicator
+                ? ((t.elements.indicator.style.visibility = "visible"),
+                  (t.elements.statusButton.style.width = "35px"),
+                  (t.elements.statusButton.style.height = "20px"),
+                  (t.elements.statusButton.style.bottom = "5px"))
+                : (t.elements.indicator.style.visibility = "hidden"),
+              (t.elements.indicator.innerHTML = t.clip.runTimeInfo.state),
+              (t.elements.settingsSpeedPanel.style.display = "none"),
+              t.elements.settingsSpeedPanel
+                .getElementsByTagName("li")[1]
+                .classList.add("no-hover"),
+              (t.elements.loopBarStart.style.left = "0%"),
+              t.elements.loopBarStart.classList.add(
+                "m-fadeOut",
+                "".concat(t.name, "-hide")
+              ),
+              (t.elements.loopBarEnd.style.left = "100%"),
+              t.elements.loopBarEnd.classList.add(
+                "m-fadeOut",
+                "".concat(t.name, "-hide")
+              ),
+              (t.elements.loopStartTime = c(
+                "".concat(t.name, "-loopbar-start-time")
+              )),
+              (t.elements.loopEndTime = c(
+                "".concat(t.name, "-loopbar-end-time")
+              )),
+              (t.elements.editableLoopStartTime = document.createElement(
+                "input"
+              )),
+              (t.elements.editableLoopStartTime.type = "text"),
+              (t.elements.editableLoopStartTime.size =
+                c("".concat(t.name, "-time-total")).innerHTML.length + 1),
+              (t.elements.editableLoopStartTime.maxLength = c(
+                "".concat(t.name, "-time-total")
+              ).innerHTML.length),
+              (t.elements.editableLoopStartTime.style.height = c(
+                "".concat(t.name, "-time-total")
+              ).offsetHeight),
+              (t.elements.editableLoopStartTime.value = c(
+                "".concat(t.name, "-loopbar-start-time")
+              ).innerHTML),
+              (t.elements.editableLoopStartTime.style.fontSize = "8px"),
+              (t.elements.editableLoopEndTime = document.createElement(
+                "input"
+              )),
+              (t.elements.editableLoopEndTime.type = "text"),
+              (t.elements.editableLoopEndTime.size =
+                c("".concat(t.name, "-time-total")).innerHTML.length + 1),
+              (t.elements.editableLoopEndTime.maxLength = c(
+                "".concat(t.name, "-time-total")
+              ).innerHTML.length),
+              (t.elements.editableLoopEndTime.style.height = c(
+                "".concat(t.name, "-time-total")
+              ).offsetHeight),
+              (t.elements.editableLoopEndTime.value = c(
+                "".concat(t.name, "-loopbar-start-time")
+              ).innerHTML),
+              (t.elements.editableLoopEndTime.pattern = "d*"),
+              (t.elements.editableLoopEndTime.style.fontSize = "8px"),
+              c("".concat(t.name, "-loop-time")).classList.add(
+                "m-fadeOut",
+                "".concat(t.name, "-hide")
+              ),
+              c("".concat(t.name, "-hover-display")).classList.add("m-fadeOut"),
+              (c("".concat(t.name, "-show-volume-checkbox")).checked =
+                t.options.showVolume),
+              (c("".concat(t.name, "-show-indicator-checkbox")).checked =
+                t.options.showIndicator),
+              (c("".concat(t.name, "-show-preview-checkbox")).checked =
+                t.options.preview),
+              (c("".concat(t.name, "-pointer-events-checkbox")).checked =
+                t.options.pointerEvents),
+              t.options.pointerEvents
+                ? ((t.elements.mcPlayer.style.pointerEvents = "none"),
+                  (t.elements.pointerEventPanel.style.pointerEvents = "auto"),
+                  (c("".concat(t.name, "-controls")).style.pointerEvents =
+                    "auto"),
+                  (t.elements.settingsPanel.style.pointerEvents = "auto"))
+                : ((t.elements.mcPlayer.style.pointerEvents = "none"),
+                  (t.elements.pointerEventPanel.style.pointerEvents = "none"),
+                  (c("".concat(t.name, "-controls")).style.pointerEvents =
+                    "auto"),
+                  (t.elements.settingsPanel.style.pointerEvents = "auto")),
+              (t.elements.listenerHelper.style.pointerEvents = "none"),
+              t.options.showVolume
+                ? ((t.elements.timeDisplay.style.left = ""),
+                  (t.elements.volumeControl.style.visibility = "visible"))
+                : ((t.elements.timeDisplay.style.left = "45px"),
+                  (t.elements.volumeControl.style.visibility = "hidden"),
+                  t.elements.volumeControl.classList.toggle(
+                    "".concat(t.name, "-hide")
+                  ),
+                  t.elements.volumeControl.classList.toggle(
+                    "".concat(t.name, "-volume-width-transition")
+                  )),
+              t.options.speedValues)) {
+                var o = u("div");
+                o.className = "".concat(t.name, "-speed-value-step");
+                var a = u("div");
+                (a.className = "".concat(t.name, "-speed-value")),
+                  (a.dataset.speedValue = t.options.speedValues[r]),
+                  (a.innerHTML = t.options.speedValues[r]),
+                  (a.dataset.zone = r),
+                  c("".concat(t.name, "-speed-value")).prepend(a),
+                  t.elements.speedBar.prepend(o);
+              }
+              !1 === t.options.buttons.fullScreen &&
+                t.elements.fullScreenButton.remove(),
+                !1 === t.options.buttons.settings &&
+                  t.elements.settingsButton.remove(),
+                !1 === t.options.buttons.donkeyclip &&
+                  t.elements.donkeyclipButton.remove(),
+                !1 === t.options.buttons.loop && t.elements.loopButton.remove();
+            })(this),
             this.setTheme(),
             this.setSpeed(),
             this.subscribeToTimer(),
@@ -12286,10 +12983,10 @@
               n.options.preview && n.setPreviewDimentions();
             });
         }
-        var e, n, o;
+        var n, i;
         return (
-          (e = t),
-          (n = [
+          (n = t),
+          (i = [
             {
               key: "createJourney",
               value: function (t, e) {
@@ -12299,15 +12996,15 @@
                       ? arguments[2]
                       : {};
                 setTimeout(function () {
-                  var o = i.before,
-                    s = void 0 === o ? null : o,
-                    a = i.after,
-                    l = void 0 === a ? null : a;
-                  s && t[s](),
-                    (n.settings.journey = r.startJourney(t)),
+                  var r = i.before,
+                    o = void 0 === r ? null : r,
+                    s = i.after,
+                    a = void 0 === s ? null : s;
+                  o && t[o](),
+                    (n.settings.journey = T.startJourney(t)),
                     n.settings.journey.station(e),
                     n.settings.journey.destination(),
-                    l && t[l]();
+                    a && t[a]();
                 }, 0);
               },
             },
@@ -12389,7 +13086,7 @@
             {
               key: "eventBroadcast",
               value: function (t, e) {
-                var n = s("".concat(this.name, "-controls"));
+                var n = L("".concat(this.name, "-controls"));
                 "state-change" === t
                   ? "paused" === e ||
                     "idle" === e ||
@@ -12398,7 +13095,7 @@
                     "blocked" === e
                     ? (n.classList.value.includes("force-show-controls") ||
                         n.classList.toggle("force-show-controls"),
-                      (this.elements.statusButton.innerHTML = c.playSVG),
+                      (this.elements.statusButton.innerHTML = s.playSVG),
                       this.elements.statusButton.appendChild(
                         this.elements.indicator
                       ),
@@ -12407,12 +13104,12 @@
                       )),
                       "blocked" === e &&
                         (this.elements.pointerEventPanel.innerHTML = '\n            <div style="width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;">'.concat(
-                          c.loadingSVG,
+                          s.loadingSVG,
                           "</div>"
                         )))
                     : (n.classList.value.includes("force-show-controls") &&
                         n.classList.toggle("force-show-controls"),
-                      (this.elements.statusButton.innerHTML = c.pauseSVG),
+                      (this.elements.statusButton.innerHTML = s.pauseSVG),
                       this.elements.statusButton.appendChild(
                         this.elements.indicator
                       ),
@@ -12470,7 +13167,7 @@
               key: "handleDragStart",
               value: function () {
                 (this.settings.needsUpdate = !0),
-                  (this.settings.journey = r.startJourney(this.clip));
+                  (this.settings.journey = T.startJourney(this.clip));
               },
             },
             {
@@ -12532,20 +13229,1108 @@
             {
               key: "addEventListeners",
               value: function () {
-                v(this),
-                  y(this),
-                  m(this),
-                  g(this),
-                  f(this),
-                  b(this),
-                  x(this),
-                  w(this),
-                  k(this),
-                  _(this),
-                  C(this),
-                  I(this),
-                  O(this),
-                  E(this);
+                var t;
+                ((t = this).listeners.onCursorMoveLoopEnd = function (e) {
+                  e.preventDefault();
+                  var n =
+                    (e.clientX || ((e.touches || [])[0] || {}).clientX) -
+                    t.elements.totalBar.getBoundingClientRect().left;
+                  n < 0
+                    ? (n = 0)
+                    : n > t.elements.totalBar.offsetWidth &&
+                      (n = t.elements.totalBar.offsetWidth),
+                    t.elements.runningBar.offsetWidth >=
+                      t.elements.loopBar.offsetWidth &&
+                      (t.elements.runningBar.style.width =
+                        t.elements.loopBar.offsetWidth + "px"),
+                    t.settings.loopLastPositionXPxls - n < 0
+                      ? (t.elements.loopBar.style.width =
+                          Math.abs(t.settings.loopLastPositionXPxls - n) + "px")
+                      : ((t.elements.loopBar.style.left = n + "px"),
+                        (t.settings.loopLastPositionXPxls = n)),
+                    (t.settings.loopEndMillisecond = Math.round(
+                      (t.clip.duration *
+                        ((parseFloat(t.elements.loopBar.style.left) || 0) +
+                          parseFloat(t.elements.loopBar.style.width))) /
+                        t.elements.totalBar.offsetWidth
+                    )),
+                    t.settings.loopEndMillisecond <
+                      t.clip.runTimeInfo.currentMillisecond &&
+                      (t.settings.loopJourney = !0),
+                    t.settings.loopStartMillisecond >
+                      t.settings.loopEndMillisecond &&
+                      ((t.settings.loopStartMillisecond =
+                        t.settings.loopEndMillisecond),
+                      (t.settings.loopJourney = !0)),
+                    (t.elements.loopEndTime.innerHTML =
+                      t.settings.loopEndMillisecond),
+                    (t.elements.loopStartTime.innerHTML =
+                      t.settings.loopStartMillisecond);
+                }),
+                  (t.listeners.onMouseUpLoopEnd = function (e) {
+                    if (
+                      ((t.elements.listenerHelper.style.pointerEvents = "none"),
+                      (t.settings.resizeLoop = !1),
+                      e.preventDefault(),
+                      (t.elements.runningBar.style.width =
+                        (t.elements.runningBar.offsetWidth /
+                          t.elements.loopBar.offsetWidth) *
+                          100 +
+                        "%"),
+                      (t.elements.loopBar.style.left =
+                        (t.elements.loopBar.offsetLeft /
+                          t.elements.totalBar.offsetWidth) *
+                          100 +
+                        "%"),
+                      (t.elements.loopBar.style.width =
+                        (t.elements.loopBar.offsetWidth /
+                          t.elements.totalBar.offsetWidth) *
+                          100 +
+                        "%"),
+                      t.settings.loopJourney &&
+                        (t.createProgressDrag(
+                          t.elements.runningBar.offsetWidth
+                        ),
+                        (t.settings.loopJourney = !1)),
+                      g("mouseup", t.listeners.onMouseUpLoopEnd, !1),
+                      g("touchend", t.listeners.onMouseUpLoopEnd, !1),
+                      g("mousemove", t.listeners.onCursorMoveLoopEnd, !1),
+                      g("touchmove", t.listeners.onCursorMoveLoopEnd, !1),
+                      t.elements.loopBar.addEventListener(
+                        "mousedown",
+                        t.listeners.onMouseDown,
+                        !1
+                      ),
+                      t.elements.loopBar.addEventListener(
+                        "touchstart",
+                        t.listeners.onMouseDown,
+                        { passive: !0 },
+                        !1
+                      ),
+                      t.settings.playAfterResize)
+                    ) {
+                      var n;
+                      if ("idle" === t.clip.runTimeInfo.state)
+                        (n =
+                          t.clip.speed >= 0
+                            ? t.settings.loopStartMillisecond + 1
+                            : t.settings.loopEndMillisecond - 1),
+                          (t.settings.needsUpdate = !0),
+                          t.createJourney(t.clip, n, {
+                            before: "pause",
+                            after: "play",
+                          });
+                      else if ("completed" === t.clip.runTimeInfo.state) {
+                        var i;
+                        (i =
+                          t.clip.speed >= 0
+                            ? t.settings.loopStartMillisecond + 1
+                            : t.settings.loopEndMillisecond - 1),
+                          (t.settings.needsUpdate = !0),
+                          t.createJourney(t.clip, i, {
+                            before: "pause",
+                            after: "play",
+                          });
+                      } else t.clip.play();
+                      t.settings.playAfterResize = !1;
+                    }
+                  }),
+                  (t.listeners.onMouseDownLoopEnd = function (e) {
+                    (t.elements.listenerHelper.style.pointerEvents = "auto"),
+                      (t.settings.resizeLoop = !0),
+                      (t.settings.needsUpdate = !0),
+                      "playing" === t.clip.runTimeInfo.state &&
+                        (t.clip.pause(), (t.settings.playAfterResize = !0)),
+                      e.preventDefault(),
+                      (t.elements.runningBar.style.width =
+                        t.elements.runningBar.offsetWidth + "px"),
+                      (t.elements.loopBar.style.left =
+                        t.elements.loopBar.offsetLeft + "px"),
+                      (t.elements.loopBar.style.width =
+                        t.elements.loopBar.offsetWidth + "px"),
+                      t.elements.loopBar.removeEventListener(
+                        "mousedown",
+                        t.listeners.onMouseDown,
+                        !1
+                      ),
+                      t.elements.loopBar.removeEventListener(
+                        "touchstart",
+                        t.listeners.onMouseDown,
+                        !1
+                      ),
+                      t.listeners.onCursorMoveLoopEnd(e),
+                      v("mouseup", t.listeners.onMouseUpLoopEnd, !1),
+                      v("touchend", t.listeners.onMouseUpLoopEnd, !1),
+                      v("mousemove", t.listeners.onCursorMoveLoopEnd, !1),
+                      v("touchmove", t.listeners.onCursorMoveLoopEnd, !1);
+                  }),
+                  t.elements.loopBarEnd.addEventListener(
+                    "mousedown",
+                    t.listeners.onMouseDownLoopEnd,
+                    !1
+                  ),
+                  t.elements.loopBarEnd.addEventListener(
+                    "touchstart",
+                    t.listeners.onMouseDownLoopEnd,
+                    { passive: !1 },
+                    !1
+                  ),
+                  (function (t) {
+                    (t.listeners.onCursorMove = function (e) {
+                      e.preventDefault();
+                      var n =
+                        (e.clientX || ((e.touches || [])[0] || {}).clientX) -
+                        t.elements.loopBar.getBoundingClientRect().left;
+                      n < 0
+                        ? (n = 0)
+                        : n > t.elements.loopBar.offsetWidth &&
+                          (n = t.elements.loopBar.offsetWidth),
+                        t.handleDrag(n);
+                    }),
+                      (t.listeners.onMouseUp = function () {
+                        (t.elements.listenerHelper.style.pointerEvents =
+                          "none"),
+                          b("mouseup", t.listeners.onMouseUp, !1),
+                          b("touchend", t.listeners.onMouseUp, !1),
+                          b("mousemove", t.listeners.onCursorMove, !1),
+                          b("touchmove", t.listeners.onCursorMove, !1),
+                          t.handleDragEnd(t.settings);
+                      }),
+                      (t.listeners.onMouseDown = function (e) {
+                        (t.elements.listenerHelper.style.pointerEvents =
+                          "auto"),
+                          "playing" === t.clip.runTimeInfo.state &&
+                            (t.settings.playAfterResize = !0),
+                          t.handleDragStart(t.clip),
+                          t.listeners.onCursorMove(e),
+                          y("mouseup", t.listeners.onMouseUp, !1),
+                          y("touchend", t.listeners.onMouseUp, !1),
+                          y("mousemove", t.listeners.onCursorMove, !1),
+                          y("touchmove", t.listeners.onCursorMove, !1);
+                      }),
+                      t.elements.loopBar.addEventListener(
+                        "mousedown",
+                        t.listeners.onMouseDown,
+                        !1
+                      ),
+                      t.elements.loopBar.addEventListener(
+                        "touchstart",
+                        t.listeners.onMouseDown,
+                        { passive: !1 },
+                        !1
+                      );
+                  })(this),
+                  (function (t) {
+                    (t.listeners.onCursorMoveLoopStart = function (e) {
+                      e.preventDefault();
+                      var n = e.clientX || ((e.touches || [])[0] || {}).clientX,
+                        i = t.elements.totalBar.getBoundingClientRect(),
+                        r = Math.round(n - i.left),
+                        o = Math.round(
+                          (t.settings.loopEndMillisecond / t.clip.duration) *
+                            t.elements.totalBar.offsetWidth
+                        );
+                      r < 0
+                        ? (r = 0)
+                        : r > t.elements.totalBar.offsetWidth &&
+                          (r = t.elements.totalBar.offsetWidth);
+                      var s =
+                        (t.clip.runTimeInfo.currentMillisecond /
+                          t.clip.duration) *
+                          t.elements.totalBar.offsetWidth -
+                        r;
+                      (t.elements.loopBar.style.left = r + "px"),
+                        (t.elements.loopBar.style.width = o - r + "px"),
+                        (t.elements.runningBar.style.width = s + "px"),
+                        (t.settings.loopLastPositionXPxls = r),
+                        (t.settings.loopStartMillisecond = Math.round(
+                          (t.clip.duration * t.elements.loopBar.offsetLeft) /
+                            t.elements.totalBar.offsetWidth
+                        )),
+                        t.settings.loopEndMillisecond <
+                          t.settings.loopStartMillisecond &&
+                          ((t.settings.loopEndMillisecond =
+                            t.settings.loopStartMillisecond),
+                          (t.elements.loopBar.style.width = "0px"),
+                          (t.elements.runningBar.style.width = "0px")),
+                        (t.elements.loopEndTime.innerHTML =
+                          t.settings.loopEndMillisecond),
+                        (t.elements.loopStartTime.innerHTML =
+                          t.settings.loopStartMillisecond),
+                        t.settings.loopStartMillisecond >
+                          t.clip.runTimeInfo.currentMillisecond &&
+                          (t.settings.loopJourney = !0);
+                    }),
+                      (t.listeners.onMouseUpLoopStart = function (e) {
+                        var n;
+                        (t.elements.listenerHelper.style.pointerEvents =
+                          "none"),
+                          (t.settings.resizeLoop = !1),
+                          e.preventDefault(),
+                          t.settings.loopJourney &&
+                            (t.createProgressDrag(
+                              t.elements.runningBar.offsetWidth
+                            ),
+                            (t.settings.loopJourney = !1)),
+                          (t.elements.loopBar.style.left =
+                            (t.elements.loopBar.offsetLeft /
+                              t.elements.totalBar.offsetWidth) *
+                              100 +
+                            "%"),
+                          (t.elements.loopBar.style.width =
+                            (t.elements.loopBar.offsetWidth /
+                              t.elements.totalBar.offsetWidth) *
+                              100 +
+                            "%"),
+                          (t.settings.loopStartMillisecond = Math.round(
+                            (t.clip.duration * t.elements.loopBar.offsetLeft) /
+                              t.elements.totalBar.offsetWidth
+                          )),
+                          (t.elements.runningBar.style.width =
+                            (t.elements.runningBar.offsetWidth /
+                              t.elements.loopBar.offsetWidth) *
+                              100 +
+                            "%"),
+                          m("mouseup", t.listeners.onMouseUpLoopStart, !1),
+                          m("touchend", t.listeners.onMouseUpLoopStart, !1),
+                          m("mousemove", t.listeners.onCursorMoveLoopStart, !1),
+                          m("touchmove", t.listeners.onCursorMoveLoopStart, !1),
+                          t.elements.loopBar.addEventListener(
+                            "mousedown",
+                            t.listeners.onMouseDown,
+                            !1
+                          ),
+                          t.elements.loopBar.addEventListener(
+                            "touchstart",
+                            t.listeners.onMouseDown,
+                            { passive: !0 },
+                            !1
+                          ),
+                          t.settings.playAfterResize &&
+                            ("idle" === t.clip.runTimeInfo.state
+                              ? ((n =
+                                  t.clip.speed >= 0
+                                    ? t.settings.loopStartMillisecond + 1
+                                    : t.settings.loopEndMillisecond - 1),
+                                (t.settings.needsUpdate = !0),
+                                t.createJourney(t.clip, n, {
+                                  before: "pause",
+                                  after: "play",
+                                }))
+                              : t.clip.play(),
+                            (t.settings.playAfterResize = !1));
+                      }),
+                      (t.listeners.onMouseDownLoopStart = function (e) {
+                        (t.elements.listenerHelper.style.pointerEvents =
+                          "auto"),
+                          (t.settings.resizeLoop = !0),
+                          e.preventDefault(),
+                          (t.settings.needsUpdate = !0),
+                          "playing" === t.clip.runTimeInfo.state &&
+                            (t.clip.pause(), (t.settings.playAfterResize = !0)),
+                          t.elements.loopBar.removeEventListener(
+                            "mousedown",
+                            t.listeners.onMouseDown,
+                            !1
+                          ),
+                          t.elements.loopBar.removeEventListener(
+                            "touchstart",
+                            t.listeners.onMouseDown,
+                            !1
+                          ),
+                          t.listeners.onCursorMoveLoopStart(e),
+                          f("mouseup", t.listeners.onMouseUpLoopStart, !1),
+                          f("touchend", t.listeners.onMouseUpLoopStart, !1),
+                          f("mousemove", t.listeners.onCursorMoveLoopStart, !1),
+                          f("touchmove", t.listeners.onCursorMoveLoopStart, !1);
+                      }),
+                      t.elements.loopBarStart.addEventListener(
+                        "mousedown",
+                        t.listeners.onMouseDownLoopStart,
+                        !1
+                      ),
+                      t.elements.loopBarStart.addEventListener(
+                        "touchstart",
+                        t.listeners.onMouseDownLoopStart,
+                        { passive: !1 },
+                        !1
+                      );
+                  })(this),
+                  (function (t) {
+                    (t.listeners.editableLoopStartTime = function () {
+                      (t.elements.editableLoopStartTime.value =
+                        t.elements.loopStartTime.innerHTML),
+                        t.elements.loopStartTime.replaceWith(
+                          t.elements.editableLoopStartTime
+                        ),
+                        t.elements.editableLoopStartTime.focus();
+                    }),
+                      (t.listeners.editableLoopEndTime = function () {
+                        (t.elements.editableLoopEndTime.value =
+                          t.elements.loopEndTime.innerHTML),
+                          t.elements.loopEndTime.replaceWith(
+                            t.elements.editableLoopEndTime
+                          ),
+                          t.elements.editableLoopEndTime.focus();
+                      }),
+                      (t.elements.editableLoopEndTime.onkeydown = t.elements.editableLoopStartTime.onkeydown = function (
+                        e
+                      ) {
+                        e.preventDefault(),
+                          13 === e.keyCode &&
+                            (t.elements.editableLoopStartTime.onfocusout(),
+                            t.elements.editableLoopEndTime.onfocusout()),
+                          8 === e.keyCode &&
+                            (e.target.value = e.target.value
+                              .toString()
+                              .substring(
+                                0,
+                                e.target.value.toString().length - 1
+                              )),
+                          13 === e.keyCode && e.target.blur();
+                        var n = parseFloat(
+                          (e.target.value || 0).toString() + e.key
+                        );
+                        if (!(n > t.clip.duration))
+                          if (
+                            ((e.target.value = n),
+                            e.target === t.elements.editableLoopStartTime)
+                          ) {
+                            var i = t.elements.totalBar.getBoundingClientRect(),
+                              r = {
+                                preventDefault: function () {},
+                                clientX:
+                                  (t.elements.totalBar.offsetWidth /
+                                    t.clip.duration) *
+                                    e.target.value +
+                                  i.left,
+                              };
+                            t.listeners.onMouseDownLoopStart(r),
+                              t.listeners.onCursorMoveLoopStart(r),
+                              t.listeners.onMouseUpLoopStart(r);
+                          } else if (
+                            e.target === t.elements.editableLoopEndTime
+                          ) {
+                            var o = t.elements.totalBar.getBoundingClientRect(),
+                              s = {
+                                preventDefault: function () {},
+                                clientX:
+                                  (t.elements.totalBar.offsetWidth /
+                                    t.clip.duration) *
+                                    e.target.value +
+                                  o.left,
+                              };
+                            t.listeners.onMouseDownLoopEnd(s),
+                              t.listeners.onCursorMoveLoopEnd(s),
+                              t.listeners.onMouseUpLoopEnd(s);
+                          }
+                      }),
+                      (t.elements.loopStartTime.onclick =
+                        t.listeners.editableLoopStartTime),
+                      (t.elements.loopEndTime.onclick =
+                        t.listeners.editableLoopEndTime),
+                      (t.elements.editableLoopStartTime.onfocusout = function () {
+                        t.elements.editableLoopStartTime.replaceWith(
+                          t.elements.loopStartTime
+                        );
+                      }),
+                      (t.elements.editableLoopEndTime.onfocusout = function () {
+                        t.elements.editableLoopEndTime.replaceWith(
+                          t.elements.loopEndTime
+                        );
+                      });
+                  })(this),
+                  (function (t) {
+                    var e = !1;
+                    t.elements.volumeBtn.onclick = function () {
+                      if (t.settings.volumeMute) {
+                        (t.elements.volumeBarActive.style.width =
+                          100 * t.settings.previousVolume + "%"),
+                          t.clip.setVolume(t.settings.previousVolume),
+                          (t.settings.volumeMute = !1);
+                        var e = document.createElement("span");
+                        (e.innerHTML = s.volumeSVG),
+                          t.elements.volumeBtn
+                            .getElementsByTagName("svg")[0]
+                            .replaceWith(e);
+                      } else {
+                        (t.settings.volumeMute = !0),
+                          (t.elements.volumeBarActive.style.width = "0%"),
+                          t.clip.setVolume(0);
+                        var n = document.createElement("span");
+                        (n.innerHTML = s.volumeMuteSVG),
+                          t.elements.volumeBtn
+                            .getElementsByTagName("svg")[0]
+                            .replaceWith(n);
+                      }
+                    };
+                    var n = !1;
+                    (t.elements.volumeBtn.onmouseover = function () {
+                      (n = !0),
+                        t.elements.volumeCursor.classList.add(
+                          "".concat(t.name, "-volume-cursor-transition")
+                        ),
+                        t.elements.volumeBar.classList.add(
+                          "".concat(t.name, "-volume-width-transition")
+                        ),
+                        t.elements.volumeBarHelper.classList.add(
+                          "".concat(t.name, "-volume-width-transition")
+                        ),
+                        t.elements.timeDisplay.classList.add(
+                          "".concat(t.name, "-time-width-transition")
+                        );
+                    }),
+                      (h(
+                        "".concat(t.name, "-left-controls")
+                      ).onmouseout = function () {
+                        if (n && !e) {
+                          var i =
+                            event.toElement ||
+                            event.relatedTarget ||
+                            event.target;
+                          (function (t, e) {
+                            for (var n = e.parentNode; null != n; ) {
+                              if (n == t) return !0;
+                              n = n.parentNode;
+                            }
+                            return !1;
+                          })(h("".concat(t.name, "-left-controls")), i) ||
+                            i === h("".concat(t.name, "-left-controls")) ||
+                            ((n = !1),
+                            t.elements.volumeCursor.classList.remove(
+                              "".concat(t.name, "-volume-cursor-transition")
+                            ),
+                            t.elements.volumeBar.classList.remove(
+                              "".concat(t.name, "-volume-width-transition")
+                            ),
+                            t.elements.volumeBarHelper.classList.remove(
+                              "".concat(t.name, "-volume-width-transition")
+                            ),
+                            t.elements.timeDisplay.classList.remove(
+                              "".concat(t.name, "-time-width-transition")
+                            ));
+                        }
+                      }),
+                      (t.listeners.onCursorMoveVolumeBar = function (e) {
+                        e.preventDefault();
+                        var n =
+                          (e.clientX || ((e.touches || [])[0] || {}).clientX) -
+                          t.elements.volumeBarHelper.getBoundingClientRect()
+                            .left;
+                        if (
+                          (n < 0
+                            ? (n = 0)
+                            : n > t.elements.volumeBarHelper.offsetWidth &&
+                              (n = t.elements.volumeBarHelper.offsetWidth),
+                          (t.settings.volume = Number(
+                            (
+                              n / t.elements.volumeBarHelper.offsetWidth
+                            ).toFixed(2)
+                          )),
+                          (t.elements.volumeBarActive.style.width =
+                            100 * t.settings.volume + "%"),
+                          t.clip.setVolume(t.settings.volume),
+                          t.settings.volume > 0)
+                        ) {
+                          t.settings.volumeMute = !1;
+                          var i = document.createElement("span");
+                          (i.innerHTML = s.volumeSVG),
+                            t.elements.volumeBtn
+                              .getElementsByTagName("svg")[0]
+                              .replaceWith(i);
+                        } else if (0 === t.settings.volume) {
+                          t.settings.volumeMute = !0;
+                          var r = document.createElement("span");
+                          (r.innerHTML = s.volumeMuteSVG),
+                            t.elements.volumeBtn
+                              .getElementsByTagName("svg")[0]
+                              .replaceWith(r);
+                        }
+                      }),
+                      (t.listeners.onMouseUpVolumeBar = function (n) {
+                        (e = !1),
+                          (t.elements.listenerHelper.style.pointerEvents =
+                            "none"),
+                          n.preventDefault(),
+                          t.settings.volume > 0 &&
+                            (t.settings.previousVolume = t.settings.volume),
+                          p("mouseup", t.listeners.onMouseUpVolumeBar, !1),
+                          p("touchend", t.listeners.onMouseUpVolumeBar, !1),
+                          p("mousemove", t.listeners.onCursorMoveVolumeBar, !1),
+                          p("touchmove", t.listeners.onCursorMoveVolumeBar, !1);
+                      }),
+                      (t.listeners.onMouseDownVolumeBar = function (n) {
+                        (e = !0),
+                          (t.elements.listenerHelper.style.pointerEvents =
+                            "auto"),
+                          n.preventDefault(),
+                          t.listeners.onCursorMoveVolumeBar(n),
+                          d("mouseup", t.listeners.onMouseUpVolumeBar, !1),
+                          d("touchend", t.listeners.onMouseUpVolumeBar, !1),
+                          d("mousemove", t.listeners.onCursorMoveVolumeBar, !1),
+                          d("touchmove", t.listeners.onCursorMoveVolumeBar, !1);
+                      }),
+                      t.elements.volumeBarHelper.addEventListener(
+                        "mousedown",
+                        t.listeners.onMouseDownVolumeBar,
+                        !1
+                      ),
+                      t.elements.volumeCursor.addEventListener(
+                        "mousedown",
+                        t.listeners.onMouseDownVolumeBar,
+                        !1
+                      ),
+                      t.elements.volumeBarHelper.addEventListener(
+                        "touchstart",
+                        t.listeners.onMouseDownVolumeBar,
+                        { passive: !1 },
+                        !1
+                      ),
+                      t.elements.volumeCursor.addEventListener(
+                        "touchstart",
+                        t.listeners.onMouseDownVolumeBar,
+                        { passive: !1 },
+                        !1
+                      );
+                  })(this),
+                  (function (t) {
+                    t.elements.statusButton.onclick = function (e) {
+                      return (
+                        e.preventDefault(),
+                        "playing" === t.clip.runTimeInfo.state
+                          ? t.clip.pause()
+                          : "paused" === t.clip.runTimeInfo.state ||
+                            "idle" === t.clip.runTimeInfo.state ||
+                            "transitional" === t.clip.runTimeInfo.state ||
+                            "armed" === t.clip.runTimeInfo.state
+                          ? t.clip.play()
+                          : "idle" === t.clip.runTimeInfo.state
+                          ? t.clip.speed >= 0
+                            ? (t.clip.play(), (t.settings.needsUpdate = !0))
+                            : (t.createJourney(
+                                t.clip,
+                                t.settings.loopEndMillisecond - 1,
+                                { before: "pause", after: "play" }
+                              ),
+                              (t.settings.needsUpdate = !0))
+                          : "completed" === t.clip.runTimeInfo.state &&
+                            (t.clip.speed >= 0
+                              ? (t.createJourney(t.clip, 0, {
+                                  before: "pause",
+                                  after: "play",
+                                }),
+                                (t.settings.needsUpdate = !0))
+                              : (t.createJourney(
+                                  t.clip,
+                                  t.settings.loopEndMillisecond - 1,
+                                  { before: "pause", after: "play" }
+                                ),
+                                (t.settings.needsUpdate = !0))),
+                        !1
+                      );
+                    };
+                  })(this),
+                  (function (t) {
+                    (t.elements.settingsShowIndicator.onclick = function (e) {
+                      e.preventDefault();
+                      var n = x("".concat(t.name, "-show-indicator-checkbox"));
+                      n.checked
+                        ? ((n.checked = !1),
+                          (t.elements.indicator.style.visibility = "hidden"))
+                        : ((n.checked = !0),
+                          (t.elements.indicator.style.visibility = "visible"));
+                    }),
+                      (t.elements.settingsPointerEvents.onclick = function (e) {
+                        e.preventDefault();
+                        var n = x(
+                          "".concat(t.name, "-pointer-events-checkbox")
+                        );
+                        n.checked
+                          ? ((n.checked = !1),
+                            (t.options.pointerEvents = !1),
+                            (t.elements.mcPlayer.style.pointerEvents = "none"),
+                            (t.elements.pointerEventPanel.style.pointerEvents =
+                              "none"),
+                            (x(
+                              "".concat(t.name, "-controls")
+                            ).style.pointerEvents = "auto"),
+                            (t.elements.settingsPanel.style.pointerEvents =
+                              "auto"))
+                          : ((n.checked = !0),
+                            (t.elements.mcPlayer.style.pointerEvents = "none"),
+                            (t.elements.pointerEventPanel.style.pointerEvents =
+                              "auto"),
+                            (x(
+                              "".concat(t.name, "-controls")
+                            ).style.pointerEvents = "auto"),
+                            (t.elements.settingsPanel.style.pointerEvents =
+                              "auto"));
+                      }),
+                      (t.elements.settingsShowVolume.onclick = function (e) {
+                        e.preventDefault(),
+                          t.elements.volumeControl.classList.toggle(
+                            "".concat(t.name, "-volume-width-transition")
+                          ),
+                          t.elements.volumeControl.classList.toggle(
+                            "".concat(t.name, "-hide")
+                          );
+                        var n = x("".concat(t.name, "-show-volume-checkbox"));
+                        n.checked
+                          ? ((n.checked = !1),
+                            (t.elements.volumeControl.style.visibility =
+                              "hidden"),
+                            (t.elements.timeDisplay.style.left = "45px"))
+                          : ((n.checked = !0),
+                            (t.elements.volumeControl.style.visibility =
+                              "visible"),
+                            (t.elements.timeDisplay.style.left = ""));
+                      }),
+                      (t.elements.settingsShowPreview.onclick = function (e) {
+                        e.preventDefault();
+                        var n = x("".concat(t.name, "-show-preview-checkbox"));
+                        n.checked
+                          ? ((n.checked = !1),
+                            (x(
+                              "".concat(t.name, "-hover-display")
+                            ).style.visibility = "hidden"),
+                            (x(
+                              "".concat(t.name, "-hover-display")
+                            ).style.display = "none"),
+                            (t.options.preview = !1))
+                          : (t.previewClip || t.createPreviewDisplay(),
+                            (n.checked = !0),
+                            (x(
+                              "".concat(t.name, "-hover-display")
+                            ).style.visibility = "visible"),
+                            (x(
+                              "".concat(t.name, "-hover-display")
+                            ).style.display = "flex"),
+                            (t.options.preview = !0));
+                      }),
+                      (t.elements.settingsButton.onclick = function (e) {
+                        e.preventDefault();
+                        var n = x("".concat(t.name, "-controls")),
+                          i = function e(n) {
+                            if (t.elements.settingsPanel.contains(n.target))
+                              return !0;
+                            t.elements.settingsPanel.classList.toggle(
+                              "".concat(t.name, "-hide")
+                            ),
+                              t.elements.settingsPanel.classList.toggle(
+                                "m-fadeOut"
+                              ),
+                              t.elements.settingsPanel.classList.toggle(
+                                "m-fadeIn"
+                              ),
+                              t.elements.settingsPanel.className.includes(
+                                "m-fadeOut"
+                              ) &&
+                                (k("click", e, !1),
+                                t.eventBroadcast("state-change", t.state));
+                          };
+                        t.elements.settingsPanel.className.includes("m-fadeOut")
+                          ? (n.classList.value.includes(
+                              "force-show-controls"
+                            ) || n.classList.toggle("force-show-controls"),
+                            w("click", i, !1))
+                          : k("click", i, !1);
+                      });
+                  })(this),
+                  (function (t) {
+                    t.elements.settingsSpeedButtonShow.onclick = t.elements.settingsSpeedButtonHide.onclick = function (
+                      e
+                    ) {
+                      e.preventDefault(),
+                        t.elements.settingsPanel.classList.toggle(
+                          "".concat(t.name, "-settings-speed-panel")
+                        ),
+                        t.elements.settingsPanel.className.includes(
+                          "".concat(t.name, "-settings-speed-panel")
+                        )
+                          ? ((t.elements.settingsMainPanel.style.display =
+                              "none"),
+                            (t.elements.settingsSpeedPanel.style.display =
+                              "block"))
+                          : ((t.elements.settingsSpeedPanel.style.display =
+                              "none"),
+                            (t.elements.settingsMainPanel.style.display =
+                              "block"));
+                    };
+                    var e = function (e) {
+                        e.preventDefault();
+                        var n = t.elements.speedBar.getBoundingClientRect(),
+                          i =
+                            (e.clientY ||
+                              ((e.touches || [])[0] || {}).clientY) - n.top;
+                        (i -= 8) < 0
+                          ? (i = 0)
+                          : i > t.elements.speedBar.offsetHeight - 16 &&
+                            (i = t.elements.speedBar.offsetHeight - 16);
+                        var r =
+                            -1 *
+                            ((i = Math.floor(i)) /
+                              (16 * (t.options.speedValues.length - 1)) -
+                              1),
+                          o = 1 / (t.options.speedValues.length - 1),
+                          s = t.calculateSpeed(o, t.options.speedValues, r);
+                        (_("".concat(t.name, "-speed-runtime")).innerHTML =
+                          s + "0"),
+                          (_("".concat(t.name, "-speed-cursor")).style.top =
+                            i + "px"),
+                          (t.clip.executionSpeed = s);
+                      },
+                      n = function n(i) {
+                        var r;
+                        (t.elements.listenerHelper.style.pointerEvents =
+                          "none"),
+                          i.preventDefault(),
+                          I("mouseup", n, !1),
+                          I("touchend", n, !1),
+                          I("mousemove", e, !1),
+                          I("touchmove", e, !1),
+                          (_("".concat(t.name, "-speed-runtime")).innerHTML =
+                            "Speed"),
+                          (r = 1 == t.clip.speed ? "Normal" : t.clip.speed),
+                          (t.elements.speedCurrent.innerHTML = r);
+                      },
+                      i = function (i) {
+                        (t.elements.listenerHelper.style.pointerEvents =
+                          "auto"),
+                          i.preventDefault(),
+                          e(i),
+                          C("mouseup", n, !1),
+                          C("touchend", n, !1),
+                          C("mousemove", e, !1),
+                          C("touchmove", e, !1);
+                      };
+                    t.elements.speedBarHelper.addEventListener(
+                      "mousedown",
+                      i,
+                      !1
+                    ),
+                      t.elements.speedBarHelper.addEventListener(
+                        "touchstart",
+                        i,
+                        { passive: !1 },
+                        !1
+                      );
+                  })(this),
+                  (function (t) {
+                    t.elements.loopButton.onclick = function () {
+                      (t.settings.loopActivated = !t.settings.loopActivated),
+                        t.elements.loopButton.classList.toggle("svg-selected"),
+                        t.elements.loopBarStart.classList.toggle("m-fadeOut"),
+                        t.elements.loopBarEnd.classList.toggle("m-fadeOut"),
+                        t.elements.loopBarStart.classList.toggle("m-fadeIn"),
+                        t.elements.loopBarStart.classList.toggle(
+                          "".concat(t.name, "-hide")
+                        ),
+                        t.elements.loopBarEnd.classList.toggle("m-fadeIn"),
+                        t.elements.loopBarEnd.classList.toggle(
+                          "".concat(t.name, "-hide")
+                        ),
+                        O("".concat(t.name, "-loop-time")).classList.toggle(
+                          "m-fadeOut"
+                        ),
+                        O("".concat(t.name, "-loop-time")).classList.toggle(
+                          "m-fadeIn"
+                        ),
+                        O("".concat(t.name, "-loop-time")).classList.toggle(
+                          "".concat(t.name, "-hide")
+                        ),
+                        (t.elements.loopEndTime.innerHTML =
+                          t.settings.loopEndMillisecond),
+                        (t.elements.loopStartTime.innerHTML =
+                          t.settings.loopStartMillisecond),
+                        (t.settings.needsUpdate = !0),
+                        t.settings.loopActivated ||
+                          ((t.elements.loopBar.style.left = "0%"),
+                          (t.elements.loopBar.style.width = "100%"),
+                          (t.settings.loopStartMillisecond = 0),
+                          (t.settings.loopEndMillisecond = t.clip.duration),
+                          (t.settings.loopLastPositionXPxls = 0),
+                          (t.settings.loopLastPositionXPercentage = 0),
+                          (t.elements.runningBar.style.width =
+                            (t.clip.runTimeInfo.currentMillisecond /
+                              t.clip.duration) *
+                              100 +
+                            "%"));
+                    };
+                  })(this),
+                  (function (t) {
+                    (E(
+                      "".concat(t.name, "-controls")
+                    ).onmouseover = function () {
+                      t.settings.loopActivated &&
+                        (t.elements.loopBarStart.classList.remove("m-fadeOut"),
+                        t.elements.loopBarEnd.classList.remove("m-fadeOut"),
+                        t.elements.loopBarStart.classList.add("m-fadeIn"),
+                        t.elements.loopBarEnd.classList.add("m-fadeIn"));
+                    }),
+                      (E("".concat(t.name, "-controls")).onmouseout = function (
+                        e
+                      ) {
+                        var n = e.toElement || e.relatedTarget || e.target;
+                        P(this, n) ||
+                          n === this ||
+                          (t.settings.loopActivated &&
+                            (t.elements.loopBarStart.classList.add("m-fadeOut"),
+                            t.elements.loopBarEnd.classList.add("m-fadeOut"),
+                            t.elements.loopBarStart.classList.remove(
+                              "m-fadeIn"
+                            ),
+                            t.elements.loopBarEnd.classList.remove(
+                              "m-fadeIn"
+                            )));
+                      });
+                    var e = !1;
+                    (E("".concat(t.name, "-controls")).ontouchstart = function (
+                      n
+                    ) {
+                      var i = n.toElement || n.relatedTarget || n.target;
+                      P(t.elements.statusButton, i) ||
+                        i === t.elements.statusButton ||
+                        P(t.elements.settingsButton, i) ||
+                        i === t.elements.settingsButton ||
+                        P(t.elements.fullScreenButton, i) ||
+                        i === t.elements.fullScreenButton ||
+                        P(t.elements.loopButton, i) ||
+                        i === t.elements.loopButton ||
+                        P(t.elements.totalBar, i) ||
+                        i === t.elements.totalBar ||
+                        ((t.elements.volumeControl.className = "".concat(
+                          t.name,
+                          "-volume-width-transition"
+                        )),
+                        (t.elements.volumeBar.className = "".concat(
+                          t.name,
+                          "-volume-width-transition"
+                        )),
+                        (t.elements.volumeBarHelper.className = "".concat(
+                          t.name,
+                          "-volume-width-transition"
+                        )),
+                        (t.elements.timeDisplay.className = "".concat(
+                          t.name,
+                          "-time-width-transition"
+                        )),
+                        (t.elements.volumeCursor.className = "".concat(
+                          t.name,
+                          "-volume-cursor-transition"
+                        )),
+                        (e = !0));
+                    }),
+                      window.addEventListener("touchstart", function (n) {
+                        var i = n.toElement || n.relatedTarget || n.target;
+                        P(E("".concat(t.name, "-controls")), i) ||
+                          i === E("".concat(t.name, "-controls")) ||
+                          (e &&
+                            ((t.elements.volumeControl.className = ""),
+                            (t.elements.volumeBar.className = ""),
+                            (t.elements.volumeBarHelper.className = ""),
+                            (t.elements.timeDisplay.className = ""),
+                            (t.elements.volumeCursor.className = "")));
+                      });
+                  })(this),
+                  (function (t) {
+                    t.elements.fullScreenButton.addEventListener(
+                      "click",
+                      function () {
+                        var e = t.clip.props.host.className.includes(
+                          "full-screen"
+                        );
+                        t.clip.props.host !== t.options.host &&
+                          !e &&
+                          t.clip.props.host.appendChild(t.elements.mcPlayer),
+                          t.clip.props.host !== t.options.host &&
+                            e &&
+                            t.options.host.appendChild(t.elements.mcPlayer),
+                          e
+                            ? t.exitFullscreen()
+                            : t.launchIntoFullscreen(t.clip.props.host);
+                      }
+                    );
+                  })(this),
+                  (function (t) {
+                    t.elements.donkeyclipButton.addEventListener(
+                      "click",
+                      function () {
+                        var e,
+                          n =
+                            ((e = new Date().getTime()),
+                            "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+                              /[xy]/g,
+                              function (t) {
+                                var n = (e + 16 * Math.random()) % 16 | 0;
+                                return (
+                                  (e = Math.floor(e / 16)),
+                                  ("x" == t ? n : (3 & n) | 8).toString(16)
+                                );
+                              }
+                            )),
+                          i = window.open(
+                            "https://donkeyclip.com?u=".concat(n)
+                          ),
+                          r = t.clip.exportDefinition(),
+                          o = t.clipClass;
+                        window.addEventListener(
+                          "message",
+                          function (t) {
+                            t.data === n &&
+                              i.postMessage(
+                                JSON.stringify({
+                                  definition: r,
+                                  clipClass: o,
+                                  u: n,
+                                }),
+                                "*"
+                              );
+                          },
+                          !1
+                        );
+                      }
+                    );
+                  })(this),
+                  (function (t) {
+                    if (
+                      !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                        navigator.userAgent
+                      )
+                    ) {
+                      var e = function () {
+                          t.options.preview &&
+                            (j(
+                              "".concat(t.name, "-hover-display")
+                            ).classList.toggle("m-fadeOut"),
+                            j(
+                              "".concat(t.name, "-hover-display")
+                            ).classList.toggle("m-fadeIn"),
+                            (t.elements.loopBar.onmousemove = i));
+                        },
+                        n = function n() {
+                          t.options.preview &&
+                            (e(),
+                            (t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = e),
+                            (t.elements.loopBar.onmousemove = i),
+                            S("mouseup", n, !1),
+                            S("touchend", n, !1),
+                            S("mousemove", i, !1),
+                            S("touchmove", i, !1));
+                        };
+                      (t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = e),
+                        (t.elements.loopBar.onmousedown = function () {
+                          t.options.preview &&
+                            ((t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = null),
+                            (t.elements.loopBar.onmousemove = null),
+                            M("mouseup", n, !1),
+                            M("touchend", n, !1),
+                            M("mousemove", i, !1),
+                            M("touchmove", i, !1));
+                        }),
+                        (t.elements.loopBar.onmouseup = function () {
+                          t.options.preview &&
+                            (S("mouseup", n, !1),
+                            S("touchend", n, !1),
+                            S("mousemove", i, !1),
+                            S("touchmove", i, !1),
+                            (t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = e),
+                            (t.elements.loopBar.onmousemove = i));
+                        });
+                      var i = function (e) {
+                        var n = e.clientX,
+                          i = t.elements.loopBar.getBoundingClientRect();
+                        if (
+                          n - i.left + t.settings.loopLastPositionXPxls >
+                            t.settings.loopLastPositionXPxls +
+                              t.elements.loopBar.offsetWidth &&
+                          !t.settings.resizeLoop
+                        )
+                          j("".concat(t.name, "-hover-millisecond")).innerHTML =
+                            t.settings.loopEndMillisecond;
+                        else if (n - i.left < 0 && !t.settings.resizeLoop)
+                          j("".concat(t.name, "-hover-millisecond")).innerHTML =
+                            t.settings.loopStartMillisecond;
+                        else {
+                          var r = n - i.left + t.settings.loopLastPositionXPxls;
+                          r < 0 && (r = 0);
+                          var o =
+                              j("".concat(t.name, "-hover-display"))
+                                .offsetWidth * t.previewScale,
+                            s = o / 2,
+                            a =
+                              j("".concat(t.name, "-hover-display"))
+                                .offsetWidth / 2,
+                            l = r - a;
+                          r - s < 0
+                            ? (l = 0 - (o + s))
+                            : r + s > t.elements.totalBar.offsetWidth &&
+                              (l = t.elements.totalBar.offsetWidth - a - s);
+                          var c = Math.round(
+                            (r / t.elements.totalBar.offsetWidth) *
+                              t.clip.duration
+                          );
+                          if (t.options.preview) {
+                            var u = c / t.clip.duration;
+                            t.previewClip.onProgress(u, c);
+                          }
+                          (j(
+                            "".concat(t.name, "-hover-millisecond")
+                          ).innerHTML = c),
+                            (j("".concat(t.name, "-hover-display")).style.left =
+                              l + "px");
+                        }
+                      };
+                    }
+                  })(this),
+                  (function (t) {
+                    document.addEventListener("fullscreenchange", function () {
+                      t.elements.mcPlayer.classList.toggle("full-screen"),
+                        t.clip.props.host.classList.toggle("full-screen"),
+                        t.options.preview && t.setPreviewDimentions();
+                    }),
+                      document.addEventListener(
+                        "webkitfullscreenchange",
+                        function () {
+                          t.elements.mcPlayer.classList.toggle("full-screen"),
+                            t.clip.props.host.classList.toggle("full-screen"),
+                            t.options.preview && t.setPreviewDimentions();
+                        }
+                      ),
+                      document.addEventListener(
+                        "mozfullscreenchange",
+                        function () {
+                          t.elements.mcPlayer.classList.toggle("full-screen"),
+                            t.clip.props.host.classList.toggle("full-screen"),
+                            t.options.preview && t.setPreviewDimentions();
+                        }
+                      ),
+                      document.addEventListener(
+                        "MSFullscreenChange",
+                        function () {
+                          t.elements.mcPlayer.classList.toggle("full-screen"),
+                            t.clip.props.host.classList.toggle("full-screen"),
+                            t.options.preview && t.setPreviewDimentions();
+                        }
+                      ),
+                      B("body")[0].addEventListener("click", function (e) {
+                        if (
+                          e.target.className ===
+                          "".concat(t.name, "-speed-value")
+                        ) {
+                          var n = e.target.dataset.speedValue;
+                          (t.clip.executionSpeed = e.target.dataset.speedValue),
+                            (n = 1 == t.clip.speed ? "Normal" : t.clip.speed),
+                            (t.elements.speedCurrent.innerHTML = n);
+                          var i = 1 / (t.options.speedValues.length - 1),
+                            r =
+                              -1 *
+                              (e.target.dataset.zone * i - 1) *
+                              (16 * (t.options.speedValues.length - 1));
+                          A("".concat(t.name, "-speed-cursor")).style.top =
+                            r + "px";
+                        }
+                      });
+                  })(this);
               },
             },
             {
@@ -12582,15 +14367,480 @@
                     (this.options.theme += " on-top");
                 var t = {};
                 for (var e in this.options.theme.split(" ")) {
-                  var n = p(this.options.theme.split(" ")[e], this.name);
+                  var n = l(this.options.theme.split(" ")[e], this.name);
                   for (var i in n || {}) t[i] = n[i];
                 }
-                var r = d(t, this.name, this.options),
-                  o = l("style");
+                var r = (function (t, e, n) {
+                    return "\n.background {\n  background-color: black;\n  width:100%;\n  height:"
+                      .concat(
+                        t["background-height"],
+                        ";;\n  position:absolute;\n  top:0px;\n  left:0px;\n  z-index:-2000;\n}\n\n.full-screen #"
+                      )
+                      .concat(
+                        e,
+                        "-controls {\n  position:fixed;\n  left:0px;\n  bottom:0px;\n}\n\n.full-screen #"
+                      )
+                      .concat(
+                        e,
+                        "-settings-panel {\n  position:fixed;\n  bottom: 45px;\n}\n\n.svg, .svg path {\n  fill: "
+                      )
+                      .concat(
+                        t["svg-color"],
+                        ";\n}\n\n.svg.arrow {\n  stroke: "
+                      )
+                      .concat(
+                        t["svg-color"],
+                        ";\n}\n\n.pointer-event-panel {\n  height: "
+                      )
+                      .concat(
+                        t["pointer-event-panel-height"],
+                        ";\n  display:flex;\n  align-items:center;\n  justify-content:center;\n}\n#"
+                      )
+                      .concat(
+                        e,
+                        "-pointer-event-panel{\n  width:100%;\n  position:absolute;\n  z-index:100;\n}\n#"
+                      )
+                      .concat(
+                        e,
+                        "-listener-helper{\n  width:100%;\n  height:calc( 100% - 45px );\n  position:absolute;\n  z-index:110;\n}\n.svg-selected svg{\n  fill: "
+                      )
+                      .concat(t["svg-selected-color"], ";\n  stroke: ")
+                      .concat(t["svg-selected-color"], ";\n}\n#")
+                      .concat(e, "-hover-display{\n    border: ")
+                      .concat(
+                        t["preview-border"],
+                        ";\n    display: flex;\n    overflow:hidden;\n    background-color: black;\n    position: absolute;\n    bottom: 14px;\n    left: 0px;\n    align-items: flex-end;\n    justify-content: center;\n}\n\n#"
+                      )
+                      .concat(e, "-hover-millisecond {\n  background-color: ")
+                      .concat(
+                        t["hms-background-color"],
+                        ";\n  padding:3px;\n  height:18px;\n  margin:0px;\n  line-height:12px;\n  font-size:10px;\n  text-align: center;\n  min-width:20px;\n  max-width:100px;\n  z-index:2;\n}\n#"
+                      )
+                      .concat(e, ",\n#")
+                      .concat(e, " ::before,\n#")
+                      .concat(e, " :::after,\n#")
+                      .concat(e, " div,\n#")
+                      .concat(e, " p,\n#")
+                      .concat(e, " span,\n#")
+                      .concat(e, " ul,\n#")
+                      .concat(
+                        e,
+                        " li {\n  font-weight: 400;\n  line-height: 1.9 !important;\n  color: "
+                      )
+                      .concat(
+                        t.color,
+                        ';\n  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;\n  box-sizing:border-box;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n#'
+                      )
+                      .concat(
+                        e,
+                        " {\n  line-height: 1.9;\n  font-size: 12px;\n  overflow:hidden;\n  height: calc(100% + "
+                      )
+                      .concat(
+                        t["controls-position"],
+                        ");\n  width:100%;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  color: "
+                      )
+                      .concat(
+                        t.color,
+                        ";\n  pointer-events:auto !important;\n}\n\n.force-show-controls {\n  height: 44px !important;\n  overflow:unset !important;\n}\n\n"
+                      )
+                      .concat(
+                        n.theme.includes("position-bottom")
+                          ? "\n    #".concat(
+                              e,
+                              "-controls {\n      height: 44px !important;\n      overflow:unset !important;\n    }\n    "
+                            )
+                          : "#"
+                              .concat(e, ":hover #")
+                              .concat(
+                                e,
+                                "-controls {\n  height: 44px;\n  overflow:unset;\n}\n"
+                              ),
+                        "\n\n#"
+                      )
+                      .concat(e, ":hover {\n  pointer-events:none;\n}\n\n#")
+                      .concat(
+                        e,
+                        "-settings-speed-hide {\n  text-align:right;\n}\n\n.grad {\n  background-image: linear-gradient(\n    rgba(100,100,100,00.01),\n    rgba(100,100,100,00.02),\n    rgba(100,100,100,00.03),\n    rgba(100,100,100,0.04),\n    rgba(100,100,100,0.05),\n    rgba(0,0,0,0.06),\n    rgba(0,0,0,0.07),\n    rgba(0,0,0,0.08),\n    rgba(0,0,0,0.09),\n    rgba(0,0,0,0.1),\n    rgba(0,0,0,0.2),\n    rgba(0,0,0,0.3),\n    rgba(0,0,0,0.4),\n    rgba(0,0,0,0.4),\n    rgba(0,0,0,0.5),\n    rgba(0,0,0,0.6),\n    rgba(0,0,0,0.7),\n    rgba(0,0,0,0.8),\n    rgba(0,0,0,0.9),\n    rgba(0,0,0,1)\n  );\n  position:absolute;\n  width:100%;\n  height:"
+                      )
+                      .concat(
+                        t["grad-height"],
+                        ";\n  left:0px;\n  bottom:0px;\n  z-index:100;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-controls {\n  touch-action: none;\n  background-color: "
+                      )
+                      .concat(t["background-color"], ";\n  border: ")
+                      .concat(
+                        t["controls-border"],
+                        ";\n  position: absolute;\n  bottom: "
+                      )
+                      .concat(
+                        t["controls-bottom"],
+                        ";\n  left: 0px;\n  width: 100%;\n  z-index:100;\n  height: 0px;\n  overflow:hidden;\n  display:flex;\n  border-radius: 6px;\n  align-items:center;\n  -webkit-transition: height 0.2s ease;\n  -moz-transition: height 0.2s ease;\n  transition: height 0.2s ease;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-totalbar {\n  width: calc(100% - 20px);\n  height: 5px;\n  margin: 0px 10px 0px 10px;\n  background-color: "
+                      )
+                      .concat(
+                        t["totalbar-color"],
+                        ";\n  position: absolute;\n  top: 0px;\n  left: 0px;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-loopbar {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  top: 0px;\n  left: 0px;\n  background-color: "
+                      )
+                      .concat(t["loopbar-color"], ";\n}\n\n.")
+                      .concat(e, "-loop-boundaries::before {\n  ")
+                      .concat(t["loopbar-boundaries-style::before"], "\n\n}\n.")
+                      .concat(
+                        e,
+                        "-loop-boundaries {\n  transform:translate(-50%,-37%);\n  position:absolute;\n  width:18px;\n  background-color:"
+                      )
+                      .concat(
+                        t["loopbar-boundaries-color"],
+                        ";\n  height:18px;\n  border-radius:10px;\n  z-index:40;\n  "
+                      )
+                      .concat(t["loopbar-boundaries-style"], "\n}\n\n.")
+                      .concat(e, "-loop-boundaries::after {\n  ")
+                      .concat(
+                        t["loopbar-boundaries-style::after"],
+                        "\n\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-helperbar {\n  position: absolute;\n  height: 20px;\n  top: -10px;\n  left: 0px;\n  right: 0px;\n  z-index:2;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-runningbar {\n  position: relative;\n  width: 0px;\n  max-width:100%;\n  height: 100%;\n  background-color: "
+                      )
+                      .concat(t["runningbar-color"], ";\n}\n\n#")
+                      .concat(
+                        e,
+                        "-cursor {\n  transform:translate(50%,-36%);\n  right: 0px;\n  overflow:hidden;\n  top: 0px;\n  width: 0px;\n  height: 0px;\n  position: absolute;\n  background-color: "
+                      )
+                      .concat(
+                        t["cursor-color"],
+                        ";\n  border-radius: 10px;\n  z-index: 5;\n}\n\n#"
+                      )
+                      .concat(e, "-cursor::before {\n  ")
+                      .concat(t["cursor-style::before"], "\n}\n\n#")
+                      .concat(e, "-cursor::after {\n  ")
+                      .concat(t["cursor-style::after"], "\n}\n\n#")
+                      .concat(e, "-left-controls,#")
+                      .concat(
+                        e,
+                        "-right-controls {\n    display: flex;\n    align-items:center;\n    height: 100%;\n    padding: 5px 5px 0px;\n}\n#"
+                      )
+                      .concat(
+                        e,
+                        "-right-controls {\n  position:absolute;\n  right:0px;\n}\n\n\n#"
+                      )
+                      .concat(e, "-left-controls > div,#")
+                      .concat(
+                        e,
+                        "-right-controls > div {\n    display: inline-flex;\n    align-items:center;\n   margin:0 10px 0 10px;\n}\n\n\n\n/*#"
+                      )
+                      .concat(
+                        e,
+                        "-time-display {\n  display: table;\n  text-align: center;\n  width: auto;\n  height: 34px;\n  position: absolute;\n  left: 90px;\n  -webkit-transition: left 0.1s ease;\n  -moz-transition: left 0.1s ease;\n  transition: left 0.1s ease;\n}\n*/\n#"
+                      )
+                      .concat(
+                        e,
+                        "-time-display span {\n  display: table-cell;\n  vertical-align: middle;\n}\n\n#"
+                      )
+                      .concat(e, "-status-btn {\n  opacity: ")
+                      .concat(t["button-opacity"], ";\n}\n#")
+                      .concat(
+                        e,
+                        "-status-btn svg{\n  width:20px;\n  height:18px;\n}\n#"
+                      )
+                      .concat(e, "-volume {\n  opacity: ")
+                      .concat(
+                        t["button-opacity"],
+                        ";\n  position: relative;\n}\n#"
+                      )
+                      .concat(
+                        e,
+                        "-volume-btn {\n  width: 20px;\n  height: 15px;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-volumebar {\n  width: 0px;\n  height: 3px;\n  background-color: "
+                      )
+                      .concat(
+                        t["loopbar-color"],
+                        ";\n  -webkit-transition: left 0.1s ease;\n  -moz-transition: left 0.1s ease;\n  transition: left 0.1s ease;\n  position:relative;\n  left:5px;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-volumebar-helper {\n  position: absolute;\n    width: 0px;\n    height: 15px;\n    bottom: 0px;\n    z-index: 10;\n    left: 25px;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-volumebar-active {\n  position: relative;\n  width: 0%;\n  height: 100%;\n  background-color: "
+                      )
+                      .concat(
+                        t.color,
+                        ";\n  position:relative;\n  bottom:0px;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-volume-cursor {\n  transform:translate(50%,-36%);\n  right: 0px;\n  top: 0px;\n  width: 0px;\n  height: 0px;\n  position: absolute;\n  background-color: "
+                      )
+                      .concat(
+                        t.color,
+                        ";\n  border-radius: 10px;\n  z-index: 5;\n}\n\n."
+                      )
+                      .concat(
+                        e,
+                        "-loopbar-time {\n  width:auto;\n  height:12px;\n  background-color:"
+                      )
+                      .concat(
+                        t["background-color"],
+                        ";\n  line-height:10px;\n  font-size:10px;\n}\n\n#"
+                      )
+                      .concat(e, "-loop-time {\n  margin: 7px;\n}\n\n#")
+                      .concat(
+                        e,
+                        "-dc-btn {\n    background-repeat: no-repeat;\n    background-size: 100% 100%;\n    width: 20px;\n    height: 15px;\n    margin: 7px 10px 5px 0px;\n    transform: scale(1.5,1.5);\n}\n\n#"
+                      )
+                      .concat(e, "-loop-btn {\n  opacity: ")
+                      .concat(
+                        t["button-opacity"],
+                        ";\n  display:flex;\n  align-items:center;\n}\n\n\n#"
+                      )
+                      .concat(e, "-settings-btn {\n  opacity: ")
+                      .concat(t["button-opacity"], ";\n}\n\n#")
+                      .concat(e, "-full-screen-btn {\n  opacity: ")
+                      .concat(t["button-opacity"], ";\n}\n\n.")
+                      .concat(e, "-speed-btn {\n  opacity: ")
+                      .concat(t["button-opacity"], ";\n  height: 14px;\n}\n\n#")
+                      .concat(
+                        e,
+                        "-settings-panel {\n  touch-action: none;\n  box-sizing: border-box;\n  position: absolute;\n  z-index:101;\n  background-color: "
+                      )
+                      .concat(t["settings-background-color"], ";\n  bottom: ")
+                      .concat(t["settings-panel-bottom"], ";\n  border: ")
+                      .concat(
+                        t.border,
+                        ";\n  right: 8px;\n  width: 167px;\n  padding: 5px;\n  margin: 0px;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n."
+                      )
+                      .concat(e, "-hide {\n  display:none !important;\n}\n\n#")
+                      .concat(
+                        e,
+                        "-speed-value-bar {\n  position: relative;\n  width: 5px;\n  background-color: "
+                      )
+                      .concat(
+                        t["speedbar-color"],
+                        ";\n  display: inline-block;\n  box-sizing: border-box;\n  height: "
+                      )
+                      .concat(
+                        16 * n.speedValues.length,
+                        "px;\n  float: left;\n  margin-right:15px;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-speed-value-helperbar {\n  position: absolute;\n  width: 25px;\n  height: "
+                      )
+                      .concat(
+                        16 * n.speedValues.length,
+                        "px;\n  float: left;\n  left: 18px;\n  z-index:10;\n}\n\n\n#"
+                      )
+                      .concat(e, "-speed-value-bar:hover,\n#")
+                      .concat(
+                        e,
+                        "-speed-value-helperbar {\n  cursor: pointer;\n}\n\n#"
+                      )
+                      .concat(e, "-volumebar:hover,\n#")
+                      .concat(e, "-volumebar-helper:hover,\n#")
+                      .concat(e, "-volume-btn:hover,\n#")
+                      .concat(e, "-volumebar:active,\n#")
+                      .concat(e, "-volumebar-helper:active,\n#")
+                      .concat(
+                        e,
+                        "-volume-btn:active {\n  cursor:pointer;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-speed-cursor {\n  position: absolute;\n  background-color: "
+                      )
+                      .concat(
+                        t["speedbar-cursor-color"],
+                        ";\n  top: 0px;\n  left: 0px;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-speed-cursor div {\n  position: absolute;\n  background-color: "
+                      )
+                      .concat(
+                        t["speedbar-cursor-color"],
+                        ";\n  left: -2.5px;\n  top: -4px;\n  width: 10px;\n  height: 10px;\n  border-radius: 5px;\n}\n\n#"
+                      )
+                      .concat(e, "-time-separator{\n  margin:0 3px;\n}\n#")
+                      .concat(
+                        e,
+                        "-speed-cursor:hover {\n  cursor: pointer;\n}\n\n."
+                      )
+                      .concat(
+                        e,
+                        "-speed-value-step {\n  width: 16px;\n  background-color: "
+                      )
+                      .concat(
+                        t["speedbar-color"],
+                        ";\n  display: inline-block;\n  box-sizing: border-box;\n  height: 2px;\n  margin-top: 7px;\n  margin-bottom: 7px;\n  float: left;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-speed-value {\n  display: inline-block;\n  box-sizing: border-box;\n  height: "
+                      )
+                      .concat(
+                        16 * n.speedValues.length,
+                        "px;\n  text-align: left;\n}\n\n."
+                      )
+                      .concat(
+                        e,
+                        "-speed-value {\n  box-sizing: border-box;\n  height: 16px;\n  font-size: 12px;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-indicator {\n  font-size: 8px !important;\n  position: absolute;\n  bottom: -3px;\n  color: "
+                      )
+                      .concat(t.color, ";\n}\n\n/*#")
+                      .concat(e, "-speed-settings {\n  height: ")
+                      .concat(
+                        16 * n.speedValues.length + 32 + 10 - 2,
+                        "px;\n}*/\n\n#"
+                      )
+                      .concat(e, "-speed-settings li.no-hover { \n  height: ")
+                      .concat(
+                        16 * n.speedValues.length + 10 - 2,
+                        "px !important; \n}\n#"
+                      )
+                      .concat(e, "-settings-panel.")
+                      .concat(
+                        e,
+                        "-settings-speed-panel {\n  overflow: hidden;\n  width: 92px;\n  position:absolute;\n  z-index:120;\n  /*height: "
+                      )
+                      .concat(
+                        16 * n.speedValues.length + 32 + 20,
+                        "px;*/\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
+                      )
+                      .concat(e, "-settings-panel.")
+                      .concat(e, "-settings-speed-panel .")
+                      .concat(e, "-speed-btn {\n  float: left;\n}\n\n.")
+                      .concat(
+                        e,
+                        "-settings-speed-panel ul:first-child {\n  text-align: right;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-speed-current {\n  float: right;\n  padding-right: 10px\n}\n\n#"
+                      )
+                      .concat(e, "-settings-panel .")
+                      .concat(e, "-speed-btn {\n  float: right;\n}\n\n#")
+                      .concat(
+                        e,
+                        "-settings-panel ul {\n  width: 100%;\n  margin: 0px;\n  padding: 0px;\n  overflow: hidden;\n}\n\n#"
+                      )
+                      .concat(e, "-settings-panel.")
+                      .concat(
+                        e,
+                        "-settings-speed-panel ul li {\n  min-width: 70px;\n  display: flex;\n  height: 32px;\n  align-items: center;\n  justify-content:center;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-settings-panel ul li.no-hover:hover {\n  background-color: transparent;\n  cursor: default;\n}\n\ndiv."
+                      )
+                      .concat(e, "-speed-value:hover {\n  background-color: ")
+                      .concat(t["hover-color"], ";\n  cursor: pointer;\n}\n\n#")
+                      .concat(
+                        e,
+                        "-settings-panel ul li {\n  /*position: relative;\n  width: 100%;\n  min-width: 154px;*/\n  list-style-type: none;\n  margin: 0px;\n  padding: 5px;\n  display: flex;\n  height:32px;\n  align-items:center;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-settings-panel ul li label {\n  margin: 0px;\n}\n\n.switch {\n  position: relative;\n  display: inline-block;\n  width: 32px;\n  height: 18px;\n}\n\n.switch input {\n  display: none;\n}\n\n.settings-switch {\n  position: absolute;\n  right: 24px;\n}\n\n.settings-switch::after {\n  clear: both;\n}\n\n.slider {\n  position: absolute;\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: "
+                      )
+                      .concat(
+                        t["slider-off-color"],
+                        ';\n  -webkit-transition: .4s;\n  transition: .4s;\n}\n\n.slider:before {\n  position: absolute;\n  content: "";\n  height: 16px;\n  width: 16px;\n  left: 1px;\n  bottom: 1px;\n  background-color: white;\n  -webkit-transition: .4s;\n  transition: .4s;\n}\n\ninput:checked+.slider {\n  background-color: '
+                      )
+                      .concat(
+                        t["slider-on-color"],
+                        ";\n}\n\ninput:focus+.slider {\n  box-shadow: 0 0 1px "
+                      )
+                      .concat(
+                        t["slider-on-color"],
+                        ";\n}\n\ninput:checked+.slider:before {\n  -webkit-transform: translateX(16px);\n  -ms-transform: translateX(16px);\n  transform: translateX(16px);\n}\n\n\n/* Rounded sliders */\n\n.slider.round {\n  border-radius: 34px;\n}\n\n.slider.round:before {\n  border-radius: 50%;\n}\n\n\n.m-fadeOut {\n  visibility: hidden;\n  opacity: 0;\n  transition: visibility 0s linear 300ms, opacity 300ms;\n}\n\n.m-fadeIn {\n  visibility: visible;\n  opacity: 1;\n  transition: visibility 0s linear 0s, opacity 300ms;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-settings-panel ul li:hover {\n  background-color: "
+                      )
+                      .concat(t["hover-color"], ";\n  cursor: pointer;\n}\n\n#")
+                      .concat(
+                        e,
+                        "-settings-panel ul li label:hover {\n  cursor: pointer;\n}\n\n#"
+                      )
+                      .concat(e, "-loopbar:hover {\n  cursor: pointer;\n}\n\n#")
+                      .concat(
+                        e,
+                        "-status-btn:hover {\n  cursor: pointer;\n}\n\n#"
+                      )
+                      .concat(e, "-controls:active #")
+                      .concat(e, "-cursor,\n#")
+                      .concat(e, "-controls:hover #")
+                      .concat(
+                        e,
+                        "-cursor  {\n  width: 16px;\n  height: 16px;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
+                      )
+                      .concat(e, "-volume .")
+                      .concat(
+                        e,
+                        "-volume-cursor-transition {\n  width: 12px;\n  height: 12px;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
+                      )
+                      .concat(e, "-volume .")
+                      .concat(
+                        e,
+                        "-volume-width-transition\n {\n  width: 50px;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
+                      )
+                      .concat(e, "-time-display.")
+                      .concat(
+                        e,
+                        "-time-width-transition {\n  position:relative;\n  left: 10px;\n  -webkit-transition: left 0.3s ease;\n  -moz-transition: left 0.3s ease;\n  transition: left 0.3s ease;\n}\n\n#"
+                      )
+                      .concat(e, "-settings-speed:hover .")
+                      .concat(
+                        e,
+                        "-speed-btn {\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-status-btn:hover {\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
+                      )
+                      .concat(e, "-loop-btn:hover,\n#")
+                      .concat(
+                        e,
+                        "-dc-btn:hover\n {\n  cursor: pointer;\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n#"
+                      )
+                      .concat(
+                        e,
+                        "-settings-btn:hover {\n  cursor: pointer;\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
+                      )
+                      .concat(
+                        e,
+                        "-full-screen-btn:hover {\n  cursor: pointer;\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n"
+                      )
+                      .concat(t["theme-style"], "\n");
+                  })(t, this.name, this.options),
+                  o = V("style");
                 o.styleSheet
                   ? (o.styleSheet.cssText = r)
                   : o.appendChild(document.createTextNode(r)),
-                  a("head")[0].appendChild(o);
+                  D("head")[0].appendChild(o);
               },
             },
             {
@@ -12621,7 +14871,7 @@
                     1) *
                   (this.options.speedValues.length - 1) *
                   16;
-                s("".concat(this.name, "-speed-cursor")).style.top = n + "px";
+                L("".concat(this.name, "-speed-cursor")).style.top = n + "px";
               },
             },
             {
@@ -12640,9 +14890,9 @@
               key: "createPreviewDisplay",
               value: function () {
                 this.previewClip = this.clip.paste(
-                  s("".concat(this.name, "-hover-display"))
+                  L("".concat(this.name, "-hover-display"))
                 );
-                var t = s("".concat(this.name, "-hover-display"));
+                var t = L("".concat(this.name, "-hover-display"));
                 (window.previewClip = this.previewClip),
                   (t.style.position = "absolute"),
                   (t.style.zIndex = 1),
@@ -12658,21 +14908,20 @@
                   i = t.offsetHeight,
                   r = n * this.previewScale;
                 r > 300 && ((r = 300), (this.previewScale = r / n)),
-                  (s("".concat(this.name, "-hover-display")).style.width =
+                  (L("".concat(this.name, "-hover-display")).style.width =
                     n + "px"),
-                  (s("".concat(this.name, "-hover-display")).style.height =
+                  (L("".concat(this.name, "-hover-display")).style.height =
                     i + "px"),
                   (e.style.transform = "scale(".concat(this.previewScale, ")")),
                   (e.style.transformOrigin = "center bottom"),
                   (e.style.boxSizing = "border-box");
               },
             },
-          ]) && i(e.prototype, n),
-          o && i(e, o),
+          ]) && e(n.prototype, i),
           t
         );
       })();
-    t.exports = P;
+    })(n(0));
   },
   function (t, e, n) {
     (function (i) {
@@ -12694,8 +14943,8 @@
       }
       !(function (i, l) {
         "object" == a(e) && void 0 !== t
-          ? (t.exports = l(n(1)))
-          : ((o = [n(1)]),
+          ? (t.exports = l(n(0)))
+          : ((o = [n(0)]),
             void 0 === (s = "function" == typeof (r = l) ? r.apply(e, o) : r) ||
               (t.exports = s));
       })(0, function (t) {
@@ -13875,15 +16124,15 @@
           compositeAttributes: F,
         };
       });
-    }.call(this, n(26)));
+    }.call(this, n(5)));
   },
   function (t, e, n) {
     "use strict";
     n.r(e);
-    var i = n(4),
+    var i = n(2),
       r = n.n(i),
-      o = n(1),
-      s = n(5),
+      o = n(0),
+      s = n(3),
       a = n.n(s),
       l = Object(o.loadPlugin)(a.a),
       c = document.getElementById("clip"),
@@ -13953,2020 +16202,6 @@
       u.addIncident(g, 9500),
       new r.a({ clip: u, theme: "mc-blue", preview: !1, pointerEvents: !1 }),
       (window.myclip = u);
-  },
-  function (t, e, n) {
-    "use strict";
-    t.exports = {
-      name: "mc-player",
-      set playerName(t) {
-        this.name += "-" + t;
-      },
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    t.exports = function (t, e, n) {
-      return "\n.background {\n  background-color: black;\n  width:100%;\n  height:"
-        .concat(
-          t["background-height"],
-          ";;\n  position:absolute;\n  top:0px;\n  left:0px;\n  z-index:-2000;\n}\n\n.full-screen #"
-        )
-        .concat(
-          e,
-          "-controls {\n  position:fixed;\n  left:0px;\n  bottom:0px;\n}\n\n.full-screen #"
-        )
-        .concat(
-          e,
-          "-settings-panel {\n  position:fixed;\n  bottom: 45px;\n}\n\n.svg, .svg path {\n  fill: "
-        )
-        .concat(t["svg-color"], ";\n}\n\n.svg.arrow {\n  stroke: ")
-        .concat(t["svg-color"], ";\n}\n\n.pointer-event-panel {\n  height: ")
-        .concat(
-          t["pointer-event-panel-height"],
-          ";\n  display:flex;\n  align-items:center;\n  justify-content:center;\n}\n#"
-        )
-        .concat(
-          e,
-          "-pointer-event-panel{\n  width:100%;\n  position:absolute;\n  z-index:100;\n}\n#"
-        )
-        .concat(
-          e,
-          "-listener-helper{\n  width:100%;\n  height:calc( 100% - 45px );\n  position:absolute;\n  z-index:110;\n}\n.svg-selected svg{\n  fill: "
-        )
-        .concat(t["svg-selected-color"], ";\n  stroke: ")
-        .concat(t["svg-selected-color"], ";\n}\n#")
-        .concat(e, "-hover-display{\n    border: ")
-        .concat(
-          t["preview-border"],
-          ";\n    display: flex;\n    overflow:hidden;\n    background-color: black;\n    position: absolute;\n    bottom: 14px;\n    left: 0px;\n    align-items: flex-end;\n    justify-content: center;\n}\n\n#"
-        )
-        .concat(e, "-hover-millisecond {\n  background-color: ")
-        .concat(
-          t["hms-background-color"],
-          ";\n  padding:3px;\n  height:18px;\n  margin:0px;\n  line-height:12px;\n  font-size:10px;\n  text-align: center;\n  min-width:20px;\n  max-width:100px;\n  z-index:2;\n}\n#"
-        )
-        .concat(e, ",\n#")
-        .concat(e, " ::before,\n#")
-        .concat(e, " :::after,\n#")
-        .concat(e, " div,\n#")
-        .concat(e, " p,\n#")
-        .concat(e, " span,\n#")
-        .concat(e, " ul,\n#")
-        .concat(
-          e,
-          " li {\n  font-weight: 400;\n  line-height: 1.9 !important;\n  color: "
-        )
-        .concat(
-          t.color,
-          ';\n  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;\n  box-sizing:border-box;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n#'
-        )
-        .concat(
-          e,
-          " {\n  line-height: 1.9;\n  font-size: 12px;\n  overflow:hidden;\n  height: calc(100% + "
-        )
-        .concat(
-          t["controls-position"],
-          ");\n  width:100%;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  color: "
-        )
-        .concat(
-          t.color,
-          ";\n  pointer-events:auto !important;\n}\n\n.force-show-controls {\n  height: 44px !important;\n  overflow:unset !important;\n}\n\n"
-        )
-        .concat(
-          n.theme.includes("position-bottom")
-            ? "\n    #".concat(
-                e,
-                "-controls {\n      height: 44px !important;\n      overflow:unset !important;\n    }\n    "
-              )
-            : "#"
-                .concat(e, ":hover #")
-                .concat(
-                  e,
-                  "-controls {\n  height: 44px;\n  overflow:unset;\n}\n"
-                ),
-          "\n\n#"
-        )
-        .concat(e, ":hover {\n  pointer-events:none;\n}\n\n#")
-        .concat(
-          e,
-          "-settings-speed-hide {\n  text-align:right;\n}\n\n.grad {\n  background-image: linear-gradient(\n    rgba(100,100,100,00.01),\n    rgba(100,100,100,00.02),\n    rgba(100,100,100,00.03),\n    rgba(100,100,100,0.04),\n    rgba(100,100,100,0.05),\n    rgba(0,0,0,0.06),\n    rgba(0,0,0,0.07),\n    rgba(0,0,0,0.08),\n    rgba(0,0,0,0.09),\n    rgba(0,0,0,0.1),\n    rgba(0,0,0,0.2),\n    rgba(0,0,0,0.3),\n    rgba(0,0,0,0.4),\n    rgba(0,0,0,0.4),\n    rgba(0,0,0,0.5),\n    rgba(0,0,0,0.6),\n    rgba(0,0,0,0.7),\n    rgba(0,0,0,0.8),\n    rgba(0,0,0,0.9),\n    rgba(0,0,0,1)\n  );\n  position:absolute;\n  width:100%;\n  height:"
-        )
-        .concat(
-          t["grad-height"],
-          ";\n  left:0px;\n  bottom:0px;\n  z-index:100;\n}\n\n#"
-        )
-        .concat(e, "-controls {\n  touch-action: none;\n  background-color: ")
-        .concat(t["background-color"], ";\n  border: ")
-        .concat(t["controls-border"], ";\n  position: absolute;\n  bottom: ")
-        .concat(
-          t["controls-bottom"],
-          ";\n  left: 0px;\n  width: 100%;\n  z-index:100;\n  height: 0px;\n  overflow:hidden;\n  display:flex;\n  border-radius: 6px;\n  align-items:center;\n  -webkit-transition: height 0.2s ease;\n  -moz-transition: height 0.2s ease;\n  transition: height 0.2s ease;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-totalbar {\n  width: calc(100% - 20px);\n  height: 5px;\n  margin: 0px 10px 0px 10px;\n  background-color: "
-        )
-        .concat(
-          t["totalbar-color"],
-          ";\n  position: absolute;\n  top: 0px;\n  left: 0px;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-loopbar {\n  position: absolute;\n  height: 100%;\n  width: 100%;\n  top: 0px;\n  left: 0px;\n  background-color: "
-        )
-        .concat(t["loopbar-color"], ";\n}\n\n.")
-        .concat(e, "-loop-boundaries::before {\n  ")
-        .concat(t["loopbar-boundaries-style::before"], "\n\n}\n.")
-        .concat(
-          e,
-          "-loop-boundaries {\n  transform:translate(-50%,-37%);\n  position:absolute;\n  width:18px;\n  background-color:"
-        )
-        .concat(
-          t["loopbar-boundaries-color"],
-          ";\n  height:18px;\n  border-radius:10px;\n  z-index:40;\n  "
-        )
-        .concat(t["loopbar-boundaries-style"], "\n}\n\n.")
-        .concat(e, "-loop-boundaries::after {\n  ")
-        .concat(t["loopbar-boundaries-style::after"], "\n\n}\n\n#")
-        .concat(
-          e,
-          "-helperbar {\n  position: absolute;\n  height: 20px;\n  top: -10px;\n  left: 0px;\n  right: 0px;\n  z-index:2;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-runningbar {\n  position: relative;\n  width: 0px;\n  max-width:100%;\n  height: 100%;\n  background-color: "
-        )
-        .concat(t["runningbar-color"], ";\n}\n\n#")
-        .concat(
-          e,
-          "-cursor {\n  transform:translate(50%,-36%);\n  right: 0px;\n  overflow:hidden;\n  top: 0px;\n  width: 0px;\n  height: 0px;\n  position: absolute;\n  background-color: "
-        )
-        .concat(
-          t["cursor-color"],
-          ";\n  border-radius: 10px;\n  z-index: 5;\n}\n\n#"
-        )
-        .concat(e, "-cursor::before {\n  ")
-        .concat(t["cursor-style::before"], "\n}\n\n#")
-        .concat(e, "-cursor::after {\n  ")
-        .concat(t["cursor-style::after"], "\n}\n\n#")
-        .concat(e, "-left-controls,#")
-        .concat(
-          e,
-          "-right-controls {\n    display: flex;\n    align-items:center;\n    height: 100%;\n    padding: 5px 5px 0px;\n}\n#"
-        )
-        .concat(
-          e,
-          "-right-controls {\n  position:absolute;\n  right:0px;\n}\n\n\n#"
-        )
-        .concat(e, "-left-controls > div,#")
-        .concat(
-          e,
-          "-right-controls > div {\n    display: inline-flex;\n    align-items:center;\n   margin:0 10px 0 10px;\n}\n\n\n\n/*#"
-        )
-        .concat(
-          e,
-          "-time-display {\n  display: table;\n  text-align: center;\n  width: auto;\n  height: 34px;\n  position: absolute;\n  left: 90px;\n  -webkit-transition: left 0.1s ease;\n  -moz-transition: left 0.1s ease;\n  transition: left 0.1s ease;\n}\n*/\n#"
-        )
-        .concat(
-          e,
-          "-time-display span {\n  display: table-cell;\n  vertical-align: middle;\n}\n\n#"
-        )
-        .concat(e, "-status-btn {\n  opacity: ")
-        .concat(t["button-opacity"], ";\n}\n#")
-        .concat(e, "-status-btn svg{\n  width:20px;\n  height:18px;\n}\n#")
-        .concat(e, "-volume {\n  opacity: ")
-        .concat(t["button-opacity"], ";\n  position: relative;\n}\n#")
-        .concat(e, "-volume-btn {\n  width: 20px;\n  height: 15px;\n}\n\n#")
-        .concat(
-          e,
-          "-volumebar {\n  width: 0px;\n  height: 3px;\n  background-color: "
-        )
-        .concat(
-          t["loopbar-color"],
-          ";\n  -webkit-transition: left 0.1s ease;\n  -moz-transition: left 0.1s ease;\n  transition: left 0.1s ease;\n  position:relative;\n  left:5px;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-volumebar-helper {\n  position: absolute;\n    width: 0px;\n    height: 15px;\n    bottom: 0px;\n    z-index: 10;\n    left: 25px;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-volumebar-active {\n  position: relative;\n  width: 0%;\n  height: 100%;\n  background-color: "
-        )
-        .concat(t.color, ";\n  position:relative;\n  bottom:0px;\n}\n\n#")
-        .concat(
-          e,
-          "-volume-cursor {\n  transform:translate(50%,-36%);\n  right: 0px;\n  top: 0px;\n  width: 0px;\n  height: 0px;\n  position: absolute;\n  background-color: "
-        )
-        .concat(t.color, ";\n  border-radius: 10px;\n  z-index: 5;\n}\n\n.")
-        .concat(
-          e,
-          "-loopbar-time {\n  width:auto;\n  height:12px;\n  background-color:"
-        )
-        .concat(
-          t["background-color"],
-          ";\n  line-height:10px;\n  font-size:10px;\n}\n\n#"
-        )
-        .concat(e, "-loop-time {\n  margin: 7px;\n}\n\n#")
-        .concat(
-          e,
-          "-dc-btn {\n    background-repeat: no-repeat;\n    background-size: 100% 100%;\n    width: 20px;\n    height: 15px;\n    margin: 7px 10px 5px 0px;\n    transform: scale(1.5,1.5);\n}\n\n#"
-        )
-        .concat(e, "-loop-btn {\n  opacity: ")
-        .concat(
-          t["button-opacity"],
-          ";\n  display:flex;\n  align-items:center;\n}\n\n\n#"
-        )
-        .concat(e, "-settings-btn {\n  opacity: ")
-        .concat(t["button-opacity"], ";\n}\n\n#")
-        .concat(e, "-full-screen-btn {\n  opacity: ")
-        .concat(t["button-opacity"], ";\n}\n\n.")
-        .concat(e, "-speed-btn {\n  opacity: ")
-        .concat(t["button-opacity"], ";\n  height: 14px;\n}\n\n#")
-        .concat(
-          e,
-          "-settings-panel {\n  touch-action: none;\n  box-sizing: border-box;\n  position: absolute;\n  z-index:101;\n  background-color: "
-        )
-        .concat(t["settings-background-color"], ";\n  bottom: ")
-        .concat(t["settings-panel-bottom"], ";\n  border: ")
-        .concat(
-          t.border,
-          ";\n  right: 8px;\n  width: 167px;\n  padding: 5px;\n  margin: 0px;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n."
-        )
-        .concat(e, "-hide {\n  display:none !important;\n}\n\n#")
-        .concat(
-          e,
-          "-speed-value-bar {\n  position: relative;\n  width: 5px;\n  background-color: "
-        )
-        .concat(
-          t["speedbar-color"],
-          ";\n  display: inline-block;\n  box-sizing: border-box;\n  height: "
-        )
-        .concat(
-          16 * n.speedValues.length,
-          "px;\n  float: left;\n  margin-right:15px;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-speed-value-helperbar {\n  position: absolute;\n  width: 25px;\n  height: "
-        )
-        .concat(
-          16 * n.speedValues.length,
-          "px;\n  float: left;\n  left: 18px;\n  z-index:10;\n}\n\n\n#"
-        )
-        .concat(e, "-speed-value-bar:hover,\n#")
-        .concat(e, "-speed-value-helperbar {\n  cursor: pointer;\n}\n\n#")
-        .concat(e, "-volumebar:hover,\n#")
-        .concat(e, "-volumebar-helper:hover,\n#")
-        .concat(e, "-volume-btn:hover,\n#")
-        .concat(e, "-volumebar:active,\n#")
-        .concat(e, "-volumebar-helper:active,\n#")
-        .concat(e, "-volume-btn:active {\n  cursor:pointer;\n}\n\n#")
-        .concat(
-          e,
-          "-speed-cursor {\n  position: absolute;\n  background-color: "
-        )
-        .concat(
-          t["speedbar-cursor-color"],
-          ";\n  top: 0px;\n  left: 0px;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-speed-cursor div {\n  position: absolute;\n  background-color: "
-        )
-        .concat(
-          t["speedbar-cursor-color"],
-          ";\n  left: -2.5px;\n  top: -4px;\n  width: 10px;\n  height: 10px;\n  border-radius: 5px;\n}\n\n#"
-        )
-        .concat(e, "-time-separator{\n  margin:0 3px;\n}\n#")
-        .concat(e, "-speed-cursor:hover {\n  cursor: pointer;\n}\n\n.")
-        .concat(e, "-speed-value-step {\n  width: 16px;\n  background-color: ")
-        .concat(
-          t["speedbar-color"],
-          ";\n  display: inline-block;\n  box-sizing: border-box;\n  height: 2px;\n  margin-top: 7px;\n  margin-bottom: 7px;\n  float: left;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-speed-value {\n  display: inline-block;\n  box-sizing: border-box;\n  height: "
-        )
-        .concat(16 * n.speedValues.length, "px;\n  text-align: left;\n}\n\n.")
-        .concat(
-          e,
-          "-speed-value {\n  box-sizing: border-box;\n  height: 16px;\n  font-size: 12px;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-indicator {\n  font-size: 8px !important;\n  position: absolute;\n  bottom: -3px;\n  color: "
-        )
-        .concat(t.color, ";\n}\n\n/*#")
-        .concat(e, "-speed-settings {\n  height: ")
-        .concat(16 * n.speedValues.length + 32 + 10 - 2, "px;\n}*/\n\n#")
-        .concat(e, "-speed-settings li.no-hover { \n  height: ")
-        .concat(16 * n.speedValues.length + 10 - 2, "px !important; \n}\n#")
-        .concat(e, "-settings-panel.")
-        .concat(
-          e,
-          "-settings-speed-panel {\n  overflow: hidden;\n  width: 92px;\n  position:absolute;\n  z-index:120;\n  /*height: "
-        )
-        .concat(
-          16 * n.speedValues.length + 32 + 20,
-          "px;*/\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
-        )
-        .concat(e, "-settings-panel.")
-        .concat(e, "-settings-speed-panel .")
-        .concat(e, "-speed-btn {\n  float: left;\n}\n\n.")
-        .concat(
-          e,
-          "-settings-speed-panel ul:first-child {\n  text-align: right;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-speed-current {\n  float: right;\n  padding-right: 10px\n}\n\n#"
-        )
-        .concat(e, "-settings-panel .")
-        .concat(e, "-speed-btn {\n  float: right;\n}\n\n#")
-        .concat(
-          e,
-          "-settings-panel ul {\n  width: 100%;\n  margin: 0px;\n  padding: 0px;\n  overflow: hidden;\n}\n\n#"
-        )
-        .concat(e, "-settings-panel.")
-        .concat(
-          e,
-          "-settings-speed-panel ul li {\n  min-width: 70px;\n  display: flex;\n  height: 32px;\n  align-items: center;\n  justify-content:center;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-settings-panel ul li.no-hover:hover {\n  background-color: transparent;\n  cursor: default;\n}\n\ndiv."
-        )
-        .concat(e, "-speed-value:hover {\n  background-color: ")
-        .concat(t["hover-color"], ";\n  cursor: pointer;\n}\n\n#")
-        .concat(
-          e,
-          "-settings-panel ul li {\n  /*position: relative;\n  width: 100%;\n  min-width: 154px;*/\n  list-style-type: none;\n  margin: 0px;\n  padding: 5px;\n  display: flex;\n  height:32px;\n  align-items:center;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-settings-panel ul li label {\n  margin: 0px;\n}\n\n.switch {\n  position: relative;\n  display: inline-block;\n  width: 32px;\n  height: 18px;\n}\n\n.switch input {\n  display: none;\n}\n\n.settings-switch {\n  position: absolute;\n  right: 24px;\n}\n\n.settings-switch::after {\n  clear: both;\n}\n\n.slider {\n  position: absolute;\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: "
-        )
-        .concat(
-          t["slider-off-color"],
-          ';\n  -webkit-transition: .4s;\n  transition: .4s;\n}\n\n.slider:before {\n  position: absolute;\n  content: "";\n  height: 16px;\n  width: 16px;\n  left: 1px;\n  bottom: 1px;\n  background-color: white;\n  -webkit-transition: .4s;\n  transition: .4s;\n}\n\ninput:checked+.slider {\n  background-color: '
-        )
-        .concat(
-          t["slider-on-color"],
-          ";\n}\n\ninput:focus+.slider {\n  box-shadow: 0 0 1px "
-        )
-        .concat(
-          t["slider-on-color"],
-          ";\n}\n\ninput:checked+.slider:before {\n  -webkit-transform: translateX(16px);\n  -ms-transform: translateX(16px);\n  transform: translateX(16px);\n}\n\n\n/* Rounded sliders */\n\n.slider.round {\n  border-radius: 34px;\n}\n\n.slider.round:before {\n  border-radius: 50%;\n}\n\n\n.m-fadeOut {\n  visibility: hidden;\n  opacity: 0;\n  transition: visibility 0s linear 300ms, opacity 300ms;\n}\n\n.m-fadeIn {\n  visibility: visible;\n  opacity: 1;\n  transition: visibility 0s linear 0s, opacity 300ms;\n}\n\n#"
-        )
-        .concat(e, "-settings-panel ul li:hover {\n  background-color: ")
-        .concat(t["hover-color"], ";\n  cursor: pointer;\n}\n\n#")
-        .concat(
-          e,
-          "-settings-panel ul li label:hover {\n  cursor: pointer;\n}\n\n#"
-        )
-        .concat(e, "-loopbar:hover {\n  cursor: pointer;\n}\n\n#")
-        .concat(e, "-status-btn:hover {\n  cursor: pointer;\n}\n\n#")
-        .concat(e, "-controls:active #")
-        .concat(e, "-cursor,\n#")
-        .concat(e, "-controls:hover #")
-        .concat(
-          e,
-          "-cursor  {\n  width: 16px;\n  height: 16px;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
-        )
-        .concat(e, "-volume .")
-        .concat(
-          e,
-          "-volume-cursor-transition {\n  width: 12px;\n  height: 12px;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
-        )
-        .concat(e, "-volume .")
-        .concat(
-          e,
-          "-volume-width-transition\n {\n  width: 50px;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
-        )
-        .concat(e, "-time-display.")
-        .concat(
-          e,
-          "-time-width-transition {\n  position:relative;\n  left: 10px;\n  -webkit-transition: left 0.3s ease;\n  -moz-transition: left 0.3s ease;\n  transition: left 0.3s ease;\n}\n\n#"
-        )
-        .concat(e, "-settings-speed:hover .")
-        .concat(
-          e,
-          "-speed-btn {\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-status-btn:hover {\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
-        )
-        .concat(e, "-loop-btn:hover,\n#")
-        .concat(
-          e,
-          "-dc-btn:hover\n {\n  cursor: pointer;\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n#"
-        )
-        .concat(
-          e,
-          "-settings-btn:hover {\n  cursor: pointer;\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n\n#"
-        )
-        .concat(
-          e,
-          "-full-screen-btn:hover {\n  cursor: pointer;\n  opacity: 1;\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n}\n"
-        )
-        .concat(t["theme-style"], "\n");
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    t.exports = function (t, e) {
-      return {
-        default: {
-          "settings-background-color": "whitesmoke",
-          "hms-background-color": "whitesmoke",
-          "background-color": "whitesmoke",
-          "grad-height": "0px",
-          color: "black",
-          "svg-color": "black",
-          "loopbar-color": "#808086",
-          "speedbar-color": "#999",
-          "runningbar-color": "red",
-          "cursor-color": "red",
-          "speedbar-cursor-color": "red",
-          "button-opacity": "1",
-          "hover-color": "rgba(200, 200, 200, 0.5)",
-          "slider-off-color": "#ccc",
-          "slider-on-color": "red",
-          "preview-border": "1px solid rgba(0,0,0,1)",
-          border: "1px solid rgba(255,255,255,0.2)",
-          "controls-border": "none",
-          "svg-selected-color": "red",
-          "loopbar-boundaries-style::before": "",
-          "loopbar-boundaries-style::after": "",
-          "theme-style": "",
-          "loopbar-boundaries-color": "#808086",
-        },
-        dark: {
-          "settings-background-color": "black",
-          "hms-background-color": "black",
-          "background-color": "black",
-          "grad-height": "0px",
-          color: "white",
-          "svg-color": "white",
-          "loopbar-color": "#808086",
-          "speedbar-color": "#999",
-          "runningbar-color": "red",
-          "cursor-color": "red",
-          "speedbar-cursor-color": "red",
-          "button-opacity": "1",
-          "hover-color": "rgba(90, 90, 90, 0.5)",
-          "slider-off-color": "#ccc",
-          "slider-on-color": "red",
-          "preview-border": "1px solid rgba(0,0,0,1)",
-          border: "1px solid rgba(255,255,255,0.2)",
-          "controls-border": "none",
-          "svg-selected-color": "red",
-          "loopbar-boundaries-style::before": "",
-          "loopbar-boundaries-style::after": "",
-          "theme-style": "",
-          "loopbar-boundaries-color": "#808086",
-        },
-        whiteGold: {
-          "settings-background-color": "white",
-          "hms-background-color": "white",
-          "background-color": "white",
-          "grad-height": "0px",
-          color: "#a17f1a",
-          "svg-color": "#a17f1a",
-          "loopbar-color": "#808086",
-          "speedbar-color": "#999",
-          "runningbar-color": "#a17f1a",
-          "cursor-color": "#a17f1a",
-          "speedbar-cursor-color": "#a17f1a",
-          "button-opacity": "1",
-          "hover-color": "rgba(200, 200, 200, 0.5)",
-          "slider-off-color": "#ccc",
-          "slider-on-color": "#a17f1a",
-          "preview-border": "1px solid rgba(0,0,0,1)",
-          border: "1px solid rgba(255,255,255,0.2)",
-          "controls-border": "none",
-          "svg-selected-color": "red",
-          "loopbar-boundaries-style::before": "",
-          "loopbar-boundaries-style::after": "",
-          "theme-style": "",
-          "loopbar-boundaries-color": "#808086",
-        },
-        darkGold: {
-          "settings-background-color": "black",
-          "hms-background-color": "black",
-          "background-color": "black",
-          "grad-height": "0px",
-          color: "#a17f1a",
-          "svg-color": "#a17f1a",
-          "loopbar-color": "#808086",
-          "speedbar-color": "#999",
-          "runningbar-color": "#a17f1a",
-          "cursor-color": "#a17f1a",
-          "speedbar-cursor-color": "#a17f1a",
-          "button-opacity": "1",
-          "hover-color": "rgba(90, 90, 90, 0.5)",
-          "slider-off-color": "#ccc",
-          "slider-on-color": "#a17f1a",
-          "preview-border": "1px solid rgba(0,0,0,1)",
-          border: "1px solid rgba(255,255,255,0.2)",
-          "controls-border": "none",
-          "svg-selected-color": "red",
-          "loopbar-boundaries-style::before": "",
-          "loopbar-boundaries-style::after": "",
-          "theme-style": "",
-          "loopbar-boundaries-color": "#808086",
-        },
-        transparent: {
-          "background-color": "transparent",
-          "settings-background-color": "rgba(0,0,0,0.5)",
-          "hms-background-color": "rgba(0,0,0,0.5)",
-          "preview-border": "1px solid rgba(0,0,0,1)",
-          color: "#999",
-          "grad-height": "60px",
-          "svg-color": "#999",
-          "loopbar-color": "#808086",
-          "speedbar-color": "#999",
-          "runningbar-color": "red",
-          "cursor-color": "#9e2d11",
-          "cursor-style::before":
-            '\n        box-shadow: 0px 0px 6px 6px red;\n        width: 6px;\n        height: 6px;\n        border-radius: 100%;\n        display: block;\n        content: "";\n        background-color: red;\n        position: relative;\n        left: -2px;\n        top: -2px;\n    ',
-          "cursor-style::after":
-            '\n        width: 6px;\n        height: 6px;\n        border-radius: 100%;\n        box-shadow: 0px 0px 6px 6px red;\n        content: "";\n        display: block;\n        position: absolute;\n        background-color: red;\n        right: -2px;\n        bottom: -2px;\n    ',
-          "speedbar-cursor-color": "red",
-          "button-opacity": "1",
-          "hover-color": "rgba(200, 200, 200, 0.5)",
-          "slider-off-color": "#ccc",
-          "slider-on-color": "red",
-          border: "1px solid rgba(255,255,255,0.1)",
-          "controls-border": "1px solid rgba(255,255,255,0.1)",
-          "svg-selected-color": "red",
-          "loopbar-boundaries-style":
-            "\n        transform: translate(-50%,-37%);\n        position: absolute;\n        width: 18px;\n        background-color: #ff0000;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        position: absolute;\n        width: 18px;\n        background-color: #ff0000;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        width: 18px;\n        height: 9px;\n        border-radius: 100%;\n        top: 1.5px;\n    ",
-          "loopbar-boundaries-style::before":
-            '\n            width: 16px;\n        height: 5px;\n        background: #ff0000;\n        border-radius: 100%;\n        display: block;\n        content: "";\n        position: relative;\n        left: -2px;\n        top: 2px;\n    ',
-          "loopbar-boundaries-style::after":
-            '\n        width: 14px;\n        height: 11px;\n        border-radius: 100%;\n        background: #ff0000;\n        content: "";\n        display: block;\n        position: relative;\n        top: -6px;\n        left: 5px;\n    ',
-          "theme-style": "\n        #".concat(
-            e,
-            "-loopbar-start {\n            left: -9px !important;\n            transform: rotate(180deg);\n            top: -2px;\n        }\n    "
-          ),
-        },
-        "mc-green": {
-          "background-color": "#141416",
-          "settings-background-color": "rgba(0,0,0,0.5)",
-          "hms-background-color": "rgba(0,0,0,0.5)",
-          "preview-border": "1px solid rgba(0,0,0,1)",
-          color: "#999",
-          "grad-height": "0px",
-          "svg-color": "#999",
-          "loopbar-color": "rgba(0,184,139,0.2)",
-          "loopbar-boundaries-color": "#00b88b",
-          "totalbar-color": "rgba(255, 255, 255, 0.11)",
-          "speedbar-color": "#999",
-          "runningbar-color": "#00b88b",
-          "cursor-color": "#00b88b",
-          "speedbar-cursor-color": "#00b88b",
-          "button-opacity": "1",
-          "hover-color": "rgba(0,184,139,0.2)",
-          "slider-off-color": "#ccc",
-          "slider-on-color": "#00b88b",
-          border: "1px solid rgba(255,255,255,0.1)",
-          "controls-border": "1px solid #151515",
-          "svg-selected-color": "#00b88b",
-          "loopbar-boundaries-style":
-            "\n        transform: translate(-50%,-37%);\n        position: absolute;\n        width: 18px;\n        background-color: #00b88b;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        position: absolute;\n        width: 18px;\n        background-color: #00b88b;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        width: 18px;\n        height: 9px;\n        border-radius: 100%;\n        top: 1.5px;\n    ",
-          "loopbar-boundaries-style::before":
-            '\n            width: 16px;\n        height: 5px;\n        background: #00b88b;\n        border-radius: 100%;\n        display: block;\n        content: "";\n        position: relative;\n        left: -2px;\n        top: 2px;\n    ',
-          "loopbar-boundaries-style::after":
-            '\n        width: 14px;\n        height: 11px;\n        border-radius: 100%;\n        background: #00b88b;\n        content: "";\n        display: block;\n        position: relative;\n        top: -6px;\n        left: 5px;\n    ',
-          "theme-style": "\n        #".concat(
-            e,
-            "-loopbar-start {\n            left: -9px !important;\n            transform: rotate(180deg);\n            top: -2px;\n        }\n    "
-          ),
-        },
-        "mc-blue": {
-          "background-color": "#141416",
-          "settings-background-color": "rgba(0,0,0,0.5)",
-          "hms-background-color": "rgba(0,0,0,0.5)",
-          "preview-border": "1px solid rgba(0,0,0,1)",
-          color: "#999",
-          "grad-height": "0px",
-          "svg-color": "#999",
-          "loopbar-color": "rgba(0,153,225,0.2)",
-          "loopbar-boundaries-color": "#0099e1",
-          "totalbar-color": "rgba(255, 255, 255, 0.11)",
-          "speedbar-color": "#999",
-          "runningbar-color": "#0099e1",
-          "cursor-color": "#0099e1",
-          "speedbar-cursor-color": "#0099e1",
-          "button-opacity": "1",
-          "hover-color": "rgba(0,153,225,0.2)",
-          "slider-off-color": "#ccc",
-          "slider-on-color": "#0099e1",
-          border: "1px solid rgba(255,255,255,0.1)",
-          "controls-border": "1px solid #151515",
-          "svg-selected-color": "#0099e1",
-          "loopbar-boundaries-style":
-            "\n        transform: translate(-50%,-37%);\n        position: absolute;\n        width: 18px;\n        background-color: #0099e1;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        position: absolute;\n        width: 18px;\n        background-color: #0099e1;\n        height: 18px;\n        border-radius: 10px;\n        z-index: 40;\n        width: 18px;\n        height: 9px;\n        border-radius: 100%;\n        top: 1.5px;\n    ",
-          "loopbar-boundaries-style::before":
-            '\n            width: 16px;\n        height: 5px;\n        background: #0099e1;\n        border-radius: 100%;\n        display: block;\n        content: "";\n        position: relative;\n        left: -2px;\n        top: 2px;\n    ',
-          "loopbar-boundaries-style::after":
-            '\n        width: 14px;\n        height: 11px;\n        border-radius: 100%;\n        background: #0099e1;\n        content: "";\n        display: block;\n        position: relative;\n        top: -6px;\n        left: 5px;\n    ',
-          "theme-style": "\n        #".concat(
-            e,
-            "-loopbar-start {\n            left: -9px !important;\n            transform: rotate(180deg);\n            top: -2px;\n        }\n    "
-          ),
-        },
-        "on-top": {
-          "background-height": "100%",
-          "pointer-event-panel-height": "calc(100% - 44px)",
-          "controls-bottom": "0px",
-          "settings-panel-bottom": "48px",
-          "controls-position": "0px",
-        },
-        "position-bottom": {
-          "background-height": "calc(100% - 44px)",
-          "pointer-event-panel-height": "calc(100% - 44px)",
-          "controls-bottom": "-0px",
-          "settings-panel-bottom": "48px",
-          "controls-position": "40px",
-        },
-      }[t];
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0),
-      r = i.elid,
-      o = i.elcreate,
-      s = n(2),
-      a = n(11);
-    t.exports = function (t) {
-      t.elements = {};
-      var e = t.clip.props.host;
-      if (
-        ((e.style.display = "flex"),
-        (e.style.justifyContent = "center"),
-        (e.style.alignItems = "center"),
-        (t.clip.props.host.style.position = "relative"),
-        (t.clip.props.host.style.zIndex = "0"),
-        (t.elements.mcPlayer = o("div")),
-        (t.elements.mcPlayer.id = "".concat(t.name)),
-        (t.elements.mcPlayer.className = "".concat(t.className)),
-        (t.elements.mcPlayer.innerHTML = a({ svg: s, name: t.name })),
-        "string" == typeof t.options.host)
-      ) {
-        var n = document.querySelectorAll(t.options.host);
-        for (var i in n) isNaN(i) || n[i].appendChild(t.elements.mcPlayer);
-      } else t.options.host.appendChild(t.elements.mcPlayer);
-      for (var l in ((t.elements.pointerEventPanel = r(
-        "".concat(t.name, "-pointer-event-panel")
-      )),
-      (t.elements.listenerHelper = r("".concat(t.name, "-listener-helper"))),
-      (t.elements.loopBar = r("".concat(t.name, "-loopbar"))),
-      (t.elements.totalBar = r("".concat(t.name, "-totalbar"))),
-      (t.elements.indicator = r("".concat(t.name, "-indicator"))),
-      (t.elements.loopButton = r("".concat(t.name, "-loop-btn"))),
-      (t.elements.volumeBar = r("".concat(t.name, "-volumebar"))),
-      (t.elements.totalTime = r("".concat(t.name, "-time-total"))),
-      (t.elements.volumeControl = r("".concat(t.name, "-volume"))),
-      (t.elements.volumeBtn = r("".concat(t.name, "-volume-btn"))),
-      (t.elements.runningBar = r("".concat(t.name, "-runningbar"))),
-      (t.elements.loopBarEnd = r("".concat(t.name, "-loopbar-end"))),
-      (t.elements.statusButton = r("".concat(t.name, "-status-btn"))),
-      (t.elements.speedBar = r("".concat(t.name, "-speed-value-bar"))),
-      (t.elements.currentTime = r("".concat(t.name, "-time-current"))),
-      (t.elements.timeDisplay = r("".concat(t.name, "-time-display"))),
-      (t.elements.speedCurrent = r("".concat(t.name, "-speed-current"))),
-      (t.elements.loopBarStart = r("".concat(t.name, "-loopbar-start"))),
-      (t.elements.volumeCursor = r("".concat(t.name, "-volume-cursor"))),
-      (t.elements.settingsButton = r("".concat(t.name, "-settings-btn"))),
-      (t.elements.donkeyclipButton = r("".concat(t.name, "-dc-btn"))),
-      (t.elements.timeSeparator = r("".concat(t.name, "-time-separator"))),
-      (t.elements.settingsPanel = r("".concat(t.name, "-settings-panel"))),
-      (t.elements.settingsMainPanel = r("".concat(t.name, "-main-settings"))),
-      (t.elements.fullScreenButton = r("".concat(t.name, "-full-screen-btn"))),
-      (t.elements.volumeBarHelper = r("".concat(t.name, "-volumebar-helper"))),
-      (t.elements.volumeBarActive = r("".concat(t.name, "-volumebar-active"))),
-      (t.elements.settingsSpeedPanel = r("".concat(t.name, "-speed-settings"))),
-      (t.elements.settingsShowVolume = r(
-        "".concat(t.name, "-settings-volume")
-      )),
-      (t.elements.settingsShowPreview = r(
-        "".concat(t.name, "-settings-preview")
-      )),
-      (t.elements.settingsPointerEvents = r(
-        "".concat(t.name, "-settings-pointer-events")
-      )),
-      (t.elements.speedBarHelper = r(
-        "".concat(t.name, "-speed-value-helperbar")
-      )),
-      (t.elements.settingsShowIndicator = r(
-        "".concat(t.name, "-settings-indicator")
-      )),
-      (t.elements.settingsSpeedButtonShow = r(
-        "".concat(t.name, "-settings-speed-show")
-      )),
-      (t.elements.settingsSpeedButtonHide = r(
-        "".concat(t.name, "-settings-speed-hide")
-      )),
-      (t.elements.volumeBarActive.style.width = 100 * t.settings.volume + "%"),
-      (t.elements.currentTime.innerHTML = t.timeFormat(0)),
-      (t.elements.totalTime.innerHTML = t.timeFormat(t.clip.duration)),
-      (t.elements.timeSeparator.innerHTML = "/"),
-      t.elements.settingsPanel.classList.add(
-        "m-fadeOut",
-        "".concat(t.name, "-hide")
-      ),
-      t.options.showIndicator
-        ? ((t.elements.indicator.style.visibility = "visible"),
-          (t.elements.statusButton.style.width = "35px"),
-          (t.elements.statusButton.style.height = "20px"),
-          (t.elements.statusButton.style.bottom = "5px"))
-        : (t.elements.indicator.style.visibility = "hidden"),
-      (t.elements.indicator.innerHTML = t.clip.runTimeInfo.state),
-      (t.elements.settingsSpeedPanel.style.display = "none"),
-      t.elements.settingsSpeedPanel
-        .getElementsByTagName("li")[1]
-        .classList.add("no-hover"),
-      (t.elements.loopBarStart.style.left = "0%"),
-      t.elements.loopBarStart.classList.add(
-        "m-fadeOut",
-        "".concat(t.name, "-hide")
-      ),
-      (t.elements.loopBarEnd.style.left = "100%"),
-      t.elements.loopBarEnd.classList.add(
-        "m-fadeOut",
-        "".concat(t.name, "-hide")
-      ),
-      (t.elements.loopStartTime = r("".concat(t.name, "-loopbar-start-time"))),
-      (t.elements.loopEndTime = r("".concat(t.name, "-loopbar-end-time"))),
-      (t.elements.editableLoopStartTime = document.createElement("input")),
-      (t.elements.editableLoopStartTime.type = "text"),
-      (t.elements.editableLoopStartTime.size =
-        r("".concat(t.name, "-time-total")).innerHTML.length + 1),
-      (t.elements.editableLoopStartTime.maxLength = r(
-        "".concat(t.name, "-time-total")
-      ).innerHTML.length),
-      (t.elements.editableLoopStartTime.style.height = r(
-        "".concat(t.name, "-time-total")
-      ).offsetHeight),
-      (t.elements.editableLoopStartTime.value = r(
-        "".concat(t.name, "-loopbar-start-time")
-      ).innerHTML),
-      (t.elements.editableLoopStartTime.style.fontSize = "8px"),
-      (t.elements.editableLoopEndTime = document.createElement("input")),
-      (t.elements.editableLoopEndTime.type = "text"),
-      (t.elements.editableLoopEndTime.size =
-        r("".concat(t.name, "-time-total")).innerHTML.length + 1),
-      (t.elements.editableLoopEndTime.maxLength = r(
-        "".concat(t.name, "-time-total")
-      ).innerHTML.length),
-      (t.elements.editableLoopEndTime.style.height = r(
-        "".concat(t.name, "-time-total")
-      ).offsetHeight),
-      (t.elements.editableLoopEndTime.value = r(
-        "".concat(t.name, "-loopbar-start-time")
-      ).innerHTML),
-      (t.elements.editableLoopEndTime.pattern = "d*"),
-      (t.elements.editableLoopEndTime.style.fontSize = "8px"),
-      r("".concat(t.name, "-loop-time")).classList.add(
-        "m-fadeOut",
-        "".concat(t.name, "-hide")
-      ),
-      r("".concat(t.name, "-hover-display")).classList.add("m-fadeOut"),
-      (r("".concat(t.name, "-show-volume-checkbox")).checked =
-        t.options.showVolume),
-      (r("".concat(t.name, "-show-indicator-checkbox")).checked =
-        t.options.showIndicator),
-      (r("".concat(t.name, "-show-preview-checkbox")).checked =
-        t.options.preview),
-      (r("".concat(t.name, "-pointer-events-checkbox")).checked =
-        t.options.pointerEvents),
-      t.options.pointerEvents
-        ? ((t.elements.mcPlayer.style.pointerEvents = "none"),
-          (t.elements.pointerEventPanel.style.pointerEvents = "auto"),
-          (r("".concat(t.name, "-controls")).style.pointerEvents = "auto"),
-          (t.elements.settingsPanel.style.pointerEvents = "auto"))
-        : ((t.elements.mcPlayer.style.pointerEvents = "none"),
-          (t.elements.pointerEventPanel.style.pointerEvents = "none"),
-          (r("".concat(t.name, "-controls")).style.pointerEvents = "auto"),
-          (t.elements.settingsPanel.style.pointerEvents = "auto")),
-      (t.elements.listenerHelper.style.pointerEvents = "none"),
-      t.options.showVolume
-        ? ((t.elements.timeDisplay.style.left = ""),
-          (t.elements.volumeControl.style.visibility = "visible"))
-        : ((t.elements.timeDisplay.style.left = "45px"),
-          (t.elements.volumeControl.style.visibility = "hidden"),
-          t.elements.volumeControl.classList.toggle("".concat(t.name, "-hide")),
-          t.elements.volumeControl.classList.toggle(
-            "".concat(t.name, "-volume-width-transition")
-          )),
-      t.options.speedValues)) {
-        var c = o("div");
-        c.className = "".concat(t.name, "-speed-value-step");
-        var u = o("div");
-        (u.className = "".concat(t.name, "-speed-value")),
-          (u.dataset.speedValue = t.options.speedValues[l]),
-          (u.innerHTML = t.options.speedValues[l]),
-          (u.dataset.zone = l),
-          r("".concat(t.name, "-speed-value")).prepend(u),
-          t.elements.speedBar.prepend(c);
-      }
-      !1 === t.options.buttons.fullScreen &&
-        t.elements.fullScreenButton.remove(),
-        !1 === t.options.buttons.settings && t.elements.settingsButton.remove(),
-        !1 === t.options.buttons.donkeyclip &&
-          t.elements.donkeyclipButton.remove(),
-        !1 === t.options.buttons.loop && t.elements.loopButton.remove();
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    t.exports = function (t) {
-      return '\n  <div\n    class="pointer-event-panel"\n    id="'
-        .concat(
-          t.name,
-          '-pointer-event-panel"\n  ></div>\n  <div\n    class="pointer-event-panel"\n    id="'
-        )
-        .concat(
-          t.name,
-          '-listener-helper"\n  ></div>\n  <div class="grad"></div>\n  <div class="background"></div>\n  <div id="'
-        )
-        .concat(t.name, '-controls">\n    <div id="')
-        .concat(t.name, '-totalbar">\n      <div id="')
-        .concat(t.name, '-hover-display">\n        <div id="')
-        .concat(
-          t.name,
-          '-hover-millisecond"></div>\n      </div>\n      <div id="'
-        )
-        .concat(t.name, '-loopbar">\n        <div\n          class="')
-        .concat(t.name, '-loop-boundaries"\n          id="')
-        .concat(
-          t.name,
-          '-loopbar-start"\n        ></div>\n        <div\n          class="'
-        )
-        .concat(t.name, '-loop-boundaries"\n          id="')
-        .concat(t.name, '-loopbar-end"\n        ></div>\n        <div id="')
-        .concat(t.name, '-helperbar"></div>\n        <div id="')
-        .concat(t.name, '-runningbar">\n          <div id="')
-        .concat(
-          t.name,
-          '-cursor"></div>\n        </div>\n      </div>\n    </div>\n    <div id="'
-        )
-        .concat(t.name, '-left-controls">\n      <div id="')
-        .concat(t.name, '-status-btn">\n        ')
-        .concat(t.svg.playSVG, '\n        <span id="')
-        .concat(t.name, '-indicator"></span>\n      </div>\n      <div id="')
-        .concat(t.name, '-volume">\n        <div id="')
-        .concat(t.name, '-volume-btn">\n          ')
-        .concat(t.svg.volumeSVG, '\n        </div>\n        <div id="')
-        .concat(t.name, '-volumebar-helper"></div>\n        <div id="')
-        .concat(t.name, '-volumebar">\n            <div id="')
-        .concat(t.name, '-volumebar-active">\n              <div id="')
-        .concat(
-          t.name,
-          '-volume-cursor"></div>\n            </div>\n        </div>\n      </div>\n      <div id="'
-        )
-        .concat(t.name, '-time-display">\n        <span id="')
-        .concat(t.name, '-time-current"></span>\n        <span id="')
-        .concat(t.name, '-time-separator"></span>\n        <span id="')
-        .concat(
-          t.name,
-          '-time-total"></span>\n      </div>\n    </div>\n    <div id="'
-        )
-        .concat(t.name, '-right-controls">\n      <div\n        id="')
-        .concat(
-          t.name,
-          '-loop-btn-container"\n      >\n        <div\n          id="'
-        )
-        .concat(t.name, '-loop-btn"\n        >')
-        .concat(t.svg.loopSVG, '</div>\n        <div\n          id="')
-        .concat(
-          t.name,
-          '-loop-time"\n        >\n          <span\n            id="'
-        )
-        .concat(t.name, '-loopbar-start-time"\n            class="')
-        .concat(
-          t.name,
-          '-loopbar-time"\n          ></span>\n          <span>:</span>\n          <span\n            id="'
-        )
-        .concat(t.name, '-loopbar-end-time"\n            class="')
-        .concat(
-          t.name,
-          '-loopbar-time"\n          ></span>\n        </div>\n      </div>\n      <div\n        id="'
-        )
-        .concat(t.name, '-settings-btn"\n      >')
-        .concat(t.svg.settingsSVG, '</div>\n      <div\n        id="')
-        .concat(t.name, '-dc-btn"\n      >\n        ')
-        .concat(t.svg.dcSVG, '\n      </div>\n      \n      <div\n        id="')
-        .concat(t.name, '-full-screen-btn"\n      >')
-        .concat(
-          t.svg.fullScreenSVG,
-          '</div>\n    </div>\n    \n\n  </div>\n  <div id="'
-        )
-        .concat(t.name, '-settings-panel">\n    <ul id="')
-        .concat(t.name, '-main-settings">\n      <li id="')
-        .concat(
-          t.name,
-          '-settings-pointer-events">\n        <label>Pointer Events</label>\n        <label class="switch settings-switch">\n          <input id="'
-        )
-        .concat(
-          t.name,
-          '-pointer-events-checkbox" type="checkbox">\n          <span class="slider round"></span>\n        </label>\n      </li>\n      <li id="'
-        )
-        .concat(
-          t.name,
-          '-settings-preview">\n        <label>Show Preview</label>\n        <label class="switch settings-switch">\n          <input id="'
-        )
-        .concat(
-          t.name,
-          '-show-preview-checkbox" type="checkbox">\n          <span class="slider round"></span>\n        </label>\n      </li>\n      <li id="'
-        )
-        .concat(
-          t.name,
-          '-settings-indicator">\n        <label>Show Indicator</label>\n        <label class="switch settings-switch">\n          <input id="'
-        )
-        .concat(
-          t.name,
-          '-show-indicator-checkbox" type="checkbox">\n          <span class="slider round"></span>\n        </label>\n      </li>\n      <li id="'
-        )
-        .concat(
-          t.name,
-          '-settings-volume">\n        <label>Show Volume</label>\n        <label class="switch settings-switch">\n          <input id="'
-        )
-        .concat(
-          t.name,
-          '-show-volume-checkbox" type="checkbox">\n          <span class="slider round"></span>\n        </label>\n      </li>\n      <li id="'
-        )
-        .concat(
-          t.name,
-          '-settings-speed-show">\n        <label>Speed</label>\n        <div class="'
-        )
-        .concat(t.name, '-speed-btn">')
-        .concat(t.svg.arrowRightSVG, '</div>\n        <span id="')
-        .concat(
-          t.name,
-          '-speed-current"></span>\n      </li>\n    </ul>\n    <ul id="'
-        )
-        .concat(t.name, '-speed-settings">\n      <li id="')
-        .concat(t.name, '-settings-speed-hide">\n        <div class="')
-        .concat(t.name, '-speed-btn">')
-        .concat(t.svg.arrowLeftSVG, "</div>\n        <label id=")
-        .concat(
-          t.name,
-          '-speed-runtime>Speed</label>\n      </li>\n      <li>\n        <div id="'
-        )
-        .concat(t.name, '-speed-value-helperbar"></div>\n        <div id="')
-        .concat(
-          t.name,
-          '-speed-value-bar">\n          <div\n            class="'
-        )
-        .concat(t.name, '-speed-value-step"\n            id="')
-        .concat(
-          t.name,
-          '-speed-cursor"\n          >\n            <div></div>\n          </div>\n        </div>\n        <div id="'
-        )
-        .concat(
-          t.name,
-          '-speed-value">\n        </div>\n      </li>\n    </ul>\n  </div>\n'
-        );
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0),
-      r = i.addListener,
-      o = i.removeListener,
-      s = i.elid,
-      a = n(2);
-    t.exports = function (t) {
-      var e = !1;
-      t.elements.volumeBtn.onclick = function () {
-        if (t.settings.volumeMute) {
-          (t.elements.volumeBarActive.style.width =
-            100 * t.settings.previousVolume + "%"),
-            t.clip.setVolume(t.settings.previousVolume),
-            (t.settings.volumeMute = !1);
-          var e = document.createElement("span");
-          (e.innerHTML = a.volumeSVG),
-            t.elements.volumeBtn.getElementsByTagName("svg")[0].replaceWith(e);
-        } else {
-          (t.settings.volumeMute = !0),
-            (t.elements.volumeBarActive.style.width = "0%"),
-            t.clip.setVolume(0);
-          var n = document.createElement("span");
-          (n.innerHTML = a.volumeMuteSVG),
-            t.elements.volumeBtn.getElementsByTagName("svg")[0].replaceWith(n);
-        }
-      };
-      var n = !1;
-      (t.elements.volumeBtn.onmouseover = function () {
-        (n = !0),
-          t.elements.volumeCursor.classList.add(
-            "".concat(t.name, "-volume-cursor-transition")
-          ),
-          t.elements.volumeBar.classList.add(
-            "".concat(t.name, "-volume-width-transition")
-          ),
-          t.elements.volumeBarHelper.classList.add(
-            "".concat(t.name, "-volume-width-transition")
-          ),
-          t.elements.timeDisplay.classList.add(
-            "".concat(t.name, "-time-width-transition")
-          );
-      }),
-        (s("".concat(t.name, "-left-controls")).onmouseout = function () {
-          if (n && !e) {
-            var i = event.toElement || event.relatedTarget || event.target;
-            (function (t, e) {
-              var n = e.parentNode;
-              for (; null != n; ) {
-                if (n == t) return !0;
-                n = n.parentNode;
-              }
-              return !1;
-            })(s("".concat(t.name, "-left-controls")), i) ||
-              i === s("".concat(t.name, "-left-controls")) ||
-              ((n = !1),
-              t.elements.volumeCursor.classList.remove(
-                "".concat(t.name, "-volume-cursor-transition")
-              ),
-              t.elements.volumeBar.classList.remove(
-                "".concat(t.name, "-volume-width-transition")
-              ),
-              t.elements.volumeBarHelper.classList.remove(
-                "".concat(t.name, "-volume-width-transition")
-              ),
-              t.elements.timeDisplay.classList.remove(
-                "".concat(t.name, "-time-width-transition")
-              ));
-          }
-        }),
-        (t.listeners.onCursorMoveVolumeBar = function (e) {
-          e.preventDefault();
-          var n =
-            (e.clientX || ((e.touches || [])[0] || {}).clientX) -
-            t.elements.volumeBarHelper.getBoundingClientRect().left;
-          if (
-            (n < 0
-              ? (n = 0)
-              : n > t.elements.volumeBarHelper.offsetWidth &&
-                (n = t.elements.volumeBarHelper.offsetWidth),
-            (t.settings.volume = Number(
-              (n / t.elements.volumeBarHelper.offsetWidth).toFixed(2)
-            )),
-            (t.elements.volumeBarActive.style.width =
-              100 * t.settings.volume + "%"),
-            t.clip.setVolume(t.settings.volume),
-            t.settings.volume > 0)
-          ) {
-            t.settings.volumeMute = !1;
-            var i = document.createElement("span");
-            (i.innerHTML = a.volumeSVG),
-              t.elements.volumeBtn
-                .getElementsByTagName("svg")[0]
-                .replaceWith(i);
-          } else if (0 === t.settings.volume) {
-            t.settings.volumeMute = !0;
-            var r = document.createElement("span");
-            (r.innerHTML = a.volumeMuteSVG),
-              t.elements.volumeBtn
-                .getElementsByTagName("svg")[0]
-                .replaceWith(r);
-          }
-        }),
-        (t.listeners.onMouseUpVolumeBar = function (n) {
-          (e = !1),
-            (t.elements.listenerHelper.style.pointerEvents = "none"),
-            n.preventDefault(),
-            t.settings.volume > 0 &&
-              (t.settings.previousVolume = t.settings.volume),
-            o("mouseup", t.listeners.onMouseUpVolumeBar, !1),
-            o("touchend", t.listeners.onMouseUpVolumeBar, !1),
-            o("mousemove", t.listeners.onCursorMoveVolumeBar, !1),
-            o("touchmove", t.listeners.onCursorMoveVolumeBar, !1);
-        }),
-        (t.listeners.onMouseDownVolumeBar = function (n) {
-          (e = !0),
-            (t.elements.listenerHelper.style.pointerEvents = "auto"),
-            n.preventDefault(),
-            t.listeners.onCursorMoveVolumeBar(n),
-            r("mouseup", t.listeners.onMouseUpVolumeBar, !1),
-            r("touchend", t.listeners.onMouseUpVolumeBar, !1),
-            r("mousemove", t.listeners.onCursorMoveVolumeBar, !1),
-            r("touchmove", t.listeners.onCursorMoveVolumeBar, !1);
-        }),
-        t.elements.volumeBarHelper.addEventListener(
-          "mousedown",
-          t.listeners.onMouseDownVolumeBar,
-          !1
-        ),
-        t.elements.volumeCursor.addEventListener(
-          "mousedown",
-          t.listeners.onMouseDownVolumeBar,
-          !1
-        ),
-        t.elements.volumeBarHelper.addEventListener(
-          "touchstart",
-          t.listeners.onMouseDownVolumeBar,
-          { passive: !1 },
-          !1
-        ),
-        t.elements.volumeCursor.addEventListener(
-          "touchstart",
-          t.listeners.onMouseDownVolumeBar,
-          { passive: !1 },
-          !1
-        );
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0),
-      r = i.addListener,
-      o = i.removeListener;
-    t.exports = function (t) {
-      (t.listeners.onCursorMoveLoopStart = function (e) {
-        e.preventDefault();
-        var n = e.clientX || ((e.touches || [])[0] || {}).clientX,
-          i = t.elements.totalBar.getBoundingClientRect(),
-          r = Math.round(n - i.left),
-          o = Math.round(
-            (t.settings.loopEndMillisecond / t.clip.duration) *
-              t.elements.totalBar.offsetWidth
-          );
-        r < 0
-          ? (r = 0)
-          : r > t.elements.totalBar.offsetWidth &&
-            (r = t.elements.totalBar.offsetWidth);
-        var s =
-          (t.clip.runTimeInfo.currentMillisecond / t.clip.duration) *
-            t.elements.totalBar.offsetWidth -
-          r;
-        (t.elements.loopBar.style.left = r + "px"),
-          (t.elements.loopBar.style.width = o - r + "px"),
-          (t.elements.runningBar.style.width = s + "px"),
-          (t.settings.loopLastPositionXPxls = r),
-          (t.settings.loopStartMillisecond = Math.round(
-            (t.clip.duration * t.elements.loopBar.offsetLeft) /
-              t.elements.totalBar.offsetWidth
-          )),
-          t.settings.loopEndMillisecond < t.settings.loopStartMillisecond &&
-            ((t.settings.loopEndMillisecond = t.settings.loopStartMillisecond),
-            (t.elements.loopBar.style.width = "0px"),
-            (t.elements.runningBar.style.width = "0px")),
-          (t.elements.loopEndTime.innerHTML = t.settings.loopEndMillisecond),
-          (t.elements.loopStartTime.innerHTML =
-            t.settings.loopStartMillisecond),
-          t.settings.loopStartMillisecond >
-            t.clip.runTimeInfo.currentMillisecond &&
-            (t.settings.loopJourney = !0);
-      }),
-        (t.listeners.onMouseUpLoopStart = function (e) {
-          if (
-            ((t.elements.listenerHelper.style.pointerEvents = "none"),
-            (t.settings.resizeLoop = !1),
-            e.preventDefault(),
-            t.settings.loopJourney &&
-              (t.createProgressDrag(t.elements.runningBar.offsetWidth),
-              (t.settings.loopJourney = !1)),
-            (t.elements.loopBar.style.left =
-              (t.elements.loopBar.offsetLeft /
-                t.elements.totalBar.offsetWidth) *
-                100 +
-              "%"),
-            (t.elements.loopBar.style.width =
-              (t.elements.loopBar.offsetWidth /
-                t.elements.totalBar.offsetWidth) *
-                100 +
-              "%"),
-            (t.settings.loopStartMillisecond = Math.round(
-              (t.clip.duration * t.elements.loopBar.offsetLeft) /
-                t.elements.totalBar.offsetWidth
-            )),
-            (t.elements.runningBar.style.width =
-              (t.elements.runningBar.offsetWidth /
-                t.elements.loopBar.offsetWidth) *
-                100 +
-              "%"),
-            o("mouseup", t.listeners.onMouseUpLoopStart, !1),
-            o("touchend", t.listeners.onMouseUpLoopStart, !1),
-            o("mousemove", t.listeners.onCursorMoveLoopStart, !1),
-            o("touchmove", t.listeners.onCursorMoveLoopStart, !1),
-            t.elements.loopBar.addEventListener(
-              "mousedown",
-              t.listeners.onMouseDown,
-              !1
-            ),
-            t.elements.loopBar.addEventListener(
-              "touchstart",
-              t.listeners.onMouseDown,
-              { passive: !0 },
-              !1
-            ),
-            t.settings.playAfterResize)
-          ) {
-            var n;
-            if ("idle" === t.clip.runTimeInfo.state)
-              (n =
-                t.clip.speed >= 0
-                  ? t.settings.loopStartMillisecond + 1
-                  : t.settings.loopEndMillisecond - 1),
-                (t.settings.needsUpdate = !0),
-                t.createJourney(t.clip, n, { before: "pause", after: "play" });
-            else t.clip.play();
-            t.settings.playAfterResize = !1;
-          }
-        }),
-        (t.listeners.onMouseDownLoopStart = function (e) {
-          (t.elements.listenerHelper.style.pointerEvents = "auto"),
-            (t.settings.resizeLoop = !0),
-            e.preventDefault(),
-            (t.settings.needsUpdate = !0),
-            "playing" === t.clip.runTimeInfo.state &&
-              (t.clip.pause(), (t.settings.playAfterResize = !0)),
-            t.elements.loopBar.removeEventListener(
-              "mousedown",
-              t.listeners.onMouseDown,
-              !1
-            ),
-            t.elements.loopBar.removeEventListener(
-              "touchstart",
-              t.listeners.onMouseDown,
-              !1
-            ),
-            t.listeners.onCursorMoveLoopStart(e),
-            r("mouseup", t.listeners.onMouseUpLoopStart, !1),
-            r("touchend", t.listeners.onMouseUpLoopStart, !1),
-            r("mousemove", t.listeners.onCursorMoveLoopStart, !1),
-            r("touchmove", t.listeners.onCursorMoveLoopStart, !1);
-        }),
-        t.elements.loopBarStart.addEventListener(
-          "mousedown",
-          t.listeners.onMouseDownLoopStart,
-          !1
-        ),
-        t.elements.loopBarStart.addEventListener(
-          "touchstart",
-          t.listeners.onMouseDownLoopStart,
-          { passive: !1 },
-          !1
-        );
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0),
-      r = i.addListener,
-      o = i.removeListener;
-    t.exports = function (t) {
-      (t.listeners.onCursorMoveLoopEnd = function (e) {
-        e.preventDefault();
-        var n =
-          (e.clientX || ((e.touches || [])[0] || {}).clientX) -
-          t.elements.totalBar.getBoundingClientRect().left;
-        n < 0
-          ? (n = 0)
-          : n > t.elements.totalBar.offsetWidth &&
-            (n = t.elements.totalBar.offsetWidth),
-          t.elements.runningBar.offsetWidth >= t.elements.loopBar.offsetWidth &&
-            (t.elements.runningBar.style.width =
-              t.elements.loopBar.offsetWidth + "px"),
-          t.settings.loopLastPositionXPxls - n < 0
-            ? (t.elements.loopBar.style.width =
-                Math.abs(t.settings.loopLastPositionXPxls - n) + "px")
-            : ((t.elements.loopBar.style.left = n + "px"),
-              (t.settings.loopLastPositionXPxls = n)),
-          (t.settings.loopEndMillisecond = Math.round(
-            (t.clip.duration *
-              ((parseFloat(t.elements.loopBar.style.left) || 0) +
-                parseFloat(t.elements.loopBar.style.width))) /
-              t.elements.totalBar.offsetWidth
-          )),
-          t.settings.loopEndMillisecond <
-            t.clip.runTimeInfo.currentMillisecond &&
-            (t.settings.loopJourney = !0),
-          t.settings.loopStartMillisecond > t.settings.loopEndMillisecond &&
-            ((t.settings.loopStartMillisecond = t.settings.loopEndMillisecond),
-            (t.settings.loopJourney = !0)),
-          (t.elements.loopEndTime.innerHTML = t.settings.loopEndMillisecond),
-          (t.elements.loopStartTime.innerHTML =
-            t.settings.loopStartMillisecond);
-      }),
-        (t.listeners.onMouseUpLoopEnd = function (e) {
-          if (
-            ((t.elements.listenerHelper.style.pointerEvents = "none"),
-            (t.settings.resizeLoop = !1),
-            e.preventDefault(),
-            (t.elements.runningBar.style.width =
-              (t.elements.runningBar.offsetWidth /
-                t.elements.loopBar.offsetWidth) *
-                100 +
-              "%"),
-            (t.elements.loopBar.style.left =
-              (t.elements.loopBar.offsetLeft /
-                t.elements.totalBar.offsetWidth) *
-                100 +
-              "%"),
-            (t.elements.loopBar.style.width =
-              (t.elements.loopBar.offsetWidth /
-                t.elements.totalBar.offsetWidth) *
-                100 +
-              "%"),
-            t.settings.loopJourney &&
-              (t.createProgressDrag(t.elements.runningBar.offsetWidth),
-              (t.settings.loopJourney = !1)),
-            o("mouseup", t.listeners.onMouseUpLoopEnd, !1),
-            o("touchend", t.listeners.onMouseUpLoopEnd, !1),
-            o("mousemove", t.listeners.onCursorMoveLoopEnd, !1),
-            o("touchmove", t.listeners.onCursorMoveLoopEnd, !1),
-            t.elements.loopBar.addEventListener(
-              "mousedown",
-              t.listeners.onMouseDown,
-              !1
-            ),
-            t.elements.loopBar.addEventListener(
-              "touchstart",
-              t.listeners.onMouseDown,
-              { passive: !0 },
-              !1
-            ),
-            t.settings.playAfterResize)
-          ) {
-            var n;
-            if ("idle" === t.clip.runTimeInfo.state)
-              (n =
-                t.clip.speed >= 0
-                  ? t.settings.loopStartMillisecond + 1
-                  : t.settings.loopEndMillisecond - 1),
-                (t.settings.needsUpdate = !0),
-                t.createJourney(t.clip, n, { before: "pause", after: "play" });
-            else if ("completed" === t.clip.runTimeInfo.state) {
-              var i;
-              (i =
-                t.clip.speed >= 0
-                  ? t.settings.loopStartMillisecond + 1
-                  : t.settings.loopEndMillisecond - 1),
-                (t.settings.needsUpdate = !0),
-                t.createJourney(t.clip, i, { before: "pause", after: "play" });
-            } else t.clip.play();
-            t.settings.playAfterResize = !1;
-          }
-        }),
-        (t.listeners.onMouseDownLoopEnd = function (e) {
-          (t.elements.listenerHelper.style.pointerEvents = "auto"),
-            (t.settings.resizeLoop = !0),
-            (t.settings.needsUpdate = !0),
-            "playing" === t.clip.runTimeInfo.state &&
-              (t.clip.pause(), (t.settings.playAfterResize = !0)),
-            e.preventDefault(),
-            (t.elements.runningBar.style.width =
-              t.elements.runningBar.offsetWidth + "px"),
-            (t.elements.loopBar.style.left =
-              t.elements.loopBar.offsetLeft + "px"),
-            (t.elements.loopBar.style.width =
-              t.elements.loopBar.offsetWidth + "px"),
-            t.elements.loopBar.removeEventListener(
-              "mousedown",
-              t.listeners.onMouseDown,
-              !1
-            ),
-            t.elements.loopBar.removeEventListener(
-              "touchstart",
-              t.listeners.onMouseDown,
-              !1
-            ),
-            t.listeners.onCursorMoveLoopEnd(e),
-            r("mouseup", t.listeners.onMouseUpLoopEnd, !1),
-            r("touchend", t.listeners.onMouseUpLoopEnd, !1),
-            r("mousemove", t.listeners.onCursorMoveLoopEnd, !1),
-            r("touchmove", t.listeners.onCursorMoveLoopEnd, !1);
-        }),
-        t.elements.loopBarEnd.addEventListener(
-          "mousedown",
-          t.listeners.onMouseDownLoopEnd,
-          !1
-        ),
-        t.elements.loopBarEnd.addEventListener(
-          "touchstart",
-          t.listeners.onMouseDownLoopEnd,
-          { passive: !1 },
-          !1
-        );
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    t.exports = function (t) {
-      (t.listeners.editableLoopStartTime = function () {
-        (t.elements.editableLoopStartTime.value =
-          t.elements.loopStartTime.innerHTML),
-          t.elements.loopStartTime.replaceWith(
-            t.elements.editableLoopStartTime
-          ),
-          t.elements.editableLoopStartTime.focus();
-      }),
-        (t.listeners.editableLoopEndTime = function () {
-          (t.elements.editableLoopEndTime.value =
-            t.elements.loopEndTime.innerHTML),
-            t.elements.loopEndTime.replaceWith(t.elements.editableLoopEndTime),
-            t.elements.editableLoopEndTime.focus();
-        }),
-        (t.elements.editableLoopEndTime.onkeydown = t.elements.editableLoopStartTime.onkeydown = function (
-          e
-        ) {
-          e.preventDefault(),
-            13 === e.keyCode &&
-              (t.elements.editableLoopStartTime.onfocusout(),
-              t.elements.editableLoopEndTime.onfocusout()),
-            8 === e.keyCode &&
-              (e.target.value = e.target.value
-                .toString()
-                .substring(0, e.target.value.toString().length - 1)),
-            13 === e.keyCode && e.target.blur();
-          var n = parseFloat((e.target.value || 0).toString() + e.key);
-          if (!(n > t.clip.duration))
-            if (
-              ((e.target.value = n),
-              e.target === t.elements.editableLoopStartTime)
-            ) {
-              var i = t.elements.totalBar.getBoundingClientRect(),
-                r = {
-                  preventDefault: function () {},
-                  clientX:
-                    (t.elements.totalBar.offsetWidth / t.clip.duration) *
-                      e.target.value +
-                    i.left,
-                };
-              t.listeners.onMouseDownLoopStart(r),
-                t.listeners.onCursorMoveLoopStart(r),
-                t.listeners.onMouseUpLoopStart(r);
-            } else if (e.target === t.elements.editableLoopEndTime) {
-              var o = t.elements.totalBar.getBoundingClientRect(),
-                s = {
-                  preventDefault: function () {},
-                  clientX:
-                    (t.elements.totalBar.offsetWidth / t.clip.duration) *
-                      e.target.value +
-                    o.left,
-                };
-              t.listeners.onMouseDownLoopEnd(s),
-                t.listeners.onCursorMoveLoopEnd(s),
-                t.listeners.onMouseUpLoopEnd(s);
-            }
-        }),
-        (t.elements.loopStartTime.onclick = t.listeners.editableLoopStartTime),
-        (t.elements.loopEndTime.onclick = t.listeners.editableLoopEndTime),
-        (t.elements.editableLoopStartTime.onfocusout = function () {
-          t.elements.editableLoopStartTime.replaceWith(
-            t.elements.loopStartTime
-          );
-        }),
-        (t.elements.editableLoopEndTime.onfocusout = function () {
-          t.elements.editableLoopEndTime.replaceWith(t.elements.loopEndTime);
-        });
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0),
-      r = i.addListener,
-      o = i.removeListener;
-    t.exports = function (t) {
-      (t.listeners.onCursorMove = function (e) {
-        e.preventDefault();
-        var n =
-          (e.clientX || ((e.touches || [])[0] || {}).clientX) -
-          t.elements.loopBar.getBoundingClientRect().left;
-        n < 0
-          ? (n = 0)
-          : n > t.elements.loopBar.offsetWidth &&
-            (n = t.elements.loopBar.offsetWidth),
-          t.handleDrag(n);
-      }),
-        (t.listeners.onMouseUp = function () {
-          (t.elements.listenerHelper.style.pointerEvents = "none"),
-            o("mouseup", t.listeners.onMouseUp, !1),
-            o("touchend", t.listeners.onMouseUp, !1),
-            o("mousemove", t.listeners.onCursorMove, !1),
-            o("touchmove", t.listeners.onCursorMove, !1),
-            t.handleDragEnd(t.settings);
-        }),
-        (t.listeners.onMouseDown = function (e) {
-          (t.elements.listenerHelper.style.pointerEvents = "auto"),
-            "playing" === t.clip.runTimeInfo.state &&
-              (t.settings.playAfterResize = !0),
-            t.handleDragStart(t.clip),
-            t.listeners.onCursorMove(e),
-            r("mouseup", t.listeners.onMouseUp, !1),
-            r("touchend", t.listeners.onMouseUp, !1),
-            r("mousemove", t.listeners.onCursorMove, !1),
-            r("touchmove", t.listeners.onCursorMove, !1);
-        }),
-        t.elements.loopBar.addEventListener(
-          "mousedown",
-          t.listeners.onMouseDown,
-          !1
-        ),
-        t.elements.loopBar.addEventListener(
-          "touchstart",
-          t.listeners.onMouseDown,
-          { passive: !1 },
-          !1
-        );
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    t.exports = function (t) {
-      t.elements.statusButton.onclick = function (e) {
-        return (
-          e.preventDefault(),
-          "playing" === t.clip.runTimeInfo.state
-            ? t.clip.pause()
-            : "paused" === t.clip.runTimeInfo.state ||
-              "idle" === t.clip.runTimeInfo.state ||
-              "transitional" === t.clip.runTimeInfo.state ||
-              "armed" === t.clip.runTimeInfo.state
-            ? t.clip.play()
-            : "idle" === t.clip.runTimeInfo.state
-            ? t.clip.speed >= 0
-              ? (t.clip.play(), (t.settings.needsUpdate = !0))
-              : (t.createJourney(t.clip, t.settings.loopEndMillisecond - 1, {
-                  before: "pause",
-                  after: "play",
-                }),
-                (t.settings.needsUpdate = !0))
-            : "completed" === t.clip.runTimeInfo.state &&
-              (t.clip.speed >= 0
-                ? (t.createJourney(t.clip, 0, {
-                    before: "pause",
-                    after: "play",
-                  }),
-                  (t.settings.needsUpdate = !0))
-                : (t.createJourney(t.clip, t.settings.loopEndMillisecond - 1, {
-                    before: "pause",
-                    after: "play",
-                  }),
-                  (t.settings.needsUpdate = !0))),
-          !1
-        );
-      };
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0),
-      r = i.elid,
-      o = i.addListener,
-      s = i.removeListener;
-    t.exports = function (t) {
-      (t.elements.settingsShowIndicator.onclick = function (e) {
-        e.preventDefault();
-        var n = r("".concat(t.name, "-show-indicator-checkbox"));
-        n.checked
-          ? ((n.checked = !1),
-            (t.elements.indicator.style.visibility = "hidden"))
-          : ((n.checked = !0),
-            (t.elements.indicator.style.visibility = "visible"));
-      }),
-        (t.elements.settingsPointerEvents.onclick = function (e) {
-          e.preventDefault();
-          var n = r("".concat(t.name, "-pointer-events-checkbox"));
-          n.checked
-            ? ((n.checked = !1),
-              (t.options.pointerEvents = !1),
-              (t.elements.mcPlayer.style.pointerEvents = "none"),
-              (t.elements.pointerEventPanel.style.pointerEvents = "none"),
-              (r("".concat(t.name, "-controls")).style.pointerEvents = "auto"),
-              (t.elements.settingsPanel.style.pointerEvents = "auto"))
-            : ((n.checked = !0),
-              (t.elements.mcPlayer.style.pointerEvents = "none"),
-              (t.elements.pointerEventPanel.style.pointerEvents = "auto"),
-              (r("".concat(t.name, "-controls")).style.pointerEvents = "auto"),
-              (t.elements.settingsPanel.style.pointerEvents = "auto"));
-        }),
-        (t.elements.settingsShowVolume.onclick = function (e) {
-          e.preventDefault(),
-            t.elements.volumeControl.classList.toggle(
-              "".concat(t.name, "-volume-width-transition")
-            ),
-            t.elements.volumeControl.classList.toggle(
-              "".concat(t.name, "-hide")
-            );
-          var n = r("".concat(t.name, "-show-volume-checkbox"));
-          n.checked
-            ? ((n.checked = !1),
-              (t.elements.volumeControl.style.visibility = "hidden"),
-              (t.elements.timeDisplay.style.left = "45px"))
-            : ((n.checked = !0),
-              (t.elements.volumeControl.style.visibility = "visible"),
-              (t.elements.timeDisplay.style.left = ""));
-        }),
-        (t.elements.settingsShowPreview.onclick = function (e) {
-          e.preventDefault();
-          var n = r("".concat(t.name, "-show-preview-checkbox"));
-          n.checked
-            ? ((n.checked = !1),
-              (r("".concat(t.name, "-hover-display")).style.visibility =
-                "hidden"),
-              (r("".concat(t.name, "-hover-display")).style.display = "none"),
-              (t.options.preview = !1))
-            : (t.previewClip || t.createPreviewDisplay(),
-              (n.checked = !0),
-              (r("".concat(t.name, "-hover-display")).style.visibility =
-                "visible"),
-              (r("".concat(t.name, "-hover-display")).style.display = "flex"),
-              (t.options.preview = !0));
-        }),
-        (t.elements.settingsButton.onclick = function (e) {
-          e.preventDefault();
-          var n = r("".concat(t.name, "-controls")),
-            i = function e(n) {
-              if (t.elements.settingsPanel.contains(n.target)) return !0;
-              t.elements.settingsPanel.classList.toggle(
-                "".concat(t.name, "-hide")
-              ),
-                t.elements.settingsPanel.classList.toggle("m-fadeOut"),
-                t.elements.settingsPanel.classList.toggle("m-fadeIn"),
-                t.elements.settingsPanel.className.includes("m-fadeOut") &&
-                  (s("click", e, !1),
-                  t.eventBroadcast("state-change", t.state));
-            };
-          t.elements.settingsPanel.className.includes("m-fadeOut")
-            ? (n.classList.value.includes("force-show-controls") ||
-                n.classList.toggle("force-show-controls"),
-              o("click", i, !1))
-            : s("click", i, !1);
-        });
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0),
-      r = i.elid,
-      o = i.addListener,
-      s = i.removeListener;
-    t.exports = function (t) {
-      t.elements.settingsSpeedButtonShow.onclick = t.elements.settingsSpeedButtonHide.onclick = function (
-        e
-      ) {
-        e.preventDefault(),
-          t.elements.settingsPanel.classList.toggle(
-            "".concat(t.name, "-settings-speed-panel")
-          ),
-          t.elements.settingsPanel.className.includes(
-            "".concat(t.name, "-settings-speed-panel")
-          )
-            ? ((t.elements.settingsMainPanel.style.display = "none"),
-              (t.elements.settingsSpeedPanel.style.display = "block"))
-            : ((t.elements.settingsSpeedPanel.style.display = "none"),
-              (t.elements.settingsMainPanel.style.display = "block"));
-      };
-      var e = function (e) {
-          e.preventDefault();
-          var n = t.elements.speedBar.getBoundingClientRect(),
-            i = (e.clientY || ((e.touches || [])[0] || {}).clientY) - n.top;
-          (i -= 8) < 0
-            ? (i = 0)
-            : i > t.elements.speedBar.offsetHeight - 16 &&
-              (i = t.elements.speedBar.offsetHeight - 16);
-          var o =
-              -1 *
-              ((i = Math.floor(i)) / (16 * (t.options.speedValues.length - 1)) -
-                1),
-            s = 1 / (t.options.speedValues.length - 1),
-            a = t.calculateSpeed(s, t.options.speedValues, o);
-          (r("".concat(t.name, "-speed-runtime")).innerHTML = a + "0"),
-            (r("".concat(t.name, "-speed-cursor")).style.top = i + "px"),
-            (t.clip.executionSpeed = a);
-        },
-        n = function n(i) {
-          var o;
-          (t.elements.listenerHelper.style.pointerEvents = "none"),
-            i.preventDefault(),
-            s("mouseup", n, !1),
-            s("touchend", n, !1),
-            s("mousemove", e, !1),
-            s("touchmove", e, !1),
-            (r("".concat(t.name, "-speed-runtime")).innerHTML = "Speed"),
-            (o = 1 == t.clip.speed ? "Normal" : t.clip.speed),
-            (t.elements.speedCurrent.innerHTML = o);
-        },
-        i = function (i) {
-          (t.elements.listenerHelper.style.pointerEvents = "auto"),
-            i.preventDefault(),
-            e(i),
-            o("mouseup", n, !1),
-            o("touchend", n, !1),
-            o("mousemove", e, !1),
-            o("touchmove", e, !1);
-        };
-      t.elements.speedBarHelper.addEventListener("mousedown", i, !1),
-        t.elements.speedBarHelper.addEventListener(
-          "touchstart",
-          i,
-          { passive: !1 },
-          !1
-        );
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0).elid;
-    t.exports = function (t) {
-      t.elements.loopButton.onclick = function () {
-        (t.settings.loopActivated = !t.settings.loopActivated),
-          t.elements.loopButton.classList.toggle("svg-selected"),
-          t.elements.loopBarStart.classList.toggle("m-fadeOut"),
-          t.elements.loopBarEnd.classList.toggle("m-fadeOut"),
-          t.elements.loopBarStart.classList.toggle("m-fadeIn"),
-          t.elements.loopBarStart.classList.toggle("".concat(t.name, "-hide")),
-          t.elements.loopBarEnd.classList.toggle("m-fadeIn"),
-          t.elements.loopBarEnd.classList.toggle("".concat(t.name, "-hide")),
-          i("".concat(t.name, "-loop-time")).classList.toggle("m-fadeOut"),
-          i("".concat(t.name, "-loop-time")).classList.toggle("m-fadeIn"),
-          i("".concat(t.name, "-loop-time")).classList.toggle(
-            "".concat(t.name, "-hide")
-          ),
-          (t.elements.loopEndTime.innerHTML = t.settings.loopEndMillisecond),
-          (t.elements.loopStartTime.innerHTML =
-            t.settings.loopStartMillisecond),
-          (t.settings.needsUpdate = !0),
-          t.settings.loopActivated ||
-            ((t.elements.loopBar.style.left = "0%"),
-            (t.elements.loopBar.style.width = "100%"),
-            (t.settings.loopStartMillisecond = 0),
-            (t.settings.loopEndMillisecond = t.clip.duration),
-            (t.settings.loopLastPositionXPxls = 0),
-            (t.settings.loopLastPositionXPercentage = 0),
-            (t.elements.runningBar.style.width =
-              (t.clip.runTimeInfo.currentMillisecond / t.clip.duration) * 100 +
-              "%"));
-      };
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0).elid;
-    function r(t, e) {
-      for (var n = e.parentNode; null != n; ) {
-        if (n == t) return !0;
-        n = n.parentNode;
-      }
-      return !1;
-    }
-    t.exports = function (t) {
-      (i("".concat(t.name, "-controls")).onmouseover = function () {
-        t.settings.loopActivated &&
-          (t.elements.loopBarStart.classList.remove("m-fadeOut"),
-          t.elements.loopBarEnd.classList.remove("m-fadeOut"),
-          t.elements.loopBarStart.classList.add("m-fadeIn"),
-          t.elements.loopBarEnd.classList.add("m-fadeIn"));
-      }),
-        (i("".concat(t.name, "-controls")).onmouseout = function (e) {
-          var n = e.toElement || e.relatedTarget || e.target;
-          r(this, n) ||
-            n === this ||
-            (t.settings.loopActivated &&
-              (t.elements.loopBarStart.classList.add("m-fadeOut"),
-              t.elements.loopBarEnd.classList.add("m-fadeOut"),
-              t.elements.loopBarStart.classList.remove("m-fadeIn"),
-              t.elements.loopBarEnd.classList.remove("m-fadeIn")));
-        });
-      var e = !1;
-      (i("".concat(t.name, "-controls")).ontouchstart = function (n) {
-        var i = n.toElement || n.relatedTarget || n.target;
-        r(t.elements.statusButton, i) ||
-          i === t.elements.statusButton ||
-          r(t.elements.settingsButton, i) ||
-          i === t.elements.settingsButton ||
-          r(t.elements.fullScreenButton, i) ||
-          i === t.elements.fullScreenButton ||
-          r(t.elements.loopButton, i) ||
-          i === t.elements.loopButton ||
-          r(t.elements.totalBar, i) ||
-          i === t.elements.totalBar ||
-          ((t.elements.volumeControl.className = "".concat(
-            t.name,
-            "-volume-width-transition"
-          )),
-          (t.elements.volumeBar.className = "".concat(
-            t.name,
-            "-volume-width-transition"
-          )),
-          (t.elements.volumeBarHelper.className = "".concat(
-            t.name,
-            "-volume-width-transition"
-          )),
-          (t.elements.timeDisplay.className = "".concat(
-            t.name,
-            "-time-width-transition"
-          )),
-          (t.elements.volumeCursor.className = "".concat(
-            t.name,
-            "-volume-cursor-transition"
-          )),
-          (e = !0));
-      }),
-        window.addEventListener("touchstart", function (n) {
-          var o = n.toElement || n.relatedTarget || n.target;
-          r(i("".concat(t.name, "-controls")), o) ||
-            o === i("".concat(t.name, "-controls")) ||
-            (e &&
-              ((t.elements.volumeControl.className = ""),
-              (t.elements.volumeBar.className = ""),
-              (t.elements.volumeBarHelper.className = ""),
-              (t.elements.timeDisplay.className = ""),
-              (t.elements.volumeCursor.className = "")));
-        });
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    t.exports = function (t) {
-      t.elements.fullScreenButton.addEventListener("click", function () {
-        var e = t.clip.props.host.className.includes("full-screen");
-        t.clip.props.host !== t.options.host &&
-          !e &&
-          t.clip.props.host.appendChild(t.elements.mcPlayer),
-          t.clip.props.host !== t.options.host &&
-            e &&
-            t.options.host.appendChild(t.elements.mcPlayer),
-          e ? t.exitFullscreen() : t.launchIntoFullscreen(t.clip.props.host);
-      });
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    t.exports = function (t) {
-      t.elements.donkeyclipButton.addEventListener("click", function () {
-        var e,
-          n =
-            ((e = new Date().getTime()),
-            "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (
-              t
-            ) {
-              var n = (e + 16 * Math.random()) % 16 | 0;
-              return (
-                (e = Math.floor(e / 16)),
-                ("x" == t ? n : (3 & n) | 8).toString(16)
-              );
-            })),
-          i = window.open("https://donkeyclip.com?u=".concat(n)),
-          r = t.clip.exportDefinition(),
-          o = t.clipClass;
-        window.addEventListener(
-          "message",
-          function (t) {
-            t.data === n &&
-              i.postMessage(
-                JSON.stringify({ definition: r, clipClass: o, u: n }),
-                "*"
-              );
-          },
-          !1
-        );
-      });
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0),
-      r = i.elid,
-      o = i.addListener,
-      s = i.removeListener;
-    t.exports = function (t) {
-      if (
-        !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
-      ) {
-        var e = function () {
-            t.options.preview &&
-              (r("".concat(t.name, "-hover-display")).classList.toggle(
-                "m-fadeOut"
-              ),
-              r("".concat(t.name, "-hover-display")).classList.toggle(
-                "m-fadeIn"
-              ),
-              (t.elements.loopBar.onmousemove = i));
-          },
-          n = function n() {
-            t.options.preview &&
-              (e(),
-              (t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = e),
-              (t.elements.loopBar.onmousemove = i),
-              s("mouseup", n, !1),
-              s("touchend", n, !1),
-              s("mousemove", i, !1),
-              s("touchmove", i, !1));
-          };
-        (t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = e),
-          (t.elements.loopBar.onmousedown = function () {
-            t.options.preview &&
-              ((t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = null),
-              (t.elements.loopBar.onmousemove = null),
-              o("mouseup", n, !1),
-              o("touchend", n, !1),
-              o("mousemove", i, !1),
-              o("touchmove", i, !1));
-          }),
-          (t.elements.loopBar.onmouseup = function () {
-            t.options.preview &&
-              (s("mouseup", n, !1),
-              s("touchend", n, !1),
-              s("mousemove", i, !1),
-              s("touchmove", i, !1),
-              (t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = e),
-              (t.elements.loopBar.onmousemove = i));
-          });
-        var i = function (e) {
-          var n = e.clientX,
-            i = t.elements.loopBar.getBoundingClientRect();
-          if (
-            n - i.left + t.settings.loopLastPositionXPxls >
-              t.settings.loopLastPositionXPxls +
-                t.elements.loopBar.offsetWidth &&
-            !t.settings.resizeLoop
-          )
-            r("".concat(t.name, "-hover-millisecond")).innerHTML =
-              t.settings.loopEndMillisecond;
-          else if (n - i.left < 0 && !t.settings.resizeLoop)
-            r("".concat(t.name, "-hover-millisecond")).innerHTML =
-              t.settings.loopStartMillisecond;
-          else {
-            var o = n - i.left + t.settings.loopLastPositionXPxls;
-            o < 0 && (o = 0);
-            var s =
-                r("".concat(t.name, "-hover-display")).offsetWidth *
-                t.previewScale,
-              a = s / 2,
-              l = r("".concat(t.name, "-hover-display")).offsetWidth / 2,
-              c = o - l;
-            o - a < 0
-              ? (c = 0 - (s + a))
-              : o + a > t.elements.totalBar.offsetWidth &&
-                (c = t.elements.totalBar.offsetWidth - l - a);
-            var u = Math.round(
-              (o / t.elements.totalBar.offsetWidth) * t.clip.duration
-            );
-            if (t.options.preview) {
-              var d = u / t.clip.duration;
-              t.previewClip.onProgress(d, u);
-            }
-            (r("".concat(t.name, "-hover-millisecond")).innerHTML = u),
-              (r("".concat(t.name, "-hover-display")).style.left = c + "px");
-          }
-        };
-      }
-    };
-  },
-  function (t, e, n) {
-    "use strict";
-    var i = n(0),
-      r = i.el,
-      o = i.elid;
-    t.exports = function (t) {
-      document.addEventListener("fullscreenchange", function () {
-        t.elements.mcPlayer.classList.toggle("full-screen"),
-          t.clip.props.host.classList.toggle("full-screen"),
-          t.options.preview && t.setPreviewDimentions();
-      }),
-        document.addEventListener("webkitfullscreenchange", function () {
-          t.elements.mcPlayer.classList.toggle("full-screen"),
-            t.clip.props.host.classList.toggle("full-screen"),
-            t.options.preview && t.setPreviewDimentions();
-        }),
-        document.addEventListener("mozfullscreenchange", function () {
-          t.elements.mcPlayer.classList.toggle("full-screen"),
-            t.clip.props.host.classList.toggle("full-screen"),
-            t.options.preview && t.setPreviewDimentions();
-        }),
-        document.addEventListener("MSFullscreenChange", function () {
-          t.elements.mcPlayer.classList.toggle("full-screen"),
-            t.clip.props.host.classList.toggle("full-screen"),
-            t.options.preview && t.setPreviewDimentions();
-        }),
-        r("body")[0].addEventListener("click", function (e) {
-          if (e.target.className === "".concat(t.name, "-speed-value")) {
-            var n = e.target.dataset.speedValue - 0;
-            (t.clip.executionSpeed = e.target.dataset.speedValue),
-              (n = 1 == t.clip.speed ? "Normal" : t.clip.speed),
-              (t.elements.speedCurrent.innerHTML = n);
-            var i = 1 / (t.options.speedValues.length - 1),
-              r =
-                -1 *
-                (e.target.dataset.zone * i - 1) *
-                (16 * (t.options.speedValues.length - 1));
-            o("".concat(t.name, "-speed-cursor")).style.top = r + "px";
-          }
-        });
-    };
   },
   function (t, e, n) {
     (function (e, n) {
@@ -16396,7 +16631,7 @@
         );
       }),
         (t.exports = i());
-    }.call(this, n(27), n(3)));
+    }.call(this, n(6), n(1)));
   },
   function (t, e) {
     var n,
