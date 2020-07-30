@@ -11,7 +11,7 @@
   };
   var n,
     i = !0,
-    r = "b9b5aa996feadc557405",
+    r = "cde114b3086a3375ef0e",
     o = {},
     s = [],
     a = [];
@@ -1213,14 +1213,14 @@
                 ),
               null != t.length &&
                 o.push(
-                  `\n\t\t\tif (len !== ${t.length}) {\n\t\t\t\t${this.makeError(
-                    {
-                      type: "arrayLength",
-                      expected: t.length,
-                      actual: "len",
-                      messages: e,
-                    }
-                  )}\n\t\t\t}\n\t\t`
+                  `\n\t\t\tif (len !== ${
+                    t.length
+                  }) {\n\t\t\t\t${this.makeError({
+                    type: "arrayLength",
+                    expected: t.length,
+                    actual: "len",
+                    messages: e,
+                  })}\n\t\t\t}\n\t\t`
                 ),
               null != t.contains &&
                 o.push(
@@ -14317,7 +14317,7 @@
                               }
                             )),
                           i = window.open(
-                            "https://staging.donkeyclip.com?u=".concat(n)
+                            "https://donkeyclip.com?u=".concat(n)
                           ),
                           r = t.clip.exportDefinition(),
                           o = t.clipClass;
