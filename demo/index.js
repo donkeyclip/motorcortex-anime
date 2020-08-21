@@ -1,5 +1,4 @@
-// import Player from "@kissmybutton/motorcortex-player";
-import Player from "../../teo-motorcortex-player";
+import Player from "@kissmybutton/motorcortex-player";
 import { Clip, Group, loadPlugin } from "@kissmybutton/motorcortex/";
 import AnimeDefinition from "../dist/motorcortex-anime.umd";
 const Anime = loadPlugin(AnimeDefinition);
