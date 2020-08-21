@@ -11,7 +11,7 @@
   };
   var n,
     i = !0,
-    r = "f94aaf2c021a08abbc6e",
+    r = "feea0db9312d2b3b2653",
     o = {},
     s = [],
     a = [];
@@ -12536,9 +12536,9 @@
     t.exports = n;
   },
   function (t, e, n) {
-    t.exports = (function (e) {
+    t.exports = (function (t) {
       "use strict";
-      function n(t, e) {
+      function e(t, e) {
         for (var n = 0; n < e.length; n++) {
           var i = e[n];
           (i.enumerable = i.enumerable || !1),
@@ -12547,23 +12547,23 @@
             Object.defineProperty(t, i.key, i);
         }
       }
-      e =
-        e && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
-      var i = function (t) {
+      t =
+        t && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
+      var n = function (t) {
           return document.getElementById(t);
         },
-        r = function (t) {
+        i = function (t) {
           return document.createElement(t);
         },
-        o = function () {
+        r = function () {
           var t;
           return (t = document).addEventListener.apply(t, arguments);
         },
-        s = function () {
+        o = function () {
           var t;
           return (t = document).removeEventListener.apply(t, arguments);
         },
-        a = (function (t, e) {
+        s = (function (t, e) {
           return (
             (function (t) {
               var e = (t.exports = {});
@@ -12595,13 +12595,13 @@
             e.exports
           );
         })(),
-        l = {
+        a = {
           name: "mc-player",
           set playerName(t) {
             this.name += "-" + t;
           },
         },
-        u = function (t, e) {
+        l = function (t, e) {
           return {
             default: {
               "settings-background-color": "whitesmoke",
@@ -12820,53 +12820,33 @@
             },
           }[t];
         },
+        u = n,
         c = i,
         d = r,
         p = o,
-        h = s,
-        f = i,
+        h = n,
+        f = r,
         m = o,
-        v = s,
+        v = r,
         y = o,
-        g = s,
+        g = r,
         b = o,
-        k = s,
-        x = i,
+        k = n,
+        x = r,
         w = o,
-        _ = s,
-        C = i,
+        _ = n,
+        C = r,
         I = o,
-        O = s,
-        j = i,
-        E = i;
-      function P(t, e) {
+        O = n,
+        j = n;
+      function E(t, e) {
         for (var n = e.parentNode; null != n; ) {
           if (n == t) return !0;
           n = n.parentNode;
         }
         return !1;
       }
-      t.exports = function (t) {
-        t.elements.donkeyclipButton.addEventListener("click", function () {
-          var e = S(),
-            n = window.open("https://donkeyclip.com?u=".concat(e)),
-            i = t.clip.exportDefinition(),
-            r = t.clipClass;
-          window.addEventListener(
-            "message",
-            function (t) {
-              t.data === e &&
-                n.postMessage(
-                  JSON.stringify({ definition: i, clipClass: r, u: e }),
-                  "*"
-                );
-            },
-            !1
-          );
-        });
-      };
-      var A,
-        S = function () {
+      var P = function () {
           var t = new Date().getTime();
           return "xxxxxxxx-xxxx".replace(/[xy]/g, function (e) {
             var n = (t + 16 * Math.random()) % 16 | 0;
@@ -12876,24 +12856,20 @@
             return i ? r.toUpperCase() : r;
           });
         },
-        M = i,
-        B = o,
-        D = s,
-        T = function (t) {
+        A = n,
+        S = r,
+        M = o,
+        B = function (t) {
           return document.querySelectorAll(t);
         },
-        L = i,
-        V =
-          ((A = Object.freeze({ __proto__: null, createUID: S })) &&
-            A.default) ||
-          A,
-        z = new e.TimeCapsule(),
-        N = i,
-        $ = function (t) {
+        D = n,
+        T = new t.TimeCapsule(),
+        L = n,
+        V = function (t) {
           return document.getElementsByTagName(t);
         },
-        R = r,
-        F = function (t, e) {
+        z = i,
+        N = function (t, e) {
           function n(t) {
             return "number" == typeof t && isFinite(t);
           }
@@ -12980,11 +12956,11 @@
           e.speedValues.sort(function (t, e) {
             return t - e;
           }),
-            (this.className = l.name),
-            (l.playerName = e.id),
+            (this.className = a.name),
+            (a.playerName = e.id),
             (this.options = e),
             (this.id = this.options.id),
-            (this.name = l.name),
+            (this.name = a.name),
             (this.previewClip = null),
             (this.clip = e.clip),
             (this.clipClass = e.clipClass),
@@ -13022,7 +12998,7 @@
                 (e.style.alignItems = "center"),
                 (t.clip.props.host.style.position = "relative"),
                 (t.clip.props.host.style.zIndex = "0"),
-                (t.elements.mcPlayer = d("div")),
+                (t.elements.mcPlayer = c("div")),
                 (t.elements.mcPlayer.id = "".concat(t.name)),
                 (t.elements.mcPlayer.className = "".concat(t.className)),
                 (t.elements.mcPlayer.innerHTML = (function (t) {
@@ -13215,86 +13191,86 @@
                       t.name,
                       '-speed-value">\n        </div>\n      </li>\n    </ul>\n  </div>\n'
                     );
-                })({ svg: a, name: t.name })),
+                })({ svg: s, name: t.name })),
                 "string" == typeof t.options.host)
               ) {
                 var n = document.querySelectorAll(t.options.host);
                 for (var i in n)
                   isNaN(i) || n[i].appendChild(t.elements.mcPlayer);
               } else t.options.host.appendChild(t.elements.mcPlayer);
-              for (var r in ((t.elements.pointerEventPanel = c(
+              for (var r in ((t.elements.pointerEventPanel = u(
                 "".concat(t.name, "-pointer-event-panel")
               )),
-              (t.elements.listenerHelper = c(
+              (t.elements.listenerHelper = u(
                 "".concat(t.name, "-listener-helper")
               )),
-              (t.elements.loopBar = c("".concat(t.name, "-loopbar"))),
-              (t.elements.totalBar = c("".concat(t.name, "-totalbar"))),
-              (t.elements.indicator = c("".concat(t.name, "-indicator"))),
-              (t.elements.loopButton = c("".concat(t.name, "-loop-btn"))),
-              (t.elements.volumeBar = c("".concat(t.name, "-volumebar"))),
-              (t.elements.totalTime = c("".concat(t.name, "-time-total"))),
-              (t.elements.volumeControl = c("".concat(t.name, "-volume"))),
-              (t.elements.volumeBtn = c("".concat(t.name, "-volume-btn"))),
-              (t.elements.runningBar = c("".concat(t.name, "-runningbar"))),
-              (t.elements.loopBarEnd = c("".concat(t.name, "-loopbar-end"))),
-              (t.elements.statusButton = c("".concat(t.name, "-status-btn"))),
-              (t.elements.speedBar = c("".concat(t.name, "-speed-value-bar"))),
-              (t.elements.currentTime = c("".concat(t.name, "-time-current"))),
-              (t.elements.timeDisplay = c("".concat(t.name, "-time-display"))),
-              (t.elements.speedCurrent = c(
+              (t.elements.loopBar = u("".concat(t.name, "-loopbar"))),
+              (t.elements.totalBar = u("".concat(t.name, "-totalbar"))),
+              (t.elements.indicator = u("".concat(t.name, "-indicator"))),
+              (t.elements.loopButton = u("".concat(t.name, "-loop-btn"))),
+              (t.elements.volumeBar = u("".concat(t.name, "-volumebar"))),
+              (t.elements.totalTime = u("".concat(t.name, "-time-total"))),
+              (t.elements.volumeControl = u("".concat(t.name, "-volume"))),
+              (t.elements.volumeBtn = u("".concat(t.name, "-volume-btn"))),
+              (t.elements.runningBar = u("".concat(t.name, "-runningbar"))),
+              (t.elements.loopBarEnd = u("".concat(t.name, "-loopbar-end"))),
+              (t.elements.statusButton = u("".concat(t.name, "-status-btn"))),
+              (t.elements.speedBar = u("".concat(t.name, "-speed-value-bar"))),
+              (t.elements.currentTime = u("".concat(t.name, "-time-current"))),
+              (t.elements.timeDisplay = u("".concat(t.name, "-time-display"))),
+              (t.elements.speedCurrent = u(
                 "".concat(t.name, "-speed-current")
               )),
-              (t.elements.loopBarStart = c(
+              (t.elements.loopBarStart = u(
                 "".concat(t.name, "-loopbar-start")
               )),
-              (t.elements.volumeCursor = c(
+              (t.elements.volumeCursor = u(
                 "".concat(t.name, "-volume-cursor")
               )),
-              (t.elements.settingsButton = c(
+              (t.elements.settingsButton = u(
                 "".concat(t.name, "-settings-btn")
               )),
-              (t.elements.donkeyclipButton = c("".concat(t.name, "-dc-btn"))),
-              (t.elements.timeSeparator = c(
+              (t.elements.donkeyclipButton = u("".concat(t.name, "-dc-btn"))),
+              (t.elements.timeSeparator = u(
                 "".concat(t.name, "-time-separator")
               )),
-              (t.elements.settingsPanel = c(
+              (t.elements.settingsPanel = u(
                 "".concat(t.name, "-settings-panel")
               )),
-              (t.elements.settingsMainPanel = c(
+              (t.elements.settingsMainPanel = u(
                 "".concat(t.name, "-main-settings")
               )),
-              (t.elements.fullScreenButton = c(
+              (t.elements.fullScreenButton = u(
                 "".concat(t.name, "-full-screen-btn")
               )),
-              (t.elements.volumeBarHelper = c(
+              (t.elements.volumeBarHelper = u(
                 "".concat(t.name, "-volumebar-helper")
               )),
-              (t.elements.volumeBarActive = c(
+              (t.elements.volumeBarActive = u(
                 "".concat(t.name, "-volumebar-active")
               )),
-              (t.elements.settingsSpeedPanel = c(
+              (t.elements.settingsSpeedPanel = u(
                 "".concat(t.name, "-speed-settings")
               )),
-              (t.elements.settingsShowVolume = c(
+              (t.elements.settingsShowVolume = u(
                 "".concat(t.name, "-settings-volume")
               )),
-              (t.elements.settingsShowPreview = c(
+              (t.elements.settingsShowPreview = u(
                 "".concat(t.name, "-settings-preview")
               )),
-              (t.elements.settingsPointerEvents = c(
+              (t.elements.settingsPointerEvents = u(
                 "".concat(t.name, "-settings-pointer-events")
               )),
-              (t.elements.speedBarHelper = c(
+              (t.elements.speedBarHelper = u(
                 "".concat(t.name, "-speed-value-helperbar")
               )),
-              (t.elements.settingsShowIndicator = c(
+              (t.elements.settingsShowIndicator = u(
                 "".concat(t.name, "-settings-indicator")
               )),
-              (t.elements.settingsSpeedButtonShow = c(
+              (t.elements.settingsSpeedButtonShow = u(
                 "".concat(t.name, "-settings-speed-show")
               )),
-              (t.elements.settingsSpeedButtonHide = c(
+              (t.elements.settingsSpeedButtonHide = u(
                 "".concat(t.name, "-settings-speed-hide")
               )),
               (t.elements.volumeBarActive.style.width =
@@ -13327,10 +13303,10 @@
                 "m-fadeOut",
                 "".concat(t.name, "-hide")
               ),
-              (t.elements.loopStartTime = c(
+              (t.elements.loopStartTime = u(
                 "".concat(t.name, "-loopbar-start-time")
               )),
-              (t.elements.loopEndTime = c(
+              (t.elements.loopEndTime = u(
                 "".concat(t.name, "-loopbar-end-time")
               )),
               (t.elements.editableLoopStartTime = document.createElement(
@@ -13338,14 +13314,14 @@
               )),
               (t.elements.editableLoopStartTime.type = "text"),
               (t.elements.editableLoopStartTime.size =
-                c("".concat(t.name, "-time-total")).innerHTML.length + 1),
-              (t.elements.editableLoopStartTime.maxLength = c(
+                u("".concat(t.name, "-time-total")).innerHTML.length + 1),
+              (t.elements.editableLoopStartTime.maxLength = u(
                 "".concat(t.name, "-time-total")
               ).innerHTML.length),
-              (t.elements.editableLoopStartTime.style.height = c(
+              (t.elements.editableLoopStartTime.style.height = u(
                 "".concat(t.name, "-time-total")
               ).offsetHeight),
-              (t.elements.editableLoopStartTime.value = c(
+              (t.elements.editableLoopStartTime.value = u(
                 "".concat(t.name, "-loopbar-start-time")
               ).innerHTML),
               (t.elements.editableLoopStartTime.style.fontSize = "8px"),
@@ -13354,40 +13330,40 @@
               )),
               (t.elements.editableLoopEndTime.type = "text"),
               (t.elements.editableLoopEndTime.size =
-                c("".concat(t.name, "-time-total")).innerHTML.length + 1),
-              (t.elements.editableLoopEndTime.maxLength = c(
+                u("".concat(t.name, "-time-total")).innerHTML.length + 1),
+              (t.elements.editableLoopEndTime.maxLength = u(
                 "".concat(t.name, "-time-total")
               ).innerHTML.length),
-              (t.elements.editableLoopEndTime.style.height = c(
+              (t.elements.editableLoopEndTime.style.height = u(
                 "".concat(t.name, "-time-total")
               ).offsetHeight),
-              (t.elements.editableLoopEndTime.value = c(
+              (t.elements.editableLoopEndTime.value = u(
                 "".concat(t.name, "-loopbar-start-time")
               ).innerHTML),
               (t.elements.editableLoopEndTime.pattern = "d*"),
               (t.elements.editableLoopEndTime.style.fontSize = "8px"),
-              c("".concat(t.name, "-loop-time")).classList.add(
+              u("".concat(t.name, "-loop-time")).classList.add(
                 "m-fadeOut",
                 "".concat(t.name, "-hide")
               ),
-              c("".concat(t.name, "-hover-display")).classList.add("m-fadeOut"),
-              (c("".concat(t.name, "-show-volume-checkbox")).checked =
+              u("".concat(t.name, "-hover-display")).classList.add("m-fadeOut"),
+              (u("".concat(t.name, "-show-volume-checkbox")).checked =
                 t.options.showVolume),
-              (c("".concat(t.name, "-show-indicator-checkbox")).checked =
+              (u("".concat(t.name, "-show-indicator-checkbox")).checked =
                 t.options.showIndicator),
-              (c("".concat(t.name, "-show-preview-checkbox")).checked =
+              (u("".concat(t.name, "-show-preview-checkbox")).checked =
                 t.options.preview),
-              (c("".concat(t.name, "-pointer-events-checkbox")).checked =
+              (u("".concat(t.name, "-pointer-events-checkbox")).checked =
                 t.options.pointerEvents),
               t.options.pointerEvents
                 ? ((t.elements.mcPlayer.style.pointerEvents = "none"),
                   (t.elements.pointerEventPanel.style.pointerEvents = "auto"),
-                  (c("".concat(t.name, "-controls")).style.pointerEvents =
+                  (u("".concat(t.name, "-controls")).style.pointerEvents =
                     "auto"),
                   (t.elements.settingsPanel.style.pointerEvents = "auto"))
                 : ((t.elements.mcPlayer.style.pointerEvents = "none"),
                   (t.elements.pointerEventPanel.style.pointerEvents = "none"),
-                  (c("".concat(t.name, "-controls")).style.pointerEvents =
+                  (u("".concat(t.name, "-controls")).style.pointerEvents =
                     "auto"),
                   (t.elements.settingsPanel.style.pointerEvents = "auto")),
               (t.elements.listenerHelper.style.pointerEvents = "none"),
@@ -13403,14 +13379,14 @@
                     "".concat(t.name, "-volume-width-transition")
                   )),
               t.options.speedValues)) {
-                var o = d("div");
+                var o = c("div");
                 o.className = "".concat(t.name, "-speed-value-step");
-                var s = d("div");
-                (s.className = "".concat(t.name, "-speed-value")),
-                  (s.dataset.speedValue = t.options.speedValues[r]),
-                  (s.innerHTML = t.options.speedValues[r]),
-                  (s.dataset.zone = r),
-                  c("".concat(t.name, "-speed-value")).prepend(s),
+                var a = c("div");
+                (a.className = "".concat(t.name, "-speed-value")),
+                  (a.dataset.speedValue = t.options.speedValues[r]),
+                  (a.innerHTML = t.options.speedValues[r]),
+                  (a.dataset.zone = r),
+                  u("".concat(t.name, "-speed-value")).prepend(a),
                   t.elements.speedBar.prepend(o);
               }
               !1 === t.options.buttons.fullScreen &&
@@ -13429,25 +13405,34 @@
             this.scaleClipHost(),
             this.eventBroadcast("state-change", this.state),
             this.options.preview && this.createPreviewDisplay(),
+            (this.resizeTimeout = setTimeout(function () {}, 20)),
             window.addEventListener("resize", function () {
-              n.options.preview && n.setPreviewDimentions();
+              clearTimeout(n.resizeTimeout),
+                (n.resizeTimeout = setTimeout(function () {
+                  n.options.preview && n.setPreviewDimentions(),
+                    n.options.scaleToFit && n.scaleClipHost();
+                }, 20));
             });
         }
-        var e, i;
+        var n, i;
         return (
-          (e = t),
+          (n = t),
           (i = [
             {
               key: "scaleClipHost",
               value: function () {
                 if (this.options.scaleToFit) {
-                  var t = F(this.clip.props.containerParams, {
+                  var t = N(this.clip.props.containerParams, {
                     width: this.clip.props.host.offsetWidth,
                     height: this.clip.props.host.offsetHeight,
                   });
-                  this.clip.realClip.rootElement.style.transform = "scale(".concat(
+                  (this.clip.realClip.rootElement.style.transform = "scale(".concat(
                     t.scale
-                  );
+                  )),
+                    (this.clip.realClip.rootElement.style.left =
+                      t.position.left + "px"),
+                    (this.clip.realClip.rootElement.style.top =
+                      t.position.top + "px");
                 }
               },
             },
@@ -13479,7 +13464,7 @@
                     s = i.after,
                     a = void 0 === s ? null : s;
                   o && t[o](),
-                    (n.settings.journey = z.startJourney(t)),
+                    (n.settings.journey = T.startJourney(t)),
                     n.settings.journey.station(e),
                     n.settings.journey.destination(),
                     a && t[a]();
@@ -13564,7 +13549,7 @@
             {
               key: "eventBroadcast",
               value: function (t, e) {
-                var n = N("".concat(this.name, "-controls"));
+                var n = L("".concat(this.name, "-controls"));
                 "state-change" === t
                   ? "paused" === e ||
                     "idle" === e ||
@@ -13573,7 +13558,7 @@
                     "blocked" === e
                     ? (n.classList.value.includes("force-show-controls") ||
                         n.classList.toggle("force-show-controls"),
-                      (this.elements.statusButton.innerHTML = a.playSVG),
+                      (this.elements.statusButton.innerHTML = s.playSVG),
                       this.elements.statusButton.appendChild(
                         this.elements.indicator
                       ),
@@ -13582,12 +13567,12 @@
                       )),
                       "blocked" === e &&
                         (this.elements.pointerEventPanel.innerHTML = '\n            <div style="width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;">'.concat(
-                          a.loadingSVG,
+                          s.loadingSVG,
                           "</div>"
                         )))
                     : (n.classList.value.includes("force-show-controls") &&
                         n.classList.toggle("force-show-controls"),
-                      (this.elements.statusButton.innerHTML = a.pauseSVG),
+                      (this.elements.statusButton.innerHTML = s.pauseSVG),
                       this.elements.statusButton.appendChild(
                         this.elements.indicator
                       ),
@@ -13645,7 +13630,7 @@
               key: "handleDragStart",
               value: function () {
                 (this.settings.needsUpdate = !0),
-                  (this.settings.journey = z.startJourney(this.clip));
+                  (this.settings.journey = T.startJourney(this.clip));
               },
             },
             {
@@ -13770,10 +13755,10 @@
                           t.elements.runningBar.offsetWidth
                         ),
                         (t.settings.loopJourney = !1)),
-                      g("mouseup", t.listeners.onMouseUpLoopEnd, !1),
-                      g("touchend", t.listeners.onMouseUpLoopEnd, !1),
-                      g("mousemove", t.listeners.onCursorMoveLoopEnd, !1),
-                      g("touchmove", t.listeners.onCursorMoveLoopEnd, !1),
+                      y("mouseup", t.listeners.onMouseUpLoopEnd, !1),
+                      y("touchend", t.listeners.onMouseUpLoopEnd, !1),
+                      y("mousemove", t.listeners.onCursorMoveLoopEnd, !1),
+                      y("touchmove", t.listeners.onCursorMoveLoopEnd, !1),
                       t.elements.loopBar.addEventListener(
                         "mousedown",
                         t.listeners.onMouseDown,
@@ -13837,10 +13822,10 @@
                         !1
                       ),
                       t.listeners.onCursorMoveLoopEnd(e),
-                      y("mouseup", t.listeners.onMouseUpLoopEnd, !1),
-                      y("touchend", t.listeners.onMouseUpLoopEnd, !1),
-                      y("mousemove", t.listeners.onCursorMoveLoopEnd, !1),
-                      y("touchmove", t.listeners.onCursorMoveLoopEnd, !1);
+                      v("mouseup", t.listeners.onMouseUpLoopEnd, !1),
+                      v("touchend", t.listeners.onMouseUpLoopEnd, !1),
+                      v("mousemove", t.listeners.onCursorMoveLoopEnd, !1),
+                      v("touchmove", t.listeners.onCursorMoveLoopEnd, !1);
                   }),
                   t.elements.loopBarEnd.addEventListener(
                     "mousedown",
@@ -13868,10 +13853,10 @@
                       (t.listeners.onMouseUp = function () {
                         (t.elements.listenerHelper.style.pointerEvents =
                           "none"),
-                          k("mouseup", t.listeners.onMouseUp, !1),
-                          k("touchend", t.listeners.onMouseUp, !1),
-                          k("mousemove", t.listeners.onCursorMove, !1),
-                          k("touchmove", t.listeners.onCursorMove, !1),
+                          b("mouseup", t.listeners.onMouseUp, !1),
+                          b("touchend", t.listeners.onMouseUp, !1),
+                          b("mousemove", t.listeners.onCursorMove, !1),
+                          b("touchmove", t.listeners.onCursorMove, !1),
                           t.handleDragEnd(t.settings);
                       }),
                       (t.listeners.onMouseDown = function (e) {
@@ -13881,10 +13866,10 @@
                             (t.settings.playAfterResize = !0),
                           t.handleDragStart(t.clip),
                           t.listeners.onCursorMove(e),
-                          b("mouseup", t.listeners.onMouseUp, !1),
-                          b("touchend", t.listeners.onMouseUp, !1),
-                          b("mousemove", t.listeners.onCursorMove, !1),
-                          b("touchmove", t.listeners.onCursorMove, !1);
+                          g("mouseup", t.listeners.onMouseUp, !1),
+                          g("touchend", t.listeners.onMouseUp, !1),
+                          g("mousemove", t.listeners.onCursorMove, !1),
+                          g("touchmove", t.listeners.onCursorMove, !1);
                       }),
                       t.elements.loopBar.addEventListener(
                         "mousedown",
@@ -13969,10 +13954,10 @@
                               t.elements.loopBar.offsetWidth) *
                               100 +
                             "%"),
-                          v("mouseup", t.listeners.onMouseUpLoopStart, !1),
-                          v("touchend", t.listeners.onMouseUpLoopStart, !1),
-                          v("mousemove", t.listeners.onCursorMoveLoopStart, !1),
-                          v("touchmove", t.listeners.onCursorMoveLoopStart, !1),
+                          m("mouseup", t.listeners.onMouseUpLoopStart, !1),
+                          m("touchend", t.listeners.onMouseUpLoopStart, !1),
+                          m("mousemove", t.listeners.onCursorMoveLoopStart, !1),
+                          m("touchmove", t.listeners.onCursorMoveLoopStart, !1),
                           t.elements.loopBar.addEventListener(
                             "mousedown",
                             t.listeners.onMouseDown,
@@ -14017,10 +14002,10 @@
                             !1
                           ),
                           t.listeners.onCursorMoveLoopStart(e),
-                          m("mouseup", t.listeners.onMouseUpLoopStart, !1),
-                          m("touchend", t.listeners.onMouseUpLoopStart, !1),
-                          m("mousemove", t.listeners.onCursorMoveLoopStart, !1),
-                          m("touchmove", t.listeners.onCursorMoveLoopStart, !1);
+                          f("mouseup", t.listeners.onMouseUpLoopStart, !1),
+                          f("touchend", t.listeners.onMouseUpLoopStart, !1),
+                          f("mousemove", t.listeners.onCursorMoveLoopStart, !1),
+                          f("touchmove", t.listeners.onCursorMoveLoopStart, !1);
                       }),
                       t.elements.loopBarStart.addEventListener(
                         "mousedown",
@@ -14127,7 +14112,7 @@
                           t.clip.setVolume(t.settings.previousVolume),
                           (t.settings.volumeMute = !1);
                         var e = document.createElement("span");
-                        (e.innerHTML = a.volumeSVG),
+                        (e.innerHTML = s.volumeSVG),
                           t.elements.volumeBtn
                             .getElementsByTagName("svg")[0]
                             .replaceWith(e);
@@ -14136,7 +14121,7 @@
                           (t.elements.volumeBarActive.style.width = "0%"),
                           t.clip.setVolume(0);
                         var n = document.createElement("span");
-                        (n.innerHTML = a.volumeMuteSVG),
+                        (n.innerHTML = s.volumeMuteSVG),
                           t.elements.volumeBtn
                             .getElementsByTagName("svg")[0]
                             .replaceWith(n);
@@ -14158,7 +14143,7 @@
                           "".concat(t.name, "-time-width-transition")
                         );
                     }),
-                      (f(
+                      (h(
                         "".concat(t.name, "-left-controls")
                       ).onmouseout = function () {
                         if (n && !e) {
@@ -14172,8 +14157,8 @@
                               n = n.parentNode;
                             }
                             return !1;
-                          })(f("".concat(t.name, "-left-controls")), i) ||
-                            i === f("".concat(t.name, "-left-controls")) ||
+                          })(h("".concat(t.name, "-left-controls")), i) ||
+                            i === h("".concat(t.name, "-left-controls")) ||
                             ((n = !1),
                             t.elements.volumeCursor.classList.remove(
                               "".concat(t.name, "-volume-cursor-transition")
@@ -14212,14 +14197,14 @@
                         ) {
                           t.settings.volumeMute = !1;
                           var i = document.createElement("span");
-                          (i.innerHTML = a.volumeSVG),
+                          (i.innerHTML = s.volumeSVG),
                             t.elements.volumeBtn
                               .getElementsByTagName("svg")[0]
                               .replaceWith(i);
                         } else if (0 === t.settings.volume) {
                           t.settings.volumeMute = !0;
                           var r = document.createElement("span");
-                          (r.innerHTML = a.volumeMuteSVG),
+                          (r.innerHTML = s.volumeMuteSVG),
                             t.elements.volumeBtn
                               .getElementsByTagName("svg")[0]
                               .replaceWith(r);
@@ -14232,10 +14217,10 @@
                           n.preventDefault(),
                           t.settings.volume > 0 &&
                             (t.settings.previousVolume = t.settings.volume),
-                          h("mouseup", t.listeners.onMouseUpVolumeBar, !1),
-                          h("touchend", t.listeners.onMouseUpVolumeBar, !1),
-                          h("mousemove", t.listeners.onCursorMoveVolumeBar, !1),
-                          h("touchmove", t.listeners.onCursorMoveVolumeBar, !1);
+                          p("mouseup", t.listeners.onMouseUpVolumeBar, !1),
+                          p("touchend", t.listeners.onMouseUpVolumeBar, !1),
+                          p("mousemove", t.listeners.onCursorMoveVolumeBar, !1),
+                          p("touchmove", t.listeners.onCursorMoveVolumeBar, !1);
                       }),
                       (t.listeners.onMouseDownVolumeBar = function (n) {
                         (e = !0),
@@ -14243,10 +14228,10 @@
                             "auto"),
                           n.preventDefault(),
                           t.listeners.onCursorMoveVolumeBar(n),
-                          p("mouseup", t.listeners.onMouseUpVolumeBar, !1),
-                          p("touchend", t.listeners.onMouseUpVolumeBar, !1),
-                          p("mousemove", t.listeners.onCursorMoveVolumeBar, !1),
-                          p("touchmove", t.listeners.onCursorMoveVolumeBar, !1);
+                          d("mouseup", t.listeners.onMouseUpVolumeBar, !1),
+                          d("touchend", t.listeners.onMouseUpVolumeBar, !1),
+                          d("mousemove", t.listeners.onCursorMoveVolumeBar, !1),
+                          d("touchmove", t.listeners.onCursorMoveVolumeBar, !1);
                       }),
                       t.elements.volumeBarHelper.addEventListener(
                         "mousedown",
@@ -14311,7 +14296,7 @@
                   (function (t) {
                     (t.elements.settingsShowIndicator.onclick = function (e) {
                       e.preventDefault();
-                      var n = x("".concat(t.name, "-show-indicator-checkbox"));
+                      var n = k("".concat(t.name, "-show-indicator-checkbox"));
                       n.checked
                         ? ((n.checked = !1),
                           (t.elements.indicator.style.visibility = "hidden"))
@@ -14320,7 +14305,7 @@
                     }),
                       (t.elements.settingsPointerEvents.onclick = function (e) {
                         e.preventDefault();
-                        var n = x(
+                        var n = k(
                           "".concat(t.name, "-pointer-events-checkbox")
                         );
                         n.checked
@@ -14329,7 +14314,7 @@
                             (t.elements.mcPlayer.style.pointerEvents = "none"),
                             (t.elements.pointerEventPanel.style.pointerEvents =
                               "none"),
-                            (x(
+                            (k(
                               "".concat(t.name, "-controls")
                             ).style.pointerEvents = "auto"),
                             (t.elements.settingsPanel.style.pointerEvents =
@@ -14338,7 +14323,7 @@
                             (t.elements.mcPlayer.style.pointerEvents = "none"),
                             (t.elements.pointerEventPanel.style.pointerEvents =
                               "auto"),
-                            (x(
+                            (k(
                               "".concat(t.name, "-controls")
                             ).style.pointerEvents = "auto"),
                             (t.elements.settingsPanel.style.pointerEvents =
@@ -14352,7 +14337,7 @@
                           t.elements.volumeControl.classList.toggle(
                             "".concat(t.name, "-hide")
                           );
-                        var n = x("".concat(t.name, "-show-volume-checkbox"));
+                        var n = k("".concat(t.name, "-show-volume-checkbox"));
                         n.checked
                           ? ((n.checked = !1),
                             (t.elements.volumeControl.style.visibility =
@@ -14365,29 +14350,29 @@
                       }),
                       (t.elements.settingsShowPreview.onclick = function (e) {
                         e.preventDefault();
-                        var n = x("".concat(t.name, "-show-preview-checkbox"));
+                        var n = k("".concat(t.name, "-show-preview-checkbox"));
                         n.checked
                           ? ((n.checked = !1),
-                            (x(
+                            (k(
                               "".concat(t.name, "-hover-display")
                             ).style.visibility = "hidden"),
-                            (x(
+                            (k(
                               "".concat(t.name, "-hover-display")
                             ).style.display = "none"),
                             (t.options.preview = !1))
                           : (t.previewClip || t.createPreviewDisplay(),
                             (n.checked = !0),
-                            (x(
+                            (k(
                               "".concat(t.name, "-hover-display")
                             ).style.visibility = "visible"),
-                            (x(
+                            (k(
                               "".concat(t.name, "-hover-display")
                             ).style.display = "flex"),
                             (t.options.preview = !0));
                       }),
                       (t.elements.settingsButton.onclick = function (e) {
                         e.preventDefault();
-                        var n = x("".concat(t.name, "-controls")),
+                        var n = k("".concat(t.name, "-controls")),
                           i = function e(n) {
                             if (t.elements.settingsPanel.contains(n.target))
                               return !0;
@@ -14403,15 +14388,15 @@
                               t.elements.settingsPanel.className.includes(
                                 "m-fadeOut"
                               ) &&
-                                (_("click", e, !1),
+                                (w("click", e, !1),
                                 t.eventBroadcast("state-change", t.state));
                           };
                         t.elements.settingsPanel.className.includes("m-fadeOut")
                           ? (n.classList.value.includes(
                               "force-show-controls"
                             ) || n.classList.toggle("force-show-controls"),
-                            w("click", i, !1))
-                          : _("click", i, !1);
+                            x("click", i, !1))
+                          : w("click", i, !1);
                       });
                   })(this),
                   (function (t) {
@@ -14451,9 +14436,9 @@
                               1),
                           o = 1 / (t.options.speedValues.length - 1),
                           s = t.calculateSpeed(o, t.options.speedValues, r);
-                        (C("".concat(t.name, "-speed-runtime")).innerHTML =
+                        (_("".concat(t.name, "-speed-runtime")).innerHTML =
                           s + "0"),
-                          (C("".concat(t.name, "-speed-cursor")).style.top =
+                          (_("".concat(t.name, "-speed-cursor")).style.top =
                             i + "px"),
                           (t.clip.executionSpeed = s);
                       },
@@ -14462,11 +14447,11 @@
                         (t.elements.listenerHelper.style.pointerEvents =
                           "none"),
                           i.preventDefault(),
-                          O("mouseup", n, !1),
-                          O("touchend", n, !1),
-                          O("mousemove", e, !1),
-                          O("touchmove", e, !1),
-                          (C("".concat(t.name, "-speed-runtime")).innerHTML =
+                          I("mouseup", n, !1),
+                          I("touchend", n, !1),
+                          I("mousemove", e, !1),
+                          I("touchmove", e, !1),
+                          (_("".concat(t.name, "-speed-runtime")).innerHTML =
                             "Speed"),
                           (r = 1 == t.clip.speed ? "Normal" : t.clip.speed),
                           (t.elements.speedCurrent.innerHTML = r);
@@ -14476,10 +14461,10 @@
                           "auto"),
                           i.preventDefault(),
                           e(i),
-                          I("mouseup", n, !1),
-                          I("touchend", n, !1),
-                          I("mousemove", e, !1),
-                          I("touchmove", e, !1);
+                          C("mouseup", n, !1),
+                          C("touchend", n, !1),
+                          C("mousemove", e, !1),
+                          C("touchmove", e, !1);
                       };
                     t.elements.speedBarHelper.addEventListener(
                       "mousedown",
@@ -14510,13 +14495,13 @@
                         t.elements.loopBarEnd.classList.toggle(
                           "".concat(t.name, "-hide")
                         ),
-                        j("".concat(t.name, "-loop-time")).classList.toggle(
+                        O("".concat(t.name, "-loop-time")).classList.toggle(
                           "m-fadeOut"
                         ),
-                        j("".concat(t.name, "-loop-time")).classList.toggle(
+                        O("".concat(t.name, "-loop-time")).classList.toggle(
                           "m-fadeIn"
                         ),
-                        j("".concat(t.name, "-loop-time")).classList.toggle(
+                        O("".concat(t.name, "-loop-time")).classList.toggle(
                           "".concat(t.name, "-hide")
                         ),
                         (t.elements.loopEndTime.innerHTML =
@@ -14540,7 +14525,7 @@
                     };
                   })(this),
                   (function (t) {
-                    (E(
+                    (j(
                       "".concat(t.name, "-controls")
                     ).onmouseover = function () {
                       t.settings.loopActivated &&
@@ -14549,11 +14534,11 @@
                         t.elements.loopBarStart.classList.add("m-fadeIn"),
                         t.elements.loopBarEnd.classList.add("m-fadeIn"));
                     }),
-                      (E("".concat(t.name, "-controls")).onmouseout = function (
+                      (j("".concat(t.name, "-controls")).onmouseout = function (
                         e
                       ) {
                         var n = e.toElement || e.relatedTarget || e.target;
-                        P(this, n) ||
+                        E(this, n) ||
                           n === this ||
                           (t.settings.loopActivated &&
                             (t.elements.loopBarStart.classList.add("m-fadeOut"),
@@ -14566,19 +14551,19 @@
                             )));
                       });
                     var e = !1;
-                    (E("".concat(t.name, "-controls")).ontouchstart = function (
+                    (j("".concat(t.name, "-controls")).ontouchstart = function (
                       n
                     ) {
                       var i = n.toElement || n.relatedTarget || n.target;
-                      P(t.elements.statusButton, i) ||
+                      E(t.elements.statusButton, i) ||
                         i === t.elements.statusButton ||
-                        P(t.elements.settingsButton, i) ||
+                        E(t.elements.settingsButton, i) ||
                         i === t.elements.settingsButton ||
-                        P(t.elements.fullScreenButton, i) ||
+                        E(t.elements.fullScreenButton, i) ||
                         i === t.elements.fullScreenButton ||
-                        P(t.elements.loopButton, i) ||
+                        E(t.elements.loopButton, i) ||
                         i === t.elements.loopButton ||
-                        P(t.elements.totalBar, i) ||
+                        E(t.elements.totalBar, i) ||
                         i === t.elements.totalBar ||
                         ((t.elements.volumeControl.className = "".concat(
                           t.name,
@@ -14604,8 +14589,8 @@
                     }),
                       window.addEventListener("touchstart", function (n) {
                         var i = n.toElement || n.relatedTarget || n.target;
-                        P(E("".concat(t.name, "-controls")), i) ||
-                          i === E("".concat(t.name, "-controls")) ||
+                        E(j("".concat(t.name, "-controls")), i) ||
+                          i === j("".concat(t.name, "-controls")) ||
                           (e &&
                             ((t.elements.volumeControl.className = ""),
                             (t.elements.volumeBar.className = ""),
@@ -14633,7 +14618,34 @@
                       }
                     );
                   })(this),
-                  V(this),
+                  (function (t) {
+                    t.elements.donkeyclipButton.addEventListener(
+                      "click",
+                      function () {
+                        var e = P(),
+                          n = window.open(
+                            "https://donkeyclip.com?u=".concat(e)
+                          ),
+                          i = t.clip.exportDefinition(),
+                          r = t.clipClass;
+                        window.addEventListener(
+                          "message",
+                          function (t) {
+                            t.data === e &&
+                              n.postMessage(
+                                JSON.stringify({
+                                  definition: i,
+                                  clipClass: r,
+                                  u: e,
+                                }),
+                                "*"
+                              );
+                          },
+                          !1
+                        );
+                      }
+                    );
+                  })(this),
                   (function (t) {
                     if (
                       !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -14642,10 +14654,10 @@
                     ) {
                       var e = function () {
                           t.options.preview &&
-                            (M(
+                            (A(
                               "".concat(t.name, "-hover-display")
                             ).classList.toggle("m-fadeOut"),
-                            M(
+                            A(
                               "".concat(t.name, "-hover-display")
                             ).classList.toggle("m-fadeIn"),
                             (t.elements.loopBar.onmousemove = i));
@@ -14655,27 +14667,27 @@
                             (e(),
                             (t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = e),
                             (t.elements.loopBar.onmousemove = i),
-                            D("mouseup", n, !1),
-                            D("touchend", n, !1),
-                            D("mousemove", i, !1),
-                            D("touchmove", i, !1));
+                            M("mouseup", n, !1),
+                            M("touchend", n, !1),
+                            M("mousemove", i, !1),
+                            M("touchmove", i, !1));
                         };
                       (t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = e),
                         (t.elements.loopBar.onmousedown = function () {
                           t.options.preview &&
                             ((t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = null),
                             (t.elements.loopBar.onmousemove = null),
-                            B("mouseup", n, !1),
-                            B("touchend", n, !1),
-                            B("mousemove", i, !1),
-                            B("touchmove", i, !1));
+                            S("mouseup", n, !1),
+                            S("touchend", n, !1),
+                            S("mousemove", i, !1),
+                            S("touchmove", i, !1));
                         }),
                         (t.elements.loopBar.onmouseup = function () {
                           t.options.preview &&
-                            (D("mouseup", n, !1),
-                            D("touchend", n, !1),
-                            D("mousemove", i, !1),
-                            D("touchmove", i, !1),
+                            (M("mouseup", n, !1),
+                            M("touchend", n, !1),
+                            M("mousemove", i, !1),
+                            M("touchmove", i, !1),
                             (t.elements.loopBar.onmouseover = t.elements.loopBar.onmouseout = e),
                             (t.elements.loopBar.onmousemove = i));
                         });
@@ -14688,20 +14700,20 @@
                               t.elements.loopBar.offsetWidth &&
                           !t.settings.resizeLoop
                         )
-                          M("".concat(t.name, "-hover-millisecond")).innerHTML =
+                          A("".concat(t.name, "-hover-millisecond")).innerHTML =
                             t.settings.loopEndMillisecond;
                         else if (n - i.left < 0 && !t.settings.resizeLoop)
-                          M("".concat(t.name, "-hover-millisecond")).innerHTML =
+                          A("".concat(t.name, "-hover-millisecond")).innerHTML =
                             t.settings.loopStartMillisecond;
                         else {
                           var r = n - i.left + t.settings.loopLastPositionXPxls;
                           r < 0 && (r = 0);
                           var o =
-                              M("".concat(t.name, "-hover-display"))
+                              A("".concat(t.name, "-hover-display"))
                                 .offsetWidth * t.previewScale,
                             s = o / 2,
                             a =
-                              M("".concat(t.name, "-hover-display"))
+                              A("".concat(t.name, "-hover-display"))
                                 .offsetWidth / 2,
                             l = r - a;
                           r - s < 0
@@ -14716,10 +14728,10 @@
                             var c = u / t.clip.duration;
                             t.previewClip.onProgress(c, u);
                           }
-                          (M(
+                          (A(
                             "".concat(t.name, "-hover-millisecond")
                           ).innerHTML = u),
-                            (M("".concat(t.name, "-hover-display")).style.left =
+                            (A("".concat(t.name, "-hover-display")).style.left =
                               l + "px");
                         }
                       };
@@ -14755,7 +14767,7 @@
                             t.options.preview && t.setPreviewDimentions();
                         }
                       ),
-                      T("body")[0].addEventListener("click", function (e) {
+                      B("body")[0].addEventListener("click", function (e) {
                         if (
                           e.target.className ===
                           "".concat(t.name, "-speed-value")
@@ -14769,7 +14781,7 @@
                               -1 *
                               (e.target.dataset.zone * i - 1) *
                               (16 * (t.options.speedValues.length - 1));
-                          L("".concat(t.name, "-speed-cursor")).style.top =
+                          D("".concat(t.name, "-speed-cursor")).style.top =
                             r + "px";
                         }
                       });
@@ -14810,7 +14822,7 @@
                     (this.options.theme += " on-top");
                 var t = {};
                 for (var e in this.options.theme.split(" ")) {
-                  var n = u(this.options.theme.split(" ")[e], this.name);
+                  var n = l(this.options.theme.split(" ")[e], this.name);
                   for (var i in n || {}) t[i] = n[i];
                 }
                 var r = (function (t, e, n) {
@@ -15279,11 +15291,11 @@
                       )
                       .concat(t["theme-style"], "\n");
                   })(t, this.name, this.options),
-                  o = R("style");
+                  o = z("style");
                 o.styleSheet
                   ? (o.styleSheet.cssText = r)
                   : o.appendChild(document.createTextNode(r)),
-                  $("head")[0].appendChild(o);
+                  V("head")[0].appendChild(o);
               },
             },
             {
@@ -15314,7 +15326,7 @@
                     1) *
                   (this.options.speedValues.length - 1) *
                   16;
-                N("".concat(this.name, "-speed-cursor")).style.top = n + "px";
+                L("".concat(this.name, "-speed-cursor")).style.top = n + "px";
               },
             },
             {
@@ -15333,9 +15345,9 @@
               key: "createPreviewDisplay",
               value: function () {
                 this.previewClip = this.clip.paste(
-                  N("".concat(this.name, "-hover-display"))
+                  L("".concat(this.name, "-hover-display"))
                 );
-                var t = N("".concat(this.name, "-hover-display"));
+                var t = L("".concat(this.name, "-hover-display"));
                 (window.previewClip = this.previewClip),
                   (t.style.position = "absolute"),
                   (t.style.zIndex = 1),
@@ -15351,16 +15363,16 @@
                   i = t.offsetHeight,
                   r = n * this.previewScale;
                 r > 300 && ((r = 300), (this.previewScale = r / n)),
-                  (N("".concat(this.name, "-hover-display")).style.width =
+                  (L("".concat(this.name, "-hover-display")).style.width =
                     n + "px"),
-                  (N("".concat(this.name, "-hover-display")).style.height =
+                  (L("".concat(this.name, "-hover-display")).style.height =
                     i + "px"),
                   (e.style.transform = "scale(".concat(this.previewScale, ")")),
                   (e.style.transformOrigin = "center bottom"),
                   (e.style.boxSizing = "border-box");
               },
             },
-          ]) && n(e.prototype, i),
+          ]) && e(n.prototype, i),
           t
         );
       })();
