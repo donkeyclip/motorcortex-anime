@@ -1,4 +1,5 @@
-import Player from "@kissmybutton/motorcortex-player";
+// import Player from "@kissmybutton/motorcortex-player";
+import Player from "../../teo-motorcortex-player";
 import { Clip, Group, loadPlugin } from "@kissmybutton/motorcortex/";
 import AnimeDefinition from "../dist/motorcortex-anime.umd";
 const Anime = loadPlugin(AnimeDefinition);
@@ -126,7 +127,7 @@ const host = document.getElementById("clip");
 
 const containerParams = {
   width: "612px",
-  height: "100%",
+  height: "800px",
 };
 
 const clip = new Clip({
@@ -288,6 +289,7 @@ clip.addIncident(opacity, 8500);
 clip.addIncident(svg, 9500);
 // clip.addIncident(boxWidthBack, 0); //12500
 new Player({
+  scaleToFit: true,
   clip: clip,
   theme: "mc-blue",
   preview: false,
