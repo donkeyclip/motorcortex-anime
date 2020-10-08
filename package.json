@@ -140,6 +140,5 @@
       "pre-commit": "lint-staged",
       "pre-push": "npm run test:prod"
     }
-  },
-  "types": "src/index.d.ts"
+  }
 }
