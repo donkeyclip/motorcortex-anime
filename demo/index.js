@@ -278,13 +278,18 @@ const svg = new Anime.Anime(
 //   }
 // );
 const myGroup = new Group();
+const gp2 = new Group()
+gp2.addIncident(boxMove, 5100)
 myGroup.addIncident(boxColor, 0);
+myGroup.addIncident(boxRotate, 3400);
+myGroup.addIncident(gp2, 5100);
+myGroup.addIncident(boxBorder, 6800, 0);
 clip.addIncident(boxWidth, 0);
 clip.addIncident(myGroup, 4000);
-clip.addIncident(boxRotate, 3400);
-clip.addIncident(boxMove, 5100);
-clip.addIncident(boxBorder, 6800);
-clip.addIncident(opacity, 8500);
+// clip.addIncident(boxRotate, 3400);
+// clip.addIncident(boxMove, 5100);
+// clip.addIncident(boxBorder, 6800);
+// clip.addIncident(opacity, 8500);
 clip.addIncident(svg, 9500);
 // clip.addIncident(boxWidthBack, 0); //12500
 new Player({
@@ -296,3 +301,5 @@ new Player({
 });
 
 window.myclip = clip;
+
+console.log(JSON.parse(JSON.stringify(clip.children)))
