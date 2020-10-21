@@ -209,6 +209,7 @@ const boxMove = new Anime.Anime(
   }
 );
 
+
 const boxBorder = new Anime.Anime(
   {
     animatedAttrs: {
