@@ -255,8 +255,6 @@ const svg = new Anime.Anime(
   }
 );
 
-//.cls-1
-
 // const boxWidthBack = new Anime.Anime(
 //   {
 //     animatedAttrs: {
@@ -300,7 +298,3 @@ new Player({
   preview: false,
   pointerEvents: false,
 });
-
-window.myclip = clip;
-
-console.log(JSON.parse(JSON.stringify(clip.children)))
