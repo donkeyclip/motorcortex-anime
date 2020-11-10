@@ -126,7 +126,7 @@ const host = document.getElementById("clip");
 
 const containerParams = {
   width: "612px",
-  height: "671px",
+  height: "800px",
 };
 
 const clip = new HTMLClip({
@@ -147,7 +147,6 @@ const boxWidth = new Anime.Anime(
     animatedAttrs: {
       width: "250px",
     },
-    attrs: {},
   },
   {
     duration: 1700,
@@ -181,7 +180,7 @@ const boxRotate = new Anime.Anime(
       },
     },
     initialValues: {
-      width: "0px",
+      width: "30cm",
       transform: {
         rotate: "0deg",
       },
@@ -209,6 +208,7 @@ const boxMove = new Anime.Anime(
     easing: "easeOutBounce",
   }
 );
+
 
 const boxBorder = new Anime.Anime(
   {
@@ -255,8 +255,6 @@ const svg = new Anime.Anime(
   }
 );
 
-//.cls-1
-
 // const boxWidthBack = new Anime.Anime(
 //   {
 //     animatedAttrs: {
@@ -279,20 +277,24 @@ const svg = new Anime.Anime(
 //   }
 // );
 const myGroup = new Group();
+const gp2 = new Group()
+gp2.addIncident(boxMove, 5100)
 myGroup.addIncident(boxColor, 0);
+myGroup.addIncident(boxRotate, 3400);
+myGroup.addIncident(gp2, 5100);
+myGroup.addIncident(boxBorder, 6800, 0);
 clip.addIncident(boxWidth, 0);
 clip.addIncident(myGroup, 4000);
-clip.addIncident(boxRotate, 3400);
-clip.addIncident(boxMove, 5100);
-clip.addIncident(boxBorder, 6800);
-clip.addIncident(opacity, 8500);
+// clip.addIncident(boxRotate, 3400);
+// clip.addIncident(boxMove, 5100);
+// clip.addIncident(boxBorder, 6800);
+// clip.addIncident(opacity, 8500);
 clip.addIncident(svg, 9500);
 // clip.addIncident(boxWidthBack, 0); //12500
 new Player({
+  scaleToFit: true,
   clip: clip,
   theme: "mc-blue",
   preview: false,
   pointerEvents: false,
 });
-
-window.myclip = clip;

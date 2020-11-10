@@ -120,6 +120,8 @@ The Incident can accept (more or less) the exact same animated attributes that a
 CSS transforms (translate, scale, etc) that MotorCortex plugin accepts them only as part of the composite "transform" attribute for conflicts check and prevention reasons. 
 ### Exposed Incidents
 The only exposed Incident by the plugin is the `Anime` Incident. Anime Incident accepts only the animatedAttrs on its properties and nothing else.
+### Demo
+https://kissmybutton.github.io/motorcortex-anime/demo/
 
 
 ## License
