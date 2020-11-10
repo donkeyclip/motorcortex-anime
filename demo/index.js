@@ -1,5 +1,5 @@
 import Player from "@kissmybutton/motorcortex-player";
-import { Clip, Group, loadPlugin } from "@kissmybutton/motorcortex/";
+import { HTMLClip, Group, loadPlugin } from "@kissmybutton/motorcortex/";
 import AnimeDefinition from "../dist/motorcortex-anime.umd";
 const Anime = loadPlugin(AnimeDefinition);
 
@@ -129,7 +129,7 @@ const containerParams = {
   height: "671px",
 };
 
-const clip = new Clip({
+const clip = new HTMLClip({
   css,
   html,
   host,

@@ -1,12 +1,11 @@
-import MC from "@kissmybutton/motorcortex";
+import MotorCortex from "@kissmybutton/motorcortex";
 import anime from "mc-animejs-core/lib/anime.es.js";
 import compoAttributes from "./compoAttributes";
 import getMatrix2D from "./matrix2d";
 
-export default class Anime extends MC.API.MonoIncident {
+export default class Anime extends MotorCortex.Effect {
   onGetContext() {
     const options = {};
-    const initialize = {};
     if (
       Object.prototype.hasOwnProperty.call(compoAttributes, this.attributeKey)
     ) {
@@ -25,14 +24,9 @@ export default class Anime extends MC.API.MonoIncident {
           this.getInitialValue()[compoAttribute[i]],
           this.targetValue[compoAttribute[i]],
         ];
-        initialize[compoAttribute[i]] = [
-          this.getScratchValue(),
-          this.targetValue[compoAttribute[i]],
-        ];
       }
     } else {
       options[this.attributeKey] = [this.getInitialValue(), this.targetValue];
-      initialize[this.targetValue] = [this.getScratchValue(), this.targetValue];
     }
 
     this.target = anime({

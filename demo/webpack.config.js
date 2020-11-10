@@ -5,7 +5,9 @@ module.exports = {
   context: path.resolve(__dirname),
 
   entry: "./index.js",
-
+  node: {
+    fs: "empty",
+  },
   resolve: {
     extensions: [".js"],
     modules: [path.resolve("./"), "node_modules"],
