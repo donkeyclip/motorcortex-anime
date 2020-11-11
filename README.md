@@ -15,8 +15,11 @@ import Anime from "@kissmybutton/motorcortex-anime";
 
 
 ## Key Concepts / Features
-MotorCortex Anime takes the capabilities of Anime.js library and exposes them via an easy to use MotorCortex Incident. 
-The library exposes just one Incident with the name "Anime" which, by the use of the Anime.js engine, can perform any CSS (or any other attribute) animation to any selected element.
+MotorCortex Anime takes the capabilities of Anime.js library and exposes them via 
+easy to use MotorCortex Incidents. 
+The library exposes two Incidents, the one with the name "Anime" which, by the use 
+of the Anime.js engine, can perform any CSS (or any other attribute) animation 
+to any selected element while the second performs motion path animation.
 
 ## Browser compatibility 
 | Chrome | Safari | IE / Edge | Firefox | Opera |
@@ -116,10 +119,36 @@ const MyAnime = new AnimePlugin.Anime({
 
 ## Reference
 ### Supported animated attributes
-The Incident can accept (more or less) the exact same animated attributes that anime.js supports. The only difference is the 
-CSS transforms (translate, scale, etc) that MotorCortex plugin accepts them only as part of the composite "transform" attribute for conflicts check and prevention reasons. 
+The Incident can accept (more or less) the exact same animated attributes that anime.js supports. 
+The only difference is the CSS transforms (translate, scale, etc) that MotorCortex plugin 
+accepts them only as part of the composite "transform" attribute for conflicts check 
+and prevention reasons. 
+
+### Create an MotionPath animation Incident and place it anywhere in your Clip
+The syntax is simple:
+
+```javascript
+const motionPath = new AnimePlugin.MotionPath({
+  animatedAttrs: {
+    positionOn: {
+      pathElement: 'the selector that targets your path element'
+    }
+  }
+}, {
+  selector: '.a',
+  duration: 2000,
+  easing: 'linear'
+});
+```
+As you can notice the animated attribute here is `positionOn` which in turn is an
+object expecting only one key, the `pathElement` which is a selctor to the path
+element that defines the motion path.
+
+The selected elements will sleep into this path on the given duration.
+
 ### Exposed Incidents
-The only exposed Incident by the plugin is the `Anime` Incident. Anime Incident accepts only the animatedAttrs on its properties and nothing else.
+* `Anime`
+* `MotionPath`
 ### Demo
 https://kissmybutton.github.io/motorcortex-anime/demo/
 

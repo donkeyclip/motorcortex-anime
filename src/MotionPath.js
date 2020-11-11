@@ -5,20 +5,32 @@ import anime from "mc-animejs-core/lib/anime.es.js";
  * Takes as attributes:
  * {
  *  animatedAttrs: {
- *      transform: {
- *          path: "svg path"
+ *      positionOn: {
+ *          pathElement: "selector of the path element"
  *      }
  *  }
  * }
  }
 **/
 export default class MotionPath extends MotorCortex.Effect {
-    onGetContext() {
-        this.anime_path = anime.path(this.targetValue.path);
-        this.isPathTargetInsideSVG = this.element instanceof SVGElement;
-    }
+  onGetContext() {
+    const svgEl = this.context.getElements(this.targetValue.pathElement)[0];
+    this.path = anime.path(svgEl);
+    this.isPathTargetInsideSVG = this.element instanceof SVGElement;
+  }
 
-    // onProgress(f, ms) {
-
-    // }
+  onProgress(f) {
+    const position = anime.getPathProgress(
+      this.path,
+      f,
+      this.isPathTargetInsideSVG
+    );
+    // console.log(position);
+    const toSet = `
+            translateX(${position.x}px) 
+            translateY(${position.y}px) 
+            rotate(${position.angle}deg)
+        `;
+    this.element.style.transform = toSet;
+  }
 }

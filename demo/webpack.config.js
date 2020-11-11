@@ -5,9 +5,7 @@ module.exports = {
   context: path.resolve(__dirname),
 
   entry: "./index.js",
-  node: {
-    fs: "empty",
-  },
+
   resolve: {
     extensions: [".js"],
     modules: [path.resolve("./"), "node_modules"],
@@ -73,6 +71,10 @@ module.exports = {
     contentBase: "./demo",
   },
   node: {
-    fs: "empty"
- }
+    fs: "empty",
+  },
+
+  optimization: {
+    minimize: false,
+  },
 };
