@@ -133,127 +133,104 @@ const clip = new HTMLClip({
   css,
   html,
   host,
-  fonts: [
-    {
-      type: `google-font`,
-      src: `https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700,900&display=swap`,
-    },
-  ],
+  fonts: [{
+    type: `google-font`,
+    src: `https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700,900&display=swap`,
+  }, ],
   containerParams,
 });
 
-const boxWidth = new Anime.Anime(
-  {
-    animatedAttrs: {
-      width: "250px",
+const boxWidth = new Anime.Anime({
+  animatedAttrs: {
+    width: "250px",
+  },
+}, {
+  duration: 1700,
+  selector: `.boxWidth`,
+  easing: "easeOutQuad",
+});
+
+const boxColor = new Anime.Anime({
+  animatedAttrs: {
+    background: "rgb(255, 0, 85)",
+  },
+  initialValues: {
+    background: "rgb(37, 32, 86)",
+  },
+}, {
+  duration: 1700,
+  selector: ".boxColor",
+  easing: "easeOutQuad",
+});
+
+const boxRotate = new Anime.Anime({
+  animatedAttrs: {
+    width: "30px",
+    transform: {
+      rotate: "360deg",
     },
   },
-  {
-    duration: 1700,
-    selector: `.boxWidth`,
-    easing: "easeOutQuad",
-  }
-);
-
-const boxColor = new Anime.Anime(
-  {
-    animatedAttrs: {
-      background: "rgb(255, 0, 85)",
-    },
-    initialValues: {
-      background: "rgb(37, 32, 86)",
+  initialValues: {
+    width: "30cm",
+    transform: {
+      rotate: "0deg",
     },
   },
-  {
-    duration: 1700,
-    selector: ".boxColor",
-    easing: "easeOutQuad",
-  }
-);
+}, {
+  duration: 1700,
+  selector: ".boxRotate",
+  easing: "easeOutQuad",
+});
 
-const boxRotate = new Anime.Anime(
-  {
-    animatedAttrs: {
-      width: "30px",
-      transform: {
-        rotate: "360deg",
-      },
-    },
-    initialValues: {
-      width: "30cm",
-      transform: {
-        rotate: "0deg",
-      },
-    },
+const boxMove = new Anime.Anime({
+  animatedAttrs: {
+    left: "220px",
   },
-  {
-    duration: 1700,
-    selector: ".boxRotate",
-    easing: "easeOutQuad",
-  }
-);
-
-const boxMove = new Anime.Anime(
-  {
-    animatedAttrs: {
-      left: "220px",
-    },
-    initialValues: {
-      left: "0px",
-    },
+  initialValues: {
+    left: "0px",
   },
-  {
-    duration: 1700,
-    selector: ".boxMove",
-    easing: "easeOutBounce",
-  }
-);
+}, {
+  duration: 1700,
+  selector: ".boxMove",
+  easing: "easeOutBounce",
+});
 
 
-const boxBorder = new Anime.Anime(
-  {
-    animatedAttrs: {
-      borderRadius: "50%",
-    },
-    initialValues: {
-      borderRadius: "0%",
-    },
+const boxBorder = new Anime.Anime({
+  animatedAttrs: {
+    borderRadius: "50%",
   },
-  {
-    duration: 1700,
-    selector: ".boxBorder",
-  }
-);
-
-const opacity = new Anime.Anime(
-  {
-    animatedAttrs: {
-      opacity: 1,
-    },
-    initialValues: {
-      opacity: 0,
-    },
+  initialValues: {
+    borderRadius: "0%",
   },
-  {
-    duration: 1000,
-    selector: ".svgText",
-  }
-);
+}, {
+  duration: 1700,
+  selector: ".boxBorder",
+});
 
-const svg = new Anime.Anime(
-  {
-    animatedAttrs: {
-      strokeDashoffset: 0,
-    },
-    initialValues: {
-      strokeDashoffset: 6000,
-    },
+const opacity = new Anime.Anime({
+  animatedAttrs: {
+    opacity: 1,
   },
-  {
-    duration: 3000,
-    selector: ".cls-1",
-  }
-);
+  initialValues: {
+    opacity: 0,
+  },
+}, {
+  duration: 1000,
+  selector: ".svgText",
+});
+
+const svg = new Anime.Anime({
+  animatedAttrs: {
+    strokeDashoffset: 0,
+  },
+  initialValues: {
+    strokeDashoffset: 6000,
+  },
+}, {
+  duration: 3000,
+  selector: ".cls-1",
+});
 
 // const boxWidthBack = new Anime.Anime(
 //   {

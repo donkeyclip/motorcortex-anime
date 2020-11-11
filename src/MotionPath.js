@@ -13,11 +13,12 @@ import anime from "mc-animejs-core/lib/anime.es.js";
  }
 **/
 export default class MotionPath extends MotorCortex.Effect {
-  onGetContext() {
-    this.anime_path = anime.path(this.targetValue.path);
-  }
+    onGetContext() {
+        this.anime_path = anime.path(this.targetValue.path);
+        this.isPathTargetInsideSVG = this.element instanceof SVGElement;
+    }
 
-  // onProgress(f, ms) {
+    // onProgress(f, ms) {
 
-  // }
+    // }
 }
