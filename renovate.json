@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "automerge": true,
+  "automergeType": "branch",
+  "packageRules": [
+    {
+      "packagePatterns": ["*"],
+      "excludePackagePatterns": ["@kissmybutton/motorcortex"],
+      "enabled": false
+    }
+  ]
+}
