@@ -109,7 +109,6 @@
     "imports-loader": "^0.8.0",
     "json-stringify-safe": "^5.0.1",
     "lint-staged": "^10.1.1",
-    "node-sass": "^4.13.1",
     "npm-check-updates": "^4.1.0",
     "npx": "^10.2.2",
     "prettier": "^2.0.2",
@@ -133,12 +132,5 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
     "whatwg-fetch": "^3.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test:prod"
-    }
   }
 }
