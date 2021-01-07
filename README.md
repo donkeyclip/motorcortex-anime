@@ -117,13 +117,7 @@ const MyAnime = new AnimePlugin.Anime({
 });
 ```
 
-## Reference
-### Supported animated attributes
-The Incident can accept (more or less) the exact same animated attributes that anime.js supports. 
-The only difference is the CSS transforms (translate, scale, etc) that MotorCortex plugin 
-accepts them only as part of the composite "transform" attribute for conflicts check 
-and prevention reasons. 
-
+## MotionPath
 ### Create an MotionPath animation Incident and place it anywhere in your Clip
 The syntax is simple:
 
