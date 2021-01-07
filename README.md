@@ -118,7 +118,7 @@ const MyAnime = new AnimePlugin.Anime({
 ```
 
 ## MotionPath
-The MotioPath Incident implements the motion path capability of anime.js library as Incident. This feature allows motion of any element on any given (svg) path.
+The MotioPath Incident implements the motion path capability of anime.js library. This feature allows motion of any element on any given (svg) path.
 ### Create a MotionPath animation Incident and place it anywhere in your Clip
 The syntax is simple:
 
