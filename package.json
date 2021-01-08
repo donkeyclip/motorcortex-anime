@@ -71,7 +71,7 @@
     "mc-animejs-core": "3.1.4"
   },
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "6.1.2"
+    "@kissmybutton/motorcortex": "6.1.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -79,7 +79,7 @@
     "@babel/preset-env": "^7.9.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@kissmybutton/motorcortex": "6.1.2",
+    "@kissmybutton/motorcortex": "6.1.3",
     "@kissmybutton/motorcortex-player": "1.7.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
