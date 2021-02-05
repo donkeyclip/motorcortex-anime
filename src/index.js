@@ -2,9 +2,11 @@ import Anime from "./Anime";
 import MotionPath from "./MotionPath";
 import compositeAttributes from "./compoAttributes";
 import { animatedAttrs } from "./validation";
+const pkg = require('../package.json');
 
 export default {
-  npm_name: "@kissmybutton/motorcortex-anime",
+  npm_name: pkg.name,
+  version: pkg.version,
   incidents: [
     {
       exportable: Anime,
