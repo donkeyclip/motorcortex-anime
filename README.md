@@ -124,6 +124,7 @@ The syntax is simple:
 
 ```javascript
 const motionPath = new AnimePlugin.MotionPath({
+  pixelsAccuracy: 5,
   animatedAttrs: {
     positionOn: {
       pathElement: 'the selector that targets your path element'
@@ -140,6 +141,10 @@ object expecting only one key, the `pathElement` which is a selctor to the path
 element that defines the motion path.
 
 The selected elements will sleep into this path on the given duration.
+
+One more thing to notice is the `pixelsAccuracy` attribute. This attribute sets the distance threshold between two
+sequential points of the path that the element should move. This attribute can be used so the motion path 
+effect gets more performant (less processing is required). The default value is 4.
 
 ### Exposed Incidents
 * `Anime`

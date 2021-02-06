@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a4e92344a2c6a6d179c2";
+/******/ 	var hotCurrentHash = "2fc5394e591de6825327";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1150,11 +1150,11 @@ process.umask = function() { return 0; };
     CSS: {}
   };
 
-  function m(t, n, e) {
+  function h(t, n, e) {
     return Math.min(Math.max(t, n), e);
   }
 
-  function h(t, n) {
+  function m(t, n) {
     return t.indexOf(n) > -1;
   }
 
@@ -1163,7 +1163,7 @@ process.umask = function() { return 0; };
       return Array.isArray(t);
     },
     obj: function obj(t) {
-      return h(Object.prototype.toString.call(t), "Object");
+      return m(Object.prototype.toString.call(t), "Object");
     },
     pth: function pth(t) {
       return b.obj(t) && t.hasOwnProperty("totalLength");
@@ -1263,7 +1263,7 @@ process.umask = function() { return 0; };
     return e;
   }
 
-  function j(t, n) {
+  function M(t, n) {
     var e = k(t);
 
     for (var o in n) {
@@ -1273,7 +1273,7 @@ process.umask = function() { return 0; };
     return e;
   }
 
-  function M(t) {
+  function j(t) {
     return b.rgb(t) ? (e = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(n = t)) ? "rgba(" + e[1] + ",1)" : n : b.hex(t) ? function (t) {
       var n = t.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (t, n, e, o) {
         return n + n + e + e + o + o;
@@ -1353,8 +1353,8 @@ process.umask = function() { return 0; };
   }
 
   function A(t, n, e, o) {
-    var r = h(n, "scale") ? 1 : 0 + function (t) {
-      return h(t, "translate") || "perspective" === t ? "px" : h(t, "rotate") || h(t, "skew") ? "deg" : void 0;
+    var r = m(n, "scale") ? 1 : 0 + function (t) {
+      return m(t, "translate") || "perspective" === t ? "px" : m(t, "rotate") || m(t, "skew") ? "deg" : void 0;
     }(n),
         i = L(t).get(n) || r;
     return e && (e.transforms.list.set(n, i), e.transforms.last = n), o ? E(t, i, o) : i;
@@ -1396,7 +1396,7 @@ process.umask = function() { return 0; };
   }
 
   function V(t, n) {
-    if (b.col(t)) return M(t);
+    if (b.col(t)) return j(t);
     if (/\s/g.test(t)) return t;
     var e = C(t),
         o = e ? t.substr(0, t.length - e.length) : t;
@@ -1447,7 +1447,7 @@ process.umask = function() { return 0; };
         value: t
       };
     }).map(function (t) {
-      return j(t, e);
+      return M(t, e);
     });
   }
 
@@ -1565,7 +1565,7 @@ process.umask = function() { return 0; };
     }(i, e),
         s = F;
 
-    return F++, j(n, {
+    return F++, M(n, {
       id: s,
       children: [],
       animatables: r,
@@ -1597,7 +1597,7 @@ process.umask = function() { return 0; };
     function s(t) {
       var s = i.duration,
           p = t;
-      i.progress = m(p / s * 100, 0, 100), i.reversePlayback = p < i.currentTime, n && function (t) {
+      i.progress = h(p / s * 100, 0, 100), i.reversePlayback = p < i.currentTime, n && function (t) {
         if (i.reversePlayback) for (var o = e; o--;) {
           a(t, n[o]);
         } else for (var r = 0; r < e; r++) {
@@ -1614,11 +1614,11 @@ process.umask = function() { return 0; };
             return t < n.end;
           })[0] || u);
 
-          for (var l = m(t - u.start, 0, u.duration) / u.duration, c = u.to.strings, f = u.round, y = [], d = u.to.numbers.length, g = void 0, h = 0; h < d; h++) {
+          for (var l = h(t - u.start, 0, u.duration) / u.duration, c = u.to.strings, f = u.round, y = [], d = u.to.numbers.length, g = void 0, m = 0; m < d; m++) {
             var b = void 0,
-                v = u.to.numbers[h],
-                w = u.from.numbers[h] || 0;
-            b = w + l * (v - w), f && (u.isColor && h > 2 || (b = Math.round(b * f) / f)), y.push(b);
+                v = u.to.numbers[m],
+                w = u.from.numbers[m] || 0;
+            b = w + l * (v - w), f && (u.isColor && m > 2 || (b = Math.round(b * f) / f)), y.push(b);
           }
 
           var P = c.length;
@@ -1636,7 +1636,7 @@ process.umask = function() { return 0; };
 
           z[r.type](a.target, r.property, g, a.transforms), r.currentValue = g, n++;
         }
-      }(p), i.currentTime = m(p, 0, s), t >= s && (i.paused = !0, i.completed || (i.completed = !0, !i.passThrough && "Promise" in window && (o(), r(i))));
+      }(p), i.currentTime = h(p, 0, s), t >= s && (i.paused = !0, i.completed || (i.completed = !0, !i.passThrough && "Promise" in window && (o(), r(i))));
     }
 
     return i.reset = function () {
@@ -1846,15 +1846,20 @@ process.umask = function() { return 0; };
     return o(r, [{
       key: "onGetContext",
       value: function value() {
+        this.pixelsAccuracy = this.attrs.pixelsAccuracy || 4, this.calculatedPoints = [];
         var t = this.context.getElements(this.targetValue.pathElement)[0];
         this.path = Q.path(t), this.isPathTargetInsideSVG = this.element instanceof SVGElement;
       }
     }, {
       key: "onProgress",
       value: function value(t) {
-        var n = Q.getPathProgress(this.path, t, this.isPathTargetInsideSVG),
-            e = "\n            translateX(".concat(n.x, "px) \n            translateY(").concat(n.y, "px) \n            rotate(").concat(n.angle, "deg)\n        ");
-        this.element.style.transform = e;
+        var n,
+            e = Math.round(this.path.totalLength / this.pixelsAccuracy * t) * this.pixelsAccuracy;
+        if (null !== this.calculatedPoints[e] && void 0 !== this.calculatedPoints[e]) n = this.calculatedPoints[e];else {
+          var o = Q.getPathProgress(this.path, e / this.path.totalLength, this.isPathTargetInsideSVG);
+          n = "\n            translateX(".concat(o.x, "px)\n            translateY(").concat(o.y, "px)\n            rotate(").concat(o.angle, "deg)\n        "), this.calculatedPoints[e] = n;
+        }
+        this.element.style.transform = n;
       }
     }]), r;
   }(t.Effect),
@@ -2789,6 +2794,7 @@ var clip = new _kissmybutton_motorcortex___WEBPACK_IMPORTED_MODULE_1__["HTMLClip
   containerParams: containerParams
 });
 var motionPath = new Anime.MotionPath({
+  pixelsAccuracy: 5,
   animatedAttrs: {
     positionOn: {
       pathElement: "path"
@@ -3210,7 +3216,7 @@ var substr = 'ab'.substr(-1) === 'b'
 /* 8 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_from\":\"@kissmybutton/motorcortex@6.2.2\",\"_id\":\"@kissmybutton/motorcortex@6.2.2\",\"_inBundle\":false,\"_integrity\":\"sha512-I0LdTruLgjwnIDST5utmdmwk9CwXhVpNwgM0MauZ/oW3qoYOuVsE/+2wnby+sOG+LKJt0cm464VW3Km0Xpwgrw==\",\"_location\":\"/@kissmybutton/motorcortex\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"@kissmybutton/motorcortex@6.2.2\",\"name\":\"@kissmybutton/motorcortex\",\"escapedName\":\"@kissmybutton%2fmotorcortex\",\"scope\":\"@kissmybutton\",\"rawSpec\":\"6.2.2\",\"saveSpec\":null,\"fetchSpec\":\"6.2.2\"},\"_requiredBy\":[\"#DEV:/\"],\"_resolved\":\"https://registry.npmjs.org/@kissmybutton/motorcortex/-/motorcortex-6.2.2.tgz\",\"_shasum\":\"7b068f4f085d8460a4fbee419c3afd15803d6b17\",\"_spec\":\"@kissmybutton/motorcortex@6.2.2\",\"_where\":\"C:\\\\Users\\\\ΓΙΑΝ\\\\Desktop\\\\development\\\\motorcortex-anime\",\"author\":{\"name\":\"KissMyButton.gr\"},\"browser\":\"dist/motorcortex.umd.js\",\"bundleDependencies\":false,\"dependencies\":{\"bezier-easing\":\"2.1.0\",\"ejs\":\"3.1.5\",\"fastest-validator\":\"1.9.0\",\"mathjs\":\"8.1.0\",\"underscore\":\"1.12.0\"},\"deprecated\":false,\"description\":\"Time based frontend framework\",\"devDependencies\":{\"@babel/cli\":\"7.12.10\",\"@babel/core\":\"7.12.10\",\"@babel/eslint-parser\":\"7.12.1\",\"@babel/plugin-proposal-class-properties\":\"7.12.1\",\"@babel/plugin-proposal-decorators\":\"7.12.1\",\"@babel/plugin-syntax-jsx\":\"7.12.1\",\"@babel/plugin-transform-modules-commonjs\":\"7.12.1\",\"@babel/plugin-transform-react-jsx\":\"7.12.12\",\"@babel/preset-env\":\"7.12.1\",\"@rollup/plugin-babel\":\"5.2.2\",\"@rollup/plugin-commonjs\":\"17.0.0\",\"@rollup/plugin-json\":\"4.1.0\",\"@rollup/plugin-node-resolve\":\"11.0.1\",\"babel-jest\":\"26.6.3\",\"babel-preset-minify\":\"0.5.1\",\"eslint\":\"7.16.0\",\"eslint-config-airbnb\":\"18.2.1\",\"eslint-config-prettier\":\"7.1.0\",\"eslint-plugin-import\":\"2.22.1\",\"eslint-plugin-jsx-a11y\":\"6.4.1\",\"eslint-plugin-prettier\":\"3.3.0\",\"eslint-plugin-react\":\"7.21.5\",\"eslint-plugin-react-hooks\":\"4.2.0\",\"husky\":\"4.3.6\",\"jest\":\"26.6.3\",\"jest-cli\":\"26.6.3\",\"lint-staged\":\"10.5.3\",\"prettier\":\"2.2.1\",\"regenerator-runtime\":\"0.13.7\",\"rollup\":\"2.35.1\",\"rollup-plugin-terser\":\"7.0.2\"},\"husky\":{\"hooks\":{}},\"jest\":{\"setupFiles\":[\"./private/mocks_initialise.js\"]},\"license\":\"Proprietary\",\"lint-staged\":{\"**/*.{js,ts}\":[\"eslint --fix\"],\"**/*.{json,scss,html}\":[\"prettier --write\"]},\"main\":\"dist/motorcortex.cjs.js\",\"module\":\"dist/motorcortex.esm.js\",\"name\":\"@kissmybutton/motorcortex\",\"scripts\":{\"build\":\"rollup -c\",\"dev-build\":\"rollup -cw\",\"lint\":\"eslint src/**\",\"prettify\":\"prettier --write src/**/*.js \",\"test\":\"npm run build && jest\"},\"types\":\"src/main.d.ts\",\"version\":\"6.2.2\"}");
+module.exports = JSON.parse("{\"_args\":[[\"@kissmybutton/motorcortex@6.2.2\",\"/workspace/motorcortex-anime\"]],\"_development\":true,\"_from\":\"@kissmybutton/motorcortex@6.2.2\",\"_id\":\"@kissmybutton/motorcortex@6.2.2\",\"_inBundle\":false,\"_integrity\":\"sha512-I0LdTruLgjwnIDST5utmdmwk9CwXhVpNwgM0MauZ/oW3qoYOuVsE/+2wnby+sOG+LKJt0cm464VW3Km0Xpwgrw==\",\"_location\":\"/@kissmybutton/motorcortex\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"@kissmybutton/motorcortex@6.2.2\",\"name\":\"@kissmybutton/motorcortex\",\"escapedName\":\"@kissmybutton%2fmotorcortex\",\"scope\":\"@kissmybutton\",\"rawSpec\":\"6.2.2\",\"saveSpec\":null,\"fetchSpec\":\"6.2.2\"},\"_requiredBy\":[\"#DEV:/\"],\"_resolved\":\"https://registry.npmjs.org/@kissmybutton/motorcortex/-/motorcortex-6.2.2.tgz\",\"_spec\":\"6.2.2\",\"_where\":\"/workspace/motorcortex-anime\",\"author\":{\"name\":\"KissMyButton.gr\"},\"browser\":\"dist/motorcortex.umd.js\",\"dependencies\":{\"bezier-easing\":\"2.1.0\",\"ejs\":\"3.1.5\",\"fastest-validator\":\"1.9.0\",\"mathjs\":\"8.1.0\",\"underscore\":\"1.12.0\"},\"description\":\"Time based frontend framework\",\"devDependencies\":{\"@babel/cli\":\"7.12.10\",\"@babel/core\":\"7.12.10\",\"@babel/eslint-parser\":\"7.12.1\",\"@babel/plugin-proposal-class-properties\":\"7.12.1\",\"@babel/plugin-proposal-decorators\":\"7.12.1\",\"@babel/plugin-syntax-jsx\":\"7.12.1\",\"@babel/plugin-transform-modules-commonjs\":\"7.12.1\",\"@babel/plugin-transform-react-jsx\":\"7.12.12\",\"@babel/preset-env\":\"7.12.1\",\"@rollup/plugin-babel\":\"5.2.2\",\"@rollup/plugin-commonjs\":\"17.0.0\",\"@rollup/plugin-json\":\"4.1.0\",\"@rollup/plugin-node-resolve\":\"11.0.1\",\"babel-jest\":\"26.6.3\",\"babel-preset-minify\":\"0.5.1\",\"eslint\":\"7.16.0\",\"eslint-config-airbnb\":\"18.2.1\",\"eslint-config-prettier\":\"7.1.0\",\"eslint-plugin-import\":\"2.22.1\",\"eslint-plugin-jsx-a11y\":\"6.4.1\",\"eslint-plugin-prettier\":\"3.3.0\",\"eslint-plugin-react\":\"7.21.5\",\"eslint-plugin-react-hooks\":\"4.2.0\",\"husky\":\"4.3.6\",\"jest\":\"26.6.3\",\"jest-cli\":\"26.6.3\",\"lint-staged\":\"10.5.3\",\"prettier\":\"2.2.1\",\"regenerator-runtime\":\"0.13.7\",\"rollup\":\"2.35.1\",\"rollup-plugin-terser\":\"7.0.2\"},\"husky\":{\"hooks\":{}},\"jest\":{\"setupFiles\":[\"./private/mocks_initialise.js\"]},\"license\":\"Proprietary\",\"lint-staged\":{\"**/*.{js,ts}\":[\"eslint --fix\"],\"**/*.{json,scss,html}\":[\"prettier --write\"]},\"main\":\"dist/motorcortex.cjs.js\",\"module\":\"dist/motorcortex.esm.js\",\"name\":\"@kissmybutton/motorcortex\",\"scripts\":{\"build\":\"rollup -c\",\"dev-build\":\"rollup -cw\",\"lint\":\"eslint src/**\",\"prettify\":\"prettier --write src/**/*.js \",\"test\":\"npm run build && jest\"},\"types\":\"src/main.d.ts\",\"version\":\"6.2.2\"}");
 
 /***/ }),
 /* 9 */
