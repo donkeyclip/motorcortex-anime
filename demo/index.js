@@ -164,6 +164,7 @@ const clip = new HTMLClip({
 
 const motionPath = new Anime.MotionPath(
   {
+    pixelsAccuracy: 5,
     animatedAttrs: {
       positionOn: {
         pathElement: "path",

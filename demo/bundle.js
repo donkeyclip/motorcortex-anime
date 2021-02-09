@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "b4b258155e8f32b2e945";
+/******/ 	var hotCurrentHash = "384ac0de8b49a8b1ae71";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2714,15 +2714,20 @@ process.umask = function() { return 0; };
         return o(r, [{
           key: "onGetContext",
           value: function value() {
+            this.pixelsAccuracy = this.attrs.pixelsAccuracy || 4, this.calculatedPoints = [];
             var t = this.context.getElements(this.targetValue.pathElement)[0];
             this.path = Q.path(t), this.isPathTargetInsideSVG = this.element instanceof SVGElement;
           }
         }, {
           key: "onProgress",
           value: function value(t) {
-            var n = Q.getPathProgress(this.path, t, this.isPathTargetInsideSVG),
-                e = "\n            translateX(".concat(n.x, "px) \n            translateY(").concat(n.y, "px) \n            rotate(").concat(n.angle, "deg)\n        ");
-            this.element.style.transform = e;
+            var n,
+                e = Math.round(this.path.totalLength / this.pixelsAccuracy * t) * this.pixelsAccuracy;
+            if (null !== this.calculatedPoints[e] && void 0 !== this.calculatedPoints[e]) n = this.calculatedPoints[e];else {
+              var o = Q.getPathProgress(this.path, e / this.path.totalLength, this.isPathTargetInsideSVG);
+              n = "\n            translateX(".concat(o.x, "px)\n            translateY(").concat(o.y, "px)\n            rotate(").concat(o.angle, "deg)\n        "), this.calculatedPoints[e] = n;
+            }
+            this.element.style.transform = n;
           }
         }]), r;
       }(t.Effect),
@@ -2782,6 +2787,7 @@ var clip = new _kissmybutton_motorcortex___WEBPACK_IMPORTED_MODULE_1__["HTMLClip
   containerParams: containerParams
 });
 var motionPath = new Anime.MotionPath({
+  pixelsAccuracy: 5,
   animatedAttrs: {
     positionOn: {
       pathElement: "path"
