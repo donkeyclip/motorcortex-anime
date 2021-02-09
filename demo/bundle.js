@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a4e92344a2c6a6d179c2";
+/******/ 	var hotCurrentHash = "b4b258155e8f32b2e945";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1263,7 +1263,7 @@ process.umask = function() { return 0; };
     return e;
   }
 
-  function j(t, n) {
+  function M(t, n) {
     var e = k(t);
 
     for (var o in n) {
@@ -1273,7 +1273,7 @@ process.umask = function() { return 0; };
     return e;
   }
 
-  function M(t) {
+  function j(t) {
     return b.rgb(t) ? (e = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(n = t)) ? "rgba(" + e[1] + ",1)" : n : b.hex(t) ? function (t) {
       var n = t.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (t, n, e, o) {
         return n + n + e + e + o + o;
@@ -1396,7 +1396,7 @@ process.umask = function() { return 0; };
   }
 
   function V(t, n) {
-    if (b.col(t)) return M(t);
+    if (b.col(t)) return j(t);
     if (/\s/g.test(t)) return t;
     var e = C(t),
         o = e ? t.substr(0, t.length - e.length) : t;
@@ -1447,7 +1447,7 @@ process.umask = function() { return 0; };
         value: t
       };
     }).map(function (t) {
-      return j(t, e);
+      return M(t, e);
     });
   }
 
@@ -1565,7 +1565,7 @@ process.umask = function() { return 0; };
     }(i, e),
         s = F;
 
-    return F++, j(n, {
+    return F++, M(n, {
       id: s,
       children: [],
       animatables: r,
@@ -1652,14 +1652,14 @@ process.umask = function() { return 0; };
     }, i.reset(), i;
   }
 
-  function q(t, n) {
+  function H(t, n) {
     return Math.sqrt(Math.pow(n.x - t.x, 2) + Math.pow(n.y - t.y, 2));
   }
 
-  function H(t) {
+  function q(t) {
     for (var n, e = t.points, o = 0, r = 0; r < e.numberOfItems; r++) {
       var i = e.getItem(r);
-      r > 0 && (o += q(n, i)), n = i;
+      r > 0 && (o += H(n, i)), n = i;
     }
 
     return o;
@@ -1681,7 +1681,7 @@ process.umask = function() { return 0; };
 
       case "line":
         return function (t) {
-          return q({
+          return H({
             x: I(t, "x1"),
             y: I(t, "y1")
           }, {
@@ -1691,12 +1691,12 @@ process.umask = function() { return 0; };
         }(t);
 
       case "polyline":
-        return H(t);
+        return q(t);
 
       case "polygon":
         return function (t) {
           var n = t.points;
-          return H(t) + q(n.getItem(n.numberOfItems - 1), n.getItem(0));
+          return q(t) + H(n.getItem(n.numberOfItems - 1), n.getItem(0));
         }(t);
     }
   }
@@ -1760,979 +1760,972 @@ process.umask = function() { return 0; };
       tt = {
     transform: ["translateX", "translateY", "translateZ", "rotate", "rotateX", "rotateY", "rotateZ", "scale", "scaleX", "scaleY", "scaleZ", "skewX", "skewY", "perspective"]
   };
-
-  var nt = function (t) {
-    a(s, t);
-    var e = c(s);
-
-    function s() {
-      return n(this, s), e.apply(this, arguments);
-    }
-
-    return o(s, [{
-      key: "onGetContext",
-      value: function value() {
-        var t = {};
-        if (Object.prototype.hasOwnProperty.call(tt, this.attributeKey)) for (var n = tt[this.attributeKey], e = 0; e < n.length; e++) {
-          Object.prototype.hasOwnProperty.call(this.targetValue, n[e]) && (t[n[e]] = [this.getInitialValue()[n[e]], this.targetValue[n[e]]]);
-        } else t[this.attributeKey] = [this.getInitialValue(), this.targetValue];
-        this.target = Q(function (t) {
-          for (var n = 1; n < arguments.length; n++) {
-            var e = null != arguments[n] ? arguments[n] : {};
-            n % 2 ? i(Object(e), !0).forEach(function (n) {
-              r(t, n, e[n]);
-            }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(e)) : i(Object(e)).forEach(function (n) {
-              Object.defineProperty(t, n, Object.getOwnPropertyDescriptor(e, n));
-            });
-          }
-
-          return t;
-        }({
-          autoplay: !1,
-          duration: this.props.duration,
-          easing: "linear",
-          targets: this.element
-        }, (this.attrs || {}).attrs || {}, {}, t));
-      }
-    }, {
-      key: "getScratchValue",
-      value: function value() {
-        if ("transform" === this.attributeKey) {
-          for (var t = {}, n = tt[this.attributeKey], e = function (t, n) {
-            var e = t.getComputedStyle(n).transform;
-            if ("" === e || "none" === e) return {};
-            var o,
-                r,
-                i,
-                a,
-                s,
-                p,
-                u,
-                l,
-                c = e.split("(")[1].split(")")[0].split(",");
-            return o = c, r = Math.atan2(o[1], o[0]), i = Math.pow(o[0], 2) + Math.pow(o[1], 2), a = Math.pow(o[2], 2) + Math.pow(o[3], 2), s = Math.sqrt(i), p = (o[0] * o[3] - o[2] * o[1]) / s, u = Math.atan2(o[0] * o[2] + o[1] * o[3], i), l = Math.atan2(o[1] * o[3] + o[0] * o[2], a), {
-              rotate: r / (Math.PI / 180) + "deg",
-              scaleX: s,
-              scaleY: p,
-              skewX: (1 === i ? u / (Math.PI / 180) : 0) + "deg",
-              skewY: (1 === a ? l / (Math.PI / 180) : 0) + "deg",
-              translateX: o[4] + "px",
-              translateY: o[5] + "px"
-            };
-          }(this.context.window, this.element), o = 0; o < n.length; o++) {
-            Object.prototype.hasOwnProperty.call(e, n[o]) ? t[n[o]] = e[n[o]] : t[n[o]] = Q.get(this.element, n[o]);
-          }
-
-          return t;
-        }
-
-        return Q.get(this.element, this.attributeKey);
-      }
-    }, {
-      key: "onProgress",
-      value: function value(t) {
-        return this.target.seek(this.target.duration * t);
-      }
-    }]), s;
-  }(t.Effect),
-      et = function (t) {
-    a(r, t);
-    var e = c(r);
-
-    function r() {
-      return n(this, r), e.apply(this, arguments);
-    }
-
-    return o(r, [{
-      key: "onGetContext",
-      value: function value() {
-        var t = this.context.getElements(this.targetValue.pathElement)[0];
-        this.path = Q.path(t), this.isPathTargetInsideSVG = this.element instanceof SVGElement;
-      }
-    }, {
-      key: "onProgress",
-      value: function value(t) {
-        var n = Q.getPathProgress(this.path, t, this.isPathTargetInsideSVG),
-            e = "\n            translateX(".concat(n.x, "px) \n            translateY(").concat(n.y, "px) \n            rotate(").concat(n.angle, "deg)\n        ");
-        this.element.style.transform = e;
-      }
-    }]), r;
-  }(t.Effect),
-      ot = ["cm", "mm", "in", "px", "pt", "pc", "em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax", "%"],
-      rt = ["deg", "rad", "grad", "turn"],
-      it = "measurement",
-      at = "color",
-      st = {
-    type: "object",
-    props: {
-      background: {
-        optional: !0,
-        type: at
-      },
-      backgroundColor: {
-        optional: !0,
-        type: at
-      },
-      backgroundPosition: {
-        optional: !0,
-        type: "string"
-      },
-      backgroundSize: {
-        optional: !0,
-        type: "string"
-      },
-      border: {
-        optional: !0,
-        type: "string"
-      },
-      borderBottom: {
-        optional: !0,
-        type: "string"
-      },
-      borderBottomColor: {
-        optional: !0,
-        type: at
-      },
-      borderBottomLeftRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderBottomRightRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderBottomWidth: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderColor: {
-        optional: !0,
-        type: at
-      },
-      borderEndEndRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderEndStartRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderImageOutset: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      borderImageSlice: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      borderImageWidth: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      borderLeft: {
-        optional: !0,
-        type: "string"
-      },
-      borderLeftColor: {
-        optional: !0,
-        type: at
-      },
-      borderLeftWidth: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderRight: {
-        optional: !0,
-        type: "string"
-      },
-      borderRightColor: {
-        optional: !0,
-        type: at
-      },
-      borderRightWidth: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderStartEndRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderStartStartRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderTop: {
-        optional: !0,
-        type: "string"
-      },
-      borderTopColor: {
-        optional: !0,
-        type: at
-      },
-      borderTopLeftRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderTopRightRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderTopWidth: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      borderWidth: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      bottom: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      boxShadow: {
-        optional: !0,
-        type: "string"
-      },
-      caretColor: {
-        optional: !0,
-        type: at
-      },
-      color: {
-        optional: !0,
-        type: at
-      },
-      columnCount: {
-        optional: !0,
-        type: "number",
-        min: 0,
-        integer: !0
-      },
-      columnGap: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      columnRule: {
-        optional: !0,
-        type: "string"
-      },
-      columnRuleColor: {
-        optional: !0,
-        type: at
-      },
-      columnRuleWidth: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      columns: {
-        optional: !0,
-        type: "number",
-        min: 0,
-        integer: !0
-      },
-      columnWidth: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      flex: {
-        optional: !0,
-        type: "number",
-        min: 0,
-        integer: !0
-      },
-      flexBasis: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      flexGrow: {
-        optional: !0,
-        type: "number",
-        min: 0,
-        integer: !0
-      },
-      flexShrink: {
-        optional: !0,
-        type: "number",
-        min: 0,
-        integer: !0
-      },
-      font: {
-        optional: !0,
-        type: "string"
-      },
-      fontSize: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      fontSizeAdjust: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      fontStretch: {
-        optional: !0,
-        type: it,
-        units: ["%"]
-      },
-      fontWeight: {
-        optional: !0,
-        type: "string"
-      },
-      gap: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      gridColumnGap: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      gridGap: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      gridRowGap: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      gridTemplateColumns: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      gridTemplateRows: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      height: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      inset: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      insetBlock: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      insetBlockEnd: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      insetBlockStart: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      insetInline: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      insetInlineEnd: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      insetInlineStart: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      left: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      letterSpacing: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      lineClamp: {
-        optional: !0,
-        type: "number",
-        min: 0,
-        integer: !0
-      },
-      lineHeight: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      margin: {
-        optional: !0,
-        type: "string"
-      },
-      marginBottom: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      marginLeft: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      marginRight: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      marginTop: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      maskBorder: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      maskPosition: {
-        optional: !0,
-        type: "string"
-      },
-      maskSize: {
-        optional: !0,
-        type: "string"
-      },
-      maxHeight: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      maxWidth: {
-        optional: !0,
-        type: it,
-        units: ot,
-        min: 0
-      },
-      objectPosition: {
-        optional: !0,
-        type: "string"
-      },
-      offset: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      offsetAnchor: {
-        optional: !0,
-        type: "string"
-      },
-      offsetDistance: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      offsetPath: {
-        optional: !0,
-        type: "string"
-      },
-      offsetPosition: {
-        optional: !0,
-        type: "string"
-      },
-      offsetRotate: {
-        optional: !0,
-        type: it,
-        units: rt
-      },
-      opacity: {
-        optional: !0,
-        type: "number",
-        min: 0,
-        max: 1
-      },
-      order: {
-        optional: !0,
-        type: "number",
-        integer: !0
-      },
-      outline: {
-        optional: !0,
-        type: "string"
-      },
-      outlineColor: {
-        optional: !0,
-        type: at
-      },
-      outlineOffset: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      outlineRadius: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      outlineRadiusBottomleft: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      outlineRadiusBottomright: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      outlineRadiusTopleft: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      outlineRadiusTopright: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      outlineWidth: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      padding: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      paddingBottom: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      paddingLeft: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      paddingRight: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      paddingTop: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      perspective: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      perspectiveOrigin: {
-        optional: !0,
-        type: "string"
-      },
-      right: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      rotate: {
-        optional: !0,
-        type: it,
-        units: rt
-      },
-      rowGap: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scale: {
-        optional: !0,
-        type: "number",
-        min: 0
-      },
-      scrollbarColor: {
-        optional: !0,
-        type: at
-      },
-      scrollMargin: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginBlock: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginBlockEnd: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginBlockStart: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginBottom: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginInline: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginInlineEnd: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginInlineStart: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginLeft: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginRight: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollMarginTop: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPadding: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingBlock: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingBlockEnd: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingBlockStart: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingBottom: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingInline: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingInlineEnd: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingInlineStart: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingLeft: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingRight: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollPaddingTop: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      scrollSnapCoordinate: {
-        optional: !0,
-        type: "string"
-      },
-      scrollSnapDestination: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      shapeImageThreshold: {
-        optional: !0,
-        type: "string"
-      },
-      shapeMargin: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      shapeOutside: {
-        optional: !0,
-        type: "string"
-      },
-      tabSize: {
-        optional: !0,
-        type: "string"
-      },
-      textDecoration: {
-        optional: !0,
-        type: "string"
-      },
-      textDecorationColor: {
-        optional: !0,
-        type: at
-      },
-      textDecorationThickness: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      textEmphasis: {
-        optional: !0,
-        type: "string"
-      },
-      textEmphasisColor: {
-        optional: !0,
-        type: at
-      },
-      textFillColor: {
-        optional: !0,
-        type: at
-      },
-      textIndent: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      textShadow: {
-        optional: !0,
-        type: "string"
-      },
-      textStroke: {
-        optional: !0,
-        type: "string"
-      },
-      textStrokeColor: {
-        optional: !0,
-        type: at
-      },
-      textUnderlineOffset: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      top: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      transform: {
-        optional: !0,
-        type: "object",
-        props: {
-          translateX: {
-            type: it,
-            units: ot,
-            optional: !0
-          },
-          translateY: {
-            type: it,
-            units: ot,
-            optional: !0
-          },
-          translateZ: {
-            type: it,
-            units: ot,
-            optional: !0
-          },
-          rotate: {
-            type: it,
-            units: rt,
-            optional: !0
-          },
-          rotateX: {
-            type: it,
-            units: rt,
-            optional: !0
-          },
-          rotateY: {
-            type: it,
-            units: rt,
-            optional: !0
-          },
-          rotateZ: {
-            type: it,
-            units: rt,
-            optional: !0
-          },
-          scale: {
-            type: "number",
-            min: 0,
-            optional: !0
-          },
-          scaleX: {
-            type: "number",
-            min: 0,
-            optional: !0
-          },
-          scaleY: {
-            type: "number",
-            min: 0,
-            optional: !0
-          },
-          scaleZ: {
-            type: "number",
-            min: 0,
-            optional: !0
-          },
-          skewX: {
-            type: it,
-            units: rt,
-            optional: !0
-          },
-          skewY: {
-            type: it,
-            units: rt,
-            optional: !0
-          },
-          perspective: {
-            type: it,
-            units: ot,
-            optional: !0
-          }
-        }
-      },
-      transformOrigin: {
-        optional: !0,
-        type: "string"
-      },
-      verticalAlign: {
-        optional: !0,
-        type: "string"
-      },
-      visibility: {
-        optional: !0,
-        type: "string"
-      },
-      width: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      wordSpacing: {
-        optional: !0,
-        type: it,
-        units: ot
-      },
-      zIndex: {
-        optional: !0,
-        type: "number",
-        integer: !0
-      },
-      zoom: {
-        optional: !0,
-        type: it,
-        units: ["%"],
-        min: 0
-      }
-    },
-    transformOrigin: {
-      type: "string"
-    },
-    verticalAlign: {
-      type: "string"
-    },
-    visibility: {
-      type: "string"
-    },
-    width: {
-      type: it,
-      units: ot
-    },
-    wordSpacing: {
-      type: it,
-      units: ot
-    },
-    zIndex: {
-      type: "number",
-      integer: !0
-    },
-    zoom: {
-      type: it,
-      units: ["%"],
-      min: 0
-    }
-  },
-      pt = __webpack_require__(10);
-
+  var nt = ["cm", "mm", "in", "px", "pt", "pc", "em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax", "%"],
+      et = ["deg", "rad", "grad", "turn"],
+      ot = "measurement",
+      rt = "color";
   return {
-    npm_name: pt.name,
-    version: pt.version,
+    npm_name: "@kissmybutton/motorcortex-anime",
     incidents: [{
-      exportable: nt,
+      exportable: function (t) {
+        a(s, t);
+        var e = c(s);
+
+        function s() {
+          return n(this, s), e.apply(this, arguments);
+        }
+
+        return o(s, [{
+          key: "onGetContext",
+          value: function value() {
+            var t = {};
+            if (Object.prototype.hasOwnProperty.call(tt, this.attributeKey)) for (var n = tt[this.attributeKey], e = 0; e < n.length; e++) {
+              Object.prototype.hasOwnProperty.call(this.targetValue, n[e]) && (t[n[e]] = [this.getInitialValue()[n[e]], this.targetValue[n[e]]]);
+            } else t[this.attributeKey] = [this.getInitialValue(), this.targetValue];
+            this.target = Q(function (t) {
+              for (var n = 1; n < arguments.length; n++) {
+                var e = null != arguments[n] ? arguments[n] : {};
+                n % 2 ? i(Object(e), !0).forEach(function (n) {
+                  r(t, n, e[n]);
+                }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(e)) : i(Object(e)).forEach(function (n) {
+                  Object.defineProperty(t, n, Object.getOwnPropertyDescriptor(e, n));
+                });
+              }
+
+              return t;
+            }({
+              autoplay: !1,
+              duration: this.props.duration,
+              easing: "linear",
+              targets: this.element
+            }, (this.attrs || {}).attrs || {}, {}, t));
+          }
+        }, {
+          key: "getScratchValue",
+          value: function value() {
+            if ("transform" === this.attributeKey) {
+              for (var t = {}, n = tt[this.attributeKey], e = function (t, n) {
+                var e = t.getComputedStyle(n).transform;
+                if ("" === e || "none" === e) return {};
+                var o,
+                    r,
+                    i,
+                    a,
+                    s,
+                    p,
+                    u,
+                    l,
+                    c = e.split("(")[1].split(")")[0].split(",");
+                return o = c, r = Math.atan2(o[1], o[0]), i = Math.pow(o[0], 2) + Math.pow(o[1], 2), a = Math.pow(o[2], 2) + Math.pow(o[3], 2), s = Math.sqrt(i), p = (o[0] * o[3] - o[2] * o[1]) / s, u = Math.atan2(o[0] * o[2] + o[1] * o[3], i), l = Math.atan2(o[1] * o[3] + o[0] * o[2], a), {
+                  rotate: r / (Math.PI / 180) + "deg",
+                  scaleX: s,
+                  scaleY: p,
+                  skewX: (1 === i ? u / (Math.PI / 180) : 0) + "deg",
+                  skewY: (1 === a ? l / (Math.PI / 180) : 0) + "deg",
+                  translateX: o[4] + "px",
+                  translateY: o[5] + "px"
+                };
+              }(this.context.window, this.element), o = 0; o < n.length; o++) {
+                Object.prototype.hasOwnProperty.call(e, n[o]) ? t[n[o]] = e[n[o]] : t[n[o]] = Q.get(this.element, n[o]);
+              }
+
+              return t;
+            }
+
+            return Q.get(this.element, this.attributeKey);
+          }
+        }, {
+          key: "onProgress",
+          value: function value(t) {
+            return this.target.seek(this.target.duration * t);
+          }
+        }]), s;
+      }(t.Effect),
       name: "Anime",
       attributesValidationRules: {
-        animatedAttrs: st
+        animatedAttrs: {
+          type: "object",
+          props: {
+            background: {
+              optional: !0,
+              type: rt
+            },
+            backgroundColor: {
+              optional: !0,
+              type: rt
+            },
+            backgroundPosition: {
+              optional: !0,
+              type: "string"
+            },
+            backgroundSize: {
+              optional: !0,
+              type: "string"
+            },
+            border: {
+              optional: !0,
+              type: "string"
+            },
+            borderBottom: {
+              optional: !0,
+              type: "string"
+            },
+            borderBottomColor: {
+              optional: !0,
+              type: rt
+            },
+            borderBottomLeftRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderBottomRightRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderBottomWidth: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderColor: {
+              optional: !0,
+              type: rt
+            },
+            borderEndEndRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderEndStartRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderImageOutset: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            borderImageSlice: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            borderImageWidth: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            borderLeft: {
+              optional: !0,
+              type: "string"
+            },
+            borderLeftColor: {
+              optional: !0,
+              type: rt
+            },
+            borderLeftWidth: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderRight: {
+              optional: !0,
+              type: "string"
+            },
+            borderRightColor: {
+              optional: !0,
+              type: rt
+            },
+            borderRightWidth: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderStartEndRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderStartStartRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderTop: {
+              optional: !0,
+              type: "string"
+            },
+            borderTopColor: {
+              optional: !0,
+              type: rt
+            },
+            borderTopLeftRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderTopRightRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderTopWidth: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            borderWidth: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            bottom: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            boxShadow: {
+              optional: !0,
+              type: "string"
+            },
+            caretColor: {
+              optional: !0,
+              type: rt
+            },
+            color: {
+              optional: !0,
+              type: rt
+            },
+            columnCount: {
+              optional: !0,
+              type: "number",
+              min: 0,
+              integer: !0
+            },
+            columnGap: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            columnRule: {
+              optional: !0,
+              type: "string"
+            },
+            columnRuleColor: {
+              optional: !0,
+              type: rt
+            },
+            columnRuleWidth: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            columns: {
+              optional: !0,
+              type: "number",
+              min: 0,
+              integer: !0
+            },
+            columnWidth: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            flex: {
+              optional: !0,
+              type: "number",
+              min: 0,
+              integer: !0
+            },
+            flexBasis: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            flexGrow: {
+              optional: !0,
+              type: "number",
+              min: 0,
+              integer: !0
+            },
+            flexShrink: {
+              optional: !0,
+              type: "number",
+              min: 0,
+              integer: !0
+            },
+            font: {
+              optional: !0,
+              type: "string"
+            },
+            fontSize: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            fontSizeAdjust: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            fontStretch: {
+              optional: !0,
+              type: ot,
+              units: ["%"]
+            },
+            fontWeight: {
+              optional: !0,
+              type: "string"
+            },
+            gap: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            gridColumnGap: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            gridGap: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            gridRowGap: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            gridTemplateColumns: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            gridTemplateRows: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            height: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            inset: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            insetBlock: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            insetBlockEnd: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            insetBlockStart: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            insetInline: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            insetInlineEnd: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            insetInlineStart: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            left: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            letterSpacing: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            lineClamp: {
+              optional: !0,
+              type: "number",
+              min: 0,
+              integer: !0
+            },
+            lineHeight: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            margin: {
+              optional: !0,
+              type: "string"
+            },
+            marginBottom: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            marginLeft: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            marginRight: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            marginTop: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            maskBorder: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            maskPosition: {
+              optional: !0,
+              type: "string"
+            },
+            maskSize: {
+              optional: !0,
+              type: "string"
+            },
+            maxHeight: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            maxWidth: {
+              optional: !0,
+              type: ot,
+              units: nt,
+              min: 0
+            },
+            objectPosition: {
+              optional: !0,
+              type: "string"
+            },
+            offset: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            offsetAnchor: {
+              optional: !0,
+              type: "string"
+            },
+            offsetDistance: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            offsetPath: {
+              optional: !0,
+              type: "string"
+            },
+            offsetPosition: {
+              optional: !0,
+              type: "string"
+            },
+            offsetRotate: {
+              optional: !0,
+              type: ot,
+              units: et
+            },
+            opacity: {
+              optional: !0,
+              type: "number",
+              min: 0,
+              max: 1
+            },
+            order: {
+              optional: !0,
+              type: "number",
+              integer: !0
+            },
+            outline: {
+              optional: !0,
+              type: "string"
+            },
+            outlineColor: {
+              optional: !0,
+              type: rt
+            },
+            outlineOffset: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            outlineRadius: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            outlineRadiusBottomleft: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            outlineRadiusBottomright: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            outlineRadiusTopleft: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            outlineRadiusTopright: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            outlineWidth: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            padding: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            paddingBottom: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            paddingLeft: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            paddingRight: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            paddingTop: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            perspective: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            perspectiveOrigin: {
+              optional: !0,
+              type: "string"
+            },
+            right: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            rotate: {
+              optional: !0,
+              type: ot,
+              units: et
+            },
+            rowGap: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scale: {
+              optional: !0,
+              type: "number",
+              min: 0
+            },
+            scrollbarColor: {
+              optional: !0,
+              type: rt
+            },
+            scrollMargin: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginBlock: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginBlockEnd: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginBlockStart: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginBottom: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginInline: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginInlineEnd: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginInlineStart: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginLeft: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginRight: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollMarginTop: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPadding: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingBlock: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingBlockEnd: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingBlockStart: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingBottom: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingInline: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingInlineEnd: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingInlineStart: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingLeft: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingRight: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollPaddingTop: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            scrollSnapCoordinate: {
+              optional: !0,
+              type: "string"
+            },
+            scrollSnapDestination: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            shapeImageThreshold: {
+              optional: !0,
+              type: "string"
+            },
+            shapeMargin: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            shapeOutside: {
+              optional: !0,
+              type: "string"
+            },
+            tabSize: {
+              optional: !0,
+              type: "string"
+            },
+            textDecoration: {
+              optional: !0,
+              type: "string"
+            },
+            textDecorationColor: {
+              optional: !0,
+              type: rt
+            },
+            textDecorationThickness: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            textEmphasis: {
+              optional: !0,
+              type: "string"
+            },
+            textEmphasisColor: {
+              optional: !0,
+              type: rt
+            },
+            textFillColor: {
+              optional: !0,
+              type: rt
+            },
+            textIndent: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            textShadow: {
+              optional: !0,
+              type: "string"
+            },
+            textStroke: {
+              optional: !0,
+              type: "string"
+            },
+            textStrokeColor: {
+              optional: !0,
+              type: rt
+            },
+            textUnderlineOffset: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            top: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            transform: {
+              optional: !0,
+              type: "object",
+              props: {
+                translateX: {
+                  type: ot,
+                  units: nt,
+                  optional: !0
+                },
+                translateY: {
+                  type: ot,
+                  units: nt,
+                  optional: !0
+                },
+                translateZ: {
+                  type: ot,
+                  units: nt,
+                  optional: !0
+                },
+                rotate: {
+                  type: ot,
+                  units: et,
+                  optional: !0
+                },
+                rotateX: {
+                  type: ot,
+                  units: et,
+                  optional: !0
+                },
+                rotateY: {
+                  type: ot,
+                  units: et,
+                  optional: !0
+                },
+                rotateZ: {
+                  type: ot,
+                  units: et,
+                  optional: !0
+                },
+                scale: {
+                  type: "number",
+                  min: 0,
+                  optional: !0
+                },
+                scaleX: {
+                  type: "number",
+                  min: 0,
+                  optional: !0
+                },
+                scaleY: {
+                  type: "number",
+                  min: 0,
+                  optional: !0
+                },
+                scaleZ: {
+                  type: "number",
+                  min: 0,
+                  optional: !0
+                },
+                skewX: {
+                  type: ot,
+                  units: et,
+                  optional: !0
+                },
+                skewY: {
+                  type: ot,
+                  units: et,
+                  optional: !0
+                },
+                perspective: {
+                  type: ot,
+                  units: nt,
+                  optional: !0
+                }
+              }
+            },
+            transformOrigin: {
+              optional: !0,
+              type: "string"
+            },
+            verticalAlign: {
+              optional: !0,
+              type: "string"
+            },
+            visibility: {
+              optional: !0,
+              type: "string"
+            },
+            width: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            wordSpacing: {
+              optional: !0,
+              type: ot,
+              units: nt
+            },
+            zIndex: {
+              optional: !0,
+              type: "number",
+              integer: !0
+            },
+            zoom: {
+              optional: !0,
+              type: ot,
+              units: ["%"],
+              min: 0
+            }
+          },
+          transformOrigin: {
+            type: "string"
+          },
+          verticalAlign: {
+            type: "string"
+          },
+          visibility: {
+            type: "string"
+          },
+          width: {
+            type: ot,
+            units: nt
+          },
+          wordSpacing: {
+            type: ot,
+            units: nt
+          },
+          zIndex: {
+            type: "number",
+            integer: !0
+          },
+          zoom: {
+            type: ot,
+            units: ["%"],
+            min: 0
+          }
+        }
       }
     }, {
-      exportable: et,
+      exportable: function (t) {
+        a(r, t);
+        var e = c(r);
+
+        function r() {
+          return n(this, r), e.apply(this, arguments);
+        }
+
+        return o(r, [{
+          key: "onGetContext",
+          value: function value() {
+            var t = this.context.getElements(this.targetValue.pathElement)[0];
+            this.path = Q.path(t), this.isPathTargetInsideSVG = this.element instanceof SVGElement;
+          }
+        }, {
+          key: "onProgress",
+          value: function value(t) {
+            var n = Q.getPathProgress(this.path, t, this.isPathTargetInsideSVG),
+                e = "\n            translateX(".concat(n.x, "px) \n            translateY(").concat(n.y, "px) \n            rotate(").concat(n.angle, "deg)\n        ");
+            this.element.style.transform = e;
+          }
+        }]), r;
+      }(t.Effect),
       name: "MotionPath",
       attributesValidationRules: {
         animatedAttrs: {
@@ -4391,12 +4384,6 @@ return Promise$1;
 //# sourceMappingURL=es6-promise.map
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(2), __webpack_require__(1)))
-
-/***/ }),
-/* 10 */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"name\":\"@kissmybutton/motorcortex-anime\",\"version\":\"2.1.7\",\"description\":\"Annime plugin for MotorCortex\",\"main\":\"dist/motorcortex-anime.cjs.js\",\"module\":\"dist/motorcortex-anime.esm.js\",\"browser\":\"dist/motorcortex-anime.umd.js\",\"author\":\"KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>\",\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/kissmybutton/motorcortex-anime.git\"},\"license\":\"MIT\",\"engines\":{\"node\":\">=10\"},\"scripts\":{\"update-force:packages\":\"./node_modules/npm-check-updates/bin/ncu -u && npm i\",\"update:packages\":\"npm update --save/--save-dev\",\"concurrently\":\"concurrently -c \\\"cyan.bold,magenta.bold\\\" --names \\\"JS,Styles\\\"\",\"lint:styles\":\"stylelint  --allow-empty-input \\\"src/**.css\\\" \\\"src/**/*.scss\\\" --config .stylelintrc.json\",\"lint:js\":\"eslint -c .eslintrc src/**/*.js\",\"lint\":\"npm run concurrently \\\"npm:lint:js\\\" \\\"npm:lint:styles\\\"\",\"lint:fix\":\"npm run concurrently  \\\"npm:lint:js -- --fix\\\" \\\"npm:lint:styles -- --fix\\\"\",\"build\":\"npm run build:lib && npm run build:demo\",\"build:lib\":\"rollup -c\",\"start\":\"npm run build:lib && concurrently -c \\\"cyan.bold,magenta.bold\\\" \\\"npm:build:lib -- -w\\\"  \\\"npm:start:demo\\\" \",\"start:demo\":\"webpack-dev-server --mode=development --config ./demo/webpack.config.js\",\"build:demo\":\"webpack --mode=production --config ./demo/webpack.config.js\",\"test\":\"HERE GOES YOUR TEST TASK\",\"test:prod\":\"npm run lint\",\"report-coverage\":\"cat ./coverage/lcov.info | coveralls\",\"commit\":\"git-cz\",\"prebuild\":\"rimraf dist\"},\"keywords\":[\"motorcortex\",\"animation\"],\"lint-staged\":{\"*.json\":[\"prettier --write\"],\"*.{css,scss}\":[\"stylelint  \\\"src/**.css\\\" \\\"src/**/*.scss\\\" --config .stylelintrc.json --fix\"],\"*.{js,jsx}\":[\"prettier --write\",\"eslint --fix\"]},\"release\":{\"verifyConditions\":[\"@semantic-release/changelog\",\"@semantic-release/npm\",\"@semantic-release/github\",\"@semantic-release/git\"],\"prepare\":[\"@semantic-release/changelog\",\"@semantic-release/npm\",\"@semantic-release/git\"]},\"config\":{\"commitizen\":{\"path\":\"cz-conventional-changelog\"}},\"dependencies\":{\"mc-animejs-core\":\"3.1.5\"},\"peerDependencies\":{\"@kissmybutton/motorcortex\":\"6.2.2\"},\"devDependencies\":{\"@babel/cli\":\"^7.8.4\",\"@babel/core\":\"^7.9.0\",\"@babel/preset-env\":\"^7.9.0\",\"@commitlint/cli\":\"^8.3.5\",\"@commitlint/config-conventional\":\"^8.3.4\",\"@kissmybutton/motorcortex\":\"6.2.2\",\"@kissmybutton/motorcortex-player\":\"1.7.7\",\"@semantic-release/changelog\":\"^5.0.1\",\"@semantic-release/git\":\"^9.0.0\",\"@semantic-release/github\":\"^7.0.5\",\"@semantic-release/npm\":\"^7.0.5\",\"babel-eslint\":\"^10.1.0\",\"babel-loader\":\"^8.1.0\",\"browserslist\":\"^4.11.1\",\"caniuse-lite\":\"^1.0.30001038\",\"commitizen\":\"^4.2.2\",\"concurrently\":\"^5.1.0\",\"coveralls\":\"^3.0.11\",\"css-loader\":\"^3.4.2\",\"cz-conventional-changelog\":\"^3.1.0\",\"es6-promise\":\"^4.2.8\",\"eslint\":\"^6.8.0\",\"eslint-config-prettier\":\"^6.10.1\",\"eslint-config-standard\":\"^14.1.1\",\"eslint-plugin-babel\":\"^5.3.0\",\"eslint-plugin-import\":\"^2.20.2\",\"eslint-plugin-node\":\"^11.1.0\",\"eslint-plugin-prettier\":\"^3.1.2\",\"eslint-plugin-promise\":\"^4.2.1\",\"eslint-plugin-standard\":\"^4.0.1\",\"exports-loader\":\"^0.7.0\",\"husky\":\"^4.2.3\",\"imports-loader\":\"^0.8.0\",\"json-stringify-safe\":\"^5.0.1\",\"lint-staged\":\"^10.1.1\",\"npm-check-updates\":\"^4.1.0\",\"npx\":\"^10.2.2\",\"prettier\":\"^2.0.2\",\"rimraf\":\"^3.0.2\",\"rollup\":\"^2.3.1\",\"rollup-plugin-babel\":\"^4.4.0\",\"rollup-plugin-commonjs\":\"^10.1.0\",\"rollup-plugin-node-resolve\":\"^5.2.0\",\"rollup-plugin-terser\":\"^5.3.0\",\"sass-loader\":\"^8.0.2\",\"semantic-release\":\"^17.0.4\",\"shelljs\":\"^0.8.3\",\"stylelint\":\"^13.2.1\",\"stylelint-config-prettier\":\"^8.0.1\",\"stylelint-config-recommended\":\"^3.0.0\",\"stylelint-config-recommended-scss\":\"^4.2.0\",\"stylelint-config-sass-guidelines\":\"^7.0.0\",\"stylelint-config-standard\":\"^20.0.0\",\"stylelint-scss\":\"^3.16.0\",\"webpack\":\"^4.42.1\",\"webpack-cli\":\"^3.3.11\",\"webpack-dev-server\":\"^3.11.0\",\"whatwg-fetch\":\"^3.0.0\"}}");
 
 /***/ })
 /******/ ]);
