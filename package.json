@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-anime",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "description": "Annime plugin for MotorCortex",
   "main": "dist/motorcortex-anime.cjs.js",
   "module": "dist/motorcortex-anime.esm.js",
@@ -68,6 +68,7 @@
     }
   },
   "dependencies": {
+    "@rollup/plugin-json": "^4.1.0",
     "mc-animejs-core": "3.1.5"
   },
   "peerDependencies": {
@@ -79,7 +80,7 @@
     "@babel/preset-env": "^7.9.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@kissmybutton/motorcortex": "6.2.3",
+    "@kissmybutton/motorcortex": "^6.2.3",
     "@kissmybutton/motorcortex-player": "1.7.7",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
