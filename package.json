@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-anime",
-  "version": "2.1.12",
+  "version": "1.0.0",
   "description": "Annime plugin for MotorCortex",
   "main": "dist/motorcortex-anime.cjs.js",
   "module": "dist/motorcortex-anime.esm.js",
