@@ -1,13 +1,20 @@
 {
-  "extends": [
-    "config:base"
-  ],
-  "automerge": true,
+  "extends": ["config:base"],
+  "separateMinorPatch": true,
+  "semanticCommits": "enabled",
+  "patch": {
+    "automerge": true
+  },
+  "pin": {
+    "automerge": true
+  },
+  "lockFileMaintenance": {
+    "automerge": true
+  },
   "automergeType": "branch",
   "packageRules": [
     {
-      "packagePatterns": ["*"],
-      "excludePackagePatterns": ["@kissmybutton/motorcortex"],
+      "matchDepTypes": ["peerDependencies"],
       "enabled": false
     }
   ]
