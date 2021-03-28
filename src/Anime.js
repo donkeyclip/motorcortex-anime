@@ -21,12 +21,12 @@ export default class Anime extends MotorCortex.Effect {
           continue;
         }
         options[compoAttribute[i]] = [
-          this.getInitialValue()[compoAttribute[i]],
+          this.initialValue[compoAttribute[i]],
           this.targetValue[compoAttribute[i]],
         ];
       }
     } else {
-      options[this.attributeKey] = [this.getInitialValue(), this.targetValue];
+      options[this.attributeKey] = [this.initialValue, this.targetValue];
     }
 
     this.target = anime({
