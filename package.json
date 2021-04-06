@@ -91,7 +91,7 @@
     "browserslist": "4.16.3",
     "caniuse-lite": "1.0.30001207",
     "commitizen": "4.2.3",
-    "concurrently": "6.0.0",
+    "concurrently": "6.0.1",
     "coveralls": "3.1.0",
     "css-loader": "3.6.0",
     "cz-conventional-changelog": "3.3.0",
