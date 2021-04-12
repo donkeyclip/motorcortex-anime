@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.14](https://www.github.com/kissmybutton/motorcortex-anime/compare/v2.1.13...v2.1.14) (2021-04-12)
+
+
+### Bug Fixes
+
+* Bump mc to resolve player preview issue ([eb0a636](https://www.github.com/kissmybutton/motorcortex-anime/commit/eb0a6368a54e6c58dff401b87a551b0292818d4b))
+
 ### 2.1.13 (2021-03-31)
 
 
