@@ -40,24 +40,24 @@ export default class Anime extends MotorCortex.Effect {
   }
 
   getScratchValue() {
-    if (this.attributeKey === "transform") {
-      const obj = {};
-      const transform = compoAttributes[this.attributeKey];
-      const currentTransform = getMatrix2D(this.context.window, this.element);
-
-      for (let i = 0; i < transform.length; i++) {
-        if (
-          Object.prototype.hasOwnProperty.call(currentTransform, transform[i])
-        ) {
-          obj[transform[i]] = currentTransform[transform[i]];
-        } else {
-          obj[transform[i]] = anime.get(this.element, transform[i]);
-        }
-      }
-
-      return obj;
+    if (this.attributeKey !== "transform") {
+      return anime.get(this.element, this.attributeKey);
     }
-    return anime.get(this.element, this.attributeKey);
+
+    const obj = {};
+    const transform = compoAttributes[this.attributeKey];
+    const currentTransform = getMatrix2D(this.context.window, this.element);
+
+    for (let i = 0; i < transform.length; i++) {
+      obj[transform[i]] = Object.prototype.hasOwnProperty.call(
+        currentTransform,
+        transform[i]
+      )
+        ? currentTransform[transform[i]]
+        : anime.get(this.element, transform[i]);
+    }
+
+    return obj;
   }
 
   /**
