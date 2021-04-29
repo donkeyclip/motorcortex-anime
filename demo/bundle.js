@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ccdff511636789ba74af";
+/******/ 	var hotCurrentHash = "6384b49f62c251873eb3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1092,30 +1092,6 @@ process.umask = function() { return 0; };
   var e = n(t);
 
   function o(t, n) {
-    if (!(t instanceof n)) throw new TypeError("Cannot call a class as a function");
-  }
-
-  function r(t, n) {
-    for (var e = 0; e < n.length; e++) {
-      var o = n[e];
-      o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(t, o.key, o);
-    }
-  }
-
-  function i(t, n, e) {
-    return n && r(t.prototype, n), e && r(t, e), t;
-  }
-
-  function a(t, n, e) {
-    return n in t ? Object.defineProperty(t, n, {
-      value: e,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }) : t[n] = e, t;
-  }
-
-  function s(t, n) {
     var e = Object.keys(t);
 
     if (Object.getOwnPropertySymbols) {
@@ -1128,17 +1104,41 @@ process.umask = function() { return 0; };
     return e;
   }
 
-  function p(t) {
+  function r(t) {
     for (var n = 1; n < arguments.length; n++) {
       var e = null != arguments[n] ? arguments[n] : {};
-      n % 2 ? s(Object(e), !0).forEach(function (n) {
-        a(t, n, e[n]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(e)) : s(Object(e)).forEach(function (n) {
+      n % 2 ? o(Object(e), !0).forEach(function (n) {
+        p(t, n, e[n]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(e)) : o(Object(e)).forEach(function (n) {
         Object.defineProperty(t, n, Object.getOwnPropertyDescriptor(e, n));
       });
     }
 
     return t;
+  }
+
+  function i(t, n) {
+    if (!(t instanceof n)) throw new TypeError("Cannot call a class as a function");
+  }
+
+  function a(t, n) {
+    for (var e = 0; e < n.length; e++) {
+      var o = n[e];
+      o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(t, o.key, o);
+    }
+  }
+
+  function s(t, n, e) {
+    return n && a(t.prototype, n), e && a(t, e), t;
+  }
+
+  function p(t, n, e) {
+    return n in t ? Object.defineProperty(t, n, {
+      value: e,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : t[n] = e, t;
   }
 
   function u(t, n) {
@@ -1830,17 +1830,17 @@ process.umask = function() { return 0; };
         var n = y(e);
 
         function e() {
-          return o(this, e), n.apply(this, arguments);
+          return i(this, e), n.apply(this, arguments);
         }
 
-        return i(e, [{
+        return s(e, [{
           key: "onGetContext",
           value: function value() {
             var t = {};
             if (Object.prototype.hasOwnProperty.call(et, this.attributeKey)) for (var n = et[this.attributeKey], e = 0; e < n.length; e++) {
               Object.prototype.hasOwnProperty.call(this.targetValue, n[e]) && (t[n[e]] = [this.initialValue[n[e]], this.targetValue[n[e]]]);
             } else t[this.attributeKey] = [this.initialValue, this.targetValue];
-            this.target = nt(p(p({
+            this.target = nt(r(r({
               autoplay: !1,
               duration: this.props.duration,
               easing: "linear",
@@ -2753,10 +2753,10 @@ process.umask = function() { return 0; };
         var n = y(e);
 
         function e() {
-          return o(this, e), n.apply(this, arguments);
+          return i(this, e), n.apply(this, arguments);
         }
 
-        return i(e, [{
+        return s(e, [{
           key: "onGetContext",
           value: function value() {
             this.pixelsAccuracy = this.attrs.pixelsAccuracy || 4, this.calculatedPoints = [];
