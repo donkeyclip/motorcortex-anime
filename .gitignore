@@ -1,7 +1,7 @@
 # Node modules
 node_modules
 dist
-# demo/bundle.js
+demo/bundle.js
 
 # Coverage
 coverage
