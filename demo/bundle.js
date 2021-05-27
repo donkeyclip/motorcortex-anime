@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "442ebffe1d72344b3a04";
+/******/ 	var hotCurrentHash = "ad5267a9db6ea98c6b15";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1625,7 +1625,7 @@
       at = "color";
   return {
     npm_name: "@kissmybutton/motorcortex-anime",
-    version: "2.1.15",
+    version: "2.1.16",
     incidents: [{
       exportable: function (t) {
         u(e, t);
