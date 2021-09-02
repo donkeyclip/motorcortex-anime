@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e117dd496f520b38c051";
+/******/ 	var hotCurrentHash = "3236319839d4e17230a2";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -967,10 +967,12 @@
   }
 
   function f(t, n) {
-    return !n || "object" != _typeof(n) && "function" != typeof n ? function (t) {
+    if (n && ("object" == _typeof(n) || "function" == typeof n)) return n;
+    if (void 0 !== n) throw new TypeError("Derived constructors may only return object or undefined");
+    return function (t) {
       if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
       return t;
-    }(t) : n;
+    }(t);
   }
 
   function y(t) {
@@ -1291,7 +1293,7 @@
     });
   }
 
-  function Z(t, n) {
+  function D(t, n) {
     var e = M(n);
 
     if (x.arr(t)) {
@@ -1310,7 +1312,7 @@
     });
   }
 
-  function D(t, n) {
+  function Z(t, n) {
     var e;
     return t.tweens.map(function (o) {
       var r = function (t, n) {
@@ -1380,7 +1382,7 @@
           var e = A(t.target, n.name);
 
           if (e) {
-            var o = D(n, t),
+            var o = Z(n, t),
                 r = o[o.length - 1];
             return {
               type: e,
@@ -1408,7 +1410,7 @@
       for (var o in n) {
         x.key(o) && e.push({
           name: o,
-          tweens: Z(n[o], t)
+          tweens: D(n[o], t)
         });
       }
 
