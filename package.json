@@ -75,7 +75,7 @@
     "@kissmybutton/motorcortex": ">= 6.4.1 < 8"
   },
   "devDependencies": {
-    "@babel/cli": "7.15.4",
+    "@babel/cli": "7.15.7",
     "@babel/core": "7.15.5",
     "@babel/preset-env": "7.15.6",
     "@commitlint/cli": "12.1.4",
