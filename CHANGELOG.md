@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.1.15](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.14...v2.1.15) (2021-09-24)
+
+
+### Bug Fixes
+
+* husky ([657a3e6](https://www.github.com/donkeyclip/motorcortex-anime/commit/657a3e6c42f21cc628e822d0eaaca16ec2c13c9d))
+* update npm name ([b83b7a3](https://www.github.com/donkeyclip/motorcortex-anime/commit/b83b7a3926c0649f8062f79282890d62a771141c))
+
 ### [2.1.14](https://www.github.com/kissmybutton/motorcortex-anime/compare/v2.1.13...v2.1.14) (2021-04-12)
 
 
