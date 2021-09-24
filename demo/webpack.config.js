@@ -1,22 +1,20 @@
 const path = require("path");
-const webpack = require("webpack");
 
 module.exports = {
-  context: path.resolve(__dirname),
-
-  entry: "./index.js",
-
+  entry: "./demo/index.js",
   resolve: {
     extensions: [".js"],
     modules: [path.resolve("./"), "node_modules"],
+    fallback: {
+      fs: false,
+      path: require.resolve("path-browserify"),
+    },
   },
   output: {
     filename: "bundle.js",
-    // the output bundle
-
-    path: path.resolve(__dirname, "./" /*"./dist"*/),
+    path: path.resolve(__dirname, "./"),
   },
-
+  mode: "development",
   module: {
     rules: [
       {
@@ -28,36 +26,22 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.svg$/,
+        loader: "svg-inline-loader",
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
     ],
   },
-
-  plugins: [
-    new webpack.ProvidePlugin({
-      Promise: "es6-promise",
-      fetch:
-        "imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch",
-    }),
-
-    new webpack.HotModuleReplacementPlugin(),
-    // enable HMR globally
-
-    new webpack.NoEmitOnErrorsPlugin(),
-    // do not emit compiled assets that include errors
-  ],
-
   devServer: {
-    // watchContentBase: true, // initiate a page refresh if static content changes
+    watchContentBase: true,
     host: "0.0.0.0",
     port: 8080,
     historyApiFallback: false,
-    hot: true,
+    hot: false,
     contentBase: "./demo",
-  },
-  node: {
-    fs: "empty",
-  },
-
-  optimization: {
-    minimize: false,
   },
 };
