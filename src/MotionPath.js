@@ -1,4 +1,4 @@
-import MotorCortex from "@kissmybutton/motorcortex";
+import MotorCortex from "@donkeyclip/motorcortex";
 import anime from "mc-animejs-core/lib/anime.es.js";
 
 /**
@@ -24,22 +24,27 @@ export default class MotionPath extends MotorCortex.Effect {
 
   onProgress(f) {
     let toSet;
-    const distance = Math.round((this.path.totalLength / this.pixelsAccuracy) * f) * this.pixelsAccuracy;
-    if(this.calculatedPoints[distance] !== null && this.calculatedPoints[distance] !== undefined){
+    const distance =
+      Math.round((this.path.totalLength / this.pixelsAccuracy) * f) *
+      this.pixelsAccuracy;
+    if (
+      this.calculatedPoints[distance] !== null &&
+      this.calculatedPoints[distance] !== undefined
+    ) {
       toSet = this.calculatedPoints[distance];
     } else {
-        const position = anime.getPathProgress(
-            this.path,
-            distance/this.path.totalLength,
-            this.isPathTargetInsideSVG
-        );
-        // console.log(position);
-        toSet = `
+      const position = anime.getPathProgress(
+        this.path,
+        distance / this.path.totalLength,
+        this.isPathTargetInsideSVG
+      );
+      // console.log(position);
+      toSet = `
             translateX(${position.x}px)
             translateY(${position.y}px)
             rotate(${position.angle}deg)
         `;
-        this.calculatedPoints[distance] = toSet;
+      this.calculatedPoints[distance] = toSet;
     }
 
     this.element.style.transform = toSet;

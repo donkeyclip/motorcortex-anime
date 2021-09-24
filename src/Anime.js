@@ -1,4 +1,4 @@
-import MotorCortex from "@kissmybutton/motorcortex";
+import MotorCortex from "@donkeyclip/motorcortex";
 import anime from "mc-animejs-core/lib/anime.es.js";
 import compoAttributes from "./compoAttributes";
 import getMatrix2D from "./matrix2d";
