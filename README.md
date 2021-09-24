@@ -3,42 +3,47 @@
 [Anime.js](https://animejs.com/) library as a MotorCortex Incident
 
 ## Installation
+
 ```bash
-$ npm install @kissmybutton/motorcortex-anime
+$ npm install @donkeyclip/motorcortex-anime
 # OR
-$ yarn add @kissmybutton/motorcortex-anime
+$ yarn add @donkeyclip/motorcortex-anime
 ```
 
 ```javascript
-import Anime from "@kissmybutton/motorcortex-anime";
+import Anime from "@donkeyclip/motorcortex-anime";
 ```
-
 
 ## Key Concepts / Features
-MotorCortex Anime takes the capabilities of Anime.js library and exposes them via 
-easy to use MotorCortex Incidents. 
-The library exposes two Incidents, the one with the name "Anime" which, by the use 
-of the Anime.js engine, can perform any CSS (or any other attribute) animation 
+
+MotorCortex Anime takes the capabilities of Anime.js library and exposes them via
+easy to use MotorCortex Incidents.
+The library exposes two Incidents, the one with the name "Anime" which, by the use
+of the Anime.js engine, can perform any CSS (or any other attribute) animation
 to any selected element while the second performs motion path animation.
 
-## Browser compatibility 
+## Browser compatibility
+
 | Chrome | Safari | IE / Edge | Firefox | Opera |
-| --- | --- | --- | --- | --- |
-| 24+ | 6+ | 10+ | 32+ | 15+ |
+| ------ | ------ | --------- | ------- | ----- |
+| 24+    | 6+     | 10+       | 32+     | 15+   |
 
 ## Documentation
+
 ### Import and load the plugin to MotorCortex
+
 ```javascript
-import MotorCortex from "@kissmybutton/motorcortex";
-import AnimePluginDefinition from "@kissmybutton/motorcortex-anime";
+import MotorCortex from "@donkeyclip/motorcortex";
+import AnimePluginDefinition from "@donkeyclip/motorcortex-anime";
 
 const AnimePlugin = MotorCortex.loadPlugin(AnimePluginDefinition);
 ```
 
 ### Create an Anim animation Incident and place it anywhere in your Clip
+
 ```javascript
-import MotorCortex from "@kissmybutton/motorcortex";
-import AnimePluginDefinition from "@kissmybutton/motorcortex-anime";
+import MotorCortex from "@donkeyclip/motorcortex";
+import AnimePluginDefinition from "@donkeyclip/motorcortex-anime";
 
 const AnimePlugin = MotorCortex.loadPlugin(AnimePluginDefinition);
 
@@ -85,7 +90,9 @@ MyClip.play();
 ```
 
 ### Work with tranform
+
 `transform` is (the only) composite attribute that Anime Incident can animate. Transform attribute includes the following attributes:
+
 - "translateX",
 - "translateY",
 - "translateZ",
@@ -102,40 +109,51 @@ MyClip.play();
 - "perspective"
 
 All of the attributes on this list can only be animated via the transform composite attribute:
+
 ```javascript
-const MyAnime = new AnimePlugin.Anime({
-  animatedAttrs: {
-    transform: {
-      translateX: '50px',
-      scale: 2
-    }
+const MyAnime = new AnimePlugin.Anime(
+  {
+    animatedAttrs: {
+      transform: {
+        translateX: "50px",
+        scale: 2,
+      },
+    },
+  },
+  {
+    selector: ".a",
+    duration: 2000,
+    easing: "linear",
   }
-}, {
-  selector: '.a',
-  duration: 2000,
-  easing: 'linear'
-});
+);
 ```
 
 ## MotionPath
+
 The MotioPath Incident implements the motion path capability of anime.js library. This feature allows motion of any element on any given (svg) path.
+
 ### Create a MotionPath animation Incident and place it anywhere in your Clip
+
 The syntax is simple:
 
 ```javascript
-const motionPath = new AnimePlugin.MotionPath({
-  pixelsAccuracy: 5,
-  animatedAttrs: {
-    positionOn: {
-      pathElement: 'the selector that targets your path element'
-    }
+const motionPath = new AnimePlugin.MotionPath(
+  {
+    pixelsAccuracy: 5,
+    animatedAttrs: {
+      positionOn: {
+        pathElement: "the selector that targets your path element",
+      },
+    },
+  },
+  {
+    selector: ".a",
+    duration: 2000,
+    easing: "linear",
   }
-}, {
-  selector: '.a',
-  duration: 2000,
-  easing: 'linear'
-});
+);
 ```
+
 As you can notice the animated attribute here is `positionOn` which in turn is an
 object expecting only one key, the `pathElement` which is a selctor to the path
 element that defines the motion path.
@@ -143,20 +161,20 @@ element that defines the motion path.
 The selected elements will sleep into this path on the given duration.
 
 One more thing to notice is the `pixelsAccuracy` attribute. This attribute sets the distance threshold between two
-sequential points of the path that the element should move. This attribute can be used so the motion path 
+sequential points of the path that the element should move. This attribute can be used so the motion path
 effect gets more performant (less processing is required). The default value is 4.
 
 ### Exposed Incidents
-* `Anime`
-* `MotionPath`
+
+- `Anime`
+- `MotionPath`
+
 ### Demo
+
 https://kissmybutton.github.io/motorcortex-anime/demo/
 
-
 ## License
+
 [MIT License](https://opensource.org/licenses/MIT)
 
-
-  
-  
 [![Kiss My Button](https://presskit.kissmybutton.gr/logos/kissmybutton-logo-small.png)](https://kissmybutton.gr)

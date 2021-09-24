@@ -1,5 +1,5 @@
-import Player from "@kissmybutton/motorcortex-player";
-import { HTMLClip, Group, loadPlugin } from "@kissmybutton/motorcortex/";
+import Player from "@donkeyclip/motorcortex-player";
+import { HTMLClip, Group, loadPlugin } from "@donkeyclip/motorcortex/";
 import AnimeDefinition from "../dist/motorcortex-anime.umd";
 const Anime = loadPlugin(AnimeDefinition);
 
