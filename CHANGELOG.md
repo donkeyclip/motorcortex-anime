@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.16](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.15...v2.1.16) (2021-09-24)
+
+
+### Bug Fixes
+
+* update webpack & webpack.config ([f36f396](https://www.github.com/donkeyclip/motorcortex-anime/commit/f36f3960bea9ff0f7358d54decabca0cf792402b))
+
 ### [2.1.15](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.14...v2.1.15) (2021-09-24)
 
 
