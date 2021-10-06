@@ -82,7 +82,7 @@
     "@commitlint/cli": "13.2.0",
     "@commitlint/config-conventional": "13.2.0",
     "@donkeyclip/motorcortex": "7.5.1",
-    "@donkeyclip/motorcortex-player": "2.2.1",
+    "@donkeyclip/motorcortex-player": "2.2.3",
     "@rollup/plugin-json": "4.1.0",
     "@semantic-release/changelog": "6.0.0",
     "@semantic-release/git": "10.0.0",
