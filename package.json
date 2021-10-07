@@ -91,7 +91,7 @@
     "@size-limit/preset-big-lib": "5.0.5",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.2.2",
-    "browserslist": "4.17.1",
+    "browserslist": "4.17.3",
     "caniuse-lite": "1.0.30001261",
     "commitizen": "4.2.4",
     "concurrently": "6.2.2",
