@@ -1,6 +1,6 @@
 import Player from "@donkeyclip/motorcortex-player";
 import { HTMLClip, Group, loadPlugin } from "@donkeyclip/motorcortex/";
-import AnimeDefinition from "../dist/motorcortex-anime.umd";
+import AnimeDefinition from "../dist/motorcortex-anime.esm";
 const Anime = loadPlugin(AnimeDefinition);
 
 const css = `
