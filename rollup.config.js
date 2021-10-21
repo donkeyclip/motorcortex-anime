@@ -29,10 +29,10 @@ export default [
       },
     ],
     plugins: [
+      json(),
       resolve({ mainFields: ["module", "main", "browser"] }),
       commonjs(),
       babel(),
-      json(),
       terser(),
     ],
   },
