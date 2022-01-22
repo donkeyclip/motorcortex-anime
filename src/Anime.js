@@ -1,15 +1,16 @@
-import MotorCortex from "@donkeyclip/motorcortex";
+import { ExtendableCSSEffect } from "@donkeyclip/motorcortex";
 import anime from "mc-animejs-core/lib/anime.es.js";
-import compoAttributes from "./compoAttributes";
-import getMatrix2D from "./matrix2d";
 
-export default class Anime extends MotorCortex.Effect {
+export default class Anime extends ExtendableCSSEffect {
   onGetContext() {
     const options = {};
     if (
-      Object.prototype.hasOwnProperty.call(compoAttributes, this.attributeKey)
+      Object.prototype.hasOwnProperty.call(
+        this.compoAttributes,
+        this.attributeKey
+      )
     ) {
-      const compoAttribute = compoAttributes[this.attributeKey];
+      const compoAttribute = this.compoAttributes[this.attributeKey];
 
       for (let i = 0; i < compoAttribute.length; i++) {
         if (
@@ -37,27 +38,6 @@ export default class Anime extends MotorCortex.Effect {
       ...((this.attrs || {}).attrs || {}),
       ...options,
     }); // handle first render initial values
-  }
-
-  getScratchValue() {
-    if (this.attributeKey !== "transform") {
-      return anime.get(this.element, this.attributeKey);
-    }
-
-    const obj = {};
-    const transform = compoAttributes[this.attributeKey];
-    const currentTransform = getMatrix2D(this.context.window, this.element);
-
-    for (let i = 0; i < transform.length; i++) {
-      obj[transform[i]] = Object.prototype.hasOwnProperty.call(
-        currentTransform,
-        transform[i]
-      )
-        ? currentTransform[transform[i]]
-        : anime.get(this.element, transform[i]);
-    }
-
-    return obj;
   }
 
   /**

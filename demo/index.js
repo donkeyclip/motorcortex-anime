@@ -1,7 +1,7 @@
-import Player from "@donkeyclip/motorcortex-player";
-import { HTMLClip, Group, loadPlugin } from "@donkeyclip/motorcortex/";
+import { HTMLClip, Group, loadPlugin } from "@donkeyclip/motorcortex";
 import AnimeDefinition from "../dist/motorcortex-anime.esm";
 const Anime = loadPlugin(AnimeDefinition);
+const AnimeEffect = AnimeDefinition.CSSEffect;
 
 const css = `
 
@@ -178,7 +178,7 @@ const motionPath = new Anime.MotionPath(
   }
 );
 
-const boxWidth = new Anime.Anime(
+const boxWidth = new AnimeEffect(
   {
     animatedAttrs: {
       width: "250px",
@@ -191,7 +191,7 @@ const boxWidth = new Anime.Anime(
   }
 );
 
-const boxColor = new Anime.Anime(
+const boxColor = new AnimeEffect(
   {
     animatedAttrs: {
       background: "rgb(255, 0, 85)",
@@ -207,7 +207,7 @@ const boxColor = new Anime.Anime(
   }
 );
 
-const boxRotate = new Anime.Anime(
+const boxRotate = new AnimeEffect(
   {
     animatedAttrs: {
       width: "30px",
@@ -229,7 +229,7 @@ const boxRotate = new Anime.Anime(
   }
 );
 
-const boxMove = new Anime.Anime(
+const boxMove = new AnimeEffect(
   {
     animatedAttrs: {
       left: "220px",
@@ -245,7 +245,7 @@ const boxMove = new Anime.Anime(
   }
 );
 
-const boxBorder = new Anime.Anime(
+const boxBorder = new AnimeEffect(
   {
     animatedAttrs: {
       borderRadius: "50%",
@@ -260,7 +260,7 @@ const boxBorder = new Anime.Anime(
   }
 );
 
-const svg = new Anime.Anime(
+const svg = new AnimeEffect(
   {
     animatedAttrs: {
       strokeDashoffset: 0,
@@ -287,10 +287,4 @@ clip.addIncident(myGroup, 4000);
 clip.addIncident(motionPath, 0);
 
 clip.addIncident(svg, 9500);
-new Player({
-  scaleToFit: true,
-  clip: clip,
-  theme: "mc-blue",
-  preview: false,
-  pointerEvents: false,
-});
+clip.play();
