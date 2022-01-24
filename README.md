@@ -1,6 +1,6 @@
 # MotorCortex Anime
 
-[Anime.js](https://animejs.com/) library as a MotorCortex Incident
+[Anime.js](https://animejs.com/) library as a MotorCortex CSS Layer
 
 ## Installation
 
@@ -16,11 +16,8 @@ import Anime from "@donkeyclip/motorcortex-anime";
 
 ## Key Concepts / Features
 
-MotorCortex Anime takes the capabilities of Anime.js library and exposes them via
-easy to use MotorCortex Incidents.
-The library exposes two Incidents, the one with the name "Anime" which, by the use
-of the Anime.js engine, can perform any CSS (or any other attribute) animation
-to any selected element while the second performs motion path animation.
+The library exposes `CSSEffect` which implementes an alternative CSS Layer for MotorCortex while the second (`MotionPath`)
+performs motion path animation.
 
 ## Browser compatibility
 
@@ -39,13 +36,13 @@ import AnimePluginDefinition from "@donkeyclip/motorcortex-anime";
 const AnimePlugin = MotorCortex.loadPlugin(AnimePluginDefinition);
 ```
 
-### Create an Anim animation Incident and place it anywhere in your Clip
+### Use the provided CSSEffect as the CSS core of MotorCortex.
 
 ```javascript
 import MotorCortex from "@donkeyclip/motorcortex";
 import AnimePluginDefinition from "@donkeyclip/motorcortex-anime";
-
-const AnimePlugin = MotorCortex.loadPlugin(AnimePluginDefinition);
+MotorCortex.setCSSCore(AnimePluginDefinition.CSSEffect);
+// from that point and on Anime's CSSEffect will be used as MotorCortex's core CSS Layer implementation
 
 const MyClip = new MotorCortex.Clip({
   html: `
@@ -71,7 +68,7 @@ const MyClip = new MotorCortex.Clip({
   `
 });
 
-const MyAnime = new AnimePlugin.Anime({
+const MyAnime = new CSSEffect({
   animatedAttrs: {
     left: '120px',
     top: '220px',
@@ -89,45 +86,6 @@ MyClip.addIncident(MyAnime, 1000);
 MyClip.play();
 ```
 
-### Work with tranform
-
-`transform` is (the only) composite attribute that Anime Incident can animate. Transform attribute includes the following attributes:
-
-- "translateX",
-- "translateY",
-- "translateZ",
-- "rotate",
-- "rotateX",
-- "rotateY",
-- "rotateZ",
-- "scale",
-- "scaleX",
-- "scaleY",
-- "scaleZ",
-- "skewX",
-- "skewY",
-- "perspective"
-
-All of the attributes on this list can only be animated via the transform composite attribute:
-
-```javascript
-const MyAnime = new AnimePlugin.Anime(
-  {
-    animatedAttrs: {
-      transform: {
-        translateX: "50px",
-        scale: 2,
-      },
-    },
-  },
-  {
-    selector: ".a",
-    duration: 2000,
-    easing: "linear",
-  }
-);
-```
-
 ## MotionPath
 
 The MotioPath Incident implements the motion path capability of anime.js library. This feature allows motion of any element on any given (svg) path.
@@ -137,6 +95,10 @@ The MotioPath Incident implements the motion path capability of anime.js library
 The syntax is simple:
 
 ```javascript
+import MotorCortex from "@donkeyclip/motorcortex";
+import AnimePluginDefinition from "@donkeyclip/motorcortex-anime";
+const AnimePlugin = MotorCortex.loadPlugin(AnimePluginDefinition);
+
 const motionPath = new AnimePlugin.MotionPath(
   {
     pixelsAccuracy: 5,
@@ -166,7 +128,7 @@ effect gets more performant (less processing is required). The default value is 
 
 ### Exposed Incidents
 
-- `Anime`
+- `CSSEffect` (CSS Layer implementation)
 - `MotionPath`
 
 ### Demo
