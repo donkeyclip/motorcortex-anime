@@ -1,4 +1,4 @@
-import MotorCortex from "@donkeyclip/motorcortex";
+import { Effect } from "@donkeyclip/motorcortex";
 import anime from "mc-animejs-core/lib/anime.es.js";
 
 /**
@@ -12,7 +12,7 @@ import anime from "mc-animejs-core/lib/anime.es.js";
  * }
  }
 **/
-export default class MotionPath extends MotorCortex.Effect {
+export default class MotionPath extends Effect {
   onGetContext() {
     this.pixelsAccuracy = this.attrs.pixelsAccuracy || 4;
     this.calculatedPoints = [];
