@@ -36,7 +36,7 @@ import AnimePluginDefinition from "@donkeyclip/motorcortex-anime";
 const AnimePlugin = MotorCortex.loadPlugin(AnimePluginDefinition);
 ```
 
-### Use the provided CSSEffect as the CSS core of MotorCortex. Create CSSEffects and place them anywhere in your Clip
+### Use the provided CSSEffect as the CSS core of MotorCortex.
 
 ```javascript
 import MotorCortex from "@donkeyclip/motorcortex";
