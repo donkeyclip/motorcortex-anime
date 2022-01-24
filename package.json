@@ -65,7 +65,7 @@
     "mc-animejs-core": "3.1.5"
   },
   "peerDependencies": {
-    "@donkeyclip/motorcortex": "^7"
+    "@donkeyclip/motorcortex": "^7.8"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",
@@ -76,7 +76,7 @@
     "@babel/preset-env": "7.16.11",
     "@commitlint/cli": "13.2.1",
     "@commitlint/config-conventional": "13.2.0",
-    "@donkeyclip/motorcortex": "/Users/trad/projects/motorcortex2",
+    "@donkeyclip/motorcortex": "^7.8",
     "@rollup/plugin-babel": "5.3.0",
     "@rollup/plugin-commonjs": "21.0.1",
     "@rollup/plugin-json": "4.1.0",

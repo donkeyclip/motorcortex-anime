@@ -1,7 +1,14 @@
-import { HTMLClip, Group, loadPlugin } from "@donkeyclip/motorcortex";
+import {
+  HTMLClip,
+  Group,
+  loadPlugin,
+  setCSSCore,
+  CSSEffect,
+} from "@donkeyclip/motorcortex";
 import AnimeDefinition from "../dist/motorcortex-anime.esm";
 const Anime = loadPlugin(AnimeDefinition);
 const AnimeEffect = AnimeDefinition.CSSEffect;
+setCSSCore(AnimeEffect);
 
 const css = `
 
@@ -178,7 +185,7 @@ const motionPath = new Anime.MotionPath(
   }
 );
 
-const boxWidth = new AnimeEffect(
+const boxWidth = new CSSEffect(
   {
     animatedAttrs: {
       width: "250px",
@@ -191,7 +198,7 @@ const boxWidth = new AnimeEffect(
   }
 );
 
-const boxColor = new AnimeEffect(
+const boxColor = new CSSEffect(
   {
     animatedAttrs: {
       background: "rgb(255, 0, 85)",
@@ -207,7 +214,7 @@ const boxColor = new AnimeEffect(
   }
 );
 
-const boxRotate = new AnimeEffect(
+const boxRotate = new CSSEffect(
   {
     animatedAttrs: {
       width: "30px",
@@ -229,7 +236,7 @@ const boxRotate = new AnimeEffect(
   }
 );
 
-const boxMove = new AnimeEffect(
+const boxMove = new CSSEffect(
   {
     animatedAttrs: {
       left: "220px",
@@ -245,7 +252,7 @@ const boxMove = new AnimeEffect(
   }
 );
 
-const boxBorder = new AnimeEffect(
+const boxBorder = new CSSEffect(
   {
     animatedAttrs: {
       borderRadius: "50%",
@@ -260,7 +267,7 @@ const boxBorder = new AnimeEffect(
   }
 );
 
-const svg = new AnimeEffect(
+const svg = new CSSEffect(
   {
     animatedAttrs: {
       strokeDashoffset: 0,

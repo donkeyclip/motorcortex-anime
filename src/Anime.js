@@ -1,7 +1,7 @@
-import { ExtendableCSSEffect } from "@donkeyclip/motorcortex";
+import MotorCortex from "@donkeyclip/motorcortex";
 import anime from "mc-animejs-core/lib/anime.es.js";
 
-export default class Anime extends ExtendableCSSEffect {
+export default class Anime extends MotorCortex.ExtendableCSSEffect {
   onGetContext() {
     const options = {};
     if (
