@@ -62,6 +62,7 @@
     }
   },
   "dependencies": {
+    "@donkeyclip/motorcortex-player": "^2.4.4",
     "mc-animejs-core": "3.1.5"
   },
   "peerDependencies": {
