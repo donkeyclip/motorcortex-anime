@@ -6,6 +6,7 @@ import {
   CSSEffect,
 } from "@donkeyclip/motorcortex";
 import AnimeDefinition from "../dist/motorcortex-anime.esm";
+import MCPlayer from "@donkeyclip/motorcortex-player";
 const Anime = loadPlugin(AnimeDefinition);
 const AnimeEffect = AnimeDefinition.CSSEffect;
 setCSSCore(AnimeEffect);
@@ -292,6 +293,5 @@ myGroup.addIncident(boxBorder, 6800, 0);
 clip.addIncident(boxWidth, 0);
 clip.addIncident(myGroup, 4000);
 clip.addIncident(motionPath, 0);
-
 clip.addIncident(svg, 9500);
-clip.play();
+new MCPlayer({ clip });
