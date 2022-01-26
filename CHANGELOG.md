@@ -1,5 +1,25 @@
 # Changelog
 
+### [2.1.17](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.16...v2.1.17) (2022-01-26)
+
+
+### Bug Fixes
+
+* drop code from demo config ([2e2aa1d](https://www.github.com/donkeyclip/motorcortex-anime/commit/2e2aa1df5c9aa98ab9ab33dd7881ba458c7d8bca))
+* fix broken rollup config ([b6e35ab](https://www.github.com/donkeyclip/motorcortex-anime/commit/b6e35ab7b923d2797e3ed416ba2aafaf2f2333a6))
+* fix broken rollup config ([33e54ce](https://www.github.com/donkeyclip/motorcortex-anime/commit/33e54cec8e385907b589c9c8d70af10e272bdae5))
+* fix broken webpack config ([667af08](https://www.github.com/donkeyclip/motorcortex-anime/commit/667af08572bdb3526eaddfa6331618d0eadc7550))
+* new verion ([bb777f5](https://www.github.com/donkeyclip/motorcortex-anime/commit/bb777f53830e992e3347e051e47f0db4c7cbddd9))
+* update build and demo files drop old babel config ([ebc59ec](https://www.github.com/donkeyclip/motorcortex-anime/commit/ebc59ec46d327c6598ad551915dfed1a2e56afe4))
+* update build and demo files drop old babel config ([bb7447d](https://www.github.com/donkeyclip/motorcortex-anime/commit/bb7447db4514a7af71163e73bdb9c6530fe1054f))
+* update build and demo files drop old babel config ([493d68c](https://www.github.com/donkeyclip/motorcortex-anime/commit/493d68cfe25b54a149d9b96ea62dfd473f85136d))
+* update build and demo files drop old babel config ([f149156](https://www.github.com/donkeyclip/motorcortex-anime/commit/f149156ddf0d89d7716301de17add88c45cb0535))
+* update build and demo files drop old babel config ([5551e47](https://www.github.com/donkeyclip/motorcortex-anime/commit/5551e47c76da47684a0ccc9cbaab79959085abcb))
+* update build and demo files drop old babel config ([2bcc100](https://www.github.com/donkeyclip/motorcortex-anime/commit/2bcc100f4903735673c8f8474716e65895b7b27c))
+* update deps ([92e02bf](https://www.github.com/donkeyclip/motorcortex-anime/commit/92e02bfb3c7cc123a4b73ad554f75a354cc9f8d2))
+* update mc version ([8df94dc](https://www.github.com/donkeyclip/motorcortex-anime/commit/8df94dcd66bf622bb278f55c16f3b52ace9c63a6))
+* update rollup deps to latest packages ([d22e2cc](https://www.github.com/donkeyclip/motorcortex-anime/commit/d22e2ccd7fe024a5209fee506e3e638b856d6ae1))
+
 ### [2.1.16](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.15...v2.1.16) (2021-09-24)
 
 
