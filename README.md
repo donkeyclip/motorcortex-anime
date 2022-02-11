@@ -1,23 +1,33 @@
-# MotorCortex Anime
+# MotorCortex-Anime
 
-[Anime.js](https://animejs.com/) library as a MotorCortex CSS Layer
+**Table of Contents**
 
-## Installation
+- [MotorCortex-Anime](#motorcortex-anime)
+  - [Demo](#demo)
+- [Intro / Features](#intro--features)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Importing and Loading](#importing-and-loading)
+- [Creating Incidents](#creating-incidents)
+  - [CSSEffect](#csseffect)
+  - [MotionPath](#motionpath)
+- [Adding Incidents in your clip](#adding-incidents-in-your-clip)
+- [Contributing](#contributing)
+- [License](#license)
+- [Sponsored by](#sponsored-by)
 
-```bash
-$ npm install @donkeyclip/motorcortex-anime
-# OR
-$ yarn add @donkeyclip/motorcortex-anime
-```
+## Demo
 
-```javascript
-import Anime from "@donkeyclip/motorcortex-anime";
-```
+[Check it out here](https://donkeyclip.github.io/motorcortex-anime/demo/)
 
-## Key Concepts / Features
+# Intro / Features
 
-The library exposes `CSSEffect` which implementes an alternative CSS Layer for MotorCortex while the second (`MotionPath`)
-performs motion path animation.
+[Anime.js](https://animejs.com/) library as a MotorCortex CSS Layer.
+The library exposes `CSSEffect` which implementes an alternative CSS Layer for MotorCortex while the second (`MotionPath`) performs motion path animation.
+
+The Plugin exposes two Incidents:
+- `CSSEffect` (CSS Layer implementation)
+- `MotionPath`
 
 ## Browser compatibility
 
@@ -25,49 +35,38 @@ performs motion path animation.
 | ------ | ------ | --------- | ------- | ----- |
 | 24+    | 6+     | 10+       | 32+     | 15+   |
 
-## Documentation
 
-### Import and load the plugin to MotorCortex
+# Getting Started
+## Installation
 
+```bash
+$ npm install @donkeyclip/motorcortex-anime
+# OR
+$ yarn add @donkeyclip/motorcortex-anime
+```
+## Importing and loading
+
+You can load Anime plugin in a two different ways, based on what you want to do with this plugin (you will find out more information below):
+
+As a MotorCortex's core CSS Layer:
 ```javascript
-import MotorCortex from "@donkeyclip/motorcortex";
+import { setCSSCore } from "@donkeyclip/motorcortex";
 import AnimePluginDefinition from "@donkeyclip/motorcortex-anime";
-
-const AnimePlugin = MotorCortex.loadPlugin(AnimePluginDefinition);
+setCSSCore(AnimePluginDefinition.CSSEffect);
 ```
 
-### Use the provided CSSEffect as the CSS core of MotorCortex.
-
+As a simple plugin:
 ```javascript
-import MotorCortex from "@donkeyclip/motorcortex";
+import { loadPlugin } from "@donkeyclip/motorcortex";
 import AnimePluginDefinition from "@donkeyclip/motorcortex-anime";
-MotorCortex.setCSSCore(AnimePluginDefinition.CSSEffect);
-// from that point and on Anime's CSSEffect will be used as MotorCortex's core CSS Layer implementation
+const AnimePlugin = loadPlugin(AnimePluginDefinition);
+```
 
-const MyClip = new MotorCortex.Clip({
-  html: `
-    <div class="container">
-      <div class="a"></div>
-    </div>
-  `,
-  css: `
-    .container{
-      width: 600px;
-      height: 400px;
-      background: white;
-      position: relative;
-    }
-    .a{
-      width: 30px;
-      height: 30px;
-      position: absolute;
-      background: red;
-      top: 0px;
-      left: 0px;
-    }
-  `
-});
+# Creating Incidents
 
+## CSSEffect
+Use the provided CSSEffect as the CSS core of MotorCortex.
+```javascript
 const MyAnime = new CSSEffect({
   animatedAttrs: {
     left: '120px',
@@ -80,25 +79,17 @@ const MyAnime = new CSSEffect({
   duration: 2000,
   easing: 'linear'
 });
-
-MyClip.addIncident(MyAnime, 1000);
-
-MyClip.play();
 ```
+#### IMPORTANT 
+Don't forget το import and load the Anime Plugin using the first way.
 
 ## MotionPath
 
 The MotioPath Incident implements the motion path capability of anime.js library. This feature allows motion of any element on any given (svg) path.
 
-### Create a MotionPath animation Incident and place it anywhere in your Clip
-
 The syntax is simple:
 
 ```javascript
-import MotorCortex from "@donkeyclip/motorcortex";
-import AnimePluginDefinition from "@donkeyclip/motorcortex-anime";
-const AnimePlugin = MotorCortex.loadPlugin(AnimePluginDefinition);
-
 const motionPath = new AnimePlugin.MotionPath(
   {
     pixelsAccuracy: 5,
@@ -115,7 +106,7 @@ const motionPath = new AnimePlugin.MotionPath(
   }
 );
 ```
-
+### MotionPath Attrs
 As you can notice the animated attribute here is `positionOn` which in turn is an
 object expecting only one key, the `pathElement` which is a selctor to the path
 element that defines the motion path.
@@ -126,17 +117,28 @@ One more thing to notice is the `pixelsAccuracy` attribute. This attribute sets 
 sequential points of the path that the element should move. This attribute can be used so the motion path
 effect gets more performant (less processing is required). The default value is 4.
 
-### Exposed Incidents
+#### IMPORTANT 
+For the MotionPath Incident you should import and load MotorCortex-Anime as a simple Plugin.
 
-- `CSSEffect` (CSS Layer implementation)
-- `MotionPath`
+# Adding Incidents in your clip
 
-### Demo
+```javascript
+clipName.addIncident(incidentName, startTime);
+```
 
-https://donkeyclip.github.io/motorcortex-anime/demo/
+# Contributing 
 
-## License
+In general, we follow the "fork-and-pull" Git workflow, so if you want to submit patches and additions you should follow the next steps:
+1.	**Fork** the repo on GitHub
+2.	**Clone** the project to your own machine
+3.	**Commit** changes to your own branch
+4.	**Push** your work back up to your fork
+5.	Submit a **Pull request** so that we can review your changes
+
+# License
 
 [MIT License](https://opensource.org/licenses/MIT)
 
+# Sponsored by
 [<img src="https://presskit.donkeyclip.com/logos/donkey%20clip%20logo.svg" width=250></img>](https://donkeyclip.com)
+
