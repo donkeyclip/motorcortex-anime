@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "scripts": {
     "update-force:packages": "./node_modules/npm-check-updates/bin/ncu -u && npm i",
@@ -26,7 +26,6 @@
     "build:demo": "webpack --mode=production --config ./demo/webpack.config.js",
     "test": "HERE GOES YOUR TEST TASK",
     "test:prod": "npm run lint",
-    "commit": "git-cz",
     "prebuild": "rimraf dist",
     "prepare": "husky install"
   },
@@ -43,26 +42,8 @@
       "eslint --fix"
     ]
   },
-  "release": {
-    "verifyConditions": [
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      "@semantic-release/git"
-    ],
-    "prepare": [
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/git"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
   "dependencies": {
-    "@donkeyclip/motorcortex-player": "^2.4.4",
+    "@donkeyclip/motorcortex-player": "^2.5.0",
     "mc-animejs-core": "3.1.5"
   },
   "peerDependencies": {
@@ -75,42 +56,30 @@
     "@babel/plugin-syntax-jsx": "7.16.7",
     "@babel/plugin-transform-react-jsx": "7.16.7",
     "@babel/preset-env": "7.16.11",
-    "@commitlint/cli": "16.1.0",
-    "@commitlint/config-conventional": "16.0.0",
     "@donkeyclip/motorcortex": "7.8.0",
     "@rollup/plugin-babel": "5.3.0",
     "@rollup/plugin-commonjs": "21.0.1",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "13.1.3",
-    "@semantic-release/changelog": "6.0.1",
-    "@semantic-release/git": "10.0.1",
-    "@semantic-release/github": "8.0.2",
-    "@semantic-release/npm": "9.0.0",
-    "@size-limit/preset-big-lib": "6.0.4",
     "babel-loader": "8.2.3",
     "browserslist": "4.19.1",
     "caniuse-lite": "1.0.30001311",
-    "commitizen": "4.2.4",
     "concurrently": "7.0.0",
     "core-js": "3.21.0",
     "css-loader": "6.6.0",
-    "cz-conventional-changelog": "3.3.0",
-    "eslint": "7.32.0",
+    "eslint": "^8.8.0",
     "eslint-config-prettier": "8.3.0",
-    "eslint-config-standard": "16.0.3",
     "eslint-plugin-babel": "5.3.1",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-promise": "5.2.0",
+    "eslint-plugin-promise": "^6.0.0",
     "husky": "7.0.4",
     "lint-staged": "12.3.3",
     "prettier": "2.5.1",
     "rimraf": "3.0.2",
     "rollup": "2.67.2",
     "rollup-plugin-terser": "7.0.2",
-    "semantic-release": "19.0.2",
-    "size-limit": "6.0.4",
     "webpack": "5.68.0",
     "webpack-cli": "4.9.2",
     "webpack-dev-server": "4.7.4"
