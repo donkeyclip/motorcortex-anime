@@ -43,11 +43,10 @@
     ]
   },
   "dependencies": {
-    "@donkeyclip/motorcortex-player": "^2.5.0",
     "mc-animejs-core": "3.1.5"
   },
   "peerDependencies": {
-    "@donkeyclip/motorcortex": "^7.8"
+    "@donkeyclip/motorcortex": "^8"
   },
   "devDependencies": {
     "@babel/cli": "7.17.6",
@@ -56,7 +55,8 @@
     "@babel/plugin-syntax-jsx": "7.16.7",
     "@babel/plugin-transform-react-jsx": "7.17.3",
     "@babel/preset-env": "7.16.11",
-    "@donkeyclip/motorcortex": "7.9.3",
+    "@donkeyclip/motorcortex": "8.0.0",
+    "@donkeyclip/motorcortex-player": "^2.5.2",
     "@rollup/plugin-babel": "5.3.1",
     "@rollup/plugin-commonjs": "21.0.2",
     "@rollup/plugin-json": "4.1.0",

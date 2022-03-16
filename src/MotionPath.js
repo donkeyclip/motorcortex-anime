@@ -22,11 +22,12 @@ export default class MotionPath extends Effect {
     this.isPathTargetInsideSVG = this.element instanceof SVGElement;
   }
 
-  onProgress(f) {
+  onProgress(m) {
     let toSet;
     const distance =
-      Math.round((this.path.totalLength / this.pixelsAccuracy) * f) *
-      this.pixelsAccuracy;
+      Math.round(
+        (this.path.totalLength / this.pixelsAccuracy) * this.getFraction(m)
+      ) * this.pixelsAccuracy;
     if (
       this.calculatedPoints[distance] !== null &&
       this.calculatedPoints[distance] !== undefined
