@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.18](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.17...v2.1.18) (2022-03-16)
+
+
+### Bug Fixes
+
+* update mc version ([c4ef05f](https://www.github.com/donkeyclip/motorcortex-anime/commit/c4ef05fba0402ae606394c5380e47c0142037936))
+
 ### [2.1.17](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.16...v2.1.17) (2022-01-26)
 
 
