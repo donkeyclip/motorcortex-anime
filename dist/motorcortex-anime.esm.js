@@ -1180,8 +1180,8 @@ var Anime = /*#__PURE__*/function (_MotorCortex$Extendab) {
 
   }, {
     key: "onProgress",
-    value: function onProgress(f) {
-      return this.target.seek(this.target.duration * f);
+    value: function onProgress(m) {
+      return this.target.seek(this.target.duration * this.getFraction(m));
     }
   }]);
 
@@ -2363,9 +2363,9 @@ var MotionPath = /*#__PURE__*/function (_Effect) {
     }
   }, {
     key: "onProgress",
-    value: function onProgress(f) {
+    value: function onProgress(m) {
       var toSet;
-      var distance = Math.round(this.path.totalLength / this.pixelsAccuracy * f) * this.pixelsAccuracy;
+      var distance = Math.round(this.path.totalLength / this.pixelsAccuracy * this.getFraction(m)) * this.pixelsAccuracy;
 
       if (this.calculatedPoints[distance] !== null && this.calculatedPoints[distance] !== undefined) {
         toSet = this.calculatedPoints[distance];

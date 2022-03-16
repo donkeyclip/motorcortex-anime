@@ -43,7 +43,7 @@ export default class Anime extends MotorCortex.ExtendableCSSEffect {
   /**
    * @param {number} f
    */
-  onProgress(f) {
-    return this.target.seek(this.target.duration * f);
+  onProgress(m) {
+    return this.target.seek(this.target.duration * this.getFraction(m));
   }
 }
