@@ -15,8 +15,6 @@
     "node": ">=12"
   },
   "scripts": {
-    "update-force:packages": "./node_modules/npm-check-updates/bin/ncu -u && npm i",
-    "update:packages": "npm update --save/--save-dev",
     "lint": "eslint -c .eslintrc src/**/*.js",
     "lint:fix": "npm run lint -- --fix",
     "build": "npm run build:lib && npm run build:demo",
