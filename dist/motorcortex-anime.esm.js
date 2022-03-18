@@ -2367,11 +2367,10 @@ var MotionPath = /*#__PURE__*/function (_Effect) {
       var toSet;
       var distance = Math.round(this.path.totalLength / this.pixelsAccuracy * this.getFraction(m)) * this.pixelsAccuracy;
 
-      if (this.calculatedPoints[distance] !== null && this.calculatedPoints[distance] !== undefined) {
+      if (this.calculatedPoints[distance] != null) {
         toSet = this.calculatedPoints[distance];
       } else {
-        var position = anime_es.getPathProgress(this.path, distance / this.path.totalLength, this.isPathTargetInsideSVG); // console.log(position);
-
+        var position = anime_es.getPathProgress(this.path, distance / this.path.totalLength, this.isPathTargetInsideSVG);
         toSet = "\n            translateX(".concat(position.x, "px)\n            translateY(").concat(position.y, "px)\n            rotate(").concat(position.angle, "deg)\n        ");
         this.calculatedPoints[distance] = toSet;
       }
