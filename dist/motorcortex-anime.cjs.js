@@ -2389,7 +2389,7 @@ var MotionPath = /*#__PURE__*/function (_Effect) {
 }(MotorCortex.Effect);
 
 var name = "@donkeyclip/motorcortex-anime";
-var version = "2.1.18";
+var version = "3.0.0";
 
 var index = {
   npm_name: name,
