@@ -1,5 +1,5 @@
 import { Effect } from "@donkeyclip/motorcortex";
-import anime from "mc-animejs-core/lib/anime.es.js";
+import { path, getPathProgress } from "mc-animejs-core/lib/anime.es.js";
 
 /**
  * Takes as attributes:
@@ -18,7 +18,7 @@ export default class MotionPath extends Effect {
     this.calculatedPoints = [];
 
     const svgEl = this.context.getElements(this.targetValue.pathElement)[0];
-    this.path = anime.path(svgEl);
+    this.path = path(svgEl);
     this.isPathTargetInsideSVG = this.element instanceof SVGElement;
   }
 
@@ -28,18 +28,14 @@ export default class MotionPath extends Effect {
       Math.round(
         (this.path.totalLength / this.pixelsAccuracy) * this.getFraction(m)
       ) * this.pixelsAccuracy;
-    if (
-      this.calculatedPoints[distance] !== null &&
-      this.calculatedPoints[distance] !== undefined
-    ) {
+    if (this.calculatedPoints[distance] != null) {
       toSet = this.calculatedPoints[distance];
     } else {
-      const position = anime.getPathProgress(
+      const position = getPathProgress(
         this.path,
         distance / this.path.totalLength,
         this.isPathTargetInsideSVG
       );
-      // console.log(position);
       toSet = `
             translateX(${position.x}px)
             translateY(${position.y}px)
