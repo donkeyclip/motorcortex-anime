@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.18...v3.0.0) (2022-03-18)
+
+
+### Miscellaneous Chores
+
+* release 3.0.0 ([8033b18](https://www.github.com/donkeyclip/motorcortex-anime/commit/8033b181b30ef1002cbea33ca585bb77cde6a8c7))
+
 ### [2.1.18](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.17...v2.1.18) (2022-03-16)
 
 
