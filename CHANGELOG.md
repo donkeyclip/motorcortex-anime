@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.0](https://github.com/donkeyclip/motorcortex-anime/compare/v3.0.0...v3.1.0) (2022-04-07)
+
+
+### Features
+
+* drop explorer 11 support ([c95287a](https://github.com/donkeyclip/motorcortex-anime/commit/c95287ae9db3f28ff1880374b24fdb57b2cb9ad9))
+* update compatibility with motorcortex ([b6d6fff](https://github.com/donkeyclip/motorcortex-anime/commit/b6d6fff042d85f9742c735796763a41451fadda3))
+
 ## [3.0.0](https://www.github.com/donkeyclip/motorcortex-anime/compare/v2.1.18...v3.0.0) (2022-03-18)
 
 
