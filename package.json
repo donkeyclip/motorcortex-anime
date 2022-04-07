@@ -1,6 +1,6 @@
 {
   "name": "@donkeyclip/motorcortex-anime",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Anime plugin for MotorCortex",
   "main": "dist/motorcortex-anime.cjs.js",
   "module": "dist/motorcortex-anime.esm.js",
