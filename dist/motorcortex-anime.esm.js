@@ -1,4 +1,4 @@
-import MotorCortex, { Effect } from '@donkeyclip/motorcortex';
+import { ExtendableCSSEffect, Effect } from '@donkeyclip/motorcortex';
 
 /*
  * anime.js v3.1.5
@@ -985,7 +985,7 @@ anime.path = getPath;
 anime.getPathProgress = getPathProgress;
 var anime_es = anime;
 
-class Anime extends MotorCortex.ExtendableCSSEffect {
+class Anime extends ExtendableCSSEffect {
   onGetContext() {
     const options = {};
 

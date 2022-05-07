@@ -1,10 +1,6 @@
 'use strict';
 
-var MotorCortex = require('@donkeyclip/motorcortex');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var MotorCortex__default = /*#__PURE__*/_interopDefaultLegacy(MotorCortex);
+var motorcortex = require('@donkeyclip/motorcortex');
 
 /*
  * anime.js v3.1.5
@@ -991,7 +987,7 @@ anime.path = getPath;
 anime.getPathProgress = getPathProgress;
 var anime_es = anime;
 
-class Anime extends MotorCortex__default["default"].ExtendableCSSEffect {
+class Anime extends motorcortex.ExtendableCSSEffect {
   onGetContext() {
     const options = {};
 
@@ -1041,7 +1037,7 @@ class Anime extends MotorCortex__default["default"].ExtendableCSSEffect {
  }
 **/
 
-class MotionPath extends MotorCortex.Effect {
+class MotionPath extends motorcortex.Effect {
   onGetContext() {
     this.pixelsAccuracy = this.attrs.pixelsAccuracy || 4;
     this.calculatedPoints = [];
