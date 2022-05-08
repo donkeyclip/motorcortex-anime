@@ -1064,7 +1064,7 @@ class MotionPath extends motorcortex.Effect {
 }
 
 var name = "@donkeyclip/motorcortex-anime";
-var version = "3.1.0";
+var version = "3.1.1";
 
 var index = {
   npm_name: name,
