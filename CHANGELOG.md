@@ -1,5 +1,42 @@
 # Changelog
 
+## 3.0.0 (2022-05-18)
+
+
+### Features
+
+* drop explorer 11 support ([c95287a](https://github.com/donkeyclip/motorcortex-anime/commit/c95287ae9db3f28ff1880374b24fdb57b2cb9ad9))
+* new version ([4bf85c1](https://github.com/donkeyclip/motorcortex-anime/commit/4bf85c1aad06458aab4d972624cea4d1ef68a966))
+* update compatibility with motorcortex ([b6d6fff](https://github.com/donkeyclip/motorcortex-anime/commit/b6d6fff042d85f9742c735796763a41451fadda3))
+
+
+### Bug Fixes
+
+* drop code from demo config ([2e2aa1d](https://github.com/donkeyclip/motorcortex-anime/commit/2e2aa1df5c9aa98ab9ab33dd7881ba458c7d8bca))
+* fix broken rollup config ([b6e35ab](https://github.com/donkeyclip/motorcortex-anime/commit/b6e35ab7b923d2797e3ed416ba2aafaf2f2333a6))
+* fix broken rollup config ([33e54ce](https://github.com/donkeyclip/motorcortex-anime/commit/33e54cec8e385907b589c9c8d70af10e272bdae5))
+* fix broken webpack config ([667af08](https://github.com/donkeyclip/motorcortex-anime/commit/667af08572bdb3526eaddfa6331618d0eadc7550))
+* husky ([657a3e6](https://github.com/donkeyclip/motorcortex-anime/commit/657a3e6c42f21cc628e822d0eaaca16ec2c13c9d))
+* import only ExtendableCSSEffect instead of all of mc ([76a926f](https://github.com/donkeyclip/motorcortex-anime/commit/76a926f534145dc8a043014492e9b6b98d2dc5ed))
+* new verion ([bb777f5](https://github.com/donkeyclip/motorcortex-anime/commit/bb777f53830e992e3347e051e47f0db4c7cbddd9))
+* update build and demo files drop old babel config ([ebc59ec](https://github.com/donkeyclip/motorcortex-anime/commit/ebc59ec46d327c6598ad551915dfed1a2e56afe4))
+* update build and demo files drop old babel config ([bb7447d](https://github.com/donkeyclip/motorcortex-anime/commit/bb7447db4514a7af71163e73bdb9c6530fe1054f))
+* update build and demo files drop old babel config ([493d68c](https://github.com/donkeyclip/motorcortex-anime/commit/493d68cfe25b54a149d9b96ea62dfd473f85136d))
+* update build and demo files drop old babel config ([f149156](https://github.com/donkeyclip/motorcortex-anime/commit/f149156ddf0d89d7716301de17add88c45cb0535))
+* update build and demo files drop old babel config ([5551e47](https://github.com/donkeyclip/motorcortex-anime/commit/5551e47c76da47684a0ccc9cbaab79959085abcb))
+* update build and demo files drop old babel config ([2bcc100](https://github.com/donkeyclip/motorcortex-anime/commit/2bcc100f4903735673c8f8474716e65895b7b27c))
+* update deps ([92e02bf](https://github.com/donkeyclip/motorcortex-anime/commit/92e02bfb3c7cc123a4b73ad554f75a354cc9f8d2))
+* update mc version ([c4ef05f](https://github.com/donkeyclip/motorcortex-anime/commit/c4ef05fba0402ae606394c5380e47c0142037936))
+* update mc version ([8df94dc](https://github.com/donkeyclip/motorcortex-anime/commit/8df94dcd66bf622bb278f55c16f3b52ace9c63a6))
+* update npm name ([b83b7a3](https://github.com/donkeyclip/motorcortex-anime/commit/b83b7a3926c0649f8062f79282890d62a771141c))
+* update rollup deps to latest packages ([d22e2cc](https://github.com/donkeyclip/motorcortex-anime/commit/d22e2ccd7fe024a5209fee506e3e638b856d6ae1))
+* update webpack & webpack.config ([f36f396](https://github.com/donkeyclip/motorcortex-anime/commit/f36f3960bea9ff0f7358d54decabca0cf792402b))
+
+
+### Miscellaneous Chores
+
+* release 3.0.0 ([8033b18](https://github.com/donkeyclip/motorcortex-anime/commit/8033b181b30ef1002cbea33ca585bb77cde6a8c7))
+
 ### [3.1.1](https://github.com/donkeyclip/motorcortex-anime/compare/v3.1.0...v3.1.1) (2022-05-07)
 
 
