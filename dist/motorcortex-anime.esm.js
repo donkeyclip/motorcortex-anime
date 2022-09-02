@@ -1052,7 +1052,11 @@ class MotionPath extends Effect {
       toSet = this.calculatedPoints[distance];
     } else {
       const position = anime_es.getPathProgress(this.path, distance / this.path.totalLength, this.isPathTargetInsideSVG);
-      toSet = "\n            translateX(".concat(position.x, "px)\n            translateY(").concat(position.y, "px)\n            rotate(").concat(position.angle, "deg)\n        ");
+      toSet = `
+            translateX(${position.x}px)
+            translateY(${position.y}px)
+            rotate(${position.angle}deg)
+        `;
       this.calculatedPoints[distance] = toSet;
     }
 
