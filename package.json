@@ -47,12 +47,12 @@
     "@donkeyclip/motorcortex": ">=8 < 10"
   },
   "devDependencies": {
-    "@babel/cli": "7.22.5",
-    "@babel/core": "7.22.5",
-    "@babel/eslint-parser": "7.22.5",
+    "@babel/cli": "7.22.6",
+    "@babel/core": "7.22.6",
+    "@babel/eslint-parser": "7.22.6",
     "@babel/plugin-syntax-jsx": "7.22.5",
     "@babel/plugin-transform-react-jsx": "7.22.5",
-    "@babel/preset-env": "7.22.5",
+    "@babel/preset-env": "7.22.6",
     "@donkeyclip/motorcortex": "9.9.0",
     "@donkeyclip/motorcortex-player": "2.10.8",
     "@rollup/plugin-babel": "6.0.3",
