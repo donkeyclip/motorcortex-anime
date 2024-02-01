@@ -62,7 +62,7 @@
     "babel-loader": "8.3.0",
     "browserslist": "4.22.3",
     "caniuse-lite": "1.0.30001582",
-    "concurrently": "7.6.0",
+    "concurrently": "8.2.2",
     "core-js": "3.35.1",
     "css-loader": "6.8.1",
     "eslint": "8.51.0",
