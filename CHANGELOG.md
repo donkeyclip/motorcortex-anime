@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0 (2024-02-02)
+
+
+### Bug Fixes
+
+* import only ExtendableCSSEffect instead of all of mc ([76a926f](https://github.com/donkeyclip/motorcortex-anime/commit/76a926f534145dc8a043014492e9b6b98d2dc5ed))
+
 ### [3.1.1](https://github.com/donkeyclip/motorcortex-anime/compare/v3.1.0...v3.1.1) (2022-05-07)
 
 
